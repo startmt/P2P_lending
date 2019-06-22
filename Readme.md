@@ -36,3 +36,6 @@ Running a unit test
 ```
 npm test
 ```
+
+## Policy (will delete on release product)
+[Docs](https://docs.google.com/document/d/1DgktiTcW_2L4rL1eAIQYDKzCAN39PgjgkbzYx06k62s/edit)
