@@ -1,8 +1,7 @@
 import jwt from 'jwt-simple'
 
-export const loginMiddleware = (username, password) => {
-   return (username === "kennaruk" && password === "mak") ? true : false
- }
+export const loginMiddleware = (username, password) => (username === "start" && password === "123456") 
+
 export const signin = (username) => {
     const payload = {
         sub: username,

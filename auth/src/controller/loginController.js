@@ -14,6 +14,6 @@ export default (req, res) => {
         res.status(401).json({ error: 'Your ussername or password wrong.'})
     }
     else{
-        res.status(422).json({ error: 'Something went wrong.'})
+        res.status(400).json({ error: 'Something went wrong.'})
     }
 }
