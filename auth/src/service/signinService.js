@@ -1,33 +1,35 @@
 import jwt from 'jwt-simple'
 import userModel from '../model/user'
-
-export const checkUserFromDb = (username, password) => {
-  return new Promise((resolve, reject) => {
-    userModel
-      .findOne(
-        {},
-        {
-          username: username,
-          password: password
-        }
-      )
-      .exec((err, user) => {
-        console.log(err)
-        console.log(user)
-        if(!err) {
-          resolve((user.username == username && user.password == password))
-        }
-        reject(false)
-      })
-  })
+import tokenModel from '../model/token'
+import bCrypt from 'bcrypt'
+export const checkUserFromDb = async (username, password) => {
+  const query = await userModel
+    .findOne(
+      {
+        username: username
+      },
+    )
+    .exec()
+  try {
+    return await bCrypt.compare(password, query.password)
+  } catch (error) {
+    return null
+  }
 }
 
 
-export const signin = (username) => {
+export const createJwt = async(user) => {
   const payload = {
-    sub: username,
-    iat: new Date().getTime()
-  };
-  const SECRET = "P2P_LENDING_PROJECT"
-  return jwt.encode(payload, SECRET)
+    sub: user.username
+  }
+  const SECRET = 'P2P_LENDING_PROJECT'
+  const jwtObj = {
+    jwt:jwt.encode(payload, SECRET)
+  }
+  try {
+    await tokenModel.create(jwtObj)
+    return jwtText
+  } catch (error) {
+    return error //will edit
+  }
 }  
