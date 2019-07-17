@@ -2,16 +2,16 @@ import jwt from 'jwt-simple'
 import userModel from '../model/user'
 import tokenModel from '../model/token'
 import bCrypt from 'bcrypt'
-export const checkUserFromDb = async (username, password) => {
+export const checkUserFromDb = async (user) => {
   const query = await userModel
     .findOne(
       {
-        username: username
+        username: user.username
       },
     )
     .exec()
   try {
-    return await bCrypt.compare(password, query.password)
+    return await bCrypt.compare(user.password, query.password)
   } catch (error) {
     return null
   }
