@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const tokenSchema = new Schema({
   jwt: {
     type: String,
-    unique: false,
+    unique: true,
   }
 });
 

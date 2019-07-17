@@ -20,16 +20,15 @@ export const checkUserFromDb = async (username, password) => {
 
 export const createJwt = async(user) => {
   const payload = {
-    sub: user.username
+    sub: user.username,
   }
   const SECRET = 'P2P_LENDING_PROJECT'
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true }
   const jwtObj = {
     jwt:jwt.encode(payload, SECRET)
   }
-  try {
-    await tokenModel.create(jwtObj)
-    return jwtText
-  } catch (error) {
-    return error //will edit
-  }
+    await tokenModel.findOneAndUpdate(jwtObj, jwtObj, options, function(error, result) {
+      if (error) return
+  })
+    return jwtObj.jwt
 }  
