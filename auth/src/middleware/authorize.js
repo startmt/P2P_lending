@@ -1,16 +1,18 @@
 import passport from 'passport'
 import BearerStrategy from 'passport-http-bearer'
-import tokenModel from '../model/token'
+import redis from 'redis'
+const redisClient = redis.createClient()
 const withBearer = new BearerStrategy(async (token, done) => {
-  const query = await tokenModel.findOne({
-    jwt: token
-  }).exec()
-  try {
-    await (query.jwt == token) ? done(null, true) : done(null, false)
-  } catch (error) {
-    done(null, false)
-  }
+  redisClient.get(token, (err, obj) => {
+    try {
+      (obj !== null) ? done(null, true, obj) : done(err)
+    } catch (error) {
+      done(err)
+    }
+  })
+  
 }
 )
+
 passport.use(withBearer)
 export const requireJWTAuth = passport.authenticate('bearer', { session: false })

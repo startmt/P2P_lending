@@ -6,6 +6,8 @@ import connectDatabase from './connect'
 
 const app = express()
 const PORT = "3000"
+
+
 http.createServer(app).listen(3000, () => {
      console.log("server status : running")
      console.log(`run on port : ${PORT}`)
