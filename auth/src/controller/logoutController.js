@@ -1,8 +1,6 @@
-import { status400, status200, status401 } from '../utils/status'
+import { clearSession } from '../service/logoutService'
 export default async (req, res) => {
-  const user = {
-      token: req.headers.authorization
-  }
-  req.logout();
-  res.redirect('/');
+  const token = req.body.token
+  clearSession(token)
+  res.end()
 }

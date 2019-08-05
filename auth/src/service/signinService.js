@@ -19,14 +19,12 @@ export const checkUserFromDb = async (user) => {
   }
 }
 
-export const createJwt = async(user) => {
+export const createSession = async(user) => {
   const payload = {
-    sub: user.username,
+    username: user.username,
   }
   const SECRET = 'P2P_LENDING_PROJECT'
-  const jwtObj = {
-    jwt:jwt.encode(payload, SECRET)
-  }
-  redisClient.hmset([jwtObj.jwt, 'username', user.username, 'role', 'user'])
-  return jwtObj.jwt
+  const enJwt = jwt.encode(payload, SECRET)
+  redisClient.set(enJwt, JSON.stringify(payload))
+  return enJwt
 }  

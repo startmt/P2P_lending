@@ -1,6 +1,6 @@
 import {
     checkUserFromDb,
-    createJwt
+    createSession
 } from '../service/signinService'
 import { status400, status200, status401 } from '../utils/status'
 export default async (req, res) => {
@@ -10,7 +10,7 @@ export default async (req, res) => {
     }
     let isUserInDatabase = await checkUserFromDb(user)
     if (isUserInDatabase) {
-        status200(res, { token: await createJwt(user) })
+        status200(res, { token: await createSession(user) })
     }
     else if (!isUserInDatabase) {
         status401(res, { message: 'Your username or password is wrong.' })
