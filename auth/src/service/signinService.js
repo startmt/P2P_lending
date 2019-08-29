@@ -1,9 +1,10 @@
 import jwt from 'jwt-simple'
 import userModel from '../model/user'
 import bCrypt from 'bcrypt'
-import redis from 'redis'
+import { getInstance } from '../redis'
 
-const redisClient = redis.createClient()
+const redisClient = getInstance()
+
 export const checkUserFromDb = async (user) => {
   const query = await userModel
     .findOne(

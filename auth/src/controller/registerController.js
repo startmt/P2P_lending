@@ -14,7 +14,7 @@ export default async (req, res) => {
   }
 
   const isUserExist = await checkExistUser(user)
-  if (isUserExist) {
+  if (!isUserExist) {
     const isCreated = await create(user)
     if (isCreated) {
       status200(res, { message: 'create account success' })

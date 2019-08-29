@@ -1,4 +1,4 @@
-import redis from 'redis'
-const redisCLient = redis.createClient()
+import { getInstance } from '../redis'
+const redisClient = getInstance()
 
-export const clearSession = async (token) => redisCLient.del(token)
+export const clearSession = async (token) => redisClient.del(token)

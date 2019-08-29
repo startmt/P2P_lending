@@ -1,4 +1,5 @@
 import userModel from '../model/user'
+
 export const checkExistUser = async (user) => {
   const query = await userModel
     .findOne(
@@ -8,7 +9,7 @@ export const checkExistUser = async (user) => {
     )
     .exec()
   try {
-    if (!query) {
+    if (query) {
       return true
     }
     return false
