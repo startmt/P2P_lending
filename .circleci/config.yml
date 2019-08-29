@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   auth:
-    working_directory: ~/p2p-lending/auth
+    working_directory: ~/P2P_lending/auth
     docker:
       - image: circleci/node:10
     steps:
