@@ -17,6 +17,7 @@ jobs:
           name: push container to docker hub
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+            ls -a \
             docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
             docker push $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1
 
