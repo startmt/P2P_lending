@@ -2,14 +2,14 @@ version: 2
 
 jobs:
   auth:
-    working_directory: ~/p2p-lending
+    working_directory: ~/p2p-lending/auth
     docker:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout:
-          path: ~/P2P_lending/auth
+          path: ~/P2P_lending/auth/
       - run:
           name: install npm
           command: npm install
