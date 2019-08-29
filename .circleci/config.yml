@@ -24,7 +24,7 @@ workflows:
   version: 2
   deploy:
     jobs:
-          - react:
+          - auth:
               filters:
                 branches:
                   only:
