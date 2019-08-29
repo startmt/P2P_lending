@@ -4,7 +4,7 @@ jobs:
   auth:
     working_directory: ~/p2p-lending
     docker:
-      - image: node:10
+      - image: circleci/node:10
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
