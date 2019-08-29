@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  react:
+    working_directory: ~/p2p-lending
+    docker:
+      - image: circleci/node:10
+    steps:
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - checkout:
+      path: ~/soa2019_group2/auth
+    - run:
+        name: install npm
+        command: npm install
+    - run:
+        name: push container to docker hub
+        command: |
+         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+         docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
+         docker push $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+          - react:
+              filters:
+                branches:
+                  only:
+                    - pre-master
