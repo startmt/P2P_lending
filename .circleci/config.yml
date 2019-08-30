@@ -26,15 +26,17 @@ jobs:
             docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
             docker push $DOCKER_USERNAME/p2p-auth-service
   deploy:
-    docker:
-      - image: google/cloud-sdk
+    machine:
+      enabled: true
     steps:
+      - add_ssh_keys:
+        fingerprints:
+          - "18:35:bb:77:3e:19:7f:00:e4:fc:e6:26:f5:de:15:3b"
       - run:
-          name: push container to docker hub
+          name: Deploy Over SSH
           command: |
-            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+            docker pull startmt/p2p-auth-service"
 
 workflows:
   version: 2
