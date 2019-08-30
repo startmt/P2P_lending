@@ -4,15 +4,15 @@ import jwt from 'jwt-simple'
 import env from '../config'
 const withBearer = new BearerStrategy(async (token, done) => {
     try {
-      (jwt.decode(token, env.SECRET_KEY) !== null) ? done(null, true, authInfo) : done(err)
+      const authInfo = jwt.decode(token, env.SECRET_KEY)
+      done(null, true, authInfo)
     } catch (error) {
-      done(err)
+      done(error)
     }
   })
 
 passport.use(withBearer)
 export const requireJWTAuth = passport.authenticate('bearer', { session: false })
-
 
 // import { getInstance } from '../redis'
 // const redisClient = getInstance()
