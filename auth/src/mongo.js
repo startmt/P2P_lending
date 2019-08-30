@@ -1,8 +1,7 @@
 import mongoose from 'mongoose'
+import env from './config'
 
-const { MONGO_HOST } = process.env
-
-const uri = `mongodb://${MONGO_HOST}:27017/test?retryWrites=true`
+const uri = `mongodb://${env.MONGO_HOST}:27017/test?retryWrites=true`
 
 const connectMongo = () => {
   mongoose.connect(uri, { useNewUrlParser: true })
