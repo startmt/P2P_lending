@@ -2,14 +2,14 @@ import jwt from 'jwt-simple'
 import userModel from '../model/user'
 import bCrypt from 'bcrypt'
 import { getInstance } from '../redis'
-
+import env from '../config'
 const redisClient = getInstance()
 
 export const checkUserFromDb = async (user) => {
   const query = await userModel
     .findOne(
       {
-        username: user.username
+        username: user.username,
       },
     )
     .exec()
@@ -24,7 +24,7 @@ export const createSession = async(user) => {
   const payload = {
     username: user.username,
   }
-  const SECRET = 'P2P_LENDING_PROJECT'
+  const SECRET = env.SECRET_KEY
   const enJwt = jwt.encode(payload, SECRET)
   redisClient.set(enJwt, JSON.stringify(payload))
   return enJwt

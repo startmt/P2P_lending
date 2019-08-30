@@ -1,10 +1,9 @@
 import redis from 'redis'
+import env from './config'
 
 let instance = null
-const { REDIS_HOST } = process.env
-
 export const connectRedis = () => {
-  instance = redis.createClient('6379', REDIS_HOST)
+  instance = redis.createClient('6379', env.REDIS_HOST)
   instance.on('connect', function() {
     console.log('redis connected')
   })
