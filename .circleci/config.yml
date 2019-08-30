@@ -47,3 +47,8 @@ workflows:
                 branches:
                   only:
                     - pre-master
+          - deploy:
+              filters:
+                branches:
+                  only:
+                    - pre-master
