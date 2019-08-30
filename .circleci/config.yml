@@ -19,6 +19,20 @@ jobs:
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
             docker build -t $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1 . && \
             docker push $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1
+      - run:
+          name: push container to docker hub (latest)
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+            docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
+            docker push $DOCKER_USERNAME/p2p-auth-service
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 
 workflows:
   version: 2
