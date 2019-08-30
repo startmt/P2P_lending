@@ -36,7 +36,7 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
-            docker pull startmt/p2p-auth-service"
+            docker-compose up -d
 
 workflows:
   version: 2
