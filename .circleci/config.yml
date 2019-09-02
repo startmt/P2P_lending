@@ -1,0 +1,56 @@
+version: 2
+
+jobs:
+  auth:
+    working_directory: ~/P2P_lending/auth
+    docker:
+      - image: circleci/node:10
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/P2P_lending
+      - run:
+          name: install npm
+          command: npm install
+      - run:
+          name: push container to docker hub
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+            docker build -t $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1 . && \
+            docker push $DOCKER_USERNAME/p2p-auth-service:$CIRCLE_SHA1
+      - run:
+          name: push container to docker hub (latest)
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
+            docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
+            docker push $DOCKER_USERNAME/p2p-auth-service
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "18:35:bb:77:3e:19:7f:00:e4:fc:e6:26:f5:de:15:3b"
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+            docker-compose up -d"
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+          - auth:
+              filters:
+                branches:
+                  only:
+                    - pre-master
+          - deploy:
+              filters:
+                branches:
+                  only:
+                    - pre-master
+              requires:
+                - auth

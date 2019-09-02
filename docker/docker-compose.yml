@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  auth:
+    image: startmt/p2p-auth-service
+    ports: 
+      - 127.0.0.1:3000
+    environment:
+      - REDIS_HOST=redis_auth
+      - MONGO_HOST=auth_mongo
+    depends_on:
+      - redis_auth
+  redis_auth:
+    image: redis:5-alpine
+  auth_mongo:
+    image: mongo
+    volumes:
+      - "./mongo_auth:/data/db"
