@@ -36,6 +36,7 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+            docker-compose pull auth && \
             docker-compose up -d"
 
 workflows:
