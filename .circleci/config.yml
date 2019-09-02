@@ -48,5 +48,9 @@ workflows:
                   only:
                     - pre-master
           - deploy:
+              filters:
+                branches:
+                  only:
+                    - pre-master
               requires:
                 - auth
