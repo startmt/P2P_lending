@@ -14,7 +14,7 @@
  
  :arrow_forward: [ExpressJS](#)
  
- :arrow_forward: [NextJS React Web Application](#)
+ :arrow_forward: [PassportJS](#)
  
 
 ## Policy (will delete on release product)
