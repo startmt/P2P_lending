@@ -31,11 +31,12 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "18:35:bb:77:3e:19:7f:00:e4:fc:e6:26:f5:de:15:3b"
+            - "b2:d6:0b:82:24:75:87:9e:8c:62:2d:27:a5:5b:92:2f"
       - run:
           name: Deploy Over SSH
           command: |
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+            docker-compose pull auth && \
             docker-compose up -d"
 
 workflows:
