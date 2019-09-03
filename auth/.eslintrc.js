@@ -13,5 +13,10 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        "indent": ["error", 2],
+        "semi": ["error", "never"],
+        "jsx-quotes": ["error", "prefer-double"],
+        "quotes": ["error", "single"],
+        "no-console": ["error", { allow: ["error"] }]
     }
-};
+}

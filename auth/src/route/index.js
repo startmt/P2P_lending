@@ -9,7 +9,6 @@ const user = router.get('/', requireJWTAuth, (req, res) => {res.end()})
 const login = router.post('/login', loginController)
 const register = router.post('/register', registerController)
 const logout = router.post('/logout', logoutController)
-
 router.use([login, register, user, logout])
 
 export default router

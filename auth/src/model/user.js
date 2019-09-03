@@ -10,7 +10,7 @@ const userSchema = new Schema({
     type: String,
     unique: false,
   },
-});
+})
 
 const User = mongoose.model('User', userSchema)
 
