@@ -10,7 +10,7 @@ export const connectRedis = () => {
 }
 
 export const getInstance = () => {
-  if (instance === null){
+  if (instance === null) {
     connectRedis()
   }
   return instance

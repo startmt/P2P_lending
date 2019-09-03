@@ -1,28 +1,27 @@
 import {
   checkUserFromDb,
-  createSession
+  createSession,
 } from '../service/signinService'
 import {
   status400,
   status200,
-  status401
+  status401,
 } from '../utils/status'
 export default async (req, res) => {
   const user = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
   }
   let isUserInDatabase = await checkUserFromDb(user)
   if (isUserInDatabase) {
     status200(res, {
-      token: await createSession(user)
+      token: await createSession(user),
     })
   } else if (!isUserInDatabase) {
     status401(res, {
-      message: 'Your username or password is wrong.'
+      message: 'Your username or password is wrong.',
     })
   } else {
     status400(res)
   }
-
 }
