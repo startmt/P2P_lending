@@ -14,10 +14,6 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
-    'prettier/prettier': 'error',
-    semi: ['error', 'never'],
-    'jsx-quotes': ['error', 'prefer-double'],
-    quotes: ['error', 'single'],
-    'no-console': ['error', { allow: ['error'] }],
+    'prettier/prettier': ['error'],
   },
 }

@@ -8,7 +8,6 @@ import { connectRedis } from './redis'
 const app = express()
 const PORT = '3000'
 
-
 http.createServer(app).listen(PORT, () => {
   connectMongo()
   connectRedis()
