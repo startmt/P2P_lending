@@ -34,7 +34,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout:
-          path: ~/P2P_lending/frontend
+          path: ~/P2P_lending
       - run:
           name: install npm
           command: npm install
