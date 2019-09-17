@@ -43,7 +43,7 @@ jobs:
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
             docker build -t $DOCKER_USERNAME/p2p-frontend:$CIRCLE_SHA1 . && \
-            docker push $DOCKER_USERNAME/p2p-frontend-service:$CIRCLE_SHA1
+            docker push $DOCKER_USERNAME/p2p-frontend:$CIRCLE_SHA1
       - run:
           name: push container to docker hub (latest)
           command: |
