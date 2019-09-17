@@ -3,12 +3,8 @@
       "public": "src/public",
       "rewrites": [
         {
-          "source": "**/**",
-          "function": "next"
+          "source": "**/**"
         }
       ]
-    },
-    "functions": {
-      "source": "src/functions"
     }
   }
