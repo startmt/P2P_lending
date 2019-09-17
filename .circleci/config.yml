@@ -27,14 +27,14 @@ jobs:
             docker push $DOCKER_USERNAME/p2p-auth-service
 
   frontend:
-    working_directory: ~/P2P_lending/front-end
+    working_directory: ~/P2P_lending/view
     docker:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout:
-          path: ~/P2P_lending/view
+          path: ~/P2P_lending/frontend
       - run:
           name: install npm
           command: npm install
