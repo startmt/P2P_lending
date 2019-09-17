@@ -56,7 +56,7 @@ jobs:
       
       - run:
             name: Firebase Deploy
-            command: ./node_modules/.bin/firebase deploy --project $PROJECT_ID --token "$TOKEN_FIREBASE"
+            command: ls -a && ./node_modules/.bin/firebase deploy --project $PROJECT_ID --token "$TOKEN_FIREBASE"
   deploy:
     machine:
       enabled: true
