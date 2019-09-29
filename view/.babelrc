@@ -1,12 +1,12 @@
 {
-    "sourceMaps": "both",
-    "presets": [ "next/babel", "@babel/preset-env" ],
-    "plugins": [
-      "transform-export-extensions",
-      "inline-react-svg",
-      [ "babel-plugin-root-import", {
+  "sourceMaps": "both",
+  "presets": ["next/babel", "@babel/preset-env"],
+  "plugins": [
+    [
+      "babel-plugin-root-import",
+      {
         "rootPathSuffix": "src"
-      }],
-      ["react-intl"]
+      }
     ]
+  ]
 }

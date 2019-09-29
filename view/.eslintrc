@@ -13,11 +13,9 @@
       "My2c2p": true
     },
     "env": {
-      "jest": true,
       "es6": true,
       "browser": true,
-      "node": true,
-      "jasmine": true
+      "node": true
     },
     "plugins": [
       "react"
