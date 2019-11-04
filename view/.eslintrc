@@ -7,11 +7,6 @@
     "parserOptions": {
       "sourceType": "module"
     },
-    "globals": {
-      "Omise": true,
-      "LANGUAGES": true,
-      "My2c2p": true
-    },
     "env": {
       "es6": true,
       "browser": true,
