@@ -1,21 +1,27 @@
-import React from 'react'
-import { compose } from 'redux'
+import React, { Fragment } from 'react'
+import { compose, bindActionCreators } from 'redux'
+import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
-import { createStructuredSelector } from 'reselect'
-
-const Index = () => (
-  <>
-    <div>Hello</div>
-  </>
-)
-const getCount = (state) =>
-  state.getIn(['authentication', 'auth'])
-const mapStateToProps = (state, props) =>
-  createStructuredSelector({
-    count: getCount,
-  })(state, props)
-const mapDispatchToProps = null
-
+import { Layout } from '../layouts'
+const Index = (props) => {
+  const { 
+    setPageName
+  } = props
+  setPageName("Landing")
+  return (
+    <Fragment>
+      <Layout></Layout>
+    </Fragment>
+  )
+}
+const mapStateToProps = null
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setPageName: pageNameAction.setPageName,
+    },
+    dispatch,
+  )
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
 )(Index)
