@@ -6,7 +6,6 @@ import mainSaga from '~/saga'
 import rootReducer from '~/reducer'
 
 const defaultState = fromJS({})
-
 export default (initialState = defaultState) => {
   console.log('Create Store')
   if (!Map.isMap(initialState)) {
