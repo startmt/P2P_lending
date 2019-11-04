@@ -2,11 +2,29 @@
   "sourceMaps": "both",
   "presets": ["next/babel", "@babel/preset-env"],
   "plugins": [
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-export-namespace-from",
+    [
+      "styled-components",
+      { "ssr": true, "displayName": true }
+    ],
+    "transform-export-extensions",
+    "inline-react-svg",
     [
       "babel-plugin-root-import",
       {
         "rootPathSuffix": "src"
       }
     ]
-  ]
+  ],
+  "env": {
+    "prod": {
+      "plugins": [
+        [
+          "styled-components",
+          { "ssr": true, "displayName": false }
+        ]
+      ]
+    }
+  }
 }
