@@ -1,19 +1,14 @@
 import Header from './header'
-import styled from 'styled-components'
 import { Fragment } from 'react'
 import Navbar from '../components/Navbar/Navbar'
-const Layout = (props) => (
+import { Layout } from 'antd'
+import '~/static/styles.scss'
+const { Content } = Layout
+const DefaultLayout = (props) => (
   <Fragment>
     <Header />
-    <Navbar/>
-    {props.children}
+    <Navbar />
+    <Content>{props.children}</Content>
   </Fragment>
 )
-export default Layout
-
-const Background = styled.div`
-  background: url('../static/bg.jpg') no-repeat center center fixed; 
-  width: 100%;
-  height: 85vh;
-}
-`
+export default DefaultLayout

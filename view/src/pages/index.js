@@ -3,14 +3,15 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
 import { Layout } from '../layouts'
+import HomeContainer from '../modules/home/containers/homeContainer'
 const Index = (props) => {
-  const { 
-    setPageName
-  } = props
-  setPageName("Landing")
+  const { setPageName } = props
+  setPageName('Landing')
   return (
     <Fragment>
-      <Layout></Layout>
+      <Layout>
+        <HomeContainer />
+      </Layout>
     </Fragment>
   )
 }
