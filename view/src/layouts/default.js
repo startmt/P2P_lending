@@ -1,7 +1,7 @@
 import Header from './header'
 import styled from 'styled-components'
 import { Fragment } from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar/Navbar'
 const Layout = (props) => (
   <Fragment>
     <Header />

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import '../static/styles.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'antd/dist/antd.css'
 const Header = (props) => (
