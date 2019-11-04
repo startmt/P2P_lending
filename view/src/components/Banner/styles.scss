@@ -1,43 +1,41 @@
-@media (min-width: 768px) {
-    .home-banner {
-      height: 450px;
-    }
-  }
-  
+.home-banner {
+  background-image: url('https://www.altran.com/as-content/uploads/sites/7/2017/05/5-0_finance_1600.jpg');
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+}
+@media only screen and (min-width: 768px) {
   .home-banner {
-    background-image: url('https://www.altran.com/as-content/uploads/sites/7/2017/05/5-0_finance_1600.jpg');
-    height: 400px;
-    position: relative;
-    overflow: hidden;
+    height: 450px;
   }
-  .hero-banner,
-  .container {
-    height: 100%;
-    position: relative;
-    z-index: 1;
-  }
-  .home-banner,
-  .bg-center {
-    background-position: 50%;
-    background-size: cover;
-    width: 100%;
-  }
-  
-  .home-banner:after {
-    content: '';
-    background: rgba(0, 0, 0, 0.55);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  .home-banner-centered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    flex-direction: column;
-  }
-  
+}
+.hero-banner,
+.container {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+.home-banner,
+.bg-center {
+  background-position: 50%;
+  background-size: cover;
+  width: 100%;
+}
+
+.home-banner:after {
+  content: '';
+  background: rgba(0, 0, 0, 0.55);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.home-banner-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
