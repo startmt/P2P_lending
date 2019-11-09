@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Typography, Row, Col } from 'antd'
+import { Row, Col } from 'antd'
 import LoginForm from '../components/LoginForm'
 const LoginContainer = (props) => {
   return (
@@ -7,7 +7,7 @@ const LoginContainer = (props) => {
       <section className="section">
         <div className="container">
           <Row>
-            <Col span={24} >
+            <Col span={24}>
               <LoginForm />
             </Col>
           </Row>

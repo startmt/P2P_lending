@@ -21,7 +21,9 @@ const LoginForm = () => {
     <div className="form-register-loan">
       <Form>
         <div className="text-center">
-          <Title type="primary" level={3}>เข้าสู่ระบบ</Title>
+          <Title type="primary" level={3}>
+            เข้าสู่ระบบ
+          </Title>
         </div>
         <Field>
           <label>อีเมล</label>
@@ -31,7 +33,9 @@ const LoginForm = () => {
           <label>รหัสผ่าน</label>
           <input type="password" placeholder="รหัสผ่าน" />
         </Field>
-        <Button type="submit">Submit</Button>
+        <Link href="/borrower/main">
+          <Button type="submit">Submit</Button>
+        </Link>
       </Form>
     </div>
   )
