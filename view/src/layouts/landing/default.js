@@ -1,6 +1,6 @@
 import Header from './header'
 import { Fragment } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Navbar from '../../components/Navbar/Navbar'
 import { Layout } from 'antd'
 import '~/static/styles.less'
 const { Content } = Layout

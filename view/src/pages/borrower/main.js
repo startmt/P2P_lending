@@ -1,18 +1,16 @@
 import React, { Fragment } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
-import withRedux from '../hocs/with-redux'
-import { LandingLayout } from '../layouts/landing'
-import RegisterLoanContainer from '../modules/authentication/containers/RegisterLoan'
-const RegisterLoanPage = (props) => {
+import withRedux from '~/hocs/with-redux'
+import { DashboardLayout } from '~/layouts/dashboard'
+import MainContainer from '~/modules/borrower/containers/MainContainer'
+const Index = (props) => {
   const { setPageName } = props
-  setPageName('RegisterLoan')
+  setPageName('Landing')
   return (
-    <Fragment>
-      <LandingLayout>
-        <RegisterLoanContainer />
-      </LandingLayout>
-    </Fragment>
+    <DashboardLayout>
+      <MainContainer />
+    </DashboardLayout>
   )
 }
 const mapStateToProps = null
@@ -25,4 +23,4 @@ const mapDispatchToProps = (dispatch) =>
   )
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
-)(RegisterLoanPage)
+)(Index)

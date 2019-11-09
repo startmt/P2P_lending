@@ -12,7 +12,7 @@ const HomeContainer = (props) => {
               คือผู้ดำเนินการเพื่อเชื่อมโยงผู้ประกอบการและนักลงทุนเข้าด้วยกัน
               ในลักษณะที่ไม่ใช่ธนาคาร"
       />
-      <section>
+      <section className="section">
         <div className="container">
           <Title className="text-center">
             Peer To Peer Lending System

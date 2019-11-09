@@ -9,7 +9,7 @@ const RegisterLoanContainer = (props) => {
         background="https://image.freepik.com/free-photo/business-adviser-analyzing-financial-figures-denoting-progress-work-company_1423-97.jpg"
         title="สมัครการกู้เงิน"
       />
-      <section>
+      <section className="section">
         <div className="container">
           <Row>
             <Col span={24} >

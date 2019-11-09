@@ -2,16 +2,16 @@ import React, { Fragment } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
-import { Layout } from '../layouts'
+import { LandingLayout } from '../layouts/landing'
 import LoginContainer from '../modules/authentication/containers/Login'
 const RegisterLoanPage = (props) => {
   const { setPageName } = props
   setPageName('Login')
   return (
     <Fragment>
-      <Layout>
+      <LandingLayout>
         <LoginContainer />
-      </Layout>
+      </LandingLayout>
     </Fragment>
   )
 }

@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm'
 const LoginContainer = (props) => {
   return (
     <Fragment>
-      <section>
+      <section className="section">
         <div className="container">
           <Row>
             <Col span={24} >
