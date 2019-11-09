@@ -3,13 +3,15 @@ import { compose } from 'redux'
 import withRedux from '../../hocs/with-redux'
 import './styles.less'
 import { Menu, Icon, Layout, Row, Col } from 'antd'
+import RegisterModal from './RegisterModal'
 import { Button } from 'antd/lib/radio'
 import { pageSelector } from '~/modules/query/selectors'
 import { createStructuredSelector } from 'reselect'
+import Link from 'next/link'
 const { Header } = Layout
 const { Item } = Menu
 
-const Navbar = ({pageName}) => (
+const Navbar = ({ pageName }) => (
   <Fragment>
     <Header>
       <Menu
@@ -18,8 +20,12 @@ const Navbar = ({pageName}) => (
         defaultSelectedKeys={['2']}
         className="menu">
         <Item className="menu-item" key="Landing">
-          <Icon type="home" />
-          หน้าแรก
+          <Link href="/">
+            <a>
+              <Icon type="home" />
+              หน้าแรก
+            </a>
+          </Link>
         </Item>
         <Item className="menu-item" key="about">
           <Icon type="info-circle" />
@@ -36,10 +42,14 @@ const Navbar = ({pageName}) => (
         <div className="right-item">
           <Row>
             <Col span={12}>
-              <Button>Login</Button>
+              <Link href="/login">
+                <Button>เข้าสู่ระบบ</Button>
+              </Link>
             </Col>
             <Col span={12}>
-              <Button>Register</Button>
+              <Link href="/register-loan">
+                <RegisterModal/>
+              </Link>
             </Col>
           </Row>
         </div>
