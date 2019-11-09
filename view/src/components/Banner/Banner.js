@@ -4,13 +4,12 @@ import './styles.scss'
 
 const { Title, Paragraph } = Typography
 const Banner = (props) => {
-    const {
-        title,
-        description
-    } = props
+  const { title, description, background } = props
   return (
     <Fragment>
-      <div className="home-banner">
+      <div
+        className="home-banner"
+        style={{ backgroundImage: `url('${background}')` }}>
         <div className="container">
           <div class="home-banner-centered">
             <Title className="text-white text-center">
