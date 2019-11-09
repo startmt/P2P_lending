@@ -1,12 +1,11 @@
 .home-banner {
-  background-image: url('https://www.altran.com/as-content/uploads/sites/7/2017/05/5-0_finance_1600.jpg');
-  height: 70vh;
+  height: 400px;
   position: relative;
   overflow: hidden;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
   .home-banner {
-    height: 450px;
+    height: 350px;
   }
 }
 .hero-banner,
