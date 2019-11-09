@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Typography } from 'antd'
-import './styles.scss'
+import './styles.less'
 
 const { Title, Paragraph } = Typography
 const Banner = (props) => {

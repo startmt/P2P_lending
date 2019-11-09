@@ -5,7 +5,7 @@ import {
   Form,
   Select,
 } from 'semantic-ui-react'
-import './styles.scss'
+import './styles.less'
 import Link from 'next/link'
 import { Typography } from 'antd'
 

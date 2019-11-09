@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-source-maps": "^0.0.3",
     "antd": "^3.24.3",
@@ -24,6 +25,7 @@
     "firebase-tools": "^7.3.2",
     "i": "^0.3.6",
     "immutable": "^4.0.0-rc.12",
+    "less": "^3.10.3",
     "lodash": "^4.17.15",
     "next": "^9.0.5",
     "next-compose-plugins": "^2.2.0",
@@ -38,6 +40,7 @@
     "redux-beacon": "^2.1.0",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^1.0.5",
+    "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1",
     "styled-components": "^4.4.0",

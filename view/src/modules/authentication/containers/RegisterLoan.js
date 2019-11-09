@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import { Typography, Row, Col } from 'antd'
 import Banner from '~/components/Banner/Banner'
 import RegisterLoanForm from '../components/RegisterLoanForm'
-const { Title, Paragraph } = Typography
-const RegisterLoan = (props) => {
+const RegisterLoanContainer = (props) => {
   return (
     <Fragment>
       <Banner
@@ -13,9 +12,7 @@ const RegisterLoan = (props) => {
       <section>
         <div className="container">
           <Row>
-            <Col span={12}>
-            </Col>
-            <Col span={12} >
+            <Col span={24} >
               <RegisterLoanForm />
             </Col>
           </Row>
@@ -24,4 +21,4 @@ const RegisterLoan = (props) => {
     </Fragment>
   )
 }
-export default RegisterLoan
+export default RegisterLoanContainer

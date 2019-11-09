@@ -8,8 +8,10 @@ export default function reducer(
 ) {
   switch (action.type) {
     case 'SET_PAGE_NAME':
-      return state
-      .set('pageName', action.payload.name)
+      return state.set(
+        'pageName',
+        fromJS(action.payload.name),
+      )
     default:
       return state
   }

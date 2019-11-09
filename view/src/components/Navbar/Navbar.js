@@ -1,21 +1,23 @@
 import React, { Fragment } from 'react'
 import { compose } from 'redux'
 import withRedux from '../../hocs/with-redux'
-import './styles.scss'
+import './styles.less'
 import { Menu, Icon, Layout, Row, Col } from 'antd'
 import { Button } from 'antd/lib/radio'
-
+import { pageSelector } from '~/modules/query/selectors'
+import { createStructuredSelector } from 'reselect'
 const { Header } = Layout
 const { Item } = Menu
 
-const Navbar = () => (
+const Navbar = ({pageName}) => (
   <Fragment>
     <Header>
       <Menu
+        selectedKeys={[pageName]}
         mode="horizontal"
         defaultSelectedKeys={['2']}
         className="menu">
-        <Item className="menu-item" key="home">
+        <Item className="menu-item" key="Landing">
           <Icon type="home" />
           หน้าแรก
         </Item>
@@ -45,7 +47,10 @@ const Navbar = () => (
     </Header>
   </Fragment>
 )
-const mapStateToProps = null
+const mapStateToProps = (state, props) =>
+  createStructuredSelector({
+    pageName: pageSelector.getNamePage,
+  })(state, props)
 const mapDispatchToProps = null
 
 export default compose(
