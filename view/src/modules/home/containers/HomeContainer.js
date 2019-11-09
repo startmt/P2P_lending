@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import './styles.scss'
 import { Typography } from 'antd'
 import Banner from '~/components/Banner/Banner'
 const { Title, Paragraph } = Typography
