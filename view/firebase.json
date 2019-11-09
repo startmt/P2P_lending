@@ -3,7 +3,7 @@
       "public": "src/out",
       "rewrites": [
         {
-          "source": "**",
+          "source": "**/**",
           "destination": "/index.html"
         }
       ]
