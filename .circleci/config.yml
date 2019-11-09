@@ -7,7 +7,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - checkout:
           path: ~/P2P_lending
       - run:
@@ -32,7 +32,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - checkout:
           path: ~/P2P_lending
       - run:
