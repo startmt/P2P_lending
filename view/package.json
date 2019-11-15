@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next ./src",
-    "build": "next build ./src && next export ./src",
-    "start": "next start ./src"
+    "dev": "next",
+    "build": "next build && next export",
+    "start": "next start",
+    "deploy:dev": "yarn run build && firebase deploy --only hosting:p2p-lending-project-dev"
   },
   "author": "",
   "license": "ISC",

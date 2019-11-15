@@ -10,6 +10,14 @@ const userSchema = new Schema({
     type: String,
     unique: false,
   },
+  isIdentify: {
+    type: Boolean,
+    unique: false,
+  },
+  role:{
+    type: String,
+    unique: false
+  }
 })
 
 const User = mongoose.model('User', userSchema)

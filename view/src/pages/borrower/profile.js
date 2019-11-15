@@ -3,13 +3,13 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
-import MainContainer from '~/modules/borrower/containers/MainContainer'
-const Index = (props) => {
+import VerifySCB from '~/modules/authentication/containers/VerifySCB'
+const ProfileContainer = (props) => {
   const { setPageName } = props
-  setPageName('borrowerMain')
+  setPageName('borrowerProfile')
   return (
     <DashboardLayout>
-      <MainContainer />
+      <VerifySCB />
     </DashboardLayout>
   )
 }
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch) =>
   )
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
-)(Index)
+)(ProfileContainer)

@@ -7,10 +7,12 @@ import { status400, status200, status422 } from '../utils/status'
 export default async (req, res) => {
   let username = req.body.username
   let password = req.body.password
+  let role = req.body.role
   const hashPassword = await bCrypt.hash(password, 10)
   const user = {
     username: username,
-    password: hashPassword
+    password: hashPassword,
+    role: role
   }
 
   const isUserExist = await checkExistUser(user)

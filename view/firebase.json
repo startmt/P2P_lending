@@ -1,6 +1,18 @@
 {
-    "hosting": {
-      "public": "src/out",
+  "hosting": [
+    {
+      "site": "p2p-lending-project-dev",
+      "public": "out",
+      "rewrites": [
+        {
+          "source": "**/**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "p2p-lending-project",
+      "public": "out",
       "rewrites": [
         {
           "source": "**/**",
@@ -8,4 +20,5 @@
         }
       ]
     }
-  }
+  ]
+}

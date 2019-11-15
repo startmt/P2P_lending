@@ -10,19 +10,18 @@ import Link from 'next/link'
 import { Typography } from 'antd'
 
 const { Title, Paragraph } = Typography
+
 const RegisterLoanForm = () => {
-  const options = [
-    { key: 'm', text: 'Male', value: 'male' },
-    { key: 'f', text: 'Female', value: 'female' },
-    { key: 'o', text: 'Other', value: 'other' },
-  ]
   const { Field } = Form
   return (
-    <div className="form-register-loan">
+    <div className="form-wrapper">
       <Form>
         <Title level={3}>ลงทะเบียนสำหรับการกู้เงิน</Title>
         <Paragraph>
-          มีบัญชีอยู่แล้ว? <Link>ล็อกอิน</Link>
+          มีบัญชีอยู่แล้ว?{' '}
+          <Link href="/login">
+            <a>ล็อกอิน</a>
+          </Link>
         </Paragraph>
         <Field>
           <label>อีเมล</label>
@@ -32,16 +31,25 @@ const RegisterLoanForm = () => {
           <label>เบอร์โทรศัพท์</label>
           <input placeholder="เบอร์โทรศัพท์" />
         </Field>
-        <Field
-          control={Select}
-          label="คุณต้องการกู้เงินไปทำอะไร"
-          options={options}
-          placeholder="กรุณาเลือก"
-        />
+        <Field>
+          <label>รหัสผ่าน</label>
+          <input placeholder="รหัสผ่าน" type="password" />
+        </Field>
+        <Field>
+          <label>ยืนยันหัสผ่าน</label>
+          <input
+            placeholder="ยืนยันรหัสผ่าน"
+            type="password"
+          />
+        </Field>
         <Field>
           <Checkbox label="I agree to the Terms and Conditions" />
         </Field>
-        <Button type="submit">Submit</Button>
+        <Link href="/login">
+          <a>
+            <Button type="submit">ต่อไป</Button>
+          </a>
+        </Link>
       </Form>
     </div>
   )
