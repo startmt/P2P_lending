@@ -7,14 +7,12 @@ import {
   Card,
   Icon,
 } from 'antd'
-import Link from 'next/link'
 const MainContainer = (props) => {
   return (
     <section className="section">
       <div className="container">
         <Row gutter={16}>
           <Col span={12}>
-            <Link href="/borrower/profile"> sdsdd</Link>
             <Card>
               <Statistic
                 title="Active"

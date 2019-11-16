@@ -4,9 +4,10 @@ import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
 import ProfileContainer from '~/modules/borrower/containers/ProfileContainer'
-const Index = (props) => {
+const Profile = (props) => {
+
   const { setPageName } = props
-  setPageName('Landing')
+  setPageName('borrowerProfile')
   return (
     <DashboardLayout>
       <ProfileContainer />
@@ -21,6 +22,8 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch,
   )
+
+
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
-)(Index)
+)(Profile)
