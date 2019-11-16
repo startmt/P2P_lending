@@ -18,7 +18,6 @@ export const authenApplication = () => {
 }
 
 export const getSCBToken = (authCode) => {
-  window.HttpCli
   return axios.post(
     'https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token',
     {
