@@ -28,13 +28,19 @@ export const getToken = async (authCode) => {
 export const generateOtp = async (data) => {
     let otpPassword = otpGenerator.generate(6, {alphabets: false, upperCase: false, specialChars: false })
     redisClient.get(otpPassword, function (err,reply) {
-        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 310)
+        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 3100)
     })
     return otpPassword
 }
 
-export const getDataFromScb = async (headers) => {
-  axios.get(
-    'https://api-sandbox.partners.scb/partners/sandbox/v1/customers/profile', {headers: headers}
-  ).then(res=>(res.data)).catch(err=>err)
+export const getDataFromScb = async (otpCode) => {
+  const headers = await redisClient.getAsync(otpCode)
+  const config = {
+    headers: JSON.parse(headers)
+  }
+    return await axios.get(
+      'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
+        config
+    ).then(res=>(res)).catch(err=>{
+      return err.response})
 }

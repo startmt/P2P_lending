@@ -13,7 +13,7 @@ const login = router.post('/login', loginController)
 const register = router.post('/register', registerController)
 const logout = router.post('/logout', logoutController)
 const getOtp = router.get('/otp', generateOtpController)
-const scbVerify = router.get('/verify', verifyScbController)
+const scbVerify = router.post('/verify', verifyScbController)
 router.use([login, register, user, logout, getOtp, scbVerify])
 
 export default router
