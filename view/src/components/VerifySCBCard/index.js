@@ -9,6 +9,12 @@ const VerifySCBCard = ({
   handleOtp,
   otpCode,
   setOtp,
+  firstname,
+  lastname,
+  citizenId,
+  setFirstname,
+  setLastname,
+  setCitizenId,
 }) => (
   <Card>
     <Empty
@@ -29,6 +35,12 @@ const VerifySCBCard = ({
         handleOtp={handleOtp}
         otpCode={otpCode}
         setOtp={setOtp}
+        firstname={firstname}
+        lastname={lastname}
+        citizenId={citizenId}
+        setFirstname={setFirstname}
+        setLastname={setLastname}
+        setCitizenId={setCitizenId}
       />
       Terms of Use
     </Empty>

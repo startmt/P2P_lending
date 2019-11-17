@@ -6,7 +6,6 @@ import { LandingLayout } from '~/layouts/landing'
 import VerifySCB from '~/modules/authentication/containers/VerifySCB'
 const RegisterLoanPage = (props) => {
   const { setPageName } = props
-  console.log(this.props.location.state.email)
   setPageName('verifySCB')
   return (
     <Fragment>

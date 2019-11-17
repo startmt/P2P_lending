@@ -7,22 +7,35 @@ import {
   Button,
   Descriptions,
 } from 'antd'
+import Link from 'next/link'
 import ProfileCard from '~/components/ProfileCard'
 import VerifySCBCard from '~/components/VerifySCBCard'
+import { getHeaderFromOtp } from '~/helpers/scbEasy'
 
 const MainContainer = (props) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [otp, setOtp] = useState('')
-  const handleOtp = async() => {
-    console.log(otp)
-  }
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [citizenId, setCitizenId] = useState('')
   const next = ()=>{
     setCurrentStep(currentStep + 1)
   }
   const prev = ()=>{
     setCurrentStep(currentStep - 1)
   }
-
+  const handleOtp = async() => {
+    const data = {
+      otp: otp,
+      firstname: firstname,
+      lastname: lastname,
+      citizenId: citizenId
+    }
+    const headers  = await getHeaderFromOtp(data)
+    if(headers){
+     next()
+    }
+  }
 
   return (
     <section className="section">
@@ -36,7 +49,13 @@ const MainContainer = (props) => {
               prev={prev}
               handleOtp={handleOtp}
               otpCode = {otp}
+              firstname = {firstname}
+              lastname = {lastname}
+              citizenId = {citizenId}
               setOtp = {setOtp}
+              setFirstname = {setFirstname}
+              setLastname = {setLastname}
+              setCitizenId = {setCitizenId}
             />
           </Col>
         </Row>

@@ -4,7 +4,7 @@ import routes from './route/index'
 import bodyParser from 'body-parser'
 import connectMongo from './mongo'
 import { connectRedis } from './redis'
-
+import cors from 'cors'
 const app = express()
 const PORT = '3000'
 
@@ -14,4 +14,7 @@ http.createServer(app).listen(PORT, () => {
 })
 
 app.use(bodyParser.json())
+
+app.use(cors())
 app.use(routes)
+app.use(bodyParser.urlencoded({ extended: true }));

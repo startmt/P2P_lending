@@ -3,19 +3,21 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { LandingLayout } from '~/layouts/landing'
-import VerifySCB from '~/modules/authentication/containers/VerifySCB'
+import OtpContainer from '~/modules/authentication/containers/OtpContainer'
+import { getOtp } from '~/helpers/scbEasy'
 const RegisterLoanPage = (props) => {
-  const { setPageName } = props
-  console.log(this.props.location.state.email)
+  console.log(props)
+  const { setPageName, otp } = props
   setPageName('otp')
   return (
     <Fragment>
       <LandingLayout>
-        <VerifySCB />
+        <OtpContainer otpCode={otp}/>
       </LandingLayout>
     </Fragment>
   )
 }
+
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -24,6 +26,14 @@ const mapDispatchToProps = (dispatch) =>
     },
     dispatch,
   )
+RegisterLoanPage.getInitialProps = async ({ query }) => {
+  try {
+    const otpCode = await getOtp(query.code)
+    otpCode ? { otp: otpCode } : query
+  } catch (e) {
+    return query
+  }
+}
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
 )(RegisterLoanPage)

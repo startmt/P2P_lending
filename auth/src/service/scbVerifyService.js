@@ -2,6 +2,7 @@ import { getInstance } from '../redis'
 import env from '../config'
 import otpGenerator  from 'otp-generator'
 import axios from 'axios'
+import { rejects } from 'assert'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
@@ -28,22 +29,28 @@ export const getToken = async (authCode) => {
 export const generateOtp = async (data) => {
     let otpPassword = otpGenerator.generate(6, {alphabets: false, upperCase: false, specialChars: false })
     redisClient.get(otpPassword, function (err,reply) {
-        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 310)
+        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 3100)
     })
     return otpPassword
 }
 
-export const verifyOtp = async (otpCode) => {
-  return await redisClient.getAsync(otpCode)
+export const verifyOtp = async (data) => {
+  const headers = await redisClient.getAsync(data.otpCode)
+  if(headers){
+    const config = {
+      headers: JSON.parse(headers)
+    }
+      return await axios.get(
+        'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
+          config
+      ).then(res=>(
+        res.data.data.profile.thaiFirstName == data.firstname 
+        && res.data.data.profile.thaiLastName == data.lastname 
+        && res.data.data.profile.citizenID == data.citizenId 
+        ? res : rejects()
+      )).catch(err=>{
+        return err.response})
+  }
+
 }
 
-export const getDataFromScb = async (headers) => {
-  const config = {
-    headers: JSON.parse(headers)
-  }
-    return await axios.get(
-      'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
-        config
-    ).then(res=>(res)).catch(err=>{
-      return err.response})
-}

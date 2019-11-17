@@ -13,10 +13,16 @@ const QrcodeModal = ({
   handleOtp,
   otpCode,
   setOtp,
+  firstname,
+  lastname,
+  citizenId,
+  setFirstname,
+  setLastname,
+  setCitizenId,
 }) => {
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(
-    'scbeasysim://login/f6822de7-17f7-4780-bb9b-2b7c7a044b4d',
+    'scbeasysim://login/54a02737-10e3-4cee-8d07-8768a3c7113f',
   )
   qr.make()
   const qrcodeImg = qr.createDataURL()
@@ -50,9 +56,37 @@ const QrcodeModal = ({
                   className="text-center"
                   type="primary"
                   level={4}>
-                  กรุณากรอกเลขที่ได้รับ
+                  กรุณากรอกข้อมูลยืนยัน
                 </Title>
                 <Form>
+                  <Form.Field>
+                    <input
+                      placeholder="ชื่อ (ภาษาไทย)"
+                      value={firstname}
+                      onChange={(e) =>
+                        setFirstname(e.target.value)
+                      }
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <input
+                      placeholder="นามสกุล (ภาษาไทย)"
+                      value={lastname}
+                      onChange={(e) =>
+                        setLastname(e.target.value)
+                      }
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <input
+                      placeholder="เลขบัตรประชาชน"
+                      value={citizenId}
+                      maxLength={13}
+                      onChange={(e) =>
+                        setCitizenId(e.target.value)
+                      }
+                    />
+                  </Form.Field>
                   <Form.Field>
                     <input
                       placeholder="รหัส OTP"

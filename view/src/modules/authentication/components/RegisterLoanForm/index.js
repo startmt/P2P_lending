@@ -27,6 +27,16 @@ const RegisterLoanForm = () => {
           <label>อีเมล</label>
           <input placeholder="อีเมล" />
         </Field>
+
+        <Field>
+          <label>ชื่อ (ภาษาไทย)</label>
+          <input placeholder="ชื่อ" />
+        </Field>
+
+        <Field>
+          <label>นามสกุล (ภาษาไทย)</label>
+          <input placeholder="นามสกุล" />
+        </Field>
         <Field>
           <label>เบอร์โทรศัพท์</label>
           <input placeholder="เบอร์โทรศัพท์" />
