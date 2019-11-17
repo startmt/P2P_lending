@@ -9,21 +9,21 @@ import {
 } from 'antd'
 import ProfileCard from '~/components/ProfileCard'
 import VerifySCBCard from '~/components/VerifySCBCard'
-import {
-  getSCBToken,
-  getAccountDetail,
-} from '~/helpers/scbEasy'
 
 const MainContainer = (props) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [otp, setOtp] = useState('')
   const handleOtp = async() => {
-    const scbTokenApi = await getSCBToken()
-    console.log(scbTokenApi)
-    const token = scbTokenApi.data.data.accessToken
-    const resourceOwnerId = scbTokenApi.headers.resourceownerid
-    scbAcountDetailApi = await getAccountDetail(token, resourceOwnerId)
+    console.log(otp)
   }
+  const next = ()=>{
+    setCurrentStep(currentStep + 1)
+  }
+  const prev = ()=>{
+    setCurrentStep(currentStep - 1)
+  }
+
+
   return (
     <section className="section">
       <div className="container">
@@ -32,13 +32,11 @@ const MainContainer = (props) => {
             {/* <ProfileCard/> */}
             <VerifySCBCard
               step={currentStep}
-              next={() => {
-                setCurrentStep(currentStep + 1)
-              }}
-              prev={() => {
-                setCurrentStep(currentStep - 1)
-              }}
+              next={next}
+              prev={prev}
               handleOtp={handleOtp}
+              otpCode = {otp}
+              setOtp = {setOtp}
             />
           </Col>
         </Row>

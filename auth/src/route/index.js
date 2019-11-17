@@ -4,7 +4,7 @@ import registerController from '../controller/registerController'
 import logoutController from '../controller/logoutController'
 import generateOtpController from '../controller/generateOtpController'
 import verifyScbController from '../controller/verifyScbController'
-
+import verifyOtpController from '../controller/verifyOtp'
 import { requireJWTAuth } from '../middleware/authorize'
 const router = Router()
 
@@ -14,6 +14,7 @@ const register = router.post('/register', registerController)
 const logout = router.post('/logout', logoutController)
 const getOtp = router.get('/otp', generateOtpController)
 const scbVerify = router.post('/verify', verifyScbController)
-router.use([login, register, user, logout, getOtp, scbVerify])
+const scbVerifyOtp = router.post('/verify/otp', verifyOtpController)
+router.use([login, register, user, logout, getOtp, scbVerify, scbVerifyOtp])
 
 export default router
