@@ -29,8 +29,10 @@ const mapDispatchToProps = (dispatch) =>
 RegisterLoanPage.getInitialProps = async ({ query }) => {
   try {
     const otpCode = await getOtp(query.code)
-    otpCode ? { otp: otpCode } : query
+    console.log(otpCode.data)
+    return otpCode.data
   } catch (e) {
+    console.log(e)
     return query
   }
 }

@@ -22,7 +22,7 @@ const QrcodeModal = ({
 }) => {
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(
-    'scbeasysim://login/54a02737-10e3-4cee-8d07-8768a3c7113f',
+    'scbeasysim://login/3023494f-f61d-48ff-aa95-52847b58778c',
   )
   qr.make()
   const qrcodeImg = qr.createDataURL()
