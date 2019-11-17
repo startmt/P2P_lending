@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { LandingLayout } from '~/layouts/landing'
 import OtpContainer from '~/modules/authentication/containers/OtpContainer'
 import { getOtp } from '~/helpers/scbEasy'
+import withIntl from '../../hocs/with-intl'
 const RegisterLoanPage = (props) => {
-  console.log(props)
   const { setPageName, otp } = props
   setPageName('otp')
   return (
@@ -29,13 +29,12 @@ const mapDispatchToProps = (dispatch) =>
 RegisterLoanPage.getInitialProps = async ({ query }) => {
   try {
     const otpCode = await getOtp(query.code)
-    console.log(otpCode.data)
     return otpCode.data
   } catch (e) {
-    console.log(e)
     return query
   }
 }
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
+  withIntl
 )(RegisterLoanPage)
