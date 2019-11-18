@@ -2,7 +2,7 @@ import axios from 'axios'
 import env from '~/env'
 
 export const getHeaderFromOtp = (data) => {
-  return axios.post(env.AUTH_SERVICE + '/verify/otp', data)
+  return axios.post(env.AUTH_SERVICE + '/auth/verify/otp', data)
 }
 
 export const getOtp = (authCode) => {
@@ -11,5 +11,5 @@ export const getOtp = (authCode) => {
       authcode: authCode
     }
   }
-  return axios.get(env.AUTH_SERVICE + '/otp', config)
+  return axios.get(env.AUTH_SERVICE + '/auth/otp', config)
 }
