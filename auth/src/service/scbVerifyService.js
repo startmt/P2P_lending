@@ -29,7 +29,7 @@ export const getToken = async (authCode) => {
 export const generateOtp = async (data) => {
     let otpPassword = otpGenerator.generate(6, {alphabets: false, upperCase: false, specialChars: false })
     redisClient.get(otpPassword, function (err,reply) {
-        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 3100)
+        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 310)
     })
     return otpPassword
 }
