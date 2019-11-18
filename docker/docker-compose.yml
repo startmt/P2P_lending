@@ -6,11 +6,11 @@ services:
       context: ../nginx
       dockerfile: Dockerfile
     ports:
-      - 127.0.0.1:80:80
+      - 80:80
   auth:
     image: startmt/p2p-auth-service
     ports: 
-      - 127.0.0.1:3000:3000
+      - 3000:3000
     environment:
       - REDIS_HOST=redis_auth
       - MONGO_HOST=auth_mongo
@@ -26,6 +26,6 @@ services:
   web:
     image: startmt/p2p-frontend-service:latest
     ports: 
-      - 127.0.0.1:8000:3000
+      - 8000:3000
     environment:
       - AUTH_SERVICE=auth
