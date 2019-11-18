@@ -1,5 +1,6 @@
 FROM node:10-alpine
 
+ENV AUTH_SERVICE=hello
 WORKDIR /work/frontend
 
 

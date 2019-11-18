@@ -7,12 +7,12 @@ import verifyOtpController from '../controller/verifyOtp'
 import { requireJWTAuth } from '../middleware/authorize'
 const router = Router()
 
-const user = router.get('/', (req, res) => (console.log(req.headers),res.end()))
-const login = router.post('/login', loginController)
-const register = router.post('/register', registerController)
-const logout = router.post('/logout', logoutController)
-const getOtp = router.get('/otp', generateOtpController)
-const scbVerifyOtp = router.post('/verify/otp', verifyOtpController)
+const user = router.get('/auth/', (req, res) => (console.log(req.headers),res.end()))
+const login = router.post('/auth/login', loginController)
+const register = router.post('/auth/register', registerController)
+const logout = router.post('/auth/logout', logoutController)
+const getOtp = router.get('/auth/otp', generateOtpController)
+const scbVerifyOtp = router.post('/auth/verify/otp', verifyOtpController)
 router.use([login, register, user, logout, getOtp, scbVerifyOtp])
 
 export default router

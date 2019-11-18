@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+  nginx:
+    build:
+      context: ../nginx
+      dockerfile: Dockerfile
+    ports:
+      - 127.0.0.1:80:80
   auth:
     image: startmt/p2p-auth-service
     ports: 
@@ -10,9 +16,16 @@ services:
       - MONGO_HOST=auth_mongo
     depends_on:
       - redis_auth
+      - auth_mongo
   redis_auth:
     image: redis:5-alpine
   auth_mongo:
     image: mongo
     volumes:
       - "./mongo_auth:/data/db"
+  web:
+    image: startmt/p2p-frontend-service:latest
+    ports: 
+      - 127.0.0.1:8000:3000
+    environment:
+      - AUTH_SERVICE=auth

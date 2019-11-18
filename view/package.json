@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
+    "build": "next build",
+    "export": "next export",
     "start": "next start",
-    "deploy:dev": "yarn run build && firebase deploy --only hosting:p2p-lending-project-dev"
+    "deploy:dev": "yarn run build && yarn run export && firebase deploy --only hosting:p2p-lending-project-dev"
   },
   "author": "",
   "license": "ISC",
