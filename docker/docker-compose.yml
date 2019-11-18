@@ -10,7 +10,7 @@ services:
   auth:
     image: startmt/p2p-auth-service
     ports: 
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     environment:
       - REDIS_HOST=redis_auth
       - MONGO_HOST=auth_mongo
@@ -26,6 +26,6 @@ services:
   web:
     image: startmt/p2p-frontend-service:latest
     ports: 
-      - 8000:3000
+      - 127.0.0.1:8000:3000
     environment:
       - AUTH_SERVICE=auth
