@@ -7,7 +7,7 @@
     "dev": "next",
     "build": "next build",
     "export": "next export",
-    "start": "next start",
+    "start": "next start -p 8000",
     "deploy:dev": "yarn run build && yarn run export && firebase deploy --only hosting:p2p-lending-project-dev"
   },
   "author": "",
