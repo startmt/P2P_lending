@@ -14,8 +14,10 @@ module.exports = withCSS(
             },
           },
         })
-
         return config
+      },
+      publicRuntimeConfig: {
+        AUTH_SERVICE: process.env.AUTH_SERVICE+":3000" || 'http://localhost:3000',
       },
     }),
   ),
