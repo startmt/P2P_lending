@@ -3,7 +3,7 @@ import getConfig from "next/config";
 const { publicRuntimeConfig } = getConfig();
 
 export const getHeaderFromOtp = (data) => {
-  return axios.post(publicRuntimeConfig.AUTH_SERVICE + '/auth/verify/otp', data)
+  return axios.post(publicRuntimeConfig.AUTH_SERVICE + '/verify/otp', data)
 }
 
 export const getOtp = (authCode) => {
@@ -12,5 +12,5 @@ export const getOtp = (authCode) => {
       authcode: authCode
     }
   }
-  return axios.get(publicRuntimeConfig.AUTH_SERVICE + '/auth/otp', config)
+  return axios.get(publicRuntimeConfig.AUTH_SERVICE + '/otp', config)
 }
