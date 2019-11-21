@@ -7,9 +7,12 @@ import {
     status200,
   } from '../utils/status'
   export default async (req, res) => {
+    
+    console.log('token generator')
     const authCode = req.headers.authcode
     if(authCode){
       const tokenScb = await getToken(authCode)
+      console.log('token scb = ',  tokenScb)
       if(tokenScb.status == 200){
         const data = {
           resourceOwnerId: tokenScb.headers.resourceownerid,
