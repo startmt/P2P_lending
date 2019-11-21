@@ -29,6 +29,6 @@ services:
     ports: 
       - 127.0.0.1:8000:8000
     environment:
-      - AUTH_SERVICE=http://23.97.59.28/auth
+      - AUTH_SERVICE="http://23.97.59.28/auth"
     depends_on:
       - auth
