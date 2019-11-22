@@ -16,7 +16,6 @@ export default async (req, res) => {
     }
     const username = req.authInfo.username
     const token = await checkToken(username)
-    console.log('token', token)
     if (token) {
         const query = await userModel
             .findOne({
@@ -32,7 +31,6 @@ export default async (req, res) => {
             }
         }
         const isDataconfirm = await confirmData(config, data)
-        console.log()
         if(isDataconfirm) return status200(res,isDataconfirm.data)
         else return status400(res)
     } else {

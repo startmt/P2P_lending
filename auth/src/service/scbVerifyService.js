@@ -53,7 +53,6 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
       status: 200,
     }
   }catch(e){
-    console.log(e)
     return null
   }
   
@@ -101,7 +100,7 @@ export const getAccessTokenByRefreshToken = async (data, username) =>{
       resourceOwnerId: env.SCB_API
     }
   }
-  const getToken = await axios.post('https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token/refresh', data, config).catch(e=>console.log(e))
+  const getToken = await axios.post('https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token/refresh', data, config).catch(e=>redisClient.del(username+'refresh'))
   if(getToken){
     await redisClient.setAsync(username+'access', getToken.data.data.accessToken, 'EX', getToken.data.data.expiresIn)
     await redisClient.setAsync(username+'refresh', getToken.data.data.refreshToken, 'EX', getToken.data.data.refreshExpiresIn)
