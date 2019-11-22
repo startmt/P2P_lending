@@ -20,7 +20,8 @@ import {
         const otpPassword = await generateOtp(data)
         if(otpPassword > 0){
           status200(res, {
-            otp: otpPassword
+            otp: otpPassword,
+            accessToken: tokenScb.data.data.accessToken
           })
         }else{
           status400(res)
