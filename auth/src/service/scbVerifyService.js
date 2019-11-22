@@ -4,6 +4,7 @@ import otpGenerator  from 'otp-generator'
 import axios from 'axios'
 import { rejects } from 'assert'
 import userModel from '../model/user'
+import { async } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/scheduler/async'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
@@ -39,6 +40,7 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
   try{
     let token = await redisClient.getAsync(otpCode+username)
     token = JSON.parse(token)
+    
     await userModel.updateOne(
       {
         username:username
@@ -55,40 +57,55 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
     return null
   }
   
-  // const headers = {
-  //   resourceOwnerId:token.resourceOwnerId,
-  //   requestUId:token.requestUId,
-  //   "accept-language": token['accept-language'],
-  //   authorization: token.accessToken 
-  // }
-  // if(token){
-  //   const config = {
-  //     headers: headers
-  //   }
-  //     return await axios.get(
-  //       'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
-  //         config
-  //     ).then(res=>(
-  //       res.data.data.profile.thaiFirstName == data.firstname 
-  //       && res.data.data.profile.thaiLastName == data.lastname 
-  //       && res.data.data.profile.citizenID == data.citizenId 
-  //       ? res : rejects()
-  //     )).catch(err=>{
-  //       return err.response})
-  // }
-
 }
 
-export const verifyOtp = async (otpCode, username) => {
-  const refreshToken = redisClient.getAsync(otpCode).then(function(res) {
-    console.log(res)
-}).catch(err=>'Error');
-  const isUpdate = await userModel.updateOne(
-    {
-      username:username
-    },{
-    scbRefresh: refreshToken
-  })
-  if(isUpdate) return "success"
-  }
+export const confirmData = async (config, data) => {
+      return await axios.get(
+        'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
+          config
+      ).then(res=>(
+        res.data.data.profile.thaiFirstName == data.firstname 
+        && res.data.data.profile.thaiLastName == data.lastname 
+        && res.data.data.profile.citizenID == data.citizenId 
+        ? res : rejects()
+      )).catch(err=>{
+        return err.response})
+}
 
+
+
+export const checkToken = async (username) => {
+  const accessToken = await redisClient.getAsync(username+'access')
+  const refreshToken = await redisClient.getAsync(username+'refresh')
+  if(accessToken){
+    return accessToken
+  }else if(refreshToken){
+    const data = {
+      applicationKey : env.SCB_API,
+      applicationSecret: env.SCB_SECRET,
+      refreshToken : refreshToken
+    }
+    return await getAccessTokenByRefreshToken(data, username)
+  }
+  else {
+    return null
+  }
+}
+
+export const getAccessTokenByRefreshToken = async (data, username) =>{
+  const config = {
+    headers: {
+      'accept-language': 'EN',
+      'Content-Type': 'application/json',
+      requestUId: 'getnewtokenby'+ data.refreshToken,
+      resourceOwnerId: env.SCB_API
+    }
+  }
+  const getToken = await axios.post('https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token/refresh', data, config).catch(e=>console.log(e))
+  if(getToken){
+    await redisClient.setAsync(username+'access', getToken.data.data.accessToken, 'EX', getToken.data.data.expiresIn)
+    await redisClient.setAsync(username+'refresh', getToken.data.data.refreshToken, 'EX', getToken.data.data.refreshExpiresIn)
+  }
+  return checkToken(username)
+  
+}
