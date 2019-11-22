@@ -18,7 +18,7 @@ const userSchema = new Schema({
     type: String,
     unique: false
   },
-  scbRefresh: {
+  scbId: {
     type: String,
     unique: true
   },

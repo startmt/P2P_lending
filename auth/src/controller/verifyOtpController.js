@@ -12,7 +12,8 @@ export default async (req, res) => {
     const username = req.authInfo.username
     const scbData = await verifyOtp(otpCode, username)
     if (scbData) {
-        redisClient.del(otpCode)
+        console.log(scbData)
+        // redisClient.del(otpCode)
         status200(res, {
             data: scbData
         })

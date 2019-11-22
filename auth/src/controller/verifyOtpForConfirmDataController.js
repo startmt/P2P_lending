@@ -8,17 +8,12 @@ import {
   import { getInstance } from '../redis'
   const redisClient = getInstance()
   export default async (req, res) => {
-
-    const data = {
-      otpCode: req.body.otp,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      citizenId: req.body.citizenId
-    }
-    const scbData = await verifyOtpForConfirm(data)
+      const otpCode = req.body.otp
+      const username = req.authInfo.username
+    const scbData = await verifyOtpForConfirm(otpCode, username)
     if(scbData){
-        redisClient.del(otpCode)
-        status200(res, scbData.data)
+        // redisClient.del(otpCode+username)
+        status200(res, scbData)
     }
     else{
         status400(res)

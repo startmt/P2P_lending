@@ -7,10 +7,7 @@ import OtpContainer from '~/modules/authentication/containers/OtpContainer'
 import { getOtp } from '~/helpers/scbEasy'
 import withIntl from '../../hocs/with-intl'
 const OtpPage = (props) => {
-  const { setPageName, otp, accessToken } = props
-  if (accessToken) {
-    localStorage.setItem('scbToken', accessToken)
-  }
+  const { setPageName, otp } = props
   setPageName('otp')
   return (
     <Fragment>

@@ -2,26 +2,26 @@ import {
     generateOtp,
     getToken
   } from '../service/scbVerifyService'
-  import {
+import {
     status400,
     status200,
-  } from '../utils/status'
-  export default async (req, res) => {
+} from '../utils/status'
+export default async (req, res) => {
     const authCode = req.headers.authcode
+    const username = req.authInfo.username
     if(authCode){
       const tokenScb = await getToken(authCode)
       if(tokenScb.status == 200){
-        const data = {
+        let data = {
           resourceOwnerId: tokenScb.headers.resourceownerid,
-          authorization: 'Bearer '+ tokenScb.data.data.accessToken,
           requestUId: tokenScb.headers.resourceownerid,
-          'accept-language': 'EN'
+          'accept-language': 'EN',
           }
-        const otpPassword = await generateOtp(data)
+          Object.assign(data, tokenScb.data.data) 
+        const otpPassword = await generateOtp(data, username)
         if(otpPassword > 0){
           status200(res, {
-            otp: otpPassword,
-            accessToken: tokenScb.data.data.accessToken
+            otp: otpPassword
           })
         }else{
           status400(res)

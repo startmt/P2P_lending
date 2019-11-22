@@ -27,31 +27,55 @@ export const getToken = async (authCode) => {
     return res
 }
 
-export const generateOtp = async (data) => {
+export const generateOtp = async (data, username) => {
     let otpPassword = otpGenerator.generate(6, {alphabets: false, upperCase: false, specialChars: false })
     redisClient.get(otpPassword, function (err,reply) {
-        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 310)
+        reply != null ? generateOtp() : redisClient.set(otpPassword+username, JSON.stringify(data),'EX', 310)
     })
     return otpPassword
 }
 
-export const verifyOtpForConfirm = async (data) => {
-  const headers = await redisClient.getAsync(data.otpCode)
-  if(headers){
-    const config = {
-      headers: JSON.parse(headers)
+export const verifyOtpForConfirm = async (otpCode, username) => {
+  try{
+    let token = await redisClient.getAsync(otpCode+username)
+    token = JSON.parse(token)
+    await userModel.updateOne(
+      {
+        username:username
+      },{
+        scbId: token.resourceOwnerId
+    })
+    await redisClient.setAsync(username+'refresh', token.refreshToken, 'EX', token.refreshExpiresIn)
+    await redisClient.setAsync(username+'access', token.accessToken, 'EX', token.expiresIn)
+    return {
+      status: 200,
     }
-      return await axios.get(
-        'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
-          config
-      ).then(res=>(
-        res.data.data.profile.thaiFirstName == data.firstname 
-        && res.data.data.profile.thaiLastName == data.lastname 
-        && res.data.data.profile.citizenID == data.citizenId 
-        ? res : rejects()
-      )).catch(err=>{
-        return err.response})
+  }catch(e){
+    console.log(e)
+    return null
   }
+  
+  // const headers = {
+  //   resourceOwnerId:token.resourceOwnerId,
+  //   requestUId:token.requestUId,
+  //   "accept-language": token['accept-language'],
+  //   authorization: token.accessToken 
+  // }
+  // if(token){
+  //   const config = {
+  //     headers: headers
+  //   }
+  //     return await axios.get(
+  //       'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
+  //         config
+  //     ).then(res=>(
+  //       res.data.data.profile.thaiFirstName == data.firstname 
+  //       && res.data.data.profile.thaiLastName == data.lastname 
+  //       && res.data.data.profile.citizenID == data.citizenId 
+  //       ? res : rejects()
+  //     )).catch(err=>{
+  //       return err.response})
+  // }
 
 }
 

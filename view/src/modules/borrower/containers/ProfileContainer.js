@@ -10,7 +10,10 @@ import {
 import Link from 'next/link'
 import ProfileCard from '~/components/ProfileCard'
 import VerifySCBCard from '~/components/VerifySCBCard'
-import { getHeaderFromOtp } from '~/helpers/scbEasy'
+import {
+  getHeaderFromOtp,
+  checkConfirmData,
+} from '~/helpers/scbEasy'
 
 const MainContainer = (props) => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -18,22 +21,30 @@ const MainContainer = (props) => {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [citizenId, setCitizenId] = useState('')
-  const next = ()=>{
+  const next = () => {
     setCurrentStep(currentStep + 1)
   }
-  const prev = ()=>{
+  const prev = () => {
     setCurrentStep(currentStep - 1)
   }
-  const handleOtp = async() => {
+  const handleConfirm = async () => {
     const data = {
-      otp: otp,
       firstname: firstname,
       lastname: lastname,
-      citizenId: citizenId
+      citizenId: citizenId,
     }
-    const headers  = await getHeaderFromOtp(data)
-    if(headers){
-     next()
+    const status = await checkConfirmData(data)
+    if (status) {
+      next()
+    }
+  }
+  const handleOtp = async () => {
+    const data = {
+      otp: otp,
+    }
+    const status = await getHeaderFromOtp(data)
+    if (status) {
+      next()
     }
   }
 
@@ -48,14 +59,15 @@ const MainContainer = (props) => {
               next={next}
               prev={prev}
               handleOtp={handleOtp}
-              otpCode = {otp}
-              firstname = {firstname}
-              lastname = {lastname}
-              citizenId = {citizenId}
-              setOtp = {setOtp}
-              setFirstname = {setFirstname}
-              setLastname = {setLastname}
-              setCitizenId = {setCitizenId}
+              otpCode={otp}
+              firstname={firstname}
+              lastname={lastname}
+              citizenId={citizenId}
+              setOtp={setOtp}
+              setFirstname={setFirstname}
+              setLastname={setLastname}
+              setCitizenId={setCitizenId}
+              handleConfirm={handleConfirm}
             />
           </Col>
         </Row>
