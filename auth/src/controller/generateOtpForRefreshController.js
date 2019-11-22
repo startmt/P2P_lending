@@ -12,10 +12,7 @@ import {
       const tokenScb = await getToken(authCode)
       if(tokenScb.status == 200){
         const data = {
-          resourceOwnerId: tokenScb.headers.resourceownerid,
-          authorization: 'Bearer '+ tokenScb.data.data.accessToken,
-          requestUId: tokenScb.headers.resourceownerid,
-          'accept-language': 'EN'
+          refreshToken: tokenScb.data.data.refreshToken
           }
         const otpPassword = await generateOtp(data)
         if(otpPassword > 0){

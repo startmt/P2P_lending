@@ -1,5 +1,5 @@
 import {
-    verifyOtp
+  verifyOtpForConfirm
   } from '../service/scbVerifyService'
   import {
     status400,
@@ -15,9 +15,9 @@ import {
       lastname: req.body.lastname,
       citizenId: req.body.citizenId
     }
-    const scbData = await verifyOtp(data)
+    const scbData = await verifyOtpForConfirm(data)
     if(scbData){
-        // redisClient.del(otpCode)
+        redisClient.del(otpCode)
         status200(res, scbData.data)
     }
     else{

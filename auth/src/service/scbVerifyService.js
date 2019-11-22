@@ -3,6 +3,7 @@ import env from '../config'
 import otpGenerator  from 'otp-generator'
 import axios from 'axios'
 import { rejects } from 'assert'
+import userModel from '../model/user'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
@@ -34,7 +35,7 @@ export const generateOtp = async (data) => {
     return otpPassword
 }
 
-export const verifyOtp = async (data) => {
+export const verifyOtpForConfirm = async (data) => {
   const headers = await redisClient.getAsync(data.otpCode)
   if(headers){
     const config = {
@@ -53,4 +54,17 @@ export const verifyOtp = async (data) => {
   }
 
 }
+
+export const verifyOtp = async (otpCode, username) => {
+  const refreshToken = redisClient.getAsync(otpCode).then(function(res) {
+    console.log(res)
+}).catch(err=>'Error');
+  const isUpdate = await userModel.updateOne(
+    {
+      username:username
+    },{
+    scbRefresh: refreshToken
+  })
+  if(isUpdate) return "success"
+  }
 
