@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
@@ -8,7 +8,6 @@ import { getOtp } from '~/helpers/scbEasy'
 import withIntl from '../../hocs/with-intl'
 const OtpPage = (props) => {
   const { setPageName, otp } = props
-  console.log(otp)
   setPageName('otp')
   return (
     <Fragment>
@@ -29,7 +28,6 @@ const mapDispatchToProps = (dispatch) =>
 OtpPage.getInitialProps = async ({ query }) => {
   try {
     const otpCode = await getOtp(query.code)
-    console.log(otpCode)
     return otpCode.data
   } catch (e) {
     console.log(e)
@@ -37,5 +35,5 @@ OtpPage.getInitialProps = async ({ query }) => {
 }
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
-  withIntl
+  withIntl,
 )(OtpPage)

@@ -17,7 +17,12 @@ const userSchema = new Schema({
   role:{
     type: String,
     unique: false
-  }
+  },
+  scbId: {
+    type: String,
+    unique: true
+  },
+  
 })
 
 const User = mongoose.model('User', userSchema)

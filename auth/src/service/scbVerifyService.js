@@ -3,6 +3,8 @@ import env from '../config'
 import otpGenerator  from 'otp-generator'
 import axios from 'axios'
 import { rejects } from 'assert'
+import userModel from '../model/user'
+import { async } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/scheduler/async'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
@@ -26,20 +28,37 @@ export const getToken = async (authCode) => {
     return res
 }
 
-export const generateOtp = async (data) => {
+export const generateOtp = async (data, username) => {
     let otpPassword = otpGenerator.generate(6, {alphabets: false, upperCase: false, specialChars: false })
     redisClient.get(otpPassword, function (err,reply) {
-        reply != null ? generateOtp() : redisClient.set(otpPassword, JSON.stringify(data),'EX', 310)
+        reply != null ? generateOtp() : redisClient.set(otpPassword+username, JSON.stringify(data),'EX', 310)
     })
     return otpPassword
 }
 
-export const verifyOtp = async (data) => {
-  const headers = await redisClient.getAsync(data.otpCode)
-  if(headers){
-    const config = {
-      headers: JSON.parse(headers)
+export const verifyOtpForConfirm = async (otpCode, username) => {
+  try{
+    let token = await redisClient.getAsync(otpCode+username)
+    token = JSON.parse(token)
+    
+    await userModel.updateOne(
+      {
+        username:username
+      },{
+        scbId: token.resourceOwnerId
+    })
+    await redisClient.setAsync(username+'refresh', token.refreshToken, 'EX', token.refreshExpiresIn)
+    await redisClient.setAsync(username+'access', token.accessToken, 'EX', token.expiresIn)
+    return {
+      status: 200,
     }
+  }catch(e){
+    return null
+  }
+  
+}
+
+export const confirmData = async (config, data) => {
       return await axios.get(
         'https://api-sandbox.partners.scb/partners/sandbox/v2/customers/profile',
           config
@@ -50,7 +69,42 @@ export const verifyOtp = async (data) => {
         ? res : rejects()
       )).catch(err=>{
         return err.response})
-  }
-
 }
 
+
+
+export const checkToken = async (username) => {
+  const accessToken = await redisClient.getAsync(username+'access')
+  const refreshToken = await redisClient.getAsync(username+'refresh')
+  if(accessToken){
+    return accessToken
+  }else if(refreshToken){
+    const data = {
+      applicationKey : env.SCB_API,
+      applicationSecret: env.SCB_SECRET,
+      refreshToken : refreshToken
+    }
+    return await getAccessTokenByRefreshToken(data, username)
+  }
+  else {
+    return null
+  }
+}
+
+export const getAccessTokenByRefreshToken = async (data, username) =>{
+  const config = {
+    headers: {
+      'accept-language': 'EN',
+      'Content-Type': 'application/json',
+      requestUId: 'getnewtokenby'+ data.refreshToken,
+      resourceOwnerId: env.SCB_API
+    }
+  }
+  const getToken = await axios.post('https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token/refresh', data, config).catch(e=>redisClient.del(username+'refresh'))
+  if(getToken){
+    await redisClient.setAsync(username+'access', getToken.data.data.accessToken, 'EX', getToken.data.data.expiresIn)
+    await redisClient.setAsync(username+'refresh', getToken.data.data.refreshToken, 'EX', getToken.data.data.refreshExpiresIn)
+  }
+  return checkToken(username)
+  
+}

@@ -1,9 +1,7 @@
 import jwt from 'jsonwebtoken'
 import userModel from '../model/user'
 import bCrypt from 'bcrypt'
-import { getInstance } from '../redis'
 import env from '../config'
-const redisClient = getInstance()
 
 export const checkUserFromDb = async (user) => {
   const query = await userModel
@@ -30,6 +28,5 @@ export const createSession = async (user) => {
   }
   const SECRET = env.SECRET_KEY
   const enJwt = jwt.sign(payload, SECRET, expiresTime)
-  redisClient.set(enJwt, JSON.stringify(payload))
   return enJwt
 }
