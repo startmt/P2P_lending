@@ -15,7 +15,8 @@ import {
   checkConfirmData,
 } from '~/helpers/scbEasy'
 
-const MainContainer = (props) => {
+const ProfileContainer = (props) => {
+
   const [currentStep, setCurrentStep] = useState(0)
   const [otp, setOtp] = useState('')
   const [firstname, setFirstname] = useState('')
@@ -101,4 +102,4 @@ const MainContainer = (props) => {
     </section>
   )
 }
-export default MainContainer
+export default ProfileContainer

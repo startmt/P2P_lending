@@ -1,10 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Heading from './header'
 import { Layout, Icon } from 'antd'
 import Sidebar from '~/components/Sidebar'
 import '~/static/styles.less'
+import { compose, bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import withAuth from '~/hocs/with-auth'
+import { authAction } from '~/modules/authentication/actions'
 const { Content, Header, Sider } = Layout
 const DefaultLayout = (props) => {
+  useEffect(() => {
+    if (props.auth) {
+      if (props.auth.username !== '') {
+        props.setUsername(props.auth.username, true)
+      } else {
+        props.setUsername('', false)
+      }
+    }
+  })
+
   const [collapsed, setCollapsed] = useState(false)
   return (
     <Layout>
@@ -28,4 +42,19 @@ const DefaultLayout = (props) => {
     </Layout>
   )
 }
-export default DefaultLayout
+const mapStateToProps = null
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setUsername: authAction.setUsername,
+    },
+    dispatch,
+  )
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  withAuth,
+)(DefaultLayout)
