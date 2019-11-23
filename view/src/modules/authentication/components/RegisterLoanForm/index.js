@@ -32,8 +32,8 @@ const RegisterLoanForm = ({
           <Input
             disable={isLoading}
             name="username"
-            type="username"
-            placeholder="รหัสผ่าน"
+            type="text"
+            placeholder="ชื่อผู้ใช้งาน"
             onChange={setValues}
             error={errors.username ? true : false}
           />

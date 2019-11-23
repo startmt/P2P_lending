@@ -8,9 +8,31 @@ export const register = (username, password, role) => {
     password,
     role,
   }
-  console.log(data)
   return axios.post(
     publicRuntimeConfig.AUTH_SERVICE + '/register',
     data,
+  )
+}
+
+export const login = (username, password) => {
+  const data = {
+    username,
+    password,
+  }
+  return axios.post(
+    publicRuntimeConfig.AUTH_SERVICE + '/login',
+    data,
+  )
+}
+
+export const checkAuth = () => {
+  const config = {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+  }
+  return axios.get(
+    publicRuntimeConfig.AUTH_SERVICE,
+    config
   )
 }

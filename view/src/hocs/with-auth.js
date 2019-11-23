@@ -1,21 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-export default (Component) => (props) => {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token != undefined) {
-      axios
-        .get(process.env.REACT_APP_API_URL + '/api/data', {
-          headers: { Authorization: 'Bearer ' + token },
+import React from 'react'
+import { checkAuth } from '../modules/authentication/api/auth'
+export default (Component) => {
+  const state = {
+    isAuth: null,
+    username: '',
+  }
+  return class extends React.Component {
+    static async getInitialProps(context) {
+      let composedProps = {}
+      if (Component.getInitialProps) {
+        composedProps = await Component.getInitialProps({
+          ...context,
         })
-        .then((data) => {
-          setData(data.data)
+      }
+      return composedProps
+    }
+    componentDidMount() {
+      checkAuth()
+        .then((res) => {
+          this.setState({
+            isAuth: true,
+            username: res.data.username,
+            isIdentify: res.data.isIdentify,
+          })
         })
-        .catch(() => {
-          localStorage.clear()
+        .catch((e) => {
+          this.setState({
+            isAuth: false,
+            username: '',
+            isIdentify: undefined,
+          })
         })
     }
-  }, [])
-  return <Component {...props} data={data} />
+
+    render() {
+      return <Component {...this.props} auth={this.state} />
+    }
+  }
 }
