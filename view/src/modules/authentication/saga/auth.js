@@ -4,8 +4,8 @@ import {
   put,
   all,
 } from 'redux-saga/effects'
-import { register } from '../api/auth'
-import { registerAction } from '../actions'
+import { login, register, checkAuth } from '../api/auth'
+import { registerAction, loginAction, authAction } from '../actions'
 import Router from 'next/router'
 
 function* registerSaga(action) {
@@ -14,7 +14,7 @@ function* registerSaga(action) {
     yield call(register, username, password, role)
     yield put(registerAction.registerSuccess())
     Router.push({
-      pathname: '/login',
+      pathname: '/',
     })
   } catch (e) {
     yield put(
@@ -23,6 +23,26 @@ function* registerSaga(action) {
   }
 }
 
+function* loginSaga(action) {
+  try {
+    const { username, password } = action.payload
+    const res = yield call(login, username, password)
+
+    localStorage.setItem('token', res.data.token)
+    yield put(loginAction.loginSuccess())
+    Router.push({
+      pathname: '/',
+    })
+  } catch (e) {
+    yield put(
+      loginAction.loginFail(e.response.data.message),
+    )
+  }
+}
+
 export default function*() {
-  yield all([takeLatest('REGISTER', registerSaga)])
+  yield all([
+    takeLatest('REGISTER', registerSaga),
+    takeLatest('LOGIN', loginSaga),
+  ])
 }

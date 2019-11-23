@@ -20,11 +20,10 @@ const QrcodeModal = ({
   setLastname,
   setCitizenId,
   handleConfirm,
+  qrCode,
 }) => {
   const qr = QrcodeGenarator(4, 'L')
-  qr.addData(
-    'scbeasysim://login/26dee56b-5717-4eb9-b9a9-3c90abfe1859',
-  )
+  qr.addData(qrCode)
   qr.make()
   const qrcodeImg = qr.createDataURL()
   return (

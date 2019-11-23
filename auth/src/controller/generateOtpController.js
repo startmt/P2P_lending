@@ -8,7 +8,7 @@ import {
 } from '../utils/status'
 export default async (req, res) => {
     const authCode = req.headers.authcode
-    const username = req.authInfo.username
+    const username = req.headers.username
     if(authCode){
       const tokenScb = await getToken(authCode)
       if(tokenScb.status == 200){
@@ -22,6 +22,7 @@ export default async (req, res) => {
         if(otpPassword > 0){
           status200(res, {
             otp: otpPassword
+
           })
         }else{
           status400(res)
