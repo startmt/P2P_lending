@@ -4,6 +4,7 @@ import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
 import { LandingLayout } from '../layouts/landing'
 import RegisterLoanContainer from '../modules/authentication/containers/RegisterLoan'
+import withIntl from '~/hocs/with-intl'
 const RegisterLoanPage = (props) => {
   const { setPageName } = props
   setPageName('RegisterLoan')
@@ -15,7 +16,7 @@ const RegisterLoanPage = (props) => {
     </Fragment>
   )
 }
-const mapStateToProps = null
+
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
@@ -24,5 +25,6 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   )
 export default compose(
-  withRedux(mapStateToProps, mapDispatchToProps),
+  withRedux(null, mapDispatchToProps),
+  withIntl,
 )(RegisterLoanPage)

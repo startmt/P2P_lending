@@ -21,6 +21,7 @@ export const create = async (user) => {
     await userModel.create(user)
     return true
   } catch (error) {
+    console.log(error)
     return false
   }
 }

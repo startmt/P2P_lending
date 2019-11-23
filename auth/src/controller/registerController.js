@@ -12,12 +12,14 @@ export default async (req, res) => {
   const user = {
     username: username,
     password: hashPassword,
-    role: role
+    role: role,
+    isIdentify: false
   }
 
   const isUserExist = await checkExistUser(user)
   if (!isUserExist) {
     const isCreated = await create(user)
+    
     if (isCreated) {
       status200(res, { message: 'create account success' })
     }
