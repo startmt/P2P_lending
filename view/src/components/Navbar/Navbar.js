@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react'
-import { compose } from 'redux'
-import withRedux from '../../hocs/with-redux'
 import './styles.less'
 import { Menu, Icon, Layout, Row, Col } from 'antd'
 import RegisterModal from './RegisterModal'
@@ -8,6 +6,7 @@ import { Button } from 'antd/lib/radio'
 import { pageSelector } from '~/modules/query/selectors'
 import { createStructuredSelector } from 'reselect'
 import Link from 'next/link'
+import { connect } from 'react-redux'
 const { Header } = Layout
 const { Item } = Menu
 
@@ -48,7 +47,7 @@ const Navbar = ({ pageName }) => (
             </Col>
             <Col span={12}>
               <Link href="/register-loan">
-                <RegisterModal/>
+                <RegisterModal />
               </Link>
             </Col>
           </Row>
@@ -63,6 +62,7 @@ const mapStateToProps = (state, props) =>
   })(state, props)
 const mapDispatchToProps = null
 
-export default compose(
-  withRedux(mapStateToProps, mapDispatchToProps),
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(Navbar)
