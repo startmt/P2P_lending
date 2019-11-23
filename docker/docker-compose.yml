@@ -7,10 +7,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+    restart: always
   auth:
+    restart: always
     image: startmt/p2p-auth-service
     ports: 
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     environment:
       - REDIS_HOST=redis_auth
       - MONGO_HOST=auth_mongo
@@ -26,6 +28,8 @@ services:
   web:
     image: startmt/p2p-frontend-service:latest
     ports: 
-      - 8000:3000
+      - 127.0.0.1:8000:8000
     environment:
-      - AUTH_SERVICE=auth
+      - AUTH_SERVICE=http://23.97.59.28/auth
+    depends_on:
+      - auth

@@ -15,6 +15,7 @@ const VerifySCBCard = ({
   setFirstname,
   setLastname,
   setCitizenId,
+  handleConfirm
 }) => (
   <Card>
     <Empty
@@ -41,6 +42,7 @@ const VerifySCBCard = ({
         setFirstname={setFirstname}
         setLastname={setLastname}
         setCitizenId={setCitizenId}
+        handleConfirm={handleConfirm}
       />
       Terms of Use
     </Empty>

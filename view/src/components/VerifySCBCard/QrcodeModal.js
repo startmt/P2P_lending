@@ -19,10 +19,11 @@ const QrcodeModal = ({
   setFirstname,
   setLastname,
   setCitizenId,
+  handleConfirm,
 }) => {
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(
-    'scbeasysim://login/faa23807-ef00-47e9-85ed-c77eed0c4608',
+    'scbeasysim://login/26dee56b-5717-4eb9-b9a9-3c90abfe1859',
   )
   qr.make()
   const qrcodeImg = qr.createDataURL()
@@ -33,6 +34,7 @@ const QrcodeModal = ({
           <Steps size="small" current={step}>
             <Step title="SCBEasy" />
             <Step title="OTP" />
+            <Step title="Confirm" />
           </Steps>
 
           {(step === 0 && (
@@ -51,6 +53,28 @@ const QrcodeModal = ({
             </div>
           )) ||
             (step === 1 && (
+              <Fragment>
+                <Title
+                  className="text-center"
+                  type="primary"
+                  level={4}>
+                  กรุณากรอกข้อมูลยืนยัน
+                </Title>
+                <Form>
+                  <Form.Field>
+                    <input
+                      placeholder="รหัส OTP"
+                      value={otpCode}
+                      maxLength={6}
+                      onChange={(e) =>
+                        setOtp(e.target.value)
+                      }
+                    />
+                  </Form.Field>
+                </Form>
+              </Fragment>
+            )) ||
+            (step === 2 && (
               <Fragment>
                 <Title
                   className="text-center"
@@ -87,16 +111,6 @@ const QrcodeModal = ({
                       }
                     />
                   </Form.Field>
-                  <Form.Field>
-                    <input
-                      placeholder="รหัส OTP"
-                      value={otpCode}
-                      maxLength={6}
-                      onChange={(e) =>
-                        setOtp(e.target.value)
-                      }
-                    />
-                  </Form.Field>
                 </Form>
               </Fragment>
             ))}
@@ -111,6 +125,9 @@ const QrcodeModal = ({
         )}
         {step === 1 && (
           <Button onClick={handleOtp}>ยืนยัน</Button>
+        )}
+        {step === 2 && (
+          <Button onClick={handleConfirm}>เสร็จสิ้น</Button>
         )}
       </Modal.Actions>
     </Modal>

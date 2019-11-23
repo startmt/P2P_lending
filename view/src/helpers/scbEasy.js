@@ -1,8 +1,14 @@
 import axios from 'axios'
-import env from '~/env'
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 export const getHeaderFromOtp = (data) => {
-  return axios.post(env.AUTH_SERVICE + '/verify/otp', data)
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  }
+  return axios.post(publicRuntimeConfig.AUTH_SERVICE + '/verify/otp', data,config)
 }
 
 export const getOtp = (authCode) => {
@@ -11,5 +17,14 @@ export const getOtp = (authCode) => {
       authcode: authCode
     }
   }
-  return axios.get(env.AUTH_SERVICE + '/otp', config)
+  return axios.get(publicRuntimeConfig.AUTH_SERVICE + '/otp', config)
+}
+
+export const checkConfirmData = (data) => {
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  }
+  return axios.post(publicRuntimeConfig.AUTH_SERVICE + '/confirm/scb', data,config)
 }
