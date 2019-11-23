@@ -12,9 +12,13 @@ const DefaultLayout = (props) => {
   useEffect(() => {
     if (props.auth) {
       if (props.auth.username !== '') {
-        props.setUsername(props.auth.username, true)
+        props.setUsername(
+          props.auth.username,
+          true,
+          props.auth.isIdentify,
+        )
       } else {
-        props.setUsername('', false)
+        props.setUsername(null, false, null)
       }
     }
   })

@@ -1,7 +1,8 @@
 import { fromJS } from 'immutable'
 const initialState = fromJS({
   isAuth: null,
-  username: ''
+  username: '',
+  isIdentify: null
 })
 export default function reducer(
   state = initialState,
@@ -12,6 +13,7 @@ export default function reducer(
       return state
         .set('isAuth', fromJS(action.payload.isAuth))
         .set('username', fromJS(action.payload.username))
+        .set('isIdentify', fromJS(action.payload.isIdentify))
     default:
       return state
   }

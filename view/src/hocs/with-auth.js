@@ -21,18 +21,20 @@ export default (Component) => {
           this.setState({
             isAuth: true,
             username: res.data.username,
+            isIdentify: res.data.isIdentify,
           })
         })
         .catch((e) => {
           this.setState({
             isAuth: false,
-            username: undefined
+            username: '',
+            isIdentify: undefined,
           })
         })
     }
 
     render() {
-      return <Component {...this.props } auth={this.state}/>
+      return <Component {...this.props} auth={this.state} />
     }
   }
 }

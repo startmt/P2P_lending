@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Row,
   Col,
@@ -9,19 +9,30 @@ import {
 } from 'antd'
 import Link from 'next/link'
 import ProfileCard from '~/components/ProfileCard'
+import { connect } from 'react-redux'
+import { authSelector } from '~/modules/authentication/selectors'
+import { getQrcode } from '~/helpers/scbEasy'
 import VerifySCBCard from '~/components/VerifySCBCard'
+import { createStructuredSelector } from 'reselect'
 import {
   getHeaderFromOtp,
   checkConfirmData,
 } from '~/helpers/scbEasy'
 
-const ProfileContainer = (props) => {
-
+const ProfileContainer = ({ username, isIdentify }) => {
+  const [qrCode, setQrcode] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
   const [otp, setOtp] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [citizenId, setCitizenId] = useState('')
+  console.log(qrCode)
+  useEffect(() => {
+    if (isIdentify === false)
+      getQrcode(username).then((res) =>
+        setQrcode(res.data.data.callbackUrl),
+      )
+  })
   const next = () => {
     setCurrentStep(currentStep + 1)
   }
@@ -58,6 +69,7 @@ const ProfileContainer = (props) => {
             <VerifySCBCard
               step={currentStep}
               next={next}
+              qrCode={qrCode}
               prev={prev}
               handleOtp={handleOtp}
               otpCode={otp}
@@ -102,4 +114,13 @@ const ProfileContainer = (props) => {
     </section>
   )
 }
-export default ProfileContainer
+
+const mapStateToProps = (state, props) =>
+  createStructuredSelector({
+    username: authSelector.getUsername,
+    isIdentify: authSelector.isIdentify,
+  })(state, props)
+export default connect(
+  mapStateToProps,
+  null,
+)(ProfileContainer)

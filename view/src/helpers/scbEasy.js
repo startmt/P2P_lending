@@ -5,7 +5,8 @@ const { publicRuntimeConfig } = getConfig()
 export const getHeaderFromOtp = (data) => {
   const config = {
     headers: {
-      Authorization: localStorage.getItem('token'),
+      Authorization:
+        'Bearer ' + localStorage.getItem('token'),
     },
   }
   return axios.post(
@@ -31,7 +32,8 @@ export const getOtp = (authCode, username) => {
 export const checkConfirmData = (data) => {
   const config = {
     headers: {
-      Authorization: localStorage.getItem('token'),
+      Authorization:
+        'Bearer ' + localStorage.getItem('token'),
     },
   }
   return axios.post(
@@ -42,6 +44,7 @@ export const checkConfirmData = (data) => {
 }
 
 export const getQrcode = (username) => {
+  console.log('ddd')
   const config = {
     headers: {
       apikey: publicRuntimeConfig.SCB_API,
@@ -53,8 +56,8 @@ export const getQrcode = (username) => {
       'accept-language': 'EN',
     },
   }
-  axios.get(
-    `https://api-sandbox.partners.scb/partners/sandbox/v2/oauth/authorize?username=${username}"`,
+  return axios.get(
+    `https://api-sandbox.partners.scb/partners/sandbox/v2/oauth/authorize?username=${username}`,
     config,
   )
 }
