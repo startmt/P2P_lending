@@ -4,7 +4,6 @@ import otpGenerator  from 'otp-generator'
 import axios from 'axios'
 import { rejects } from 'assert'
 import userModel from '../model/user'
-import { async } from '../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/scheduler/async'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
