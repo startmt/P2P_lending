@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 const { Header } = Layout
 const { Item } = Menu
 
-const Navbar = ({ pageName, username, isAuth }) => (
+const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
   <Fragment>
     <Header>
       <Menu
@@ -42,8 +42,8 @@ const Navbar = ({ pageName, username, isAuth }) => (
         <div className="right-item">
           {isAuth ? (
             <Row>
-              {username}
-              <Link href="/borrower/main"><a className="ml-2">Console</a></Link>
+              <Link href="/borrower/main"><a className="mr-2">Console</a></Link>
+                  <Button onClick={handleLogout}>ออกจากระบบ</Button>
             </Row>
           ) : (
             <Row>

@@ -5,7 +5,6 @@ import Sidebar from '~/components/Sidebar'
 import '~/static/styles.less'
 import { compose } from 'redux'
 import withAuth from '~/hocs/with-auth'
-import withIntl from '../../hocs/with-intl'
 const { Content, Header, Sider } = Layout
 const DefaultLayout = (props) => {
   useEffect(() => {
@@ -46,7 +45,4 @@ const DefaultLayout = (props) => {
   )
 }
 
-export default compose(
-  withIntl,
-  withAuth,
-)(DefaultLayout)
+export default compose(withAuth)(DefaultLayout)

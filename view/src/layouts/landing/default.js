@@ -7,10 +7,14 @@ import { compose } from 'redux'
 import withAuth from '~/hocs/with-auth'
 const { Content } = Layout
 const DefaultLayout = (props) => {
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.replace('/')
+  }
   return (
     <Fragment>
       <Header />
-      <Navbar />
+      <Navbar handleLogout={handleLogout} />
       <Content>{props.children}</Content>
     </Fragment>
   )
