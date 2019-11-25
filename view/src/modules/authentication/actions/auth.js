@@ -1,9 +1,9 @@
-export const setUsername = (
+export const setAuth = (
   username,
   isAuth,
   isIdentify,
 ) => ({
-  type: 'SET_USERNAME',
+  type: 'SET_AUTH',
   payload: {
     isAuth,
     username,

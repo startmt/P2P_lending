@@ -7,6 +7,7 @@ import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import withAuth from '~/hocs/with-auth'
 import { authAction } from '~/modules/authentication/actions'
+import withIntl from '../../hocs/with-intl'
 const { Content, Header, Sider } = Layout
 const DefaultLayout = (props) => {
   useEffect(() => {
@@ -60,5 +61,6 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
+  withIntl,
   withAuth,
 )(DefaultLayout)
