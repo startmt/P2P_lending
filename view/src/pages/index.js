@@ -4,10 +4,8 @@ import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
 import { LandingLayout } from '../layouts/landing'
 import HomeContainer from '../modules/home/containers/HomeContainer'
-import withAuth from '../hocs/with-auth'
 import withIntl from '../hocs/with-intl'
 const Index = (props) => {
-  console.log(props)
   const { setPageName } = props
   setPageName('Landing')
   return (

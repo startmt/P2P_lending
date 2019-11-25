@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import withRedux from 'next-redux-wrapper'
-import withReduxSaga from 'next-redux-saga'
+// import withReduxSaga from 'next-redux-saga'
 
 import createStore from '~/store'
 
@@ -26,16 +26,12 @@ export default (...connectParams) => (
         return <ComposedComponent {...this.props} />
       }
     }
-
   return withRedux(makeStore, ...connectParams)(
-    withReduxSaga(composeComponent())
+    composeComponent(),
   )
 }
 
 export function makeStore(initialState) {
-  if (process.browser) {
-    return createStore(initialState)
-  }
 
   const state = {
     ...initialState,
