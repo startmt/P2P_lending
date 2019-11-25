@@ -1,12 +1,8 @@
 export const setAuth = (
-  username,
-  isAuth,
-  isIdentify,
+  authDesc
 ) => ({
   type: 'SET_AUTH',
   payload: {
-    isAuth,
-    username,
-    isIdentify,
+    authDesc
   },
 })
