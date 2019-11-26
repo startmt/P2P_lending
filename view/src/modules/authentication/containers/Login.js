@@ -9,11 +9,21 @@ import { loginSelector } from '../selectors'
 import useForm from 'react-hook-form'
 import { Form, Icon, Input, Button } from 'antd'
 
+const useResetState = (dispatchFn) => {
+  useEffect(() => {
+    return () => {
+      console.log('UNMOUNTED')
+      dispatchFn()
+    }
+  }, [])
+}
+
 const LoginContainer = ({
   isLoading,
   error,
   isError,
   loginFunction,
+  resetState,
 }) => {
   const {
     handleSubmit,
@@ -22,6 +32,7 @@ const LoginContainer = ({
     setValue,
     triggerValidation,
   } = useForm()
+  useResetState(resetState)
   const setValues = async (e, { name, value }) => {
     setValue(name, value)
     await triggerValidation({ name })
@@ -44,6 +55,7 @@ const LoginContainer = ({
       },
     )
   }, [])
+
   return (
     <Fragment>
       <section className="section">
@@ -76,6 +88,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       loginFunction: loginAction.login,
+      resetState: loginAction.resetState,
     },
     dispatch,
   )
