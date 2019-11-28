@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+เระ import React, { Fragment } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
