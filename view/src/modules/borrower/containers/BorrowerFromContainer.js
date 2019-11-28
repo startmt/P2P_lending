@@ -1,6 +1,7 @@
 import React from 'react'
-import BorrowerFrom from '~/components/BorrowerFrom'
-import { Form, Message } from 'semantic-ui-react'
+import{ Row, Col} from 'antd'
+// import BorrowerFrom from '~/components/BorrowerFrom'
+import { Dropdown, Form, Message } from 'semantic-ui-react'
 const BorrowerFromContainer = (props) => {
   return (
     <section className="section">
@@ -14,7 +15,7 @@ const BorrowerFromContainer = (props) => {
               ระบุข้อมูลเฉพาะของผู้ทำรายการกู้สินเชื่อ
               <div class="ui small form">
 
-              <div class="field">
+              {/* <div class="field">
                   <label>Name Title (คำนำหน้าชื่อ) </label>
                   <div class="ui selection dropdown">
                     <input type="hidden" name="gender" />
@@ -32,7 +33,7 @@ const BorrowerFromContainer = (props) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div class="field">
                   <label>First Name (ชื่อจริง)</label>
@@ -54,7 +55,7 @@ const BorrowerFromContainer = (props) => {
                   <label>ID Card Number (เลขบัตรประชาชน)</label>
                   <input
                     placeholder="ID Card Number (เลขบัตรประชาชน)"
-                    type="number"
+                    type="text"
                   />
                 </div>
 
@@ -62,7 +63,7 @@ const BorrowerFromContainer = (props) => {
                   <label>ID Card Number (เลขบัตรประชาชน)</label>
                   <input
                     placeholder="ID Card Number (เลขบัตรประชาชน)"
-                    type="number"
+                    type="text"
                   />
                 </div>
 

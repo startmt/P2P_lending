@@ -3,7 +3,7 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
-import BorrowerFromContainer from '../../modules/borrower/containers/BorrowerFromContainer'
+import BorrowerFromContainer from '~/modules/borrower/containers/BorrowerFromContainer'
 const Index = (props) => {
   const { setPageName } = props
   setPageName('borrowerFrom')
