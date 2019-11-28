@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-export default (Component) => (props) => {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token != undefined) {
-      axios
-        .get(process.env.REACT_APP_API_URL + '/api/data', {
-          headers: { Authorization: 'Bearer ' + token },
-        })
-        .then((data) => {
-          setData(data.data)
-        })
-        .catch(() => {
-          localStorage.clear()
-        })
+import React, { useEffect } from 'react'
+import { checkAuth } from '../modules/authentication/api/auth'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { authAction } from '~/modules/authentication/actions/'
+export default (Component) => {
+  const withAuth = (props) => {
+    useEffect(() => {
+      checkAuth()
+        .then((res) =>
+          props.setAuth({ ...res.data, isAuth: true }),
+        )
+        .catch((e) => props.setAuth({ isAuth: false }))
+    }, [])
+    return <Component {...props} />
+  }
+
+  withAuth.getInitialProps = async (context) => {
+    let composedProps = {}
+    if (Component.getInitialProps) {
+      composedProps = await Component.getInitialProps({
+        ...context,
+      })
     }
-  }, [])
-  return <Component {...props} data={data} />
+    return composedProps
+  }
+
+  const mapDispatchToProps = (dispatch) =>
+    bindActionCreators(
+      {
+        setAuth: authAction.setAuth,
+      },
+      dispatch,
+    )
+  return connect(
+    null,
+    mapDispatchToProps,
+  )(withAuth)
 }

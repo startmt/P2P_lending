@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) =>
   )
 OtpPage.getInitialProps = async ({ query }) => {
   try {
-    const otpCode = await getOtp(query.code)
+    const otpCode = await getOtp(query.code, query.username)
     return otpCode.data
   } catch (e) {
     console.log(e)

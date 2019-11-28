@@ -4,6 +4,7 @@ import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
 import { LandingLayout } from '../layouts/landing'
 import HomeContainer from '../modules/home/containers/HomeContainer'
+import withIntl from '../hocs/with-intl'
 const Index = (props) => {
   const { setPageName } = props
   setPageName('Landing')
@@ -25,4 +26,5 @@ const mapDispatchToProps = (dispatch) =>
   )
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
+  withIntl,
 )(Index)

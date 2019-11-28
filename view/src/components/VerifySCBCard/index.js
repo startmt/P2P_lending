@@ -15,7 +15,8 @@ const VerifySCBCard = ({
   setFirstname,
   setLastname,
   setCitizenId,
-  handleConfirm
+  handleConfirm,
+  qrCode,
 }) => (
   <Card>
     <Empty
@@ -32,6 +33,7 @@ const VerifySCBCard = ({
       <QrcodeModal
         step={step}
         next={next}
+        qrCode={qrCode}
         prev={prev}
         handleOtp={handleOtp}
         otpCode={otpCode}
