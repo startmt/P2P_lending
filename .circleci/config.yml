@@ -53,17 +53,13 @@ jobs:
       - run:
           name: build react
           command: npm run build
-      
-      - run:
-            name: Firebase Deploy
-            command: ls -a && ./node_modules/.bin/firebase deploy --project $PROJECT_ID --token "$TOKEN_FIREBASE"
   deploy:
     machine:
       enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "92:94:37:e7:f7:4c:f9:51:a7:3c:97:1f:c2:89:15:18"
+            - "6c:35:40:40:55:d5:ea:77:e4:cd:b0:6b:8e:77:43:3d"
       - run:
           name: Deploy Over SSH
           command: |
@@ -92,3 +88,4 @@ workflows:
                     - pre-master
               requires:
                 - auth
+                - frontend
