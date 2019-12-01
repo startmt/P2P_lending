@@ -1,25 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 export default (Component) => {
-  return class extends React.Component {
-    static async getInitialProps(context) {
-      let composedProps = {}
-      if (Component.getInitialProps) {
-        composedProps = await Component.getInitialProps({
-          ...context,
-        })
-      }
-      return composedProps
-    }
-    componentDidMount() {
+  const withIntl = (props) => {
+    useEffect(() => {
       window.history.replaceState(
         {},
         '',
-        this.props.url.pathname,
+        props.url.pathname,
       )
-    }
+    }, [])
 
-    render() {
-      return <Component {...this.props} />
-    }
+    return <Component {...props} />
   }
+
+  withIntl.getInitialProps = async (context) => {
+    let composedProps = {}
+    if (Component.getInitialProps) {
+      composedProps = await Component.getInitialProps({
+        ...context,
+      })
+    }
+    return composedProps
+  }
+
+  return withIntl
 }

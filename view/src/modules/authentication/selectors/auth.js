@@ -7,9 +7,13 @@ export const getAuth = (state) =>
 
 export const isIdentify = createSelector(
   getAuth,
-  (login) => login.get('isIdentify', false),
+  (auth) => auth.get('isIdentify', false),
 )
 export const getUsername = createSelector(
   getAuth,
-  (login) => login.get('username', null),
+  (auth) => auth.get('username', null),
+)
+export const isAuth = createSelector(
+  getAuth,
+  (auth) => auth.get('isAuth', false),
 )
