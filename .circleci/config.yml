@@ -63,12 +63,12 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-           ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} \
-           '"cd P2P_lending && cd docker && \
+           ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+           cd P2P_lending && cd docker && \
            sudo docker-compose stop && \
            sudo docker-compose rm -f && \
            sudo docker-compose pull && \
-           sudo docker-compose up -d"'
+           sudo docker-compose up -d"
 
 workflows:
   version: 2
