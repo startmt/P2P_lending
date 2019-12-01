@@ -59,11 +59,11 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "6c:35:40:40:55:d5:ea:77:e4:cd:b0:6b:8e:77:43:3d"
+            - "1d:ac:17:b2:37:21:2d:53:6c:82:39:81:f9:30:46:bb"
       - run:
           name: Deploy Over SSH
           command: |
-            ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+           ssh -vv -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} bash -ic"\
             cd P2P_lending &&\
             cd docker &&\
             sudo docker-compose pull auth && \
