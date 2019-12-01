@@ -22,6 +22,8 @@ export default function reducer(
         .set('isLoading', fromJS(false))
         .set('error', fromJS(action.payload.error))
         .set('isError', fromJS(true))
+    case 'RESET_STATE':
+      return initialState
     default:
       return state
   }

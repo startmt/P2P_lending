@@ -15,4 +15,7 @@ export const login = (username, password, role) => ({
       error,
     },
   })
+  export const resetState = () => ({
+    type: 'RESET_STATE',
+  })
   

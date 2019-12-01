@@ -14,6 +14,7 @@ const RegisterLoanContainer = ({
   isLoading,
   error,
   isError,
+  resetState
 }) => {
   const handleRegister = (values) => {
     const role = 'borrower'
@@ -62,6 +63,7 @@ const RegisterLoanContainer = ({
       },
     )
   }, [])
+  useEffect(()=>resetState(),[])
   const setValues = async (e, { name, value }) => {
     setValue(name, value)
     await triggerValidation({ name })
@@ -103,6 +105,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       registerFunction: registerAction.register,
+      resetState: registerAction.resetState
     },
     dispatch,
   )
