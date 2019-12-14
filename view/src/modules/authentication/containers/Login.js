@@ -7,13 +7,13 @@ import { bindActionCreators } from 'redux'
 import { loginAction } from '../actions'
 import { loginSelector } from '../selectors'
 import useForm from 'react-hook-form'
-import { Form, Icon, Input, Button } from 'antd'
 
 const LoginContainer = ({
   isLoading,
   error,
   isError,
   loginFunction,
+  resetLogin,
 }) => {
   const {
     handleSubmit,
@@ -43,6 +43,11 @@ const LoginContainer = ({
         required: 'กรุณากรอกรหัสผ่าน',
       },
     )
+  }, [])
+  useEffect(() => {
+    return () => {
+      resetLogin()
+    }
   }, [])
   return (
     <Fragment>
@@ -76,6 +81,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       loginFunction: loginAction.login,
+      resetLogin: loginAction.resetState,
     },
     dispatch,
   )
