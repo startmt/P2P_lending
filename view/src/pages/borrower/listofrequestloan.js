@@ -3,13 +3,13 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
-import StateLoaner from '~/modules/borrower/containers/ListOfLoaner/ListOfLoaner'
+import ListOfRequestLoan from '~/modules/borrower/containers/ListOfRequestLoan/ListOfRequestLoan'
 const Index = (props) => {
   const { setPageName } = props
   setPageName('stateLoan')
   return (
     <DashboardLayout>
-      <StateLoaner />
+      <ListOfRequestLoan />
     </DashboardLayout>
   )
 }

@@ -1,9 +1,25 @@
 import React from 'react'
 // import LoanConditionFrom from '../components/LoanCondition'
-import { From, TextArea, Checkbox } from 'semantic-ui-react'
-import { Row, Col } from 'antd'
+import {
+  Row,
+  Col,
+  Input,
+  Checkbox,
+  Button,
+  Select,
+} from 'antd'
 import Link from 'next/link'
 import './style.less'
+
+function onChange(e) {
+  console.log(`checked = ${e.target.checked}`)
+}
+
+const { Option } = Select
+
+function handleChange(value) {
+  console.log(`selected ${value}`)
+}
 
 const LoanCondition = (props) => {
   return (
@@ -25,7 +41,7 @@ const LoanCondition = (props) => {
             </div>
           </Row>
           <Row>
-            <input
+            <Input
               className="titleLoan"
               placeholder="กรอกหัวข้อการขอกู้สินเชื่อ"
               type="text"
@@ -48,7 +64,7 @@ const LoanCondition = (props) => {
                 </label>
               </Col>
               <Col span={8}>
-                <input
+                <Input
                   className="financialAmountArea"
                   placeholder="กรอกจำนวนเงินที่ต้องการกู้"
                   type="text"
@@ -77,16 +93,24 @@ const LoanCondition = (props) => {
               <br />
             </Col>
             <Col span={5}>
-              <select class="ui dropdown">
-                <option value="">Type</option>
-                <option value="0">เงินทุนหมุนเวียน</option>
-                <option value="1">ปรับโครงสร้างหนี้</option>
-                <option value="2">ขยายกิจการ</option>
-                <option value="3">
-                  ลงทุนในโครงการใหม่
-                </option>
-                <option value="4">อื่นๆ</option>
-              </select>
+              <div>
+                <Select
+                  defaultValue="Type"
+                  style={{ width: 200 }}
+                  onChange={handleChange}>
+                  <Option value="1">
+                    เงินทุนหมุนเวียน
+                  </Option>
+                  <Option value="2">
+                    ปรับโครงสร้างหนี้
+                  </Option>
+                  <Option value="3">ขยายกิจการ</Option>
+                  <Option value="4">
+                    ลงทุนในโครงการใหม่
+                  </Option>
+                  <Option value="5">อื่นๆ</Option>
+                </Select>
+              </div>
             </Col>
           </Row>
           <br />
@@ -125,27 +149,17 @@ const LoanCondition = (props) => {
               </Link>
             </label>
             <br />
-            <label>
-              <div class="ui checkbox">
-                <input type="checkbox" name="example" />
-                <label>
-                  ยอมรับเงื่อนไขและข้อตกลงในการใช้บริการ
-                </label>
-              </div>
-            </label>
+            <Checkbox onChange={onChange}>
+              ยอมรับเงื่อนไขและข้อตกลงในการใช้บริการ
+            </Checkbox>
           </Row>
           <br />
           <Row>
-            <Col span={6} />
-            <Col span={6} />
-            <Col span={6} />
-            <Col span={6}>
-            <div class="ui submit button"
-                Link
-                href="../StateLoaner.js">
-                Create loan
-              </div>
-            </Col>
+            <div className="buttonMargin">
+              <Link href="/borrower/uploadborrowerfrom">
+                <Button type="primary">Create loan</Button>
+              </Link>
+            </div>
           </Row>
         </div>
       </section>

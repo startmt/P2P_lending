@@ -1,4 +1,5 @@
-import { Upload, Icon, message } from 'antd'
+import { Upload, Icon, message, Button } from 'antd'
+import Link from 'next/link'
 import './style.less'
 
 const { Dragger } = Upload
@@ -146,6 +147,12 @@ const UploadFromBorrow = () => {
             </p>
           </Dragger>
         </div>
+        <br />
+      </div>
+      <div className="buttonMargin">
+        <Link href="/borrower/stateloan">
+          <Button type="primary">Submit</Button>
+        </Link>
       </div>
     </div>
   )
