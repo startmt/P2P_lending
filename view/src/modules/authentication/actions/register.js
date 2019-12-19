@@ -15,3 +15,7 @@ export const registerFail = (error) => ({
     error,
   },
 })
+
+export const resetState = () => ({
+  type: 'RESET_STATE',
+})

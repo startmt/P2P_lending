@@ -53,23 +53,22 @@ jobs:
       - run:
           name: build react
           command: npm run build
-      
-      - run:
-            name: Firebase Deploy
-            command: ls -a && ./node_modules/.bin/firebase deploy --project $PROJECT_ID --token "$TOKEN_FIREBASE"
   deploy:
     machine:
       enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "b2:d6:0b:82:24:75:87:9e:8c:62:2d:27:a5:5b:92:2f"
+            - "1d:ac:17:b2:37:21:2d:53:6c:82:39:81:f9:30:46:bb"
       - run:
           name: Deploy Over SSH
           command: |
-            ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
-            docker-compose pull auth && \
-            docker-compose up -d"
+           ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+           cd P2P_lending && cd docker && \
+           sudo docker-compose stop && \
+           sudo docker-compose rm -f && \
+           sudo docker-compose pull && \
+           sudo docker-compose up -d"
 
 workflows:
   version: 2
@@ -92,3 +91,4 @@ workflows:
                     - pre-master
               requires:
                 - auth
+                - frontend
