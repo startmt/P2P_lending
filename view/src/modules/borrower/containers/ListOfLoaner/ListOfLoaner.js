@@ -8,9 +8,10 @@ const StateLoaner = (props) => {
       <table class="ui selectable table">
         <thead>
           <tr>
-            <th>Start Date</th>
-            <th>Detail</th>
-            <th>Status</th>
+            <th>Loaner Name</th>
+            <th>Amount</th>
+            <th>Create at</th>
+            <th>Type</th>
             <th>
               Upload Information
             </th>

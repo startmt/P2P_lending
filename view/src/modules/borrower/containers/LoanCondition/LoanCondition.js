@@ -13,33 +13,24 @@ const LoanCondition = (props) => {
           <Row>
             <h4>
               <div className="Topic">
-                อนุญาติการเข้าถึงข้อมูลส่วนตัวเพื่อใช้ในการขอสินเชื่อ
+                ใบคำร้องขอการกู้สินเชื่อ
               </div>
             </h4>
-
-            <label className="subTopic_2">
-              ข้อกำหนดในการขอสินเชื่อ
-            </label>
-            <br />
-            <div className="subTopic">
-              ต้องได้รับการยินยอม National Credit Bureau
-              (NCB) และ ยอมรับข้อกำหนดและเงื่อนไข (T&C)
+          </Row>
+          <Row>
+            <div class="field">
+              <label className="subTopic_2">
+                หัวข้อการขอกู้สินเชื่อ
+              </label>
             </div>
-
-            <label>
-              <Link href="https://www.scb.co.th/th/personal-banking/loans/personal-loans/speedy-loan.html">
-                <a>อ่านข้อกำหนดในการขอกู้สินเชื่อ</a>
-              </Link>
-            </label>
-            <br />
-            <label>
-              <div class="ui checkbox">
-                <input type="checkbox" name="example" />
-                <label>
-                  ยอมรับเงื่อนไขและข้อตกลงในการใช้บริการ
-                </label>
-              </div>
-            </label>
+          </Row>
+          <Row>
+            <input
+              className="titleLoan"
+              placeholder="กรอกหัวข้อการขอกู้สินเชื่อ"
+              type="text"
+              size="25"
+            />
           </Row>
           <br />
           <Row>
@@ -79,15 +70,15 @@ const LoanCondition = (props) => {
           </Row>
           <br />
           <Row>
-            <Col span={6}>
+            <Col span={5}>
               <label className="subTopic_2">
                 จุดประสงต์ในการกู้ :
               </label>
               <br />
             </Col>
-            <Col span={6}>
+            <Col span={5}>
               <select class="ui dropdown">
-                <option value="">Gender</option>
+                <option value="">Type</option>
                 <option value="0">เงินทุนหมุนเวียน</option>
                 <option value="1">ปรับโครงสร้างหนี้</option>
                 <option value="2">ขยายกิจการ</option>
@@ -109,11 +100,50 @@ const LoanCondition = (props) => {
                   <textarea rows="2"></textarea>
                 </div>
               </div>
-              <div
-                class="ui submit button"
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <h4>
+              <div className="supTopic_2">
+                อนุญาติการเข้าถึงข้อมูลส่วนตัวเพื่อใช้ในการขอสินเชื่อ
+              </div>
+            </h4>
+
+            <label className="subTopic_2">
+              ข้อกำหนดในการขอสินเชื่อ
+            </label>
+            <br />
+            <div className="subTopic">
+              ต้องได้รับการยินยอม National Credit Bureau
+              (NCB) และ ยอมรับข้อกำหนดและเงื่อนไข (T&C)
+            </div>
+
+            <label>
+              <Link href="https://www.scb.co.th/th/personal-banking/loans/personal-loans/speedy-loan.html">
+                <a>อ่านข้อกำหนดในการขอกู้สินเชื่อ</a>
+              </Link>
+            </label>
+            <br />
+            <label>
+              <div class="ui checkbox">
+                <input type="checkbox" name="example" />
+                <label>
+                  ยอมรับเงื่อนไขและข้อตกลงในการใช้บริการ
+                </label>
+              </div>
+            </label>
+          </Row>
+          <br />
+          <Row>
+            <Col span={6} />
+            <Col span={6} />
+            <Col span={6} />
+            <Col span={6}>
+            <div class="ui submit button"
                 Link
                 href="../StateLoaner.js">
-                Submit
+                Create loan
               </div>
             </Col>
           </Row>
