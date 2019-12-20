@@ -3,6 +3,7 @@ import Heading from './header'
 import { Layout, Icon } from 'antd'
 import Sidebar from '~/components/Sidebar'
 import { connect } from 'react-redux'
+import Route from 'next/router'
 import { createStructuredSelector } from 'reselect'
 import '~/static/styles.less'
 import { authSelector } from '~/modules/authentication/selectors'
@@ -11,13 +12,18 @@ import withAuth from '~/hocs/with-auth'
 const { Content, Header, Sider } = Layout
 const DefaultLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false)
+  const handleLogout = () => {
+    console.log('dd')
+    localStorage.clear()
+    Route.push('/')
+  }
   return (
     <Layout>
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}>
-        <Sidebar />
+        <Sidebar handleLogout={handleLogout} />
       </Sider>
       <Layout>
         <Heading />
