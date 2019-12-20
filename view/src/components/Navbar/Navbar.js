@@ -53,8 +53,8 @@ const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
                 </Link>
               </Col>
               <Col span={12}>
-                <Link href="/register-loan">
-                  <RegisterModal />
+                <Link href="/register">
+                <Button>เริ่มต้นใช้งาน</Button>
                 </Link>
               </Col>
             </Row>

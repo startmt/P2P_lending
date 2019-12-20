@@ -27,8 +27,7 @@ const LoginContainer = ({
     await triggerValidation({ name })
   }
   const handleLogin = (values) => {
-    const role = 'borrower'
-    loginFunction(values.username, values.password, role)
+    loginFunction(values.username, values.password)
   }
   useEffect(() => {
     register(
