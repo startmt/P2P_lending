@@ -9,6 +9,7 @@ import {
 } from 'antd'
 import Link from 'next/link'
 import ProfileCard from '~/components/ProfileCard'
+import Route from 'next/router'
 import { connect } from 'react-redux'
 import { authSelector } from '~/modules/authentication/selectors'
 import { getQrcode } from '~/helpers/scbEasy'
@@ -26,7 +27,6 @@ const ProfileContainer = ({ username, isIdentify }) => {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [citizenId, setCitizenId] = useState('')
-  console.log(qrCode)
   useEffect(() => {
     if (isIdentify === false)
       getQrcode(username).then((res) =>
@@ -47,7 +47,7 @@ const ProfileContainer = ({ username, isIdentify }) => {
     }
     const status = await checkConfirmData(data)
     if (status) {
-      next()
+      Route.push('/verify/confirm')
     }
   }
   const handleOtp = async () => {
