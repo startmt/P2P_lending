@@ -41,7 +41,7 @@ const StateLoaner = (props) => {
           </thead>
           <tbody>
             <tr>
-              <td>Kritsakorn Yongpenny</td>
+              <td>Kritsakorn Yungpenny</td>
               <td>850,000</td>
               <td>24/03/19</td>
               <td>ขยายกิจการ</td>

@@ -67,8 +67,8 @@ const LoanCondition = (props) => {
                 <Input
                   className="financialAmountArea"
                   placeholder="กรอกจำนวนเงินที่ต้องการกู้"
-                  type="text"
-                  size="25"
+                  type="number"
+                  maxLength="7"
                 />
               </Col>
             </div>
