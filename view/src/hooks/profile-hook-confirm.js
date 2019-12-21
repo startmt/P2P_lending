@@ -3,7 +3,7 @@ import useForm from 'react-hook-form'
 export const useQrcodeConfirm = () => {
   const {
     register,
-    errors,
+    errors: otpErrors,
     handleSubmit: handleOtpSubmit,
     setValue,
     triggerValidation,
@@ -21,13 +21,53 @@ export const useQrcodeConfirm = () => {
     )
   }, [])
 
-  const setValues = async (e, { name, value }) => {
+  const setOtpValues = async (e, { name, value }) => {
     setValue(name, value)
     await triggerValidation({ name })
   }
   return {
-    setValues,
-    errors,
+    setOtpValues,
+    otpErrors,
     handleOtpSubmit,
+  }
+}
+
+export const useProfileConfirm = () => {
+  const {
+    register,
+    errors: profileFormErrors,
+    handleSubmit: handleProfileSubmit,
+    setValue,
+    triggerValidation,
+  } = useForm()
+  useEffect(() => {
+    register(
+      { name: 'firstname' },
+      {
+        required: 'กรุณากรอกชื่อจริง',
+      },
+    )
+    register(
+      { name: 'lastname' },
+      {
+        required: 'กรุณากรอกรหัสนามสกุล',
+      },
+    )
+    register(
+      { name: 'citizenId' },
+      {
+        required: 'กรุณากรอกรหัสหมายเลขบัตรประชาชน',
+      },
+    )
+  }, [])
+
+  const setProfileValues = async (e, { name, value }) => {
+    setValue(name, value)
+    await triggerValidation({ name })
+  }
+  return {
+    setProfileValues,
+    profileFormErrors,
+    handleProfileSubmit,
   }
 }

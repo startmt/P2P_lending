@@ -6,28 +6,30 @@ import './styles.less'
 import PropTypes from 'prop-types'
 import ErrorMessage from '~/components/ErrorMessage'
 import QrcodeGenarator from 'qrcode-generator'
-import { useQrcodeConfirm } from '../../hooks/profile-hook-confirm'
+import {
+  useQrcodeConfirm,
+  useProfileConfirm,
+} from '../../hooks/profile-hook-confirm'
 const { Step } = Steps
 const { Title } = Typography
 const QrcodeModal = ({
   step,
   prev,
   next,
-  firstname,
-  lastname,
   handleOtp,
-  citizenId,
-  setFirstname,
-  setLastname,
-  setCitizenId,
   handleConfirm,
   qrCode,
 }) => {
   const {
-    setValues,
+    setOtpValues,
     handleOtpSubmit,
-    errors,
+    otpErrors,
   } = useQrcodeConfirm()
+  const {
+    setProfileValues,
+    handleProfileSubmit,
+    profileFormErrors,
+  } = useProfileConfirm()
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(qrCode)
   qr.make()
@@ -72,12 +74,13 @@ const QrcodeModal = ({
                       type="text"
                       name="otp"
                       maxLength={6}
-                      onChange={setValues}
-                      error={errors.otp ? true : false}
+                      onChange={setOtpValues}
+                      error={otpErrors.otp ? true : false}
                     />
                     <ErrorMessage
                       text={
-                        errors.otp && errors.otp.message
+                        otpErrors.otp &&
+                        otpErrors.otp.message
                       }
                     />
                   </Form.Field>
@@ -94,30 +97,59 @@ const QrcodeModal = ({
                 </Title>
                 <Form>
                   <Form.Field>
-                    <input
+                    <Input
                       placeholder="ชื่อ (ภาษาไทย)"
-                      value={firstname}
-                      onChange={(e) =>
-                        setFirstname(e.target.value)
+                      type="text"
+                      name="firstname"
+                      onChange={setProfileValues}
+                      error={
+                        profileFormErrors.firstname
+                          ? true
+                          : false
+                      }
+                    />
+                    <ErrorMessage
+                      text={
+                        profileFormErrors.firstname &&
+                        profileFormErrors.firstname.message
                       }
                     />
                   </Form.Field>
                   <Form.Field>
-                    <input
+                    <Input
                       placeholder="นามสกุล (ภาษาไทย)"
-                      value={lastname}
-                      onChange={(e) =>
-                        setLastname(e.target.value)
+                      type="text"
+                      name="lastname"
+                      onChange={setProfileValues}
+                      error={
+                        profileFormErrors.lastname
+                          ? true
+                          : false
+                      }
+                    />
+                    <ErrorMessage
+                      text={
+                        profileFormErrors.lastname &&
+                        profileFormErrors.lastname.message
                       }
                     />
                   </Form.Field>
                   <Form.Field>
-                    <input
+                    <Input
                       placeholder="เลขบัตรประชาชน"
-                      value={citizenId}
-                      maxLength={13}
-                      onChange={(e) =>
-                        setCitizenId(e.target.value)
+                      type="text"
+                      name="citizenId"
+                      onChange={setProfileValues}
+                      error={
+                        profileFormErrors.citizenId
+                          ? true
+                          : false
+                      }
+                    />
+                    <ErrorMessage
+                      text={
+                        profileFormErrors.citizenId &&
+                        profileFormErrors.citizenId.message
                       }
                     />
                   </Form.Field>
@@ -139,7 +171,10 @@ const QrcodeModal = ({
           </Button>
         )}
         {step === 2 && (
-          <Button onClick={handleConfirm}>เสร็จสิ้น</Button>
+          <Button
+            onClick={handleProfileSubmit(handleConfirm)}>
+            เสร็จสิ้น
+          </Button>
         )}
       </Modal.Actions>
     </Modal>

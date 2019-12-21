@@ -21,9 +21,6 @@ import {
 const ProfileContainer = ({ username, isIdentify }) => {
   const [qrCode, setQrcode] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
-  const [citizenId, setCitizenId] = useState('')
   useEffect(() => {
     if (isIdentify === false)
       getQrcode(username).then((res) =>
@@ -36,12 +33,7 @@ const ProfileContainer = ({ username, isIdentify }) => {
   const prev = () => {
     setCurrentStep(currentStep - 1)
   }
-  const handleConfirm = async () => {
-    const data = {
-      firstname: firstname,
-      lastname: lastname,
-      citizenId: citizenId,
-    }
+  const handleConfirm = async (data) => {
     const status = await checkConfirmData(data)
     if (status) {
       Route.push('/verify/confirm')
@@ -67,13 +59,7 @@ const ProfileContainer = ({ username, isIdentify }) => {
                 next={next}
                 qrCode={qrCode}
                 prev={prev}
-                firstname={firstname}
-                lastname={lastname}
-                citizenId={citizenId}
                 handleOtp={handleOtp}
-                setFirstname={setFirstname}
-                setLastname={setLastname}
-                setCitizenId={setCitizenId}
                 handleConfirm={handleConfirm}
               />
             )}

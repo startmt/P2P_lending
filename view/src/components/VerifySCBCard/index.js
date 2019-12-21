@@ -6,13 +6,7 @@ const VerifySCBCard = ({
   next,
   prev,
   step,
-  firstname,
-  lastname,
-  citizenId,
-  setFirstname,
   handleOtp,
-  setLastname,
-  setCitizenId,
   handleConfirm,
   qrCode,
 }) => (
@@ -33,13 +27,6 @@ const VerifySCBCard = ({
         next={next}
         qrCode={qrCode}
         handleOtp={handleOtp}
-        prev={prev}
-        firstname={firstname}
-        lastname={lastname}
-        citizenId={citizenId}
-        setFirstname={setFirstname}
-        setLastname={setLastname}
-        setCitizenId={setCitizenId}
         handleConfirm={handleConfirm}
       />
       Terms of Use
