@@ -1,20 +1,21 @@
 import React, { Fragment } from 'react'
 import { Modal, Form } from 'semantic-ui-react'
 import { Typography, Button, Steps } from 'antd'
+import Input from '~/components/Input'
 import './styles.less'
 import PropTypes from 'prop-types'
+import ErrorMessage from '~/components/ErrorMessage'
 import QrcodeGenarator from 'qrcode-generator'
+import { useQrcodeConfirm } from '../../hooks/profile-hook-confirm'
 const { Step } = Steps
 const { Title } = Typography
 const QrcodeModal = ({
   step,
   prev,
   next,
-  handleOtp,
-  otpCode,
-  setOtp,
   firstname,
   lastname,
+  handleOtp,
   citizenId,
   setFirstname,
   setLastname,
@@ -22,6 +23,11 @@ const QrcodeModal = ({
   handleConfirm,
   qrCode,
 }) => {
+  const {
+    setValues,
+    handleSubmit,
+    errors,
+  } = useQrcodeConfirm()
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(qrCode)
   qr.make()
@@ -61,12 +67,22 @@ const QrcodeModal = ({
                 </Title>
                 <Form>
                   <Form.Field>
-                    <input
+                    <Input
                       placeholder="รหัส OTP"
-                      value={otpCode}
+                      type="text"
+                      name="otp"
                       maxLength={6}
-                      onChange={(e) =>
-                        setOtp(e.target.value)
+                      onChange={setValues}
+                      error={
+                        errors.otp
+                          ? true
+                          : false
+                      }
+                    />
+                    <ErrorMessage
+                      text={
+                        errors.otp &&
+                        errors.otp.message
                       }
                     />
                   </Form.Field>
@@ -123,7 +139,7 @@ const QrcodeModal = ({
           <Button onClick={next}>ถัดไป</Button>
         )}
         {step === 1 && (
-          <Button onClick={handleOtp}>ยืนยัน</Button>
+          <Button onClick={handleSubmit(handleOtp)}>ยืนยัน</Button>
         )}
         {step === 2 && (
           <Button onClick={handleConfirm}>เสร็จสิ้น</Button>
@@ -137,8 +153,5 @@ QrcodeModal.propTypes = {
   next: PropTypes.func,
   prev: PropTypes.func,
   step: PropTypes.number,
-  handleOtp: PropTypes.func,
-  otpCode: PropTypes.string,
-  setOtp: PropTypes.func,
 }
 export default QrcodeModal

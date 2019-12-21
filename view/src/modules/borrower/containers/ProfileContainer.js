@@ -18,11 +18,9 @@ import {
   getHeaderFromOtp,
   checkConfirmData,
 } from '~/helpers/scbEasy'
-
 const ProfileContainer = ({ username, isIdentify }) => {
   const [qrCode, setQrcode] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
-  const [otp, setOtp] = useState('')
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [citizenId, setCitizenId] = useState('')
@@ -49,10 +47,7 @@ const ProfileContainer = ({ username, isIdentify }) => {
       Route.push('/verify/confirm')
     }
   }
-  const handleOtp = async () => {
-    const data = {
-      otp: otp,
-    }
+  const handleOtp = async (data) => {
     const status = await getHeaderFromOtp(data)
     if (status) {
       next()
@@ -72,12 +67,10 @@ const ProfileContainer = ({ username, isIdentify }) => {
                 next={next}
                 qrCode={qrCode}
                 prev={prev}
-                handleOtp={handleOtp}
-                otpCode={otp}
                 firstname={firstname}
                 lastname={lastname}
                 citizenId={citizenId}
-                setOtp={setOtp}
+                handleOtp={handleOtp}
                 setFirstname={setFirstname}
                 setLastname={setLastname}
                 setCitizenId={setCitizenId}
