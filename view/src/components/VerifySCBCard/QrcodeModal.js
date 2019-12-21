@@ -25,7 +25,7 @@ const QrcodeModal = ({
 }) => {
   const {
     setValues,
-    handleSubmit,
+    handleOtpSubmit,
     errors,
   } = useQrcodeConfirm()
   const qr = QrcodeGenarator(4, 'L')
@@ -73,16 +73,11 @@ const QrcodeModal = ({
                       name="otp"
                       maxLength={6}
                       onChange={setValues}
-                      error={
-                        errors.otp
-                          ? true
-                          : false
-                      }
+                      error={errors.otp ? true : false}
                     />
                     <ErrorMessage
                       text={
-                        errors.otp &&
-                        errors.otp.message
+                        errors.otp && errors.otp.message
                       }
                     />
                   </Form.Field>
@@ -139,7 +134,9 @@ const QrcodeModal = ({
           <Button onClick={next}>ถัดไป</Button>
         )}
         {step === 1 && (
-          <Button onClick={handleSubmit(handleOtp)}>ยืนยัน</Button>
+          <Button onClick={handleOtpSubmit(handleOtp)}>
+            ยืนยัน
+          </Button>
         )}
         {step === 2 && (
           <Button onClick={handleConfirm}>เสร็จสิ้น</Button>

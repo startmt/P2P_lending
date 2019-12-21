@@ -4,7 +4,7 @@ export const useQrcodeConfirm = () => {
   const {
     register,
     errors,
-    handleSubmit,
+    handleSubmit: handleOtpSubmit,
     setValue,
     triggerValidation,
   } = useForm()
@@ -28,6 +28,6 @@ export const useQrcodeConfirm = () => {
   return {
     setValues,
     errors,
-    handleSubmit,
+    handleOtpSubmit,
   }
 }
