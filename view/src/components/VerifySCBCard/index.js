@@ -24,6 +24,7 @@ const VerifySCBCard = ({
       }>
       <QrcodeModal
         step={step}
+        prev={prev}
         next={next}
         qrCode={qrCode}
         handleOtp={handleOtp}
