@@ -29,6 +29,7 @@ export const checkAuth = () => {
   const config = {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token')
+      
     }
   }
   return axios.get(

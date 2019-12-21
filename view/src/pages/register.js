@@ -3,7 +3,7 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
 import { LandingLayout } from '../layouts/landing'
-import RegisterLoanContainer from '../modules/authentication/containers/RegisterLoan'
+import RegisterContainer from '../modules/authentication/containers/Register'
 import withIntl from '~/hocs/with-intl'
 const RegisterLoanPage = (props) => {
   const { setPageName } = props
@@ -11,7 +11,7 @@ const RegisterLoanPage = (props) => {
   return (
     <Fragment>
       <LandingLayout>
-        <RegisterLoanContainer />
+        <RegisterContainer />
       </LandingLayout>
     </Fragment>
   )

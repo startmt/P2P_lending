@@ -3,10 +3,11 @@ import { Button, Form, Message } from 'semantic-ui-react'
 import './styles.less'
 import Link from 'next/link'
 import Input from '~/components/Input'
+import { Select } from 'semantic-ui-react'
 import { Typography } from 'antd'
 import ErrorMessage from '~components/ErrorMessage'
 const { Title, Paragraph } = Typography
-const RegisterLoanForm = ({
+const RegisterForm = ({
   handleRegister,
   isLoading,
   error,
@@ -15,12 +16,24 @@ const RegisterLoanForm = ({
   handleSubmit,
   errors,
 }) => {
+  const roleOptions = [
+    {
+      key: 'borrower',
+      value: 'borrower',
+      text: 'ผู้ขอสินเชื่อ',
+    },
+    {
+      key: 'lender',
+      value: 'lender',
+      text: 'ผู้ให้สินเชื่อ',
+    },
+  ]
   return (
     <div className="form-wrapper">
       <Form
         onSubmit={handleSubmit(handleRegister)}
         error={isError}>
-        <Title level={3}>ลงทะเบียนสำหรับการกู้เงิน</Title>
+        <Title level={3}>ลงทะเบียนสมาชิก</Title>
         <Paragraph>
           มีบัญชีอยู่แล้ว?{' '}
           <Link href="/login">
@@ -75,6 +88,21 @@ const RegisterLoanForm = ({
             }
           />
         </Form.Field>
+        <Form.Field>
+          <label>ตำแหน่ง</label>
+          <Select
+            name="role"
+            placeholder="กรุณาเลือกตำแหน่ง"
+            options={roleOptions}
+            error={errors.role ? true : false}
+            onChange={setValues}
+          />
+          <ErrorMessage
+            text={
+              errors.role && errors.role.message
+            }
+          />
+        </Form.Field>
         <Message error header="Error" content={error} />
         <Button
           loading={isLoading}
@@ -87,4 +115,4 @@ const RegisterLoanForm = ({
   )
 }
 
-export default RegisterLoanForm
+export default RegisterForm
