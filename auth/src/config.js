@@ -1,6 +1,6 @@
 export default {
-  REDIS_HOST: process.env.REDIS_HOST || '13.76.93.14',
-  MONGO_HOST: process.env.MONGO_HOST || '13.76.93.14',
+  REDIS_HOST: process.env.REDIS_HOST || 'localhost',
+  MONGO_HOST: process.env.MONGO_HOST || 'localhost',
   SECRET_KEY: process.env.SECRET_KEY || 'EZMAK',
   LENDING_HOST: process.env.LENDING_HOST || 'localhost:3001',
   SCB_API:  'l7b5616b7185e143c9a380033362b5f324',
