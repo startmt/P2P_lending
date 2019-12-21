@@ -1,8 +1,10 @@
 import { fromJS } from 'immutable'
+import { Map } from 'immutable'
 const initialState = fromJS({
   isAuth: null,
   username: '',
   isIdentify: null,
+  userDetail: Map()
 })
 export default function reducer(
   state = initialState,
@@ -16,6 +18,10 @@ export default function reducer(
         .set(
           'isIdentify',
           fromJS(action.payload.authDesc.isIdentify),
+        )
+        .set(
+          'userDetail',
+          fromJS(action.payload.authDesc.userDetail)
         )
     default:
       return state

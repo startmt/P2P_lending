@@ -1,6 +1,14 @@
 import React from 'react'
 import { Result, Button, Descriptions } from 'antd'
+import { useSelector } from 'react-redux'
+import Link from 'next/link'
 const VerifySCBData = () => {
+  const authDetailSelector = useSelector((state) =>
+    state.getIn(['authentication', 'auth', 'userDetail']),
+  )
+  const addressJson = JSON.parse(
+    authDetailSelector.get('address') || '{}',
+  )
   return (
     <Result
       status="success"
@@ -8,28 +16,35 @@ const VerifySCBData = () => {
       subTitle={
         <Descriptions className="section">
           <Descriptions.Item label="ชื่อ-นามสกุล">
-            ชาญศิลป์ ทองคำ
+            {`${authDetailSelector.get('firstName') ||
+              ''} ${authDetailSelector.get('lastName') ||
+              ''}`}
           </Descriptions.Item>
           <Descriptions.Item label="เบอร์โทรศัพท์">
-          0910110111
+            {authDetailSelector.get('phoneNumber') || ''}
           </Descriptions.Item>
           <Descriptions.Item label="วันเกิด">
-            02/09/1997
+            {authDetailSelector.get('birthDate') || ''}
           </Descriptions.Item>
           <Descriptions.Item label="เลขบัตรประจำตัวประชาชน">
-            1200101730094
+            {authDetailSelector.get('citizenId') || ''}
           </Descriptions.Item>
           <Descriptions.Item label="ที่อยู่">
-            No. 18, Wantang Road, Xihu District, Hangzhou,
-            Zhejiang, China
+            {`บ้านเลขที่. ${addressJson.thaiAddressMoo ||
+              ''}, ${addressJson.thaiAddressThanon ||
+              ''}, ต. ${addressJson.thaiAddressDistrict ||
+              ''} อ. ${addressJson.thaiAddressAmphur ||
+              ''} จ. ${addressJson.thaiAddressProvince ||
+              ''} ${addressJson.zipCode || ''} `}
           </Descriptions.Item>
         </Descriptions>
       }
       extra={[
-        <Button type="success" key="console">
-          ยืนยัน
-        </Button>,
-        <Button key="buy">ยกเลิก</Button>,
+        <Link href="/borrower/profile">
+          <Button type="success" key="console">
+            ยืนยัน
+          </Button>
+        </Link>,
       ]}
     />
   )
