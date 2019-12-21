@@ -38,7 +38,6 @@ export default async (req, res) => {
             const isCreated = await createBorrowerValidated(isDataconfirm.data.data, username)
 
             if(isCreated.status === 200) {await validatedUser(username)
-                console.log(isCreated)
                 return status200(res,isCreated)
             }
                 
@@ -47,7 +46,6 @@ export default async (req, res) => {
             status422(res, 'your token has expired.')
         }
     } catch(e){
-        console.log(e)
         return status400(res)
     }
     

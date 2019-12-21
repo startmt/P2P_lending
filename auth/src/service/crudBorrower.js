@@ -18,3 +18,9 @@ export const createBorrowerValidated = async(data, username) => {
         return {message: e}
     }
 }
+
+export const getUserDatail = async(username)=>{
+    return await db.borrower.findOne({
+        where: {username}
+    })
+}
