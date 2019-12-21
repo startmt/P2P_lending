@@ -17,8 +17,7 @@ const RegisterLoanContainer = ({
   resetState,
 }) => {
   const handleRegister = (values) => {
-    const role = 'borrower'
-    registerFunction(values.username, values.password, role)
+    registerFunction(values.username, values.password, values.role)
   }
   const {
     handleSubmit,
@@ -62,6 +61,12 @@ const RegisterLoanContainer = ({
         required: ' ',
       },
     )
+    register(
+      { name: 'role' },
+      {
+        required: 'กรุณาเลือกสถานะ',
+      },
+    )
   }, [])
   useEffect(() => {
     return () => {
@@ -76,7 +81,7 @@ const RegisterLoanContainer = ({
     <Fragment>
       <Banner
         background="https://image.freepik.com/free-photo/business-adviser-analyzing-financial-figures-denoting-progress-work-company_1423-97.jpg"
-        title="สมัครการกู้เงิน"
+        title="สมัครสมาชิก"
       />
       <section className="section">
         <div className="container">

@@ -1,51 +1,43 @@
 import { Menu, Icon } from 'antd'
 import './styles.less'
-const { SubMenu } = Menu
-
-const Sidebar = () => {
+import Link from 'next/link'
+import { pageSelector } from '~/modules/query/selectors'
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
+const Sidebar = ({ pageName, handleLogout }) => {
   return (
     <Menu
       className="sidebar"
       theme="dark"
-      defaultSelectedKeys={['1']}
+      defaultSelectedKeys={pageName}
+      selectedKeys={pageName}
       mode="inline">
-      <Menu.Item key="1">
-        <Icon type="pie-chart" />
-        <span>หน้าหลัก</span>
+      <Menu.Item key="borrowerMain">
+        <Icon type="home" />
+        <Link href="/borrower/main" prefetch>
+          <span>หน้าหลัก</span>
+        </Link>
       </Menu.Item>
-      <Menu.Item key="2">
-        <Icon type="desktop" />
-        <span>Option 2</span>
+      <Menu.Item key="borrowerProfile">
+        <Icon type="user" />
+        <Link href="/borrower/profile" prefetch>
+          <span>ข้อมูลส่วนตัว</span>
+        </Link>
       </Menu.Item>
-      <SubMenu
-        key="sub1"
-        title={
-          <span>
-            <Icon type="user" />
-            <span>User</span>
-          </span>
-        }>
-        <Menu.Item key="3">Tom</Menu.Item>
-        <Menu.Item key="4">Bill</Menu.Item>
-        <Menu.Item key="5">Alex</Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key="sub2"
-        title={
-          <span>
-            <Icon type="team" />
-            <span>Team</span>
-          </span>
-        }>
-        <Menu.Item key="6">Team 1</Menu.Item>
-        <Menu.Item key="8">Team 2</Menu.Item>
-      </SubMenu>
-      <Menu.Item key="9">
-        <Icon type="file" />
-        <span>File</span>
+      <Menu.Item key="3">
+        <Icon type="logout" />
+        <span onClick={handleLogout}>Logout</span>
       </Menu.Item>
     </Menu>
   )
 }
+const mapStateToProps = (state, props) =>
+  createStructuredSelector({
+    pageName: pageSelector.getNamePage,
+  })(state, props)
+const mapDispatchToProps = null
 
-export default Sidebar
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Sidebar)

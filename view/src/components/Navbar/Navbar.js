@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import './styles.less'
 import { Menu, Icon, Layout, Row, Col } from 'antd'
-import RegisterModal from './RegisterModal'
 import { Button } from 'antd/lib/radio'
 import { pageSelector } from '~/modules/query/selectors'
 import { authSelector } from '~/modules/authentication/selectors'
@@ -53,8 +52,8 @@ const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
                 </Link>
               </Col>
               <Col span={12}>
-                <Link href="/register-loan">
-                  <RegisterModal />
+                <Link href="/register">
+                <Button>เริ่มต้นใช้งาน</Button>
                 </Link>
               </Col>
             </Row>
