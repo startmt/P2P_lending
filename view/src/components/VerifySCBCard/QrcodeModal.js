@@ -8,7 +8,7 @@ import {
   useQrcodeConfirm,
   useProfileConfirm,
 } from '../../hooks/profile-hook-confirm'
-import Otpconfirm from './Otpconfirm'
+import Otpconfirm from './OtpConfirm'
 import ProfileConfirm from './ProfileConfirm'
 const { Step } = Steps
 const { Title } = Typography
