@@ -7,14 +7,6 @@ const VerifySCBCard = ({
   prev,
   step,
   handleOtp,
-  otpCode,
-  setOtp,
-  firstname,
-  lastname,
-  citizenId,
-  setFirstname,
-  setLastname,
-  setCitizenId,
   handleConfirm,
   qrCode,
 }) => (
@@ -34,16 +26,7 @@ const VerifySCBCard = ({
         step={step}
         next={next}
         qrCode={qrCode}
-        prev={prev}
         handleOtp={handleOtp}
-        otpCode={otpCode}
-        setOtp={setOtp}
-        firstname={firstname}
-        lastname={lastname}
-        citizenId={citizenId}
-        setFirstname={setFirstname}
-        setLastname={setLastname}
-        setCitizenId={setCitizenId}
         handleConfirm={handleConfirm}
       />
       Terms of Use
@@ -55,8 +38,5 @@ VerifySCBCard.propTypes = {
   next: PropTypes.func,
   prev: PropTypes.func,
   step: PropTypes.number,
-  handleOtp: PropTypes.func,
-  otpCode: PropTypes.string,
-  setOtp: PropTypes.func,
 }
 export default VerifySCBCard
