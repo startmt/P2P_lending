@@ -181,7 +181,7 @@ const DetailLoanerDoc = () => {
         <br />
       </div>
       <div className="buttonMargin">
-        <Link href="/admin/adminlistofloantransaction">
+        <Link href="/borrower/listofrequestloan">
           <Button type="primary">Close</Button>
         </Link>
       </div>

@@ -2,15 +2,15 @@ import React, { Fragment } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
-import { DashboardLayout } from '~/layouts/dashboard'
+import { LandingLayout } from '~/layouts/landing'
 import PaymentSuccess from '~/modules/borrower/containers/PaymentSuccess/PaymentSuccess'
 const Index = (props) => {
   const { setPageName } = props
   setPageName('paymentSuccess')
   return (
-    <DashboardLayout>
+    <LandingLayout>
       <PaymentSuccess />
-    </DashboardLayout>
+    </LandingLayout>
   )
 }
 const mapStateToProps = null
