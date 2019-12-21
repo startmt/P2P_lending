@@ -7,7 +7,6 @@ import {
   Button,
   Descriptions,
 } from 'antd'
-import Link from 'next/link'
 import ProfileCard from '~/components/ProfileCard'
 import Route from 'next/router'
 import { connect } from 'react-redux'
@@ -65,23 +64,26 @@ const ProfileContainer = ({ username, isIdentify }) => {
       <div className="container">
         <Row gutter={[0, 7]}>
           <Col span={18}>
-            {/* <ProfileCard/> */}
-            <VerifySCBCard
-              step={currentStep}
-              next={next}
-              qrCode={qrCode}
-              prev={prev}
-              handleOtp={handleOtp}
-              otpCode={otp}
-              firstname={firstname}
-              lastname={lastname}
-              citizenId={citizenId}
-              setOtp={setOtp}
-              setFirstname={setFirstname}
-              setLastname={setLastname}
-              setCitizenId={setCitizenId}
-              handleConfirm={handleConfirm}
-            />
+            {isIdentify == true ? (
+              <ProfileCard />
+            ) : (
+              <VerifySCBCard
+                step={currentStep}
+                next={next}
+                qrCode={qrCode}
+                prev={prev}
+                handleOtp={handleOtp}
+                otpCode={otp}
+                firstname={firstname}
+                lastname={lastname}
+                citizenId={citizenId}
+                setOtp={setOtp}
+                setFirstname={setFirstname}
+                setLastname={setLastname}
+                setCitizenId={setCitizenId}
+                handleConfirm={handleConfirm}
+              />
+            )}
           </Col>
         </Row>
         <Row gutter={[7, 7]}>
