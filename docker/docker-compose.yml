@@ -16,6 +16,7 @@ services:
     ports: 
       - 127.0.0.1:3000:3000
     environment:
+      - MYSQL_HOST=mysql
       - REDIS_HOST=redis_auth
       - MONGO_HOST=auth_mongo
     depends_on:

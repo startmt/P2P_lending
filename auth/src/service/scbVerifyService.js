@@ -52,7 +52,7 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
       status: 200,
     }
   }catch(e){
-    return null
+    return e.code === 11000 ? {status: 400, message: 'มีผู้ใช้ที่ผูกกับ SCB แล้ว'} : {status: 400}
   }
   
 }
