@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import Link from 'next/link'
 import './style.less'
 
-const AdminRequestUploadDoc = () => {
+const DetailLoanerDoc = () => {
   return (
     <div className="fromContainer">
       <h3>
@@ -189,4 +189,4 @@ const AdminRequestUploadDoc = () => {
   )
 }
 
-export default AdminRequestUploadDoc
+export default DetailLoanerDoc

@@ -33,7 +33,7 @@ const ListOfRequestLoan = (props) => {
               <td>24/03/19</td>
               <td>Initial</td>
               <td>
-                <a href="../UploadFromBorrower">Upload</a>
+                <a href="/borrower/uploadborrowerfrom">Upload</a>
               </td>
             </tr>
             <tr>
@@ -42,7 +42,7 @@ const ListOfRequestLoan = (props) => {
               <td>09/12/18</td>
               <td>Initial</td>
               <td>
-                <a href="../UploadFromBorrower">Detail</a>
+                <a href="/borrower/detailloanerdoc">Detail</a>
               </td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@ const ListOfRequestLoan = (props) => {
               <td>21/03/17</td>
               <td>Process</td>
               <td>
-                <a href="../UploadFromBorrower">Pay</a>
+                <a href="/borrower/paymentforloan">Pay</a>
               </td>
             </tr>
             <tr>
@@ -60,7 +60,7 @@ const ListOfRequestLoan = (props) => {
               <td>31/07/16</td>
               <td>Pay in 05/08/16</td>
               <td>
-                <a href="../UploadFromBorrower">Pay</a>
+                <a href="/borrower/paymentsuccess">Pay</a>
               </td>
             </tr>
           </tbody>
