@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
-import { Modal, Form } from 'semantic-ui-react'
+import React from 'react'
+import { Modal } from 'semantic-ui-react'
 import { Typography, Button, Steps } from 'antd'
-import Input from '~/components/Input'
 import './styles.less'
 import PropTypes from 'prop-types'
-import ErrorMessage from '~/components/ErrorMessage'
 import QrcodeGenarator from 'qrcode-generator'
 import {
   useQrcodeConfirm,
   useProfileConfirm,
 } from '../../hooks/profile-hook-confirm'
+import Otpconfirm from './Otpconfirm'
+import ProfileConfirm from './ProfileConfirm'
 const { Step } = Steps
 const { Title } = Typography
 const QrcodeModal = ({
@@ -60,101 +60,16 @@ const QrcodeModal = ({
             </div>
           )) ||
             (step === 1 && (
-              <Fragment>
-                <Title
-                  className="text-center"
-                  type="primary"
-                  level={4}>
-                  กรุณากรอกข้อมูลยืนยัน
-                </Title>
-                <Form>
-                  <Form.Field>
-                    <Input
-                      placeholder="รหัส OTP"
-                      type="text"
-                      name="otp"
-                      maxLength={6}
-                      onChange={setOtpValues}
-                      error={otpErrors.otp ? true : false}
-                    />
-                    <ErrorMessage
-                      text={
-                        otpErrors.otp &&
-                        otpErrors.otp.message
-                      }
-                    />
-                  </Form.Field>
-                </Form>
-              </Fragment>
+              <Otpconfirm
+                setOtpValues={setOtpValues}
+                otpErrors={otpErrors}
+              />
             )) ||
             (step === 2 && (
-              <Fragment>
-                <Title
-                  className="text-center"
-                  type="primary"
-                  level={4}>
-                  กรุณากรอกข้อมูลยืนยัน
-                </Title>
-                <Form>
-                  <Form.Field>
-                    <Input
-                      placeholder="ชื่อ (ภาษาไทย)"
-                      type="text"
-                      name="firstname"
-                      onChange={setProfileValues}
-                      error={
-                        profileFormErrors.firstname
-                          ? true
-                          : false
-                      }
-                    />
-                    <ErrorMessage
-                      text={
-                        profileFormErrors.firstname &&
-                        profileFormErrors.firstname.message
-                      }
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      placeholder="นามสกุล (ภาษาไทย)"
-                      type="text"
-                      name="lastname"
-                      onChange={setProfileValues}
-                      error={
-                        profileFormErrors.lastname
-                          ? true
-                          : false
-                      }
-                    />
-                    <ErrorMessage
-                      text={
-                        profileFormErrors.lastname &&
-                        profileFormErrors.lastname.message
-                      }
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      placeholder="เลขบัตรประชาชน"
-                      type="text"
-                      name="citizenId"
-                      onChange={setProfileValues}
-                      error={
-                        profileFormErrors.citizenId
-                          ? true
-                          : false
-                      }
-                    />
-                    <ErrorMessage
-                      text={
-                        profileFormErrors.citizenId &&
-                        profileFormErrors.citizenId.message
-                      }
-                    />
-                  </Form.Field>
-                </Form>
-              </Fragment>
+              <ProfileConfirm
+                setProfileValues={setProfileValues}
+                profileFormErrors={profileFormErrors}
+              />
             ))}
         </Modal.Description>
       </Modal.Content>
