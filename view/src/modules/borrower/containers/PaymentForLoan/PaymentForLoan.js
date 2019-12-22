@@ -62,9 +62,9 @@ const PaymentForLoan = () => {
         <Col span="8">
           <div className="buttonSpace">
             <div className="AcceptButtonMargin">
-            <Link href="/borrower/paymentsuccess/[transactionId]" as={`borrower/paymentsuccess/${md5('4218 1589 1564 1883')}`}>
+            <Link href="/borrower/paymentsuccess/[transactionId]" as={`/borrower/paymentsuccess/${md5('4218 1589 1564 1883')}`}>
               <Button type="primary">Accept</Button>
-            </Link>
+            </Link>           
             </div>
             <div className="CancelButtonMargin">
               <Link href="/borrower/listofrequestloan">
