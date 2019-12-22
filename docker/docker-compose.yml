@@ -26,6 +26,7 @@ services:
     depends_on:
       - redis_auth
       - auth_mongo
+      - mysql
   redis_auth:
     image: redis:5-alpine
   auth_mongo:
