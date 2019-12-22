@@ -63,33 +63,33 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-           ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
-           cd P2P_lending && cd docker && \
-           sudo docker-compose stop && \
-           sudo docker-compose rm -f && \
-           sudo docker-compose pull && \
-           sudo docker-compose up -d" \
-           sudo docker image prune -f \
+            ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
+            cd P2P_lending && cd docker && \
+            sudo docker-compose stop && \
+            sudo docker-compose rm -f && \
+            sudo docker-compose pull && \
+            sudo docker-compose up -d \
+            sudo docker image prune -f \"
 
 workflows:
   version: 2
   deploy:
     jobs:
-          - auth:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-          - frontend:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-          - deploy:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-              requires:
-                - auth
-                - frontend
+      - auth:
+          filters:
+            branches:
+              only:
+                - pre-master
+      - frontend:
+          filters:
+            branches:
+              only:
+                - pre-master
+      - deploy:
+          filters:
+            branches:
+              only:
+                - pre-master
+          requires:
+            - auth
+            - frontend
