@@ -2,8 +2,11 @@ import { Input, Button, Row, Col } from 'antd'
 import Link from 'next/link'
 import './style.less'
 import paymentforloan from '../../../../pages/borrower/paymentforloan'
+import { useRouter } from 'next/router'
 
-const PaymentSuccess = () => {
+const PaymentSuccess = props => {
+  console.log(props)
+  const router = useRouter()
   return (
     <div className="paymentFrom">
       <div className="imgIconPayment">
@@ -19,7 +22,7 @@ const PaymentSuccess = () => {
       </div>
       <br />
       <div className="information">
-        Transaction id : 24545099
+        Transaction id : {router.query.transactionId}
       </div>
       <br />
       <div className="information">Amount : 10,000</div>
@@ -36,6 +39,10 @@ const PaymentSuccess = () => {
       <br />
     </div>
   )
+}
+
+PaymentSuccess.getInitialProps = async function({ query }) {
+  console.log(query)
 }
 
 export default PaymentSuccess

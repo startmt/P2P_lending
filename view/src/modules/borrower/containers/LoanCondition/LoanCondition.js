@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'semantic-ui-react'
-// import LoanConditionFrom from '../components/LoanCondition'
+// import LoanConditionFrom from '../containers/LoanCondition/LoanCondition'
 import {
   Row,
   Col,
@@ -23,8 +23,14 @@ function handleChange(value) {
 }
 
 const LoanCondition = (props) => {
+  console.log(props)
+  const { loanName, approvalLimit, loanPurpose, purposeDetail, setLoanName, open, submit, setModalLoan } = props
+  //console.log(approvalLimit)
   return (
-    <Modal trigger={<Button type="primary">Create Loan</Button>}>
+    <Modal open={open}
+    onClose={() => setModalLoan(false)}
+    //trigger={<Button onClick={() => setModalLoan(!modalLoan)} type="primary">Create Loan</Button>}
+    >
       <Modal.Content>
         <Modal.Description>
           <div className="fromLoanCondition">
@@ -50,6 +56,8 @@ const LoanCondition = (props) => {
                     placeholder="กรอกหัวข้อการขอกู้สินเชื่อ"
                     type="text"
                     size="25"
+                    value={loanName}
+                    onChange={(e) => setLoanName(e.target.value)}
                   />
                 </Row>
                 <br />
@@ -164,7 +172,7 @@ const LoanCondition = (props) => {
                 <Row>
                   <div className="buttonMargin">
                     <Link href="/borrower/listofrequestloan">
-                      <Button type="primary">
+                      <Button onClick={submit} type="primary">
                         Create loan
                       </Button>
                     </Link>

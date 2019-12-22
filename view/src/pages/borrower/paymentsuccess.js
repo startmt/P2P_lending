@@ -3,7 +3,7 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { LandingLayout } from '~/layouts/landing'
-import PaymentSuccess from '~/modules/borrower/containers/PaymentSuccess/PaymentSuccess'
+import PaymentSuccess from '~/modules/borrower/containers/PaymentSuccess/PaymentSuccess[transactionId]'
 const Index = (props) => {
   const { setPageName } = props
   setPageName('paymentSuccess')

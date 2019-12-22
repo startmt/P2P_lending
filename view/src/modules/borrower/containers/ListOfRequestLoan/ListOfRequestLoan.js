@@ -1,18 +1,55 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table } from 'semantic-ui-react'
 import { Row, Col, Button } from 'antd'
 import Link from 'next/link'
 import './style.less'
 import LoanCondition from '~/modules/borrower/containers/LoanCondition/LoanCondition'
 import UploadFromBorrower from '~/modules/borrower/containers/UploadFromBorrower/UploadFromBorrower'
+import moment from 'moment'
 
 const ListOfRequestLoan = (props) => {
+  const [loanName, setLoanName] = useState('')
+  const [approvalLimit, setApprovalLimit] = useState(20000)
+  const [loanPurpose, setLoanPurpose] = useState('เงินทุนหมุนเวียน')
+  const [purposeDetail, setPurposeDetail] = useState('')
+  const [modalLoan, setModalLoan] = useState(false)
+  const [loanList, setLoanList]= useState([])
+  // const [createAt, setCreateAt] = useState('')
+
+  useEffect(() => {
+    localStorage.setItem('loanList', loanList);
+  }, [loanList]);
+
+
+  const submitForm = () => {
+    setLoanList([...loanList, { loanName, approvalLimit, loanPurpose, purposeDetail, loanerName:  'boss', state: 'Initial', createAt: moment().calendar() }])
+    window.localStorage.setItem('loanList', [...loanList, { loanName, approvalLimit, loanPurpose, purposeDetail, loanerName:  'boss', state: 'Initial', createAt: moment().calendar() }])
+    setLoanName('')
+    setApprovalLimit(20000)
+    setLoanPurpose('เงินทุนหมุนเวียน')
+    setPurposeDetail('')
+    setModalLoan(false)
+  }
+  //setLoanList(localStorage.getItem('loanList'))
   return (
     <div className="fromRequestLoan">
       <div class="stateTable">
+      <Button onClick={(e) => setModalLoan(!modalLoan)} type="primary">Create Loan</Button>
         <Row>
           <div className="createLoan">
-            <LoanCondition />
+            <LoanCondition
+              open={modalLoan}
+              submit={submitForm}
+              loanName={loanName}
+              approvalLimit={approvalLimit}
+              loanPurpose={loanPurpose}
+              purposeDetail={purposeDetail}
+              setModalLoan={setModalLoan}
+              setLoanName={setLoanName}
+              setApprovalLimit={setApprovalLimit}
+              setLoanPurpose={setLoanPurpose}
+              setPurposeDetail={setPurposeDetail}
+            />
           </div>
           <br />
         </Row>
@@ -67,6 +104,17 @@ const ListOfRequestLoan = (props) => {
                 <Button type="primary" href="/borrower/paymentsuccess">Pay</Button>
               </td>
             </tr>
+            {loanList.map(loan => 
+            <tr>
+<td>{loan.loanerName}</td>
+            <td>{loan.approvalLimit}</td>
+            <td>{loan.createAt}</td>
+            <td>{loan.state}</td>
+            <td>
+            <UploadFromBorrower />
+              </td>
+            </tr>
+            )}
           </tbody>
         </table>
       </div>

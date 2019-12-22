@@ -1,7 +1,14 @@
 import { Input, Button, Row, Col } from 'antd'
+import md5 from 'md5'
 import Link from 'next/link'
 import './style.less'
 import paymentforloan from '../../../../pages/borrower/paymentforloan'
+
+const MicrodataLink = ({ href, children, ...rest }) => (
+  <Link href={href}>
+    <a {...rest}>{children}</a>
+  </Link>
+)
 
 const PaymentForLoan = () => {
   return (
@@ -19,7 +26,7 @@ const PaymentForLoan = () => {
       </div>
       <br />
       <div className="information">
-        Transaction id : 24545099
+        Transaction id : {md5('4218 1589 1564 1883')}
       </div>
       <br />
       <div className="information">Amount : 10,000</div>
@@ -36,10 +43,10 @@ const PaymentForLoan = () => {
         <Col span="8" />
         <Col span="8">
           <div className="information">
-            CCV :
+            CVV :
             <Input
-              className="ccv"
-              placeholder="ccv"
+              className="cvv"
+              placeholder="cvv"
               type="text"
               size="3"
               maxLength="3"
@@ -55,9 +62,9 @@ const PaymentForLoan = () => {
         <Col span="8">
           <div className="buttonSpace">
             <div className="AcceptButtonMargin">
-              <Link href="/borrower/paymentsuccess">
-                <Button type="primary">Accept</Button>
-              </Link>
+            <Link href="/borrower/paymentsuccess/[transactionId]" as={`borrower/paymentsuccess/${md5('4218 1589 1564 1883')}`}>
+              <Button type="primary">Accept</Button>
+            </Link>
             </div>
             <div className="CancelButtonMargin">
               <Link href="/borrower/listofrequestloan">
