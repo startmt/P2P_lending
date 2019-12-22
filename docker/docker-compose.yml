@@ -14,7 +14,7 @@ services:
     restart: always
     container_name: mysql
     volumes:
-      - dbdata:/var/lib/mysql
+      - ./dbdata:/var/lib/mysql
     environment:
       MYSQL_DATABASE: test
       MYSQL_ROOT_PASSWORD: example
