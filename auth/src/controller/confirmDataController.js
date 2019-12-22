@@ -7,15 +7,15 @@ import {
     status422,
     status200,
 } from '../utils/status'
-import { createBorrowerValidated } from '../service/crudBorrower'
+import { createValidatedUserData } from '../service/crudValidatedUser'
 import userModel from '../model/user'
-import {validatedUser} from '../service/auth'
+
 export default async (req, res) => {
-    try{
+    try {
         const data = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
-            citizenId: req.body.citizenId 
+            citizenId: req.body.citizenId
         }
         const username = req.authInfo.username
         const token = await checkToken(username)
@@ -33,20 +33,18 @@ export default async (req, res) => {
                     authorization: 'bearer ' + token
                 }
             }
+            if(query.isIdentify == false){
             const isDataconfirm = await confirmData(config, data)
-            
-            const isCreated = await createBorrowerValidated(isDataconfirm.data.data, username)
-
-            if(isCreated.status === 200) {await validatedUser(username)
-                return status200(res,isCreated)
+            const isCreated = await createValidatedUserData(isDataconfirm.data.data, username, query.role)
+                if (isCreated.status === 200) return status200(res, isCreated)
+                return status400(res,   isCreated.message)
             }
-                
-                return status400(res)
+            return status400(res, 'ข้อมูลมีการยืนยันแล้ว')
         } else {
             status422(res, 'your token has expired.')
         }
-    } catch(e){
+    } catch (e) {
         return status400(res)
     }
-    
+
 }

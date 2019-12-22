@@ -5,7 +5,7 @@ export default (sequelize) =>
     {
       borrowerId: {
         type: DataTypes.INTEGER,
-        field: 'borrower_id',
+        field: 'id',
         primaryKey: true,
         autoIncrement: true
       },

@@ -3,9 +3,9 @@ export default (sequelize) =>
   sequelize.define(
     'lender',
     {
-      borrowerId: {
+      lenderId: {
         type: DataTypes.INTEGER,
-        field: 'lender_id',
+        field: 'id',
         primaryKey: true,
         autoIncrement: true
       },
