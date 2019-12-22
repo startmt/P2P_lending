@@ -44,6 +44,7 @@ export default async (req, res) => {
             status422(res, 'your token has expired.')
         }
     } catch (e) {
+        console.log(e)
         return status400(res)
     }
 
