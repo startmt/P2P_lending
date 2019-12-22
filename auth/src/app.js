@@ -9,10 +9,10 @@ import { connectMysql } from './mysql'
 const app = express()
 const PORT = '3000'
 
-http.createServer(app).listen(PORT, () => {
+http.createServer(app).listen(PORT, async() => {
   connectMongo()
   connectRedis()
-  connectMysql()
+  await connectMysql()
 })
 
 app.use(bodyParser.json())
