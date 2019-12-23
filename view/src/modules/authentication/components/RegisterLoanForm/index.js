@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Input from '~/components/Input'
 import { Select } from 'semantic-ui-react'
 import { Typography } from 'antd'
-import ErrorMessage from '~components/ErrorMessage'
+import ErrorMessage from '~/components/ErrorMessage'
 const { Title, Paragraph } = Typography
 const RegisterForm = ({
   handleRegister,

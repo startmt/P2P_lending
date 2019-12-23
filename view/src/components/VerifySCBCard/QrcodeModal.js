@@ -1,9 +1,15 @@
-import React, { Fragment } from 'react'
-import { Modal, Form } from 'semantic-ui-react'
+import React from 'react'
+import { Modal } from 'semantic-ui-react'
 import { Typography, Button, Steps } from 'antd'
 import './styles.less'
 import PropTypes from 'prop-types'
 import QrcodeGenarator from 'qrcode-generator'
+import {
+  useQrcodeConfirm,
+  useProfileConfirm,
+} from '../../hooks/profile-hook-confirm'
+import Otpconfirm from './OtpConfirm'
+import ProfileConfirm from './ProfileConfirm'
 const { Step } = Steps
 const { Title } = Typography
 const QrcodeModal = ({
@@ -11,17 +17,19 @@ const QrcodeModal = ({
   prev,
   next,
   handleOtp,
-  otpCode,
-  setOtp,
-  firstname,
-  lastname,
-  citizenId,
-  setFirstname,
-  setLastname,
-  setCitizenId,
   handleConfirm,
   qrCode,
 }) => {
+  const {
+    setOtpValues,
+    handleOtpSubmit,
+    otpErrors,
+  } = useQrcodeConfirm()
+  const {
+    setProfileValues,
+    handleProfileSubmit,
+    profileFormErrors,
+  } = useProfileConfirm()
   const qr = QrcodeGenarator(4, 'L')
   qr.addData(qrCode)
   qr.make()
@@ -52,66 +60,16 @@ const QrcodeModal = ({
             </div>
           )) ||
             (step === 1 && (
-              <Fragment>
-                <Title
-                  className="text-center"
-                  type="primary"
-                  level={4}>
-                  กรุณากรอกข้อมูลยืนยัน
-                </Title>
-                <Form>
-                  <Form.Field>
-                    <input
-                      placeholder="รหัส OTP"
-                      value={otpCode}
-                      maxLength={6}
-                      onChange={(e) =>
-                        setOtp(e.target.value)
-                      }
-                    />
-                  </Form.Field>
-                </Form>
-              </Fragment>
+              <Otpconfirm
+                setOtpValues={setOtpValues}
+                otpErrors={otpErrors}
+              />
             )) ||
             (step === 2 && (
-              <Fragment>
-                <Title
-                  className="text-center"
-                  type="primary"
-                  level={4}>
-                  กรุณากรอกข้อมูลยืนยัน
-                </Title>
-                <Form>
-                  <Form.Field>
-                    <input
-                      placeholder="ชื่อ (ภาษาไทย)"
-                      value={firstname}
-                      onChange={(e) =>
-                        setFirstname(e.target.value)
-                      }
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <input
-                      placeholder="นามสกุล (ภาษาไทย)"
-                      value={lastname}
-                      onChange={(e) =>
-                        setLastname(e.target.value)
-                      }
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <input
-                      placeholder="เลขบัตรประชาชน"
-                      value={citizenId}
-                      maxLength={13}
-                      onChange={(e) =>
-                        setCitizenId(e.target.value)
-                      }
-                    />
-                  </Form.Field>
-                </Form>
-              </Fragment>
+              <ProfileConfirm
+                setProfileValues={setProfileValues}
+                profileFormErrors={profileFormErrors}
+              />
             ))}
         </Modal.Description>
       </Modal.Content>
@@ -123,10 +81,15 @@ const QrcodeModal = ({
           <Button onClick={next}>ถัดไป</Button>
         )}
         {step === 1 && (
-          <Button onClick={handleOtp}>ยืนยัน</Button>
+          <Button onClick={handleOtpSubmit(handleOtp)}>
+            ยืนยัน
+          </Button>
         )}
         {step === 2 && (
-          <Button onClick={handleConfirm}>เสร็จสิ้น</Button>
+          <Button
+            onClick={handleProfileSubmit(handleConfirm)}>
+            เสร็จสิ้น
+          </Button>
         )}
       </Modal.Actions>
     </Modal>
@@ -137,8 +100,5 @@ QrcodeModal.propTypes = {
   next: PropTypes.func,
   prev: PropTypes.func,
   step: PropTypes.number,
-  handleOtp: PropTypes.func,
-  otpCode: PropTypes.string,
-  setOtp: PropTypes.func,
 }
 export default QrcodeModal

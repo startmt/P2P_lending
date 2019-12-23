@@ -52,7 +52,7 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
       status: 200,
     }
   }catch(e){
-    return null
+    return {status: 400}
   }
   
 }

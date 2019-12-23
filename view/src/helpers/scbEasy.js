@@ -44,7 +44,6 @@ export const checkConfirmData = (data) => {
 }
 
 export const getQrcode = (username) => {
-  console.log('ddd')
   const config = {
     headers: {
       apikey: publicRuntimeConfig.SCB_API,

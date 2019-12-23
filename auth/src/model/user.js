@@ -20,7 +20,7 @@ const userSchema = new Schema({
   },
   scbId: {
     type: String,
-    unique: true
+    unique: false
   },
   
 })

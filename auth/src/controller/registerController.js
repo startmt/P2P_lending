@@ -13,6 +13,7 @@ export default async (req, res) => {
     username: username,
     password: hashPassword,
     role: role,
+    scbId: null,
     isIdentify: false
   }
 

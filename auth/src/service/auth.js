@@ -6,4 +6,11 @@ export const checkAuth = async (username) =>(
       username: username,
     })
     .exec())
-  
+export const validatedUser = async (username)=>{
+  await userModel.updateOne({
+    username:username
+  },
+  {
+    isIdentify:true
+  })
+}
