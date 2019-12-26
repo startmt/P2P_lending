@@ -1,7 +1,5 @@
-import db from '../mysql'
-import userModel from '../model/user'
 import { validatedUser } from '../service/auth'
-import { createInformation } from '../crud/information'
+import { createInformation, getInfomationByUsername } from '../crud/information'
 export const createValidatedUserData = async (data, username, role) => {
     try {
         const newUserValidate = await createInformation(data, username)
@@ -13,8 +11,5 @@ export const createValidatedUserData = async (data, username, role) => {
 }
 
 export const getUserDatail = async (username) => {
-
-    // return await db.user.findOne({
-    //     where: { username }
-    // })
+    return await getInfomationByUsername(username)
 }

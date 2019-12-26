@@ -12,12 +12,12 @@ export default async (req, res) => {
   try {
     const query = await checkAuth(req.authInfo.username)
     if (query.user.identify == true) {
-      userDetail = await getUserDatail(req.authInfo.username, query.role)
+      const userDetail = await getUserDatail(req.authInfo.username)
       status200(res, {
         username: query.username,
-        isIdentify: query.dataValues.isIdentify,
+        isIdentify: query.user.identify,
         role: query.role,
-        userDetail: userDetail.dataValues
+        userDetail: userDetail.get()
       })
     } else {
       status200(res, {
