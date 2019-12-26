@@ -4,6 +4,7 @@ const initialState = fromJS({
   isAuth: null,
   username: '',
   isIdentify: null,
+  isConnectScb: null,
   userDetail: Map()
 })
 export default function reducer(
@@ -18,6 +19,10 @@ export default function reducer(
         .set(
           'isIdentify',
           fromJS(action.payload.authDesc.isIdentify),
+        )
+        .set(
+          'isConnectScb',
+          fromJS(action.payload.authDesc.isConnectScb),
         )
         .set(
           'userDetail',
