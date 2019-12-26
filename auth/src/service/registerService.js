@@ -1,10 +1,8 @@
-import db from '../mysql'
+import {getUserByUsername, createUser} from '../crud/user'
 
 export const checkExistUser = async (user) => {
   try {
-    const data = await db.user.findOne({
-      where: { username: user.username }
-    })
+    const data = await getUserByUsername(user.username)
     if (data) {
       return true
     }
@@ -16,14 +14,7 @@ export const checkExistUser = async (user) => {
 
 export const create = async (user) => {
   try {
-    await db.sequelize.transaction(t => {
-      return db.user.create({
-        username: user.username,
-        password: user.password,
-        identify: false,
-        role: user.role,
-      }, { transaction: t });
-    });
+    await createUser(user)
     return ({ status: 200})
   } catch (error) {
     return false

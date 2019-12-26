@@ -9,7 +9,7 @@ import {
 export default async (req, res) => {
     const authCode = req.headers.authcode
     const username = req.headers.username
-    if(authCode){
+    if(authCode && username){
       const tokenScb = await getToken(authCode)
       if(tokenScb.status == 200){
         let data = {
@@ -22,7 +22,6 @@ export default async (req, res) => {
         if(otpPassword > 0){
           status200(res, {
             otp: otpPassword
-
           })
         }else{
           status400(res)

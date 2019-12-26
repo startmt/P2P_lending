@@ -3,7 +3,7 @@ export default (sequelize) =>
   sequelize.define(
     'user',
     {
-      userId: {
+      id: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
@@ -18,7 +18,7 @@ export default (sequelize) =>
         field: 'password'
       },
       identify: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
         field: 'identify'
       },
       role: {

@@ -3,7 +3,7 @@ export default (sequelize) =>
   sequelize.define(
     'infomation',
     {
-      infomationId: {
+      id: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
@@ -33,5 +33,17 @@ export default (sequelize) =>
         type: DataTypes.TEXT,
         field: 'address'
       },
-    },
+      scbId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'scbs',
+        },
+        unique: true,
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      },
+    }, {
+    underscored: true,
+  }
   )

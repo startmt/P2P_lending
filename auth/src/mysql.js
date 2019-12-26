@@ -24,15 +24,15 @@ export const connectMysql = async() => {
     const RequestModel = Request(sequelize)
 
 
-    userModel.hasMany(ScbModel)
-    userModel.hasOne(DebitCardModel)
+    userModel.hasOne(ScbModel,)
+    userModel.hasMany(DebitCardModel)
     ScbModel.belongsTo(userModel)
     ScbModel.hasOne(InformationModel)
     InformationModel.belongsTo(ScbModel)
     DebitCardModel.belongsTo(userModel)
 
     db.user = userModel
-    db.Scb = ScbModel
+    db.scb = ScbModel
     db.request = RequestModel
     db.infomation = InformationModel
     db.Sequelize = Sequelize;

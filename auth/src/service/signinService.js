@@ -1,13 +1,9 @@
 import jwt from 'jsonwebtoken'
-import userModel from '../model/user'
 import bCrypt from 'bcrypt'
 import env from '../config'
-import db from '../mysql'
-
+import { getUserByUsername } from '../crud/user'
 export const checkUserFromDb = async (user) => {
-  const query = await db.user.findOne({
-    where: { username:user.username }
-})
+  const query = await getUserByUsername(user.username)
   try {
     return await bCrypt.compare(
       user.password,

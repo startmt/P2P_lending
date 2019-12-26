@@ -1,9 +1,10 @@
 import { DataTypes } from 'sequelize'
+import user from './user'
 export default (sequelize) =>
   sequelize.define(
     'scb',
     {
-      scbId: {
+      id: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
@@ -11,7 +12,20 @@ export default (sequelize) =>
       },
       scbAccount: {
         type: DataTypes.STRING,
-        field: 'scb_account'
+        field: 'scb_account',
+        unique: true
       },
-    },
+      userId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'users',
+        },
+        unique:true,
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      },
+    },{
+      underscored: true,
+    }
   )
