@@ -15,5 +15,5 @@ export const checkAuth = async (username) => {
 export const validatedUser = async (username) => {
   const query = await getUserByUsername(username)
   const data = { identify: true }
-  await updateUser(query.dataValues.userId, data)
+  await updateUser(query.get().id, data)
 }
