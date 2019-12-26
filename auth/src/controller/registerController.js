@@ -13,15 +13,13 @@ export default async (req, res) => {
     username: username,
     password: hashPassword,
     role: role,
-    scbId: null,
-    isIdentify: false
   }
 
   const isUserExist = await checkExistUser(user)
   if (!isUserExist) {
     const isCreated = await create(user)
     
-    if (isCreated) {
+    if (isCreated.status === 200) {
       status200(res, { message: 'create account success' })
     }
     else {

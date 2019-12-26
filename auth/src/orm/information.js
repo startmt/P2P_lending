@@ -1,17 +1,13 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
   sequelize.define(
-    'borrower',
+    'infomation',
     {
-      borrowerId: {
+      infomationId: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
         autoIncrement: true
-      },
-      username: {
-        type: DataTypes.STRING,
-        field: 'username'
       },
       firstName: {
         type: DataTypes.STRING,

@@ -38,9 +38,9 @@ export const createValidatedUserData = async (data, username, role) => {
     }
 }
 
-export const getUserDatail = async (username, role) => {
+export const getUserDatail = async (username) => {
 
-    return await db[`${role}`].findOne({
-        where: { username }
-    })
+    // return await db.user.findOne({
+    //     where: { username }
+    // })
 }

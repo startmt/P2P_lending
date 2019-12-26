@@ -7,12 +7,13 @@ import { connectRedis } from './redis'
 import cors from 'cors'
 import { connectMysql } from './mysql'
 const app = express()
-const PORT = '3000'
+const PORT = '3001'
 
 http.createServer(app).listen(PORT, async() => {
+  
+  await connectMysql()
   connectMongo()
   connectRedis()
-  await connectMysql()
 })
 
 app.use(bodyParser.json())

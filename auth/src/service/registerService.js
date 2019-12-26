@@ -1,27 +1,31 @@
-import userModel from '../model/user'
+import db from '../mysql'
 
 export const checkExistUser = async (user) => {
-  const query = await userModel
-    .findOne({
-      username: user.username,
-    })
-    .exec()
   try {
-    if (query) {
+    const data = await db.user.findOne({
+      where: { username: user.username }
+    })
+    if (data) {
       return true
     }
     return false
-  } catch (error) {
-    return null
+  } catch (e) {
+    return false
   }
 }
 
 export const create = async (user) => {
   try {
-    await userModel.create(user)
-    return true
+    await db.sequelize.transaction(t => {
+      return db.user.create({
+        username: user.username,
+        password: user.password,
+        identify: false,
+        role: user.role,
+      }, { transaction: t });
+    });
+    return ({ status: 200})
   } catch (error) {
-    console.log(error)
     return false
   }
 }

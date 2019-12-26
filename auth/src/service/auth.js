@@ -1,11 +1,11 @@
-import userModel from '../model/user'
+import db from '../mysql'
 
 export const checkAuth = async (username) =>(
-    await userModel
+    await db.user
     .findOne({
       username: username,
     })
-    .exec())
+)
 export const validatedUser = async (username)=>{
   await userModel.updateOne({
     username:username

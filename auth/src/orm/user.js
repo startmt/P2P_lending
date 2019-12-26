@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
   sequelize.define(
-    'lender',
+    'user',
     {
-      lenderId: {
+      userId: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
@@ -13,29 +13,17 @@ export default (sequelize) =>
         type: DataTypes.STRING,
         field: 'username'
       },
-      firstName: {
+      password: {
         type: DataTypes.STRING,
-        field: 'firstname'
+        field: 'password'
       },
-      lastName: {
+      identify: {
         type: DataTypes.STRING,
-        field: 'lastname'
+        field: 'identify'
       },
-      citizenId: {
+      role: {
         type: DataTypes.STRING,
-        field: 'citizen_id'
-      },
-      phoneNumber: {
-        type: DataTypes.STRING,
-        field: 'phone_number'
-      },
-      birthDate: {
-        type: DataTypes.STRING,
-        field: 'birthday'
-      },
-      address: {
-        type: DataTypes.TEXT,
-        field: 'address'
+        field: 'role'
       },
     },
   )
