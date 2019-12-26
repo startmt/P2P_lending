@@ -4,12 +4,10 @@ import {
 } from '../service/scbVerifyService'
 import {
     status400,
-    status422,
     status200,
 } from '../utils/status'
 import { createValidatedUserData } from '../service/crudValidatedUser'
-import userModel from '../model/user'
-
+import { getScbByUsername } from '../crud/scb'
 export default async (req, res) => {
     try {
         const data = {
@@ -20,28 +18,21 @@ export default async (req, res) => {
         const username = req.authInfo.username
         const token = await checkToken(username)
         if (token) {
-            const query = await userModel
-                .findOne({
-                    username: username,
-                })
-                .exec()
+            const query = await getScbByUsername(username)
             const config = {
                 headers: {
-                    resourceOwnerId: query.scbId,
+                    resourceOwnerId: query.get().scbAccount,
                     requestUId: username + 'confirm',
                     "accept-language": 'en',
                     authorization: 'bearer ' + token
                 }
             }
-            if(query.isIdentify == false){
             const isDataconfirm = await confirmData(config, data)
             const isCreated = await createValidatedUserData(isDataconfirm.data.data, username, query.role)
-                if (isCreated.status === 200) return status200(res, isCreated)
-                return status400(res,   isCreated.message)
-            }
-            return status400(res, 'ข้อมูลมีการยืนยันแล้ว')
+            if (isCreated.status === 200) return status200(res, isCreated)
+            return status400(res, isCreated.message)
         } else {
-            status422(res, 'your token has expired.')
+            return status400(res)
         }
     } catch (e) {
         console.log(e)

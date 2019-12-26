@@ -2,7 +2,6 @@ import express from 'express'
 import http from 'http'
 import routes from './route/index'
 import bodyParser from 'body-parser'
-import connectMongo from './mongo'
 import { connectRedis } from './redis'
 import cors from 'cors'
 import { connectMysql } from './mysql'
@@ -10,9 +9,9 @@ const app = express()
 const PORT = '3000'
 
 http.createServer(app).listen(PORT, async() => {
-  connectMongo()
-  connectRedis()
+  
   await connectMysql()
+  connectRedis()
 })
 
 app.use(bodyParser.json())

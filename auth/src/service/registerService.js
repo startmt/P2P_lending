@@ -1,27 +1,22 @@
-import userModel from '../model/user'
+import {getUserByUsername, createUser} from '../crud/user'
 
 export const checkExistUser = async (user) => {
-  const query = await userModel
-    .findOne({
-      username: user.username,
-    })
-    .exec()
   try {
-    if (query) {
+    const data = await getUserByUsername(user.username)
+    if (data) {
       return true
     }
     return false
-  } catch (error) {
-    return null
+  } catch (e) {
+    return false
   }
 }
 
 export const create = async (user) => {
   try {
-    await userModel.create(user)
-    return true
+    await createUser(user)
+    return ({ status: 200})
   } catch (error) {
-    console.log(error)
     return false
   }
 }

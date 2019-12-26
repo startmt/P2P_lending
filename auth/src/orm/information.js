@@ -1,17 +1,13 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
   sequelize.define(
-    'borrower',
+    'infomation',
     {
-      borrowerId: {
+      id: {
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
         autoIncrement: true
-      },
-      username: {
-        type: DataTypes.STRING,
-        field: 'username'
       },
       firstName: {
         type: DataTypes.STRING,
@@ -37,5 +33,17 @@ export default (sequelize) =>
         type: DataTypes.TEXT,
         field: 'address'
       },
-    },
+      scbId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'scbs',
+        },
+        unique: true,
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+      },
+    }, {
+    underscored: true,
+  }
   )
