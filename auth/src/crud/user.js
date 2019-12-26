@@ -16,7 +16,7 @@ export const createUser = async (user) =>
 export const updateUser = async (id, data) =>{
     try{
         await db.sequelize.transaction(t => {
-            return db.user.update(data, { where: { userId: id } }, { transaction: t });
+            return db.user.update(data, { where: { id: id } }, { transaction: t });
         });
     }catch(e){
         console.log(e)

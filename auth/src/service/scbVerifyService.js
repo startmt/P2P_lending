@@ -5,6 +5,7 @@ import axios from 'axios'
 import { rejects } from 'assert'
 import { createScb } from '../crud/scb'
 import { getTokenScb } from '../api/scb'
+import { getScbByUsername } from '../crud/scb'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
@@ -40,7 +41,24 @@ export const verifyOtpForConfirm = async (otpCode, username) => {
     console.log(e)
     return { status: 400 }
   }
+}
 
+export const getNewToken = async (otpCode, username) => {
+  try {
+    let token = await redisClient.getAsync(otpCode + username)
+    token = JSON.parse(token)
+    const query = await getScbByUsername(username)
+    if (query.get().scbAccount === token.resourceOwnerId) {
+      await redisClient.setAsync(username + 'refresh', token.refreshToken, 'EX', token.refreshExpiresIn)
+      await redisClient.setAsync(username + 'access', token.accessToken, 'EX', token.expiresIn)
+      return {
+        status: 200,
+      }
+    }
+    return { status: 400 }
+  } catch (e) {
+    return { status: 400 }
+  }
 }
 
 export const confirmData = async (config, data) => {

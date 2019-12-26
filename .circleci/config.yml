@@ -66,6 +66,7 @@ jobs:
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
             cd P2P_lending && cd docker && \
             sudo docker-compose stop && \
+            sudo git pull && \
             sudo docker-compose rm -f && \
             sudo docker-compose pull && \
             sudo docker-compose up -d && \
