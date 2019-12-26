@@ -3,7 +3,7 @@ import { createInformation, getInfomationByUsername } from '../crud/information'
 export const createValidatedUserData = async (data, username, role) => {
     try {
         const newUserValidate = await createInformation(data, username)
-        validatedUser(username)
+        await validatedUser(username)
         return ({ status: 200, data: newUserValidate })
     } catch (e) {
         return { message: "คุณเคยยืนยันตัวตนไปแล้ว" }
