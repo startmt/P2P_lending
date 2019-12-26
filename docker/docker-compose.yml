@@ -26,17 +26,11 @@ services:
     environment:
       - MYSQL_HOST=mysql
       - REDIS_HOST=redis_auth
-      - MONGO_HOST=auth_mongo
     depends_on:
       - redis_auth
-      - auth_mongo
       - mysql
   redis_auth:
     image: redis:5-alpine
-  auth_mongo:
-    image: mongo
-    volumes:
-      - "./mongo_auth:/data/db"
   web:
     image: startmt/p2p-frontend-service:latest
     ports:
