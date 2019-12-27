@@ -1,6 +1,6 @@
-import { validatedUser } from '../service/auth'
-import { createInformation, getInfomationByUsername } from '../crud/information'
-export const createValidatedUserData = async (data, username, role) => {
+import { validatedUser } from './auth'
+import { createInformation, getInfomationByUsername } from '../../crud/information'
+export const createValidatedUserData = async (data, username) => {
     try {
         const newUserValidate = await createInformation(data, username)
         await validatedUser(username)

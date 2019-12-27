@@ -1,5 +1,6 @@
-import axios from 'axios'
 import env from '../config'
-export const lending = () => {
-  axios.get(`${env.LENDING_HOST}/lending`)
+import { requireJWTAuth } from '../middleware/authorize'
+import getLendingController from '../controller/lending/getLendingController'
+export const lending = (router) => {
+  router.get('/lending/', requireJWTAuth, getLendingController)
 }

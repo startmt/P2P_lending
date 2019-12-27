@@ -10,6 +10,7 @@ export const createUser = async (user) =>
             username: user.username,
             password: user.password,
             identify: false,
+            state: 'NORMAL',
             role: user.role,
         }, { transaction: t });
     });

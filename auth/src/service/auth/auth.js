@@ -1,5 +1,5 @@
-import { getUserByUsername, updateUser } from '../crud/user'
-import { getScbByUsername } from '../crud/scb'
+import { getUserByUsername, updateUser } from '../../crud/user'
+import { getScbByUsername } from '../../crud/scb'
 export const checkAuth = async (username) => {
   const user = await getUserByUsername(username)
   const scb = await getScbByUsername(username)

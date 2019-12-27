@@ -1,12 +1,12 @@
 import {
   checkAuth,
-} from '../service/auth'
-import { getInstance } from '../redis'
+} from '../../service/auth/auth'
+import { getInstance } from '../../redis'
 import {
   status400,
   status200,
-} from '../utils/status'
-import { getUserDatail } from '../service/crudValidatedUser'
+} from '../../utils/status'
+import { getUserDatail } from '../../service/auth/crudValidatedUser'
 const redisClient = getInstance()
 export default async (req, res) => {
   try {

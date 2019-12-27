@@ -1,11 +1,11 @@
 import {
   verifyOtpForConfirm
-  } from '../service/scbVerifyService'
+  } from '../../service/auth/scbVerifyService'
   import {
     status400,
     status200,
-  } from '../utils/status'
-  import { getInstance } from '../redis'
+  } from '../../utils/status'
+  import { getInstance } from '../../redis'
 
   const redisClient = getInstance()
   export default async (req, res) => {

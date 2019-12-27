@@ -1,9 +1,9 @@
 import {
   checkExistUser,
   create
-} from '../service/registerService'
+} from '../../service/auth/registerService'
 import bCrypt from 'bcrypt'
-import { status400, status200, status422 } from '../utils/status'
+import { status400, status200, status422 } from '../../utils/status'
 export default async (req, res) => {
   let username = req.body.username
   let password = req.body.password

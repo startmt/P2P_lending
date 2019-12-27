@@ -25,5 +25,8 @@ export default (sequelize) =>
         type: DataTypes.STRING,
         field: 'role'
       },
+      state: {
+        type: DataTypes.ENUM('NORMAL', 'BLACKLIST', 'WARN', 'DANGER')
+      }
     },
   )

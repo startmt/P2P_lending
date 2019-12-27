@@ -1,13 +1,13 @@
 import {
     checkToken,
     confirmData
-} from '../service/scbVerifyService'
+} from '../../service/auth/scbVerifyService'
 import {
     status400,
     status200,
-} from '../utils/status'
-import { createValidatedUserData } from '../service/crudValidatedUser'
-import { getScbByUsername } from '../crud/scb'
+} from '../../utils/status'
+import { createValidatedUserData } from '../../service/auth/crudValidatedUser'
+import { getScbByUsername } from '../../crud/scb'
 export default async (req, res) => {
     try {
         const data = {

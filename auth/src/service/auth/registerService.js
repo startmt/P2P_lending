@@ -1,4 +1,4 @@
-import {getUserByUsername, createUser} from '../crud/user'
+import {getUserByUsername, createUser} from '../../crud/user'
 
 export const checkExistUser = async (user) => {
   try {

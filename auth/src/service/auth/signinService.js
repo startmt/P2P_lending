@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bCrypt from 'bcrypt'
-import env from '../config'
-import { getUserByUsername } from '../crud/user'
+import env from '../../config'
+import { getUserByUsername } from '../../crud/user'
 export const checkUserFromDb = async (user) => {
   const query = await getUserByUsername(user.username)
   try {

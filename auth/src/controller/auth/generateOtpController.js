@@ -1,11 +1,11 @@
 import {
     generateOtp,
     getToken
-  } from '../service/scbVerifyService'
+  } from '../../service/auth/scbVerifyService'
 import {
     status400,
     status200,
-} from '../utils/status'
+} from '../../utils/status'
 export default async (req, res) => {
     const authCode = req.headers.authcode
     const username = req.headers.username

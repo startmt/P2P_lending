@@ -1,11 +1,11 @@
-import { getInstance } from '../redis'
-import env from '../config'
+import { getInstance } from '../../redis'
+import env from '../../config'
 import otpGenerator from 'otp-generator'
 import axios from 'axios'
 import { rejects } from 'assert'
-import { createScb } from '../crud/scb'
-import { getTokenScb } from '../api/scb'
-import { getScbByUsername } from '../crud/scb'
+import { createScb } from '../../crud/scb'
+import { getTokenScb } from '../../api/scb'
+import { getScbByUsername } from '../../crud/scb'
 const redisClient = getInstance()
 
 export const getToken = async (authCode) => {
