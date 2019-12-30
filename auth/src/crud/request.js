@@ -7,7 +7,7 @@ export const getCheckedRequest = async () => {
 
 export const getCheckedRequestById = async (id) => {
     return db.request.findOne({
-        where: { state: 'CHECKED', id }
+        where: { state: 'CHECKED', id: id }
     })
 }
 
