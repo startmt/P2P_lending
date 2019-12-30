@@ -29,5 +29,16 @@ export const initRequest = async (data, id) => {
     } catch (e) {
         return { message: 'error' }
     }
+}
 
+export const getApprovedRequest = async (userId) => {
+    let request = await db.request.findAll({
+        include: [
+            {
+                model: db.requestuser,
+                where: { userId: userId },
+            }
+        ]
+    })
+    return request
 }

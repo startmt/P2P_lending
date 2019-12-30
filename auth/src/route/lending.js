@@ -2,16 +2,18 @@ import { requireJWTAuth } from '../middleware/authorize'
 import getRequestController from '../controller/lending/getRequestController'
 import createLendingController from '../controller/lending/createLendingController'
 import getRequestByIdController from '../controller/lending/getRequestByIdController'
+import getLenderListController from '../controller/lending/getLenderListController'
+
 export const lending = (router) => {
   router.get('/lending/', requireJWTAuth, getRequestController)
   router.post('/lending/create', requireJWTAuth, createLendingController)
-  router.get('/lending/:id', requireJWTAuth, getRequestByIdController)
-  router.post('/lending/:id', requireJWTAuth, () => res.end()) //not done
-  router.get('/lending/lender', requireJWTAuth, () => res.end())
-  router.get('/lending/lender/:id', requireJWTAuth, () => res.end())
-  router.get('/lending/borrower', requireJWTAuth, () => res.end())
-  router.get('/lending/borrower/:id', requireJWTAuth, () => res.end())
-  router.post('/lending/admin/confirm', requireJWTAuth, () => res.end())
+  router.get('/lending/lender', requireJWTAuth, getLenderListController)
+  router.get('/lending/id/:id', requireJWTAuth, getRequestByIdController)
+  // router.post('/lending/:id', requireJWTAuth, () => res.end()) //not done
+  // router.get('/lending/lender/:id', requireJWTAuth, () => res.end())
+  // router.get('/lending/borrower', requireJWTAuth, () => res.end())
+  // router.get('/lending/borrower/:id', requireJWTAuth, () => res.end())
+  // router.post('/lending/admin/confirm', requireJWTAuth, () => res.end())
 }
 
 // • GET / Get all request lending’s list 
