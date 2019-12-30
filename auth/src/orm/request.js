@@ -11,31 +11,38 @@ export default (sequelize) =>
       },
       category: {
         type: DataTypes.STRING,
-        field: 'category'
+        field: 'category',
+        allowNull: false
       },
       title: {
         type: DataTypes.STRING,
-        field: 'title'
+        field: 'title',
+        allowNull: false
       },
       state: {
         type: DataTypes.ENUM('INIT', 'STAFF', 'CHECKED', 'LENDING', 'SUCCESS', 'REJECT'),
-        field: 'state'
+        field: 'state',
+        allowNull: false
       },
       amount: {
         type: DataTypes.INTEGER,
-        field: 'amount'
+        field: 'amount',
+        allowNull: false
       },
       interestRate: {
-        type: DataTypes.INTEGER,
-        field: 'interest_rate'
+        type: DataTypes.FLOAT,
+        field: 'interest_rate',
+        allowNull: false
       },
       loanTenor: {
-        type: DataTypes.INTEGER,
-        field: 'loan_tenor'
+        type: DataTypes.FLOAT,
+        field: 'loan_tenor',
+        allowNull: false
       },
       description: {
-        type: DataTypes.INTEGER,
-        field: 'description'
+        type: DataTypes.TEXT,
+        field: 'description',
+        allowNull: false
       },
     },
   )

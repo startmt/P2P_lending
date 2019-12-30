@@ -1,4 +1,4 @@
-import Sequelize  from 'sequelize'
+import Sequelize from 'sequelize'
 import env from './config'
 import User from './orm/user'
 import Scb from './orm/scb'
@@ -6,8 +6,9 @@ import Information from './orm/information'
 import DebitCard from './orm/debitcard'
 import Request from './orm/request'
 import Config from './orm/config'
+import RequestUser from './orm/request_user'
 const db = {}
-export const connectMysql = async() => {
+export const connectMysql = async () => {
     const sequelize = new Sequelize('test', 'root', 'example', {
         host: env.MYSQL_HOST,
         dialect: 'mysql',
@@ -16,28 +17,29 @@ export const connectMysql = async() => {
             min: 0,
             acquire: 30000,
             idle: 10000
-          }
-      });
+        }
+    });
     const userModel = User(sequelize)
     const ScbModel = Scb(sequelize)
     const InformationModel = Information(sequelize)
     const DebitCardModel = DebitCard(sequelize)
     const RequestModel = Request(sequelize)
     const ConfigModel = Config(sequelize)
-
-    userModel.hasOne(ScbModel,)
+    const RequestUserModel = RequestUser(sequelize)
+    userModel.hasOne(ScbModel)
     userModel.hasMany(DebitCardModel)
 
-    // userModel.hasMany(RequestModel)
-    // RequestModel.belongsToMany(userModel)
+    userModel.hasMany(RequestUserModel)
+    RequestModel.hasMany(RequestUserModel)
 
     ScbModel.belongsTo(userModel)
     ScbModel.hasOne(InformationModel)
     InformationModel.belongsTo(ScbModel)
     DebitCardModel.belongsTo(userModel)
-    
+
     db.user = userModel
     db.scb = ScbModel
+    db.requestuser = RequestUserModel
     db.request = RequestModel
     db.infomation = InformationModel
     db.Sequelize = Sequelize;
