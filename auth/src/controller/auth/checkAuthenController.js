@@ -1,11 +1,6 @@
-import {
-  checkAuth,
-} from '../../service/auth/auth'
+import { checkAuth } from '../../service/auth/auth'
 import { getInstance } from '../../redis'
-import {
-  status400,
-  status200,
-} from '../../utils/status'
+import { status400, status200 } from '../../utils/status'
 import { getUserDatail } from '../../service/auth/crudValidatedUser'
 const redisClient = getInstance()
 export default async (req, res) => {
@@ -19,7 +14,7 @@ export default async (req, res) => {
         isIdentify: query.user.identify,
         role: query.user.role,
         userDetail: userDetail.get(),
-        isConnectScb: token ? true : false
+        isConnectScb: token ? true : false,
       })
     } else {
       status200(res, {
@@ -27,13 +22,11 @@ export default async (req, res) => {
         isIdentify: query.user.identify,
         role: query.user.role,
         isAuthSCB: query.scb || false,
-        isConnectScb: token ? true : false
+        isConnectScb: token ? true : false,
       })
     }
-  }
-  catch (e) {
+  } catch (e) {
     console.log(e)
     status400(res)
   }
-
 }

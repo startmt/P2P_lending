@@ -5,12 +5,12 @@ export const checkAuth = async (username) => {
   const scb = await getScbByUsername(username)
   if (scb) {
     return {
-      user: user.get(), scb: true
+      user: user.get(),
+      scb: true,
     }
   } else {
     return { user: user.get(), scb: null }
   }
-
 }
 export const validatedUser = async (username) => {
   const query = await getUserByUsername(username)

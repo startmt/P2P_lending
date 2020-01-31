@@ -8,8 +8,7 @@ import { connectMysql } from './mysql'
 const app = express()
 const PORT = '3000'
 
-http.createServer(app).listen(PORT, async() => {
-  
+http.createServer(app).listen(PORT, async () => {
   await connectMysql()
   connectRedis()
 })
@@ -17,4 +16,4 @@ http.createServer(app).listen(PORT, async() => {
 app.use(bodyParser.json())
 app.use(cors())
 app.use(routes)
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))

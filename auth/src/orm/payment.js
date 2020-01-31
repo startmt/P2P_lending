@@ -7,15 +7,15 @@ export default (sequelize) =>
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       omiseTransactionId: {
         type: DataTypes.STRING,
-        field: 'omise_transaction_id'
+        field: 'omise_transaction_id',
       },
       blockChainId: {
         type: DataTypes.STRING,
-        field: 'blockchan_id'
+        field: 'blockchan_id',
       },
       requestId: {
         type: DataTypes.INTEGER,
@@ -27,7 +27,8 @@ export default (sequelize) =>
         onDelete: 'cascade',
         onUpdate: 'cascade',
       },
-    }, {
-    underscored: true,
-  }
+    },
+    {
+      underscored: true,
+    },
   )

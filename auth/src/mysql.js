@@ -9,42 +9,42 @@ import Config from './orm/config'
 import RequestUser from './orm/request_user'
 const db = {}
 export const connectMysql = async () => {
-    const sequelize = new Sequelize('test', 'root', 'example', {
-        host: env.MYSQL_HOST,
-        dialect: 'mysql',
-        pool: {
-            max: 5,
-            min: 0,
-            acquire: 30000,
-            idle: 10000
-        }
-    });
-    const userModel = User(sequelize)
-    const ScbModel = Scb(sequelize)
-    const InformationModel = Information(sequelize)
-    const DebitCardModel = DebitCard(sequelize)
-    const RequestModel = Request(sequelize)
-    const ConfigModel = Config(sequelize)
-    const RequestUserModel = RequestUser(sequelize)
-    userModel.hasOne(ScbModel)
-    userModel.hasMany(DebitCardModel)
+  const sequelize = new Sequelize('test', 'root', 'example', {
+    host: env.MYSQL_HOST,
+    dialect: 'mysql',
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+  })
+  const userModel = User(sequelize)
+  const ScbModel = Scb(sequelize)
+  const InformationModel = Information(sequelize)
+  const DebitCardModel = DebitCard(sequelize)
+  const RequestModel = Request(sequelize)
+  const ConfigModel = Config(sequelize)
+  const RequestUserModel = RequestUser(sequelize)
+  userModel.hasOne(ScbModel)
+  userModel.hasMany(DebitCardModel)
 
-    userModel.hasMany(RequestUserModel)
-    RequestModel.hasMany(RequestUserModel)
+  userModel.hasMany(RequestUserModel)
+  RequestModel.hasMany(RequestUserModel)
 
-    ScbModel.belongsTo(userModel)
-    ScbModel.hasOne(InformationModel)
-    InformationModel.belongsTo(ScbModel)
-    DebitCardModel.belongsTo(userModel)
+  ScbModel.belongsTo(userModel)
+  ScbModel.hasOne(InformationModel)
+  InformationModel.belongsTo(ScbModel)
+  DebitCardModel.belongsTo(userModel)
 
-    db.user = userModel
-    db.scb = ScbModel
-    db.requestuser = RequestUserModel
-    db.request = RequestModel
-    db.infomation = InformationModel
-    db.Sequelize = Sequelize;
-    db.sequelize = sequelize;
-    db.config = ConfigModel
-    db.sequelize.sync()
+  db.user = userModel
+  db.scb = ScbModel
+  db.requestuser = RequestUserModel
+  db.request = RequestModel
+  db.infomation = InformationModel
+  db.Sequelize = Sequelize
+  db.sequelize = sequelize
+  db.config = ConfigModel
+  db.sequelize.sync()
 }
 export default db

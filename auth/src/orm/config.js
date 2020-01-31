@@ -7,17 +7,18 @@ export default (sequelize) =>
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       interest: {
         type: DataTypes.INTEGER,
-        field: 'interest'
+        field: 'interest',
       },
       category: {
         type: DataTypes.STRING,
-        field: 'category'
+        field: 'category',
       },
-    }, {
-    underscored: true,
-  }
+    },
+    {
+      underscored: true,
+    },
   )

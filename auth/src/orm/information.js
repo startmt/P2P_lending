@@ -7,31 +7,31 @@ export default (sequelize) =>
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       firstName: {
         type: DataTypes.STRING,
-        field: 'firstname'
+        field: 'firstname',
       },
       lastName: {
         type: DataTypes.STRING,
-        field: 'lastname'
+        field: 'lastname',
       },
       citizenId: {
         type: DataTypes.STRING,
-        field: 'citizen_id'
+        field: 'citizen_id',
       },
       phoneNumber: {
         type: DataTypes.STRING,
-        field: 'phone_number'
+        field: 'phone_number',
       },
       birthDate: {
         type: DataTypes.STRING,
-        field: 'birthday'
+        field: 'birthday',
       },
       address: {
         type: DataTypes.TEXT,
-        field: 'address'
+        field: 'address',
       },
       scbId: {
         type: DataTypes.INTEGER,
@@ -43,7 +43,8 @@ export default (sequelize) =>
         onDelete: 'cascade',
         onUpdate: 'cascade',
       },
-    }, {
-    underscored: true,
-  }
+    },
+    {
+      underscored: true,
+    },
   )

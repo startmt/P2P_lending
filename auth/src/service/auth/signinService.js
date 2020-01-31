@@ -5,10 +5,7 @@ import { getUserByUsername } from '../../crud/user'
 export const checkUserFromDb = async (user) => {
   const query = await getUserByUsername(user.username)
   try {
-    return await bCrypt.compare(
-      user.password,
-      query.dataValues.password,
-    )
+    return await bCrypt.compare(user.password, query.dataValues.password)
   } catch (error) {
     return null
   }

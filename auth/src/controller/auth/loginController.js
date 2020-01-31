@@ -2,11 +2,7 @@ import {
   checkUserFromDb,
   createSession,
 } from '../../service/auth/signinService'
-import {
-  status400,
-  status200,
-  status401,
-} from '../../utils/status'
+import { status400, status200, status401 } from '../../utils/status'
 export default async (req, res) => {
   const user = {
     username: req.body.username,

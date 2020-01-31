@@ -1,5 +1,4 @@
 import { DataTypes } from 'sequelize'
-import user from './user'
 export default (sequelize) =>
   sequelize.define(
     'scb',
@@ -8,12 +7,12 @@ export default (sequelize) =>
         type: DataTypes.INTEGER,
         field: 'id',
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       scbAccount: {
         type: DataTypes.STRING,
         field: 'scb_account',
-        unique: true
+        unique: true,
       },
       userId: {
         type: DataTypes.INTEGER,
@@ -21,11 +20,12 @@ export default (sequelize) =>
         references: {
           model: 'users',
         },
-        unique:true,
+        unique: true,
         onDelete: 'cascade',
         onUpdate: 'cascade',
       },
-    },{
+    },
+    {
       underscored: true,
-    }
+    },
   )

@@ -13,5 +13,5 @@ const withBearer = new BearerStrategy(async (token, done) => {
 
 passport.use(withBearer)
 export const requireJWTAuth = passport.authenticate('bearer', {
-  session: false
+  session: false,
 })
