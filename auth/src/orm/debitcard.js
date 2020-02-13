@@ -15,4 +15,14 @@ export default (sequelize) =>
       type: DataTypes.STRING,
       field: 'card_name',
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: 'users',
+      },
+      unique: true,
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    },
   })

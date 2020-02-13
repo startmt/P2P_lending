@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
   sequelize.define(
-    'payment',
+    'contract',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -9,13 +9,9 @@ export default (sequelize) =>
         primaryKey: true,
         autoIncrement: true,
       },
-      omiseTransactionId: {
+      contractDetailId: {
         type: DataTypes.STRING,
-        field: 'omise_transaction_id',
-      },
-      blockChainId: {
-        type: DataTypes.STRING,
-        field: 'blockchan_id',
+        field: 'contract_detail_id',
       },
       requestId: {
         type: DataTypes.INTEGER,
