@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aes256": "^1.0.4",
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.6",
