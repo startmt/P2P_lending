@@ -17,7 +17,7 @@ export default async (amount, type) => {
       description: 'Test',
       amount,
       currency: 'thb',
-      return_uri: 'https://www.google.comไ',
+      return_uri: 'https://www.google.com',
       source: source.data.id,
     },
     { auth: { username: 'skey_test_5hu9iykyg1qw218pezq' } },
