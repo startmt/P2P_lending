@@ -11,6 +11,24 @@ export const getCheckedRequestById = async (id) => {
   })
 }
 
+export const getRequestByUserList = async (userId) => {
+  return db.request.findAll({
+    include: [
+      {
+        model: db.requestuser,
+        where: { userId },
+      },
+    ],
+    raw: true,
+  })
+}
+
+export const getRequestById = async (id) => {
+  return db.request.findOne({
+    where: { id },
+  })
+}
+
 export const initRequest = async (data, id) => {
   try {
     const request = await db.sequelize.transaction(async (t) => {

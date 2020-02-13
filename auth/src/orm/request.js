@@ -18,14 +18,7 @@ export default (sequelize) =>
       allowNull: false,
     },
     state: {
-      type: DataTypes.ENUM(
-        'INIT',
-        'STAFF',
-        'CHECKED',
-        'LENDING',
-        'SUCCESS',
-        'REJECT',
-      ),
+      type: DataTypes.ENUM('INIT', 'CHECKED', 'LENDING', 'SUCCESS', 'REJECT'),
       field: 'state',
       allowNull: false,
     },

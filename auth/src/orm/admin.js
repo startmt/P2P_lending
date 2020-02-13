@@ -1,18 +1,18 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
-  sequelize.define('file', {
+  sequelize.define('admin', {
     id: {
       type: DataTypes.INTEGER,
       field: 'id',
       primaryKey: true,
       autoIncrement: true,
     },
-    fileUrl: {
+    username: {
       type: DataTypes.STRING,
-      field: 'file_url',
+      field: 'username',
     },
-    fileDescription: {
+    password: {
       type: DataTypes.STRING,
-      field: 'file_description',
+      field: 'password',
     },
   })
