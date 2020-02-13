@@ -1,6 +1,6 @@
 import { initRequest } from '../../crud/request'
 import { getUserByUsername } from '../../crud/user'
-import { getRequestById } from '../../crud/request'
+import { getRequestById, getRequestByUserList } from '../../crud/request'
 export const createLending = async (username, data) => {
   try {
     const query = await getUserByUsername(username)
@@ -28,7 +28,6 @@ export const getBorrowerRequestById = async (id) => {
     const query = await getRequestById(id)
     return { status: 200, data: query.get() }
   } catch (e) {
-    console.log(e)
     return { status: 400, message: 'error' }
   }
 }
