@@ -23,6 +23,12 @@ export const getRequestByUserList = async (userId) => {
   })
 }
 
+export const getRequestById = async (id) => {
+  return db.request.findOne({
+    where: { id },
+  })
+}
+
 export const initRequest = async (data, id) => {
   try {
     const request = await db.sequelize.transaction(async (t) => {
