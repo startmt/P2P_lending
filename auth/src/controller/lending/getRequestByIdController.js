@@ -9,6 +9,6 @@ export default async (req, res) => {
     if (query.status === 200) status200(res, query.data || {})
     status400(res, query.message)
   } catch (e) {
-    return status400(res)
+    status400(res)
   }
 }
