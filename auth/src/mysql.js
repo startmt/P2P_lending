@@ -11,7 +11,7 @@ import PaymentDate from './orm/payment_date'
 import Contract from './orm/contract'
 import File from './orm/file'
 import Admin from './orm/admin'
-import Request_Admin from './orm/request_admin'
+import RequestAdmin from './orm/request_admin'
 const db = {}
 export const connectMysql = async () => {
   const sequelize = new Sequelize('test', 'root', 'example', {
@@ -39,10 +39,14 @@ export const connectMysql = async () => {
   const RequestUserModel = RequestUser(sequelize)
 
   paymentDateModel.belongsTo(contractModel)
+  // contractModel.hasMany(paymentDateModel)
   contractModel.belongsTo(RequestModel)
+  // RequestModel.hasMany(contractModel)
   fileModel.belongsTo(RequestModel)
-  adminModel.belongsTo(requestAdminModel)
+  // RequestModel.hasMany(fileModel)
+  // requestAdminModel.hasMany(adminModel)
   requestAdminModel.belongsTo(RequestModel)
+  // RequestModel.hasMany(requestAdminModel)
   userModel.hasOne(ScbModel)
   userModel.hasMany(DebitCardModel)
   userModel.hasMany(RequestUserModel)
@@ -60,6 +64,10 @@ export const connectMysql = async () => {
   db.Sequelize = Sequelize
   db.sequelize = sequelize
   db.config = ConfigModel
+  db.paymentDate = paymentDateModel
+  db.contract = contractModel
+  db.file = fileModel
+  db.requestAdmin = requestAdminModel
   db.sequelize.sync()
 }
 export default db
