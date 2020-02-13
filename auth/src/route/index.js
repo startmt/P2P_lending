@@ -27,3 +27,11 @@ lending(router)
 router.use([login, register, user, getOtp, scbVerifyOtp, confirmDataScb])
 
 export default router
+
+// GET /		Check authorization / get detail user
+// POST /login
+// POST /register
+// POST /otp	Generate OTP code
+// POST /verify/otp	Verify user OTP code
+// POST /confirm/scb	Verify user detail and save on database
+// POST /card	Add debit card
