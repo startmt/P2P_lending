@@ -7,6 +7,7 @@ import confirmDataController from '../controller/auth/confirmDataController'
 import checkAuthenController from '../controller/auth/checkAuthenController'
 import { requireJWTAuth } from '../middleware/authorize'
 import { lending } from './lending'
+import { transaction } from './transaction'
 const router = Router()
 
 const user = router.get('/auth/', requireJWTAuth, checkAuthenController)
@@ -24,6 +25,7 @@ const confirmDataScb = router.post(
   confirmDataController,
 )
 lending(router)
+transaction(router)
 router.use([login, register, user, getOtp, scbVerifyOtp, confirmDataScb])
 
 export default router
