@@ -5,7 +5,10 @@ import getRequestByIdController from '../controller/lending/getRequestByIdContro
 import getBorrowerRequestListController from '../controller/lending/getBorrowerRequestListController'
 import getBorrowerRequestByIdController from '../controller/lending/getBorrowerRequestByIdController'
 import getLenderRequestListController from '../controller/lending/getLenderRequestListController'
+import getInitRequestListController from '../controller/lending/getInitRequestListController'
 export const lending = (router) => {
+  //lending admin
+  router.get('/lending/admin', requireJWTAuth, getInitRequestListController)
   router.get('/lending/', requireJWTAuth, getRequestController)
   router.post('/lending/create', requireJWTAuth, createLendingController)
   router.get(

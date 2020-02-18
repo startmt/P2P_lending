@@ -23,6 +23,15 @@ export const getRequestByUserList = async (userId) => {
   })
 }
 
+export const getRequestByState = async (state) => {
+  return db.request.findAll({
+    where: {
+      state,
+    },
+    raw: true,
+  })
+}
+
 export const getRequestById = async (id) => {
   return db.request.findOne({
     where: { id },
