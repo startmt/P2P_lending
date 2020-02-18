@@ -12,7 +12,7 @@ export default (sequelize) =>
       field: 'file_url',
     },
     fileDescription: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('NCB', 'SA', 'BS', 'COMREG', 'PERSON'),
       field: 'file_description',
     },
   })
