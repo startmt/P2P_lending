@@ -8,10 +8,12 @@ import checkAuthenController from '../controller/auth/checkAuthenController'
 import { requireJWTAuth } from '../middleware/authorize'
 import { lending } from './lending'
 import { transaction } from './transaction'
+import adminLoginController from '../controller/auth/adminLoginController'
 const router = Router()
 
 const user = router.get('/auth/', requireJWTAuth, checkAuthenController)
 const login = router.post('/auth/login', loginController)
+const adminLogin = router.post('/auth/admin/login', adminLoginController)
 const register = router.post('/auth/register', registerController)
 const getOtp = router.get('/auth/otp', generateOtpController)
 const scbVerifyOtp = router.post(
@@ -26,7 +28,15 @@ const confirmDataScb = router.post(
 )
 lending(router)
 transaction(router)
-router.use([login, register, user, getOtp, scbVerifyOtp, confirmDataScb])
+router.use([
+  login,
+  register,
+  user,
+  getOtp,
+  scbVerifyOtp,
+  confirmDataScb,
+  adminLogin,
+])
 
 export default router
 
