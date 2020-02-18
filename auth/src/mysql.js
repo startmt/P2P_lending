@@ -67,6 +67,7 @@ export const connectMysql = async () => {
   db.paymentDate = paymentDateModel
   db.contract = contractModel
   db.file = fileModel
+  db.admin = adminModel
   db.requestAdmin = requestAdminModel
   db.sequelize.sync()
 }

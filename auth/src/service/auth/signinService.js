@@ -15,10 +15,8 @@ export const checkUserFromDb = async (user) => {
 export const adminAuthen = async (user) => {
   const query = await getAdminDataByUsername(user.username)
   try {
-    console.log(query, user.password)
     return await bCrypt.compare(user.password, query.get().password)
   } catch (error) {
-    console.log(error)
     return null
   }
 }
