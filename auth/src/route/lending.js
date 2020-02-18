@@ -6,9 +6,16 @@ import getBorrowerRequestListController from '../controller/lending/getBorrowerR
 import getBorrowerRequestByIdController from '../controller/lending/getBorrowerRequestByIdController'
 import getLenderRequestListController from '../controller/lending/getLenderRequestListController'
 import getInitRequestListController from '../controller/lending/getInitRequestListController'
+import getInitRequestListItemController from '../controller/lending/getInitRequestListItemController'
 export const lending = (router) => {
   //lending admin
   router.get('/lending/admin', requireJWTAuth, getInitRequestListController)
+  router.get(
+    '/lending/admin/:id',
+    requireJWTAuth,
+    getInitRequestListItemController,
+  )
+
   router.get('/lending/', requireJWTAuth, getRequestController)
   router.post('/lending/create', requireJWTAuth, createLendingController)
   router.get(
