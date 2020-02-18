@@ -4,10 +4,11 @@ import routes from './route/index'
 import bodyParser from 'body-parser'
 import { connectRedis } from './redis'
 import cors from 'cors'
+import fileUpload from 'express-fileupload'
 import { connectMysql } from './mysql'
 const app = express()
 const PORT = '3000'
-
+app.use(fileUpload())
 http.createServer(app).listen(PORT, async () => {
   await connectMysql()
   connectRedis()
