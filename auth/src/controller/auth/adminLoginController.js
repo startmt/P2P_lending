@@ -8,7 +8,7 @@ export default async (req, res) => {
   let isUserInDatabase = await adminAuthen(user)
   if (isUserInDatabase) {
     status200(res, {
-      token: await createSession(user),
+      token: await createSession(user, 'admin'),
     })
   } else if (!isUserInDatabase) {
     status401(res, {

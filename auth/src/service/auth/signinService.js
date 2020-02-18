@@ -21,9 +21,10 @@ export const adminAuthen = async (user) => {
   }
 }
 
-export const createSession = async (user) => {
+export const createSession = async (user, role = 'user') => {
   const payload = {
     username: user.username,
+    role,
   }
   const expiresTime = {
     expiresIn: '1h',

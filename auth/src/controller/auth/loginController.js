@@ -11,7 +11,7 @@ export default async (req, res) => {
   let isUserInDatabase = await checkUserFromDb(user)
   if (isUserInDatabase) {
     status200(res, {
-      token: await createSession(user),
+      token: await createSession(user, 'user'),
     })
   } else if (!isUserInDatabase) {
     status401(res, {
