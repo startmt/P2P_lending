@@ -4,21 +4,15 @@ import createLendingController from '../controller/lending/createLendingControll
 import getRequestByIdController from '../controller/lending/getRequestByIdController'
 import getBorrowerRequestListController from '../controller/lending/getBorrowerRequestListController'
 import getBorrowerRequestByIdController from '../controller/lending/getBorrowerRequestByIdController'
-import getLenderRequestListController from '../controller/lending/getLenderRequestListController'
 export const lending = (router) => {
   router.get('/lending/', requireJWTAuth, getRequestController)
   router.post('/lending/create', requireJWTAuth, createLendingController)
-  router.get(
-    '/lending/borrower',
-    requireJWTAuth,
-    getBorrowerRequestListController,
-  )
+  router.get('/lending/my', requireJWTAuth, getBorrowerRequestListController)
   router.get(
     '/lending/borrower/:id',
     requireJWTAuth,
     getBorrowerRequestByIdController,
   )
-  router.get('/lending/lender', requireJWTAuth, getLenderRequestListController)
   router.get('/lending/lender/:id', requireJWTAuth, getRequestByIdController)
   router.get('/lending/:id', requireJWTAuth, getBorrowerRequestByIdController)
   router.post('/lending/:id', requireJWTAuth, (req, res) => res.end()) //not done

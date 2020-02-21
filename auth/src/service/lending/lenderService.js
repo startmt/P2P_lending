@@ -27,13 +27,3 @@ export const getLendingRequestById = async (username, id) => {
     return { status: 400, message: 'error' }
   }
 }
-
-export const getLenderRequestList = async (username) => {
-  try {
-    const user = await getUserByUsername(username)
-    const query = await getRequestByUserList(user.get().id)
-    return { status: 200, data: query }
-  } catch (e) {
-    return { status: 400, message: 'error' }
-  }
-}
