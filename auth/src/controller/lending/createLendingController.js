@@ -13,9 +13,14 @@ export default async (req, res) => {
       loanTenor: req.body.loanTenor,
       description: req.body.description,
     })
-    const prefix = `${req.authInfo.username}-${query.data.id}`
-    const upload = await uploadFile(req.files, prefix)
-    if (upload === 200) {
+    if (query.status === 200) {
+      const prefix = `${req.authInfo.username}-${query.data.id}`
+      const data = {
+        id: query.data.id,
+        prefix,
+        files: req.files,
+      }
+      await uploadFile(data)
       status200(res, query)
     }
     status400(res, query.message)

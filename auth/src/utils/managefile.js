@@ -1,5 +1,6 @@
 import { Client } from 'minio'
 import env from '../config'
+import { putFileUrl } from '../crud/file'
 const minioClient = new Client({
   endPoint: env.MINIO_ENDPOINT,
   port: env.MINIO_PORT,
@@ -8,22 +9,24 @@ const minioClient = new Client({
   secretKey: env.MINIO_SECRET_KEY,
 })
 
-export const uploadFile = async (files, prefix) => {
-  const keyName = Object.keys(files)
+export const uploadFile = async (data) => {
+  const keyName = Object.keys(data.files)
   keyName.map(async (key) => {
-    const a = await minioClient.putObject(
+    const upload = await minioClient.putObject(
       key,
-      prefix + files[key].name,
-      files[key].data,
-      files[key].size,
+      data.prefix + data.files[key].name,
+      data.files[key].data,
+      data.files[key].size,
+      { 'Content-Type': data.files[key].mimetype },
     )
-
-    console.log(a)
+    if (upload) {
+      const dataToDb = {
+        requestId: data.id,
+        fileUrl: `${key}/${data.prefix}${data.files[key].name}`,
+        fileDescription: key,
+      }
+      await putFileUrl(dataToDb)
+    }
   })
   return 200
-}
-
-export const getFile = async (bucket, fileName) => {
-  const url = await minioClient.presignedGetObject(bucket, fileName, 2000)
-  return url
 }
