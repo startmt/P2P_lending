@@ -26,6 +26,9 @@ services:
     environment:
       - MYSQL_HOST=mysql
       - REDIS_HOST=redis_auth
+      - MINIO_ENDPOINT=minio1
+      - MINIO_PORT=9000
+
     depends_on:
       - redis_auth
       - mysql
@@ -39,3 +42,20 @@ services:
       - AUTH_SERVICE=http://35.247.143.156/auth
     depends_on:
       - auth
+  minio1:
+    image: minio/minio:RELEASE.2020-02-07T23-28-16Z
+
+    volumes:
+      - data1-1:/data1
+      - data1-2:/data2
+    ports:
+      - "9000:9000"
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server http://minio{1...4}/data{1...2}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
