@@ -3,6 +3,7 @@
   "presets": ["next/babel", "@babel/preset-env"],
   "plugins": [
     "@babel/plugin-proposal-export-default-from",
+    "@babel/transform-runtime",
     "@babel/plugin-proposal-export-namespace-from",
     [
       "styled-components",
