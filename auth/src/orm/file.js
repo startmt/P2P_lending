@@ -11,8 +11,16 @@ export default (sequelize) =>
       type: DataTypes.STRING,
       field: 'file_url',
     },
+    requestId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'requests',
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    },
     fileDescription: {
-      type: DataTypes.ENUM('NCB', 'SA', 'BS', 'COMREG', 'PERSON'),
+      type: DataTypes.STRING,
       field: 'file_description',
     },
   })
