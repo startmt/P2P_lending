@@ -1,4 +1,4 @@
-import { getRequestByState, getRequestInitById } from '../../crud/request'
+import { getRequestByState, getRequestByIdState } from '../../crud/request'
 
 export const getLendingRequest = async () => {
   try {
@@ -10,7 +10,7 @@ export const getLendingRequest = async () => {
 
 export const getLedingDetail = async (id) => {
   try {
-    const data = await getRequestInitById(id)
+    const data = await getRequestByIdState(id, 'INIT')
     return { status: 200, data }
   } catch (error) {
     console.log(error)

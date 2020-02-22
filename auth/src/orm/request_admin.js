@@ -9,6 +9,10 @@ export default (sequelize) =>
         primaryKey: true,
         autoIncrement: true,
       },
+      description: {
+        type: DataTypes.STRING,
+        field: 'description',
+      },
       requestId: {
         type: DataTypes.INTEGER,
         references: {

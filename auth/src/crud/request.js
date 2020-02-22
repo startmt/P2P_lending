@@ -32,9 +32,9 @@ export const getRequestByState = async (state) => {
   })
 }
 
-export const getRequestInitById = async (id) => {
+export const getRequestByIdState = async (id, state) => {
   return db.request.findOne({
-    where: { id, state: 'INIT' },
+    where: { id, state },
     include: [
       {
         model: db.file,
