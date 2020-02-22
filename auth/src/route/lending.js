@@ -10,6 +10,11 @@ import adminConfirmInitRequestController from '../controller/lending/adminConfir
 export const lending = (router) => {
   //lending admin
   router.get('/lending/admin', requireJWTAuth, getInitRequestListController)
+  router.post(
+    '/lending/admin/confirm',
+    requireJWTAuth,
+    adminConfirmInitRequestController,
+  )
   router.get(
     '/lending/admin/:id',
     requireJWTAuth,
@@ -27,11 +32,6 @@ export const lending = (router) => {
   router.get('/lending/lender/:id', requireJWTAuth, getRequestByIdController)
   router.get('/lending/:id', requireJWTAuth, getBorrowerRequestByIdController)
   router.post('/lending/:id', requireJWTAuth, (req, res) => res.end()) //not done
-  router.post(
-    '/lending/admin/confirm',
-    requireJWTAuth,
-    adminConfirmInitRequestController,
-  )
 }
 
 // • GET / Get all request lending’s list

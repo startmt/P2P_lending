@@ -70,3 +70,14 @@ export const initRequest = async (data, id) => {
     return { message: 'error' }
   }
 }
+
+export const updateRequest = async (id, data) => {
+  try {
+    await db.sequelize.transaction((t) => {
+      return db.request.update(data, { where: { id } }, { transaction: t })
+    })
+  } catch (e) {
+    console.log(e)
+    return { message: 'error' }
+  }
+}
