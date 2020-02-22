@@ -23,6 +23,25 @@ export const getRequestByUserList = async (userId) => {
   })
 }
 
+export const getRequestByState = async (state) => {
+  return db.request.findAll({
+    where: {
+      state,
+    },
+    raw: true,
+  })
+}
+
+export const getRequestByIdState = async (id, state) => {
+  return db.request.findOne({
+    where: { id, state },
+    include: [
+      {
+        model: db.file,
+      },
+    ],
+  })
+}
 export const getRequestById = async (id) => {
   return db.request.findOne({
     where: { id },
@@ -48,6 +67,17 @@ export const initRequest = async (data, id) => {
     }
     return returnData
   } catch (e) {
+    return { message: 'error' }
+  }
+}
+
+export const updateRequest = async (id, data) => {
+  try {
+    await db.sequelize.transaction((t) => {
+      return db.request.update(data, { where: { id } }, { transaction: t })
+    })
+  } catch (e) {
+    console.log(e)
     return { message: 'error' }
   }
 }

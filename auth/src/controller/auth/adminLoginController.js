@@ -1,17 +1,14 @@
-import {
-  checkUserFromDb,
-  createSession,
-} from '../../service/auth/signinService'
+import { createSession, adminAuthen } from '../../service/auth/signinService'
 import { status400, status200, status401 } from '../../utils/status'
 export default async (req, res) => {
   const user = {
     username: req.body.username,
     password: req.body.password,
   }
-  let isUserInDatabase = await checkUserFromDb(user)
+  let isUserInDatabase = await adminAuthen(user)
   if (isUserInDatabase) {
     status200(res, {
-      token: await createSession(user, 'user'),
+      token: await createSession(user, 'admin'),
     })
   } else if (!isUserInDatabase) {
     status401(res, {

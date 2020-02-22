@@ -43,7 +43,7 @@ export const connectMysql = async () => {
   contractModel.belongsTo(RequestModel)
   // RequestModel.hasMany(contractModel)
   fileModel.belongsTo(RequestModel)
-  // RequestModel.hasMany(fileModel)
+  RequestModel.hasMany(fileModel)
   // requestAdminModel.hasMany(adminModel)
   requestAdminModel.belongsTo(RequestModel)
   // RequestModel.hasMany(requestAdminModel)
@@ -67,6 +67,7 @@ export const connectMysql = async () => {
   db.paymentDate = paymentDateModel
   db.contract = contractModel
   db.file = fileModel
+  db.admin = adminModel
   db.requestAdmin = requestAdminModel
   db.sequelize.sync()
 }
