@@ -20,10 +20,10 @@ services:
       MYSQL_ROOT_PASSWORD: example
   api:
     restart: always
-    # image: startmt/p2p-auth-service:latest
-    build:
-      context: ../auth
-      dockerfile: Dockerfile
+    image: startmt/p2p-auth-service:latest
+    # build:
+    #   context: ../auth
+    #   dockerfile: Dockerfile
     ports:
       - 127.0.0.1:3000:3000
     environment:
@@ -39,14 +39,16 @@ services:
   redis_auth:
     image: redis:5-alpine
   web:
-    # image: startmt/p2p-frontend-service:latest
-    build:
-      context: ../view
-      dockerfile: Dockerfile
+    image: startmt/p2p-frontend-service:latest
+    # build:
+    #   context: ../view
+    #   dockerfile: Dockerfile
     ports:
       - 127.0.0.1:8000:8000
     environment:
-      - AUTH_SERVICE=http://127.0.0.1/auth
+      - AUTH_SERVICE=http://35.247.143.156/api/auth
+      - LENDING_SERVICE=http://35.247.143.156/api/lending
+      - TRANSACTION_SERVICE=http://35.247.143.156/api/transaction
     depends_on:
       - api
   minio1:

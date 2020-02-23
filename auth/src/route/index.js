@@ -11,18 +11,18 @@ import { transaction } from './transaction'
 import adminLoginController from '../controller/auth/adminLoginController'
 const router = Router()
 
-const user = router.get('/auth/', requireJWTAuth, checkAuthenController)
-const login = router.post('/auth/login', loginController)
-const adminLogin = router.post('/auth/admin/login', adminLoginController)
-const register = router.post('/auth/register', registerController)
-const getOtp = router.get('/auth/otp', generateOtpController)
+const user = router.get('/api/auth/', requireJWTAuth, checkAuthenController)
+const login = router.post('/api/auth/login', loginController)
+const adminLogin = router.post('/api/auth/admin/login', adminLoginController)
+const register = router.post('/api/auth/register', registerController)
+const getOtp = router.get('/api/auth/otp', generateOtpController)
 const scbVerifyOtp = router.post(
-  '/auth/verify/otp',
+  '/api/auth/verify/otp',
   requireJWTAuth,
   verifyOtpForConfirmDataController,
 )
 const confirmDataScb = router.post(
-  '/auth/confirm/scb',
+  '/api/auth/confirm/scb',
   requireJWTAuth,
   confirmDataController,
 )

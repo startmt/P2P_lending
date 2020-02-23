@@ -9,36 +9,39 @@ import getInitRequestListItemController from '../controller/lending/getInitReque
 import adminConfirmInitRequestController from '../controller/lending/adminConfirmInitRequestController'
 export const lending = (router) => {
   //lending admin
-  router.get('/lending/admin', requireJWTAuth, getInitRequestListController)
+  router.get('/api/lending/admin', requireJWTAuth, getInitRequestListController)
   router.post(
-    '/lending/admin/confirm',
+    '/api/lending/admin/confirm',
     requireJWTAuth,
     adminConfirmInitRequestController,
   )
   router.get(
-    '/lending/admin/:id',
+    '/api/lending/admin/:id',
     requireJWTAuth,
     getInitRequestListItemController,
   )
 
-  router.get('/lending/', requireJWTAuth, getRequestController)
-  router.post('/lending/create', requireJWTAuth, createLendingController)
-  router.get('/lending/my', requireJWTAuth, getBorrowerRequestListController)
+  router.get('/api/lending/', requireJWTAuth, getRequestController)
+  router.post('/api/lending/create', requireJWTAuth, createLendingController)
   router.get(
-    '/lending/borrower/:id',
+    '/api/lending/my',
+    requireJWTAuth,
+    getBorrowerRequestListController,
+  )
+  router.get(
+    '/api/lending/borrower/:id',
     requireJWTAuth,
     getBorrowerRequestByIdController,
   )
-  router.get('/lending/lender/:id', requireJWTAuth, getRequestByIdController)
-  router.get('/lending/:id', requireJWTAuth, getBorrowerRequestByIdController)
-  router.post('/lending/:id', requireJWTAuth, (req, res) => res.end()) //not done
+  router.get(
+    '/api/lending/lender/:id',
+    requireJWTAuth,
+    getRequestByIdController,
+  )
+  router.get(
+    '/api/lending/:id',
+    requireJWTAuth,
+    getBorrowerRequestByIdController,
+  )
+  router.post('/api/lending/:id', requireJWTAuth, (req, res) => res.end()) //not done
 }
-
-// • GET / Get all request lending’s list
-// • GET /{id} Get detail of request lending
-// • POST /{id} Accept request lending by investor
-// • GET /lender Get list of accept request lending
-// • GET /lender/{id} Get detail of request lending
-// • GET /borrower Get list of user’s request lendings
-// • GET /borrower/{id} Get detail of user’s request lending
-// • POST /confirm/scb Confirm request from admin
