@@ -1,0 +1,1162 @@
+{
+  "contractName": "Interest",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "interest",
+      "outputs": [
+        {
+          "name": "allInterest",
+          "type": "int256"
+        },
+        {
+          "name": "fee",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getNetInterest",
+      "outputs": [
+        {
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_interest",
+          "type": "int256"
+        }
+      ],
+      "name": "setAllInterest",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_fee",
+          "type": "int256"
+        }
+      ],
+      "name": "setFee",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506101a3806100206000396000f3fe608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635533c63f14610067578063a1128f3e146100a2578063c392f766146100dd578063dca6895a1461010f575b600080fd5b34801561007357600080fd5b506100a06004803603602081101561008a57600080fd5b810190808035906020019092919050505061013a565b005b3480156100ae57600080fd5b506100db600480360360208110156100c557600080fd5b8101908080359060200190929190505050610147565b005b3480156100e957600080fd5b506100f2610153565b604051808381526020018281526020019250505060405180910390f35b34801561011b57600080fd5b50610124610165565b6040518082815260200191505060405180910390f35b8060006001018190555050565b80600080018190555050565b60008060000154908060010154905082565b6000806001015460008001540390509056fea165627a7a723058208aa39bbf30279f39e36e4d64590cb9795801cfbfb531ad76c498f52dc80acecb0029",
+  "deployedBytecode": "0x608060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680635533c63f14610067578063a1128f3e146100a2578063c392f766146100dd578063dca6895a1461010f575b600080fd5b34801561007357600080fd5b506100a06004803603602081101561008a57600080fd5b810190808035906020019092919050505061013a565b005b3480156100ae57600080fd5b506100db600480360360208110156100c557600080fd5b8101908080359060200190929190505050610147565b005b3480156100e957600080fd5b506100f2610153565b604051808381526020018281526020019250505060405180910390f35b34801561011b57600080fd5b50610124610165565b6040518082815260200191505060405180910390f35b8060006001018190555050565b80600080018190555050565b60008060000154908060010154905082565b6000806001015460008001540390509056fea165627a7a723058208aa39bbf30279f39e36e4d64590cb9795801cfbfb531ad76c498f52dc80acecb0029",
+  "sourceMap": "36:461:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:461:0;;;;;;;",
+  "deployedSourceMap": "36:461:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;418:74;;8:9:-1;5:2;;;30:1;27;20:12;5:2;418:74:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;418:74:0;;;;;;;;;;;;;;;;;;;;312:100;;8:9:-1;5:2;;;30:1;27;20:12;5:2;312:100:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;312:100:0;;;;;;;;;;;;;;;;;;;;149:30;;8:9:-1;5:2;;;30:1;27;20:12;5:2;149:30:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;188:118;;8:9:-1;5:2;;;30:1;27;20:12;5:2;188:118:0;;;;;;;;;;;;;;;;;;;;;;;418:74;480:4;465:8;:12;;:19;;;;418:74;:::o;312:100::-;395:9;372:8;:20;;:32;;;;312:100;:::o;149:30::-;;;;;;;;;;;;;;:::o;188:118::-;235:6;285:8;:12;;;262:8;:20;;;:35;254:44;;188:118;:::o",
+  "source": "pragma solidity >=0.4.25 <0.7.0;\r\n\r\ncontract Interest {\r\n    struct InterestStruct {\r\n        int256 allInterest;\r\n        int256 fee;\r\n    }\r\n\r\n    InterestStruct public interest;\r\n\r\n    function getNetInterest() public view returns (int256) {\r\n        return (interest.allInterest - interest.fee);\r\n    }\r\n    function setAllInterest(int256 _interest) public {\r\n        interest.allInterest = _interest;\r\n    }\r\n    function setFee(int256 _fee) public {\r\n        interest.fee = _fee;\r\n    }\r\n\r\n}\r\n",
+  "sourcePath": "D:/work/P2P_lending/blockchain/contracts/Interest.sol",
+  "ast": {
+    "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
+    "exportedSymbols": {
+      "Interest": [
+        46
+      ]
+    },
+    "id": 47,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 46,
+        "linearizedBaseContracts": [
+          46
+        ],
+        "name": "Interest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Interest.InterestStruct",
+            "id": 6,
+            "members": [
+              {
+                "constant": false,
+                "id": 3,
+                "name": "allInterest",
+                "nodeType": "VariableDeclaration",
+                "scope": 6,
+                "src": "94:18:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 2,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "94:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 5,
+                "name": "fee",
+                "nodeType": "VariableDeclaration",
+                "scope": 6,
+                "src": "123:10:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 4,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "123:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "InterestStruct",
+            "nodeType": "StructDefinition",
+            "scope": 46,
+            "src": "61:80:0",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 8,
+            "name": "interest",
+            "nodeType": "VariableDeclaration",
+            "scope": 46,
+            "src": "149:30:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+              "typeString": "struct Interest.InterestStruct"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "InterestStruct",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6,
+              "src": "149:14:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_InterestStruct_$6_storage_ptr",
+                "typeString": "struct Interest.InterestStruct"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20,
+              "nodeType": "Block",
+              "src": "243:63:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        },
+                        "id": 17,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 13,
+                            "name": "interest",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8,
+                            "src": "262:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                              "typeString": "struct Interest.InterestStruct storage ref"
+                            }
+                          },
+                          "id": 14,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "allInterest",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 3,
+                          "src": "262:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "-",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 15,
+                            "name": "interest",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8,
+                            "src": "285:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                              "typeString": "struct Interest.InterestStruct storage ref"
+                            }
+                          },
+                          "id": 16,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "fee",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 5,
+                          "src": "285:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "src": "262:35:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        }
+                      }
+                    ],
+                    "id": 18,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "261:37:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 12,
+                  "id": 19,
+                  "nodeType": "Return",
+                  "src": "254:44:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 21,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNetInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "211:2:0"
+            },
+            "returnParameters": {
+              "id": 12,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21,
+                  "src": "235:6:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 10,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "235:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "234:8:0"
+            },
+            "scope": 46,
+            "src": "188:118:0",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 32,
+              "nodeType": "Block",
+              "src": "361:51:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 30,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 26,
+                        "name": "interest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8,
+                        "src": "372:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                          "typeString": "struct Interest.InterestStruct storage ref"
+                        }
+                      },
+                      "id": 28,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "allInterest",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3,
+                      "src": "372:20:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 29,
+                      "name": "_interest",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "395:9:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "src": "372:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "id": 31,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:32:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 33,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAllInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 24,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23,
+                  "name": "_interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33,
+                  "src": "336:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 22,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "336:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "335:18:0"
+            },
+            "returnParameters": {
+              "id": 25,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:0:0"
+            },
+            "scope": 46,
+            "src": "312:100:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 44,
+              "nodeType": "Block",
+              "src": "454:38:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 42,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 38,
+                        "name": "interest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8,
+                        "src": "465:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                          "typeString": "struct Interest.InterestStruct storage ref"
+                        }
+                      },
+                      "id": 40,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "fee",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5,
+                      "src": "465:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 41,
+                      "name": "_fee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 35,
+                      "src": "480:4:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "src": "465:19:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "id": 43,
+                  "nodeType": "ExpressionStatement",
+                  "src": "465:19:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 45,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setFee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 36,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 35,
+                  "name": "_fee",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 45,
+                  "src": "434:11:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "434:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "433:13:0"
+            },
+            "returnParameters": {
+              "id": 37,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "454:0:0"
+            },
+            "scope": 46,
+            "src": "418:74:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 47,
+        "src": "36:461:0"
+      }
+    ],
+    "src": "0:499:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
+    "exportedSymbols": {
+      "Interest": [
+        46
+      ]
+    },
+    "id": 47,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 46,
+        "linearizedBaseContracts": [
+          46
+        ],
+        "name": "Interest",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Interest.InterestStruct",
+            "id": 6,
+            "members": [
+              {
+                "constant": false,
+                "id": 3,
+                "name": "allInterest",
+                "nodeType": "VariableDeclaration",
+                "scope": 6,
+                "src": "94:18:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 2,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "94:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 5,
+                "name": "fee",
+                "nodeType": "VariableDeclaration",
+                "scope": 6,
+                "src": "123:10:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 4,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "123:6:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "InterestStruct",
+            "nodeType": "StructDefinition",
+            "scope": 46,
+            "src": "61:80:0",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 8,
+            "name": "interest",
+            "nodeType": "VariableDeclaration",
+            "scope": 46,
+            "src": "149:30:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+              "typeString": "struct Interest.InterestStruct"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "InterestStruct",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6,
+              "src": "149:14:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_InterestStruct_$6_storage_ptr",
+                "typeString": "struct Interest.InterestStruct"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 20,
+              "nodeType": "Block",
+              "src": "243:63:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        },
+                        "id": 17,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 13,
+                            "name": "interest",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8,
+                            "src": "262:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                              "typeString": "struct Interest.InterestStruct storage ref"
+                            }
+                          },
+                          "id": 14,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "allInterest",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 3,
+                          "src": "262:20:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "-",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 15,
+                            "name": "interest",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 8,
+                            "src": "285:8:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                              "typeString": "struct Interest.InterestStruct storage ref"
+                            }
+                          },
+                          "id": 16,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "fee",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 5,
+                          "src": "285:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_int256",
+                            "typeString": "int256"
+                          }
+                        },
+                        "src": "262:35:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int256",
+                          "typeString": "int256"
+                        }
+                      }
+                    ],
+                    "id": 18,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "261:37:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "functionReturnParameters": 12,
+                  "id": 19,
+                  "nodeType": "Return",
+                  "src": "254:44:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 21,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getNetInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 9,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "211:2:0"
+            },
+            "returnParameters": {
+              "id": 12,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 21,
+                  "src": "235:6:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 10,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "235:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "234:8:0"
+            },
+            "scope": 46,
+            "src": "188:118:0",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 32,
+              "nodeType": "Block",
+              "src": "361:51:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 30,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 26,
+                        "name": "interest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8,
+                        "src": "372:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                          "typeString": "struct Interest.InterestStruct storage ref"
+                        }
+                      },
+                      "id": 28,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "allInterest",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3,
+                      "src": "372:20:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 29,
+                      "name": "_interest",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "395:9:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "src": "372:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "id": 31,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:32:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 33,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAllInterest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 24,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23,
+                  "name": "_interest",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33,
+                  "src": "336:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 22,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "336:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "335:18:0"
+            },
+            "returnParameters": {
+              "id": 25,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:0:0"
+            },
+            "scope": 46,
+            "src": "312:100:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 44,
+              "nodeType": "Block",
+              "src": "454:38:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 42,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 38,
+                        "name": "interest",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8,
+                        "src": "465:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_InterestStruct_$6_storage",
+                          "typeString": "struct Interest.InterestStruct storage ref"
+                        }
+                      },
+                      "id": 40,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "fee",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5,
+                      "src": "465:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 41,
+                      "name": "_fee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 35,
+                      "src": "480:4:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_int256",
+                        "typeString": "int256"
+                      }
+                    },
+                    "src": "465:19:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "id": 43,
+                  "nodeType": "ExpressionStatement",
+                  "src": "465:19:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 45,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setFee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 36,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 35,
+                  "name": "_fee",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 45,
+                  "src": "434:11:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "int256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "434:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "433:13:0"
+            },
+            "returnParameters": {
+              "id": 37,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "454:0:0"
+            },
+            "scope": 46,
+            "src": "418:74:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 47,
+        "src": "36:461:0"
+      }
+    ],
+    "src": "0:499:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2020-03-12T10:49:49.561Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
