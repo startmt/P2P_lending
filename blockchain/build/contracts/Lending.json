@@ -1,0 +1,598 @@
+{
+  "contractName": "Lending",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lending",
+      "outputs": [
+        {
+          "name": "id",
+          "type": "int256"
+        },
+        {
+          "name": "amount",
+          "type": "int256"
+        },
+        {
+          "name": "interest",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060be8061001f6000396000f3fe608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806395e97eee146044575b600080fd5b348015604f57600080fd5b506056607a565b60405180848152602001838152602001828152602001935050505060405180910390f35b6000806000015490806001015490806002015490508356fea165627a7a72305820d5b7337e317b4a6b8adaf1a1ee4e26d001889ae415278e70e4ff4729954d43190029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806395e97eee146044575b600080fd5b348015604f57600080fd5b506056607a565b60405180848152602001838152602001828152602001935050505060405180910390f35b6000806000015490806001015490806002015490508356fea165627a7a72305820d5b7337e317b4a6b8adaf1a1ee4e26d001889ae415278e70e4ff4729954d43190029",
+  "sourceMap": "36:781:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:781:1;;;;;;;",
+  "deployedSourceMap": "36:781:1:-;;;;;;;;;;;;;;;;;;;;;;;;456:28;;8:9:-1;5:2;;;30:1;27;20:12;5:2;456:28:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.25 <0.7.0;\r\n\r\ncontract Lending {\r\n    struct ContractStruct {\r\n        string date;\r\n        int256 amount;\r\n        bool isPaid;\r\n        string evidence;\r\n    }\r\n    struct LendingStruct {\r\n        int256 id;\r\n        int256 amount;\r\n        int256 interest;\r\n        // list รายการที่ยังไม่จ่าย\r\n        // list รายการเดือนที่จ่ายแล้ว\r\n    }\r\n\r\n    LendingStruct public lending;\r\n\r\n    // function getContract() public view returns (int256) {\r\n    //     return (lending.alllending - lending.fee);\r\n    // }\r\n    // function setAlllending(int256 _lending) public {\r\n    //     lending.alllending = _lending;\r\n    // }\r\n    // function setFee(int256 _fee) public {\r\n    //     lending.fee = _fee;\r\n    // }\r\n\r\n}\r\n",
+  "sourcePath": "D:/work/P2P_lending/blockchain/contracts/Lending.sol",
+  "ast": {
+    "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Lending.sol",
+    "exportedSymbols": {
+      "Lending": [
+        67
+      ]
+    },
+    "id": 68,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 48,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 67,
+        "linearizedBaseContracts": [
+          67
+        ],
+        "name": "Lending",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Lending.ContractStruct",
+            "id": 57,
+            "members": [
+              {
+                "constant": false,
+                "id": 50,
+                "name": "date",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "93:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 49,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "93:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 52,
+                "name": "amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "115:13:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 51,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "115:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 54,
+                "name": "isPaid",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "139:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 53,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "139:4:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 56,
+                "name": "evidence",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "161:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 55,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "161:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "ContractStruct",
+            "nodeType": "StructDefinition",
+            "scope": 67,
+            "src": "60:124:1",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Lending.LendingStruct",
+            "id": 64,
+            "members": [
+              {
+                "constant": false,
+                "id": 59,
+                "name": "id",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "222:9:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 58,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "222:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 61,
+                "name": "amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "242:13:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 60,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "242:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 63,
+                "name": "interest",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "266:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 62,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "266:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "LendingStruct",
+            "nodeType": "StructDefinition",
+            "scope": 67,
+            "src": "190:258:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 66,
+            "name": "lending",
+            "nodeType": "VariableDeclaration",
+            "scope": 67,
+            "src": "456:28:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_LendingStruct_$64_storage",
+              "typeString": "struct Lending.LendingStruct"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 65,
+              "name": "LendingStruct",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 64,
+              "src": "456:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LendingStruct_$64_storage_ptr",
+                "typeString": "struct Lending.LendingStruct"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 68,
+        "src": "36:781:1"
+      }
+    ],
+    "src": "0:819:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Lending.sol",
+    "exportedSymbols": {
+      "Lending": [
+        67
+      ]
+    },
+    "id": 68,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 48,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 67,
+        "linearizedBaseContracts": [
+          67
+        ],
+        "name": "Lending",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Lending.ContractStruct",
+            "id": 57,
+            "members": [
+              {
+                "constant": false,
+                "id": 50,
+                "name": "date",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "93:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 49,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "93:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 52,
+                "name": "amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "115:13:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 51,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "115:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 54,
+                "name": "isPaid",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "139:11:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 53,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "139:4:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 56,
+                "name": "evidence",
+                "nodeType": "VariableDeclaration",
+                "scope": 57,
+                "src": "161:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 55,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "161:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "ContractStruct",
+            "nodeType": "StructDefinition",
+            "scope": 67,
+            "src": "60:124:1",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Lending.LendingStruct",
+            "id": 64,
+            "members": [
+              {
+                "constant": false,
+                "id": 59,
+                "name": "id",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "222:9:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 58,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "222:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 61,
+                "name": "amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "242:13:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 60,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "242:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 63,
+                "name": "interest",
+                "nodeType": "VariableDeclaration",
+                "scope": 64,
+                "src": "266:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int256",
+                  "typeString": "int256"
+                },
+                "typeName": {
+                  "id": 62,
+                  "name": "int256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "266:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "LendingStruct",
+            "nodeType": "StructDefinition",
+            "scope": 67,
+            "src": "190:258:1",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 66,
+            "name": "lending",
+            "nodeType": "VariableDeclaration",
+            "scope": 67,
+            "src": "456:28:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_LendingStruct_$64_storage",
+              "typeString": "struct Lending.LendingStruct"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 65,
+              "name": "LendingStruct",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 64,
+              "src": "456:13:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_LendingStruct_$64_storage_ptr",
+                "typeString": "struct Lending.LendingStruct"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 68,
+        "src": "36:781:1"
+      }
+    ],
+    "src": "0:819:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2020-03-12T12:04:29.032Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
