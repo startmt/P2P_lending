@@ -2,6 +2,7 @@ import { checkToken, confirmData } from '../../service/auth/scbVerifyService'
 import { status400, status200 } from '../../utils/status'
 import { createValidatedUserData } from '../../service/auth/crudValidatedUser'
 import { getScbByUsername } from '../../crud/scb'
+import { createUserInContract } from '../../service/auth/createUserInContract'
 export default async (req, res) => {
   try {
     const data = {
@@ -22,11 +23,13 @@ export default async (req, res) => {
         },
       }
       const isDataconfirm = await confirmData(config, data)
-      const isCreated = await createValidatedUserData(
-        isDataconfirm.data.data,
-        username,
-        query.role,
-      )
+      const addressBlock = await createUserInContract(username, data)
+
+      const createData = {
+        user: isDataconfirm.data.data,
+        blockData: addressBlock.data.address,
+      }
+      const isCreated = await createValidatedUserData(createData, username)
       if (isCreated.status === 200) return status200(res, isCreated)
       return status400(res, isCreated.message)
     } else {

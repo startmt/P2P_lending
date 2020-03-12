@@ -33,6 +33,10 @@ export default (sequelize) =>
         type: DataTypes.TEXT,
         field: 'address',
       },
+      blockData: {
+        type: DataTypes.STRING,
+        field: 'block_data',
+      },
       scbId: {
         type: DataTypes.INTEGER,
         primaryKey: true,

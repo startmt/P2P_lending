@@ -49,6 +49,7 @@ services:
       - AUTH_SERVICE=http://35.187.230.102/api/auth
       - LENDING_SERVICE=http://35.187.230.102/api/lending
       - TRANSACTION_SERVICE=http://35.187.230.102/api/transaction
+      - BLOCKCHAIN_HOST=https://ropsten.infura.io/v3/60b00290d6e841db9c79393ddcb2f00d
     depends_on:
       - api
   minio1:

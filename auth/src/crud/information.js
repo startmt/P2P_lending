@@ -6,21 +6,22 @@ export const getInfomationByUsername = async (username) => {
     where: { scbId: query.get().id },
   })
 }
-
+//can't reuse
 export const createInformation = async (data, username) => {
   const scb = await getScbByUsername(username)
-  const addressJSON = JSON.stringify(data.profile.address)
+  const addressJSON = JSON.stringify(data.user.profile.address)
   const newUserValidate = await db.sequelize.transaction((t) => {
     return db.infomation.create(
       {
         scbId: scb.get().id,
         username: username,
-        firstName: data.profile.thaiFirstName,
-        lastName: data.profile.thaiLastName,
-        birthDate: data.profile.birthDate,
-        phoneNumber: data.profile.mobile,
-        citizenId: data.profile.citizenID,
+        firstName: data.user.profile.thaiFirstName,
+        lastName: data.user.profile.thaiLastName,
+        birthDate: data.user.profile.birthDate,
+        phoneNumber: data.user.profile.mobile,
+        citizenId: data.user.profile.citizenID,
         address: addressJSON,
+        blockData: data.blockData,
       },
       { transaction: t },
     )

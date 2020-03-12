@@ -13,4 +13,5 @@ export default {
   MINIO_SECURITY: process.env.MINIO_SECURITY || false,
   MINIO_BUCKET: process.env.MINIO_BUCKET || '',
   HOST: process.env.HOST || 'http://35.187.230.102',
+  BLOCKCHAIN_HOST: process.env.BLOCKCHAIN_HOST || 'http://localhost:7545',
 }

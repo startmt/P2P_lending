@@ -17,9 +17,11 @@ module.exports = withCSS(
         return config
       },
       publicRuntimeConfig: {
-        AUTH_SERVICE: process.env.AUTH_SERVICE || 'http://localhost:3000/auth',
+        AUTH_SERVICE:
+          process.env.AUTH_SERVICE ||
+          'http://localhost:3000/api/auth',
         SCB_API: 'l7b5616b7185e143c9a380033362b5f324',
-        SCB_SECRET: 'e48a5b88876f48708e4ac495fb4705d9'
+        SCB_SECRET: 'e48a5b88876f48708e4ac495fb4705d9',
       },
     }),
   ),

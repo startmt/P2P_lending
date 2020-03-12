@@ -9,6 +9,7 @@ export const createValidatedUserData = async (data, username) => {
     await validatedUser(username)
     return { status: 200, data: newUserValidate }
   } catch (e) {
+    console.log(e)
     return { message: 'คุณเคยยืนยันตัวตนไปแล้ว' }
   }
 }
