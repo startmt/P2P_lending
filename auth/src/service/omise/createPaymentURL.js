@@ -1,6 +1,6 @@
 import axios from 'axios'
 import env from '../../config'
-export default async (amount, type) => {
+export default async (amount, type, userData) => {
   const source = await axios.post(
     env.OMISE_HOST + '/sources',
     {
@@ -14,10 +14,10 @@ export default async (amount, type) => {
   return await axios.post(
     env.OMISE_HOST + '/charges',
     {
-      description: 'Test',
+      metadata: userData,
       amount,
       currency: 'thb',
-      return_uri: 'https://www.google.com',
+      return_uri: `${env.HOST}/`,
       source: source.data.id,
     },
     { auth: { username: 'skey_test_5hu9iykyg1qw218pezq' } },
