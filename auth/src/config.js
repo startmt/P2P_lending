@@ -12,5 +12,5 @@ export default {
   MINIO_PORT: process.env.MINIO_PORT || 9001,
   MINIO_SECURITY: process.env.MINIO_SECURITY || false,
   MINIO_BUCKET: process.env.MINIO_BUCKET || '',
-  HOST: process.env.HOST || 'http://34.87.163.180',
+  HOST: process.env.HOST || 'http://35.187.230.102',
 }

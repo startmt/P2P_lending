@@ -46,9 +46,9 @@ services:
     ports:
       - 127.0.0.1:8000:8000
     environment:
-      - AUTH_SERVICE=http://35.247.143.156/api/auth
-      - LENDING_SERVICE=http://35.247.143.156/api/lending
-      - TRANSACTION_SERVICE=http://35.247.143.156/api/transaction
+      - AUTH_SERVICE=http://35.187.230.102/api/auth
+      - LENDING_SERVICE=http://35.187.230.102/api/lending
+      - TRANSACTION_SERVICE=http://35.187.230.102/api/transaction
     depends_on:
       - api
   minio1:
