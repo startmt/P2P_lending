@@ -1,5 +1,5 @@
 pragma solidity >=0.4.25 <0.7.0;
-
+pragma experimental ABIEncoderV2;
 contract Lending {
     struct ContractStruct {
         string date;
@@ -7,24 +7,36 @@ contract Lending {
         bool isPaid;
         string evidence;
     }
-    struct LendingStruct {
-        int256 id;
-        int256 amount;
-        int256 interest;
-        // list รายการที่ยังไม่จ่าย
-        // list รายการเดือนที่จ่ายแล้ว
+    struct UserContractStruct {
+        int256 borrowerId;
+        int256 lenderId;
     }
-
-    LendingStruct public lending;
-
-    // function getContract() public view returns (int256) {
-    //     return (lending.alllending - lending.fee);
-    // }
-    // function setAlllending(int256 _lending) public {
-    //     lending.alllending = _lending;
-    // }
-    // function setFee(int256 _fee) public {
-    //     lending.fee = _fee;
-    // }
+    // Contractdata
+    UserContractStruct public user;
+    uint256 numberOf;
+    mapping(uint256 => ContractStruct) public contractList;
+    //
+    constructor(
+        string[] memory dateList,
+        int256[] memory amountList,
+        bool[] memory isPaidList,
+        string[] memory evidenceList,
+        int256 _borrowerId,
+        int256 _lenderId
+    ) public {
+        for (uint256 i = 0; i < dateList.length; i++) {
+            contractList[i] = ContractStruct({
+                date: dateList[i],
+                amount: amountList[i],
+                isPaid: isPaidList[i],
+                evidence: evidenceList[i]
+            });
+        }
+        user = UserContractStruct({
+            borrowerId: _borrowerId,
+            lenderId: _lenderId
+        });
+        numberOf = 0;
+    }
 
 }

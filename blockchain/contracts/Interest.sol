@@ -8,6 +8,10 @@ contract Interest {
 
     InterestStruct public interest;
 
+    constructor() public {
+        interest.allInterest = 10;
+        interest.fee = 2;
+    }
     function getNetInterest() public view returns (int256) {
         return (interest.allInterest - interest.fee);
     }
