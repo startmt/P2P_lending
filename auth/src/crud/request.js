@@ -48,6 +48,19 @@ export const getRequestById = async (id) => {
   })
 }
 
+export const lenderAcceptRequest = async (userId, requestId) => {
+  const request = await db.sequelize.transaction(async (t) => {
+    return await db.requestuser.create(
+      {
+        userId,
+        requestId,
+      },
+      { transaction: t },
+    )
+  })
+  return request
+}
+
 export const initRequest = async (data, id) => {
   try {
     const request = await db.sequelize.transaction(async (t) => {
