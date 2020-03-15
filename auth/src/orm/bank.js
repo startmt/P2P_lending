@@ -7,13 +7,17 @@ export default (sequelize) =>
       primaryKey: true,
       autoIncrement: true,
     },
-    cardNumber: {
+    bankAccount: {
       type: DataTypes.STRING,
-      field: 'card_number',
+      field: 'bank_account',
     },
-    cardName: {
+    name: {
       type: DataTypes.STRING,
-      field: 'card_name',
+      field: 'name',
+    },
+    state: {
+      type: DataTypes.ENUM('CREATED', 'VERIFIED'),
+      field: 'state',
     },
     userId: {
       type: DataTypes.INTEGER,
