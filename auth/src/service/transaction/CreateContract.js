@@ -1,15 +1,26 @@
 import moment from 'moment'
-export default async (request) => {
-  const currentDate = moment([2010, 0, 31])
+import { createLendingContract } from '../blockchain/lending'
+export default async (request, userContract) => {
+  const currentDate = moment()
   const contract = []
-  contract.push({
-    date: currentDate,
-  })
   const { loanTenor, amount, interestRate } = request
-  const net = (amount + (amount * interestRate) / 100) / loanTenor
+  const net = Math.ceil((amount + (amount * interestRate) / 100) / loanTenor)
+  contract.push({
+    date: currentDate.unix(),
+    amount: net,
+    isPaid: false,
+    evidence: '',
+  })
+
   for (let i = 1; i < loanTenor; i++) {
-    let date = currentDate.add(30, 'days').toDate()
-    contract.push({ date, amount: net })
+    let date = currentDate.add(30, 'days').unix()
+    contract.push({ date, amount: net, isPaid: false, evidence: '' })
   }
-  return contract
+  const data = {
+    contract,
+    userContract,
+  }
+  const response = await createLendingContract(data)
+
+  return response
 }
