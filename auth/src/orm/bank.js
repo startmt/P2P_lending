@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 export default (sequelize) =>
-  sequelize.define('debitcard', {
+  sequelize.define('bank', {
     id: {
       type: DataTypes.INTEGER,
       field: 'id',
@@ -25,7 +25,6 @@ export default (sequelize) =>
       references: {
         model: 'users',
       },
-      unique: true,
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },

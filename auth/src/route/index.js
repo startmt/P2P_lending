@@ -9,6 +9,7 @@ import { requireJWTAuth } from '../middleware/authorize'
 import { lending } from './lending'
 import { transaction } from './transaction'
 import adminLoginController from '../controller/auth/adminLoginController'
+import addBankController from '../controller/auth/addBankController'
 const router = Router()
 
 const user = router.get('/api/auth/', requireJWTAuth, checkAuthenController)
@@ -16,6 +17,7 @@ const login = router.post('/api/auth/login', loginController)
 const adminLogin = router.post('/api/auth/admin/login', adminLoginController)
 const register = router.post('/api/auth/register', registerController)
 const getOtp = router.get('/api/auth/otp', generateOtpController)
+const addBank = router.post('/api/auth/bank', requireJWTAuth, addBankController)
 const scbVerifyOtp = router.post(
   '/api/auth/verify/otp',
   requireJWTAuth,
@@ -36,6 +38,7 @@ router.use([
   scbVerifyOtp,
   confirmDataScb,
   adminLogin,
+  addBank,
 ])
 
 export default router
