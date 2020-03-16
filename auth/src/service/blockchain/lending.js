@@ -1,5 +1,6 @@
 import web3 from '../../service/blockchain/web3'
 import Lending from '../../contracts/Lending.json'
+import config from '../../config'
 export const lendingContract = (contractId) => {
   return new web3.eth.Contract(Lending.abi, contractId)
 }
@@ -22,7 +23,7 @@ export const createLendingContract = async (contractData) => {
       ],
     })
     .send({
-      from: '0xFB42998FAc8D89105a058F9a52fEcA5aE1f155c1',
+      from: config.ACCOUNT_WALLET,
       gasPrice: '1000',
       gas: 6721975,
     })

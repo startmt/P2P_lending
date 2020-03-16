@@ -82,14 +82,24 @@
   "ast": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
     "exportedSymbols": {
-      "Interest": [62]
+      "Interest": [
+        62
+      ]
     },
     "id": 63,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".25", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:32:0"
       },
@@ -100,7 +110,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 62,
-        "linearizedBaseContracts": [62],
+        "linearizedBaseContracts": [
+          62
+        ],
         "name": "Interest",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -776,14 +788,24 @@
   "legacyAST": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
     "exportedSymbols": {
-      "Interest": [62]
+      "Interest": [
+        62
+      ]
     },
     "id": 63,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 1,
-        "literals": ["solidity", ">=", "0.4", ".25", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:32:0"
       },
@@ -794,7 +816,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 62,
-        "linearizedBaseContracts": [62],
+        "linearizedBaseContracts": [
+          62
+        ],
         "name": "Interest",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1472,15 +1496,21 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0xcC3Cd4A0aF0F3Bc499CBaF19722d58431273789B",
+      "transactionHash": "0x2ea33d43128d321ba286a493477e455e7ee119dcceb3da13d98b4e2c252a9424"
+    },
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xFAaD5DEd93AafeF18221192d5eD9fDa9C1b206B7",
-      "transactionHash": "0x05ad676b657242a3cd488bbcab05042075ff0a89c1b92c4ac856a0affc98b50b"
+      "address": "0x7aD4554f90307478894ee50Cd792e7162F05F2DE",
+      "transactionHash": "0xbffdda43a2e8995991a43d31e48432b64029efaf5920cf020d76ef5df342c1f5"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2020-03-14T15:52:01.740Z",
+  "updatedAt": "2020-03-16T08:58:29.064Z",
   "devdoc": {
     "methods": {}
   },

@@ -100,14 +100,24 @@
   "ast": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Manner.sol",
     "exportedSymbols": {
-      "Manner": [274]
+      "Manner": [
+        274
+      ]
     },
     "id": 275,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 153,
-        "literals": ["solidity", ">=", "0.4", ".25", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:32:2"
       },
@@ -118,7 +128,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 274,
-        "linearizedBaseContracts": [274],
+        "linearizedBaseContracts": [
+          274
+        ],
         "name": "Manner",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -1556,14 +1568,24 @@
   "legacyAST": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Manner.sol",
     "exportedSymbols": {
-      "Manner": [274]
+      "Manner": [
+        274
+      ]
     },
     "id": 275,
     "nodeType": "SourceUnit",
     "nodes": [
       {
         "id": 153,
-        "literals": ["solidity", ">=", "0.4", ".25", "<", "0.7", ".0"],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.7",
+          ".0"
+        ],
         "nodeType": "PragmaDirective",
         "src": "0:32:2"
       },
@@ -1574,7 +1596,9 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 274,
-        "linearizedBaseContracts": [274],
+        "linearizedBaseContracts": [
+          274
+        ],
         "name": "Manner",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -3014,6 +3038,12 @@
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x3e5c129E83ABE23EA138f6d6BD0248e38D7Ea97D",
+      "transactionHash": "0xbf56f73615c17737f48442b2afb4dd76bc76369a4bd4310e0582a8dd4a4c310e"
+    },
     "4447": {
       "events": {},
       "links": {},
@@ -3023,12 +3053,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x9E6E9aC8834876a77636788b9453Ef751e0900a9",
-      "transactionHash": "0x5cc19a28e023a0ec4db7ac4c383df4aa7867a94a5cd15a530f7801f748425a3a"
+      "address": "0x4a50b73fea8637958ae6f1Fef9FeD4FD2188A6Ad",
+      "transactionHash": "0x3ef846fdf4110892c6d7069b371509bc2363fc82bb57055734eea68ceec935c3"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2020-03-14T15:52:01.744Z",
+  "updatedAt": "2020-03-16T08:58:29.075Z",
   "devdoc": {
     "methods": {}
   },

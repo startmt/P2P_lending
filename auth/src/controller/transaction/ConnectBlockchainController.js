@@ -40,6 +40,7 @@ export default async (req, res) => {
         }
       case 'recipient':
         if (data.verified !== true) status400(res, 'incomplete verify')
+        
     }
   } catch (e) {
     console.log(e)
