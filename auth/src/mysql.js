@@ -3,7 +3,7 @@ import env from './config'
 import User from './orm/user'
 import Scb from './orm/scb'
 import Information from './orm/information'
-import DebitCard from './orm/debitcard'
+import Bank from './orm/Bank'
 import Request from './orm/request'
 import Config from './orm/config'
 import RequestUser from './orm/request_user'
@@ -33,7 +33,7 @@ export const connectMysql = async () => {
   const userModel = User(sequelize)
   const ScbModel = Scb(sequelize)
   const InformationModel = Information(sequelize)
-  const DebitCardModel = DebitCard(sequelize)
+  const BankModel = Bank(sequelize)
   const RequestModel = Request(sequelize)
   const ConfigModel = Config(sequelize)
   const RequestUserModel = RequestUser(sequelize)
@@ -48,13 +48,13 @@ export const connectMysql = async () => {
   requestAdminModel.belongsTo(RequestModel)
   // RequestModel.hasMany(requestAdminModel)
   userModel.hasOne(ScbModel)
-  userModel.hasMany(DebitCardModel)
+  userModel.hasMany(BankModel)
   userModel.hasMany(RequestUserModel)
   RequestModel.hasMany(RequestUserModel)
   ScbModel.belongsTo(userModel)
   ScbModel.hasOne(InformationModel)
   InformationModel.belongsTo(ScbModel)
-  DebitCardModel.belongsTo(userModel)
+  BankModel.belongsTo(userModel)
 
   db.user = userModel
   db.scb = ScbModel
@@ -69,6 +69,7 @@ export const connectMysql = async () => {
   db.file = fileModel
   db.admin = adminModel
   db.requestAdmin = requestAdminModel
+  db.bank = BankModel
   db.sequelize.sync()
 }
 export default db
