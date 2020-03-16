@@ -7,6 +7,7 @@ export const mannerContract = (contractId) => {
 
 export const createManner = async (data) => {
   const { id, firstname, lastname } = data
+  console.log(await web3.eth.getAccounts())
   const contract = new web3.eth.Contract(Manner.abi)
   return await contract
     .deploy({
@@ -15,8 +16,8 @@ export const createManner = async (data) => {
     })
     .send({
       from: config.ACCOUNT_WALLET,
-      gasPrice: '6721975',
-      gas: 6721975,
+      gasPrice: '10000000000',
+      gas: 3000000,
     })
 }
 

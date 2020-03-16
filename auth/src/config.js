@@ -13,7 +13,10 @@ export default {
   MINIO_SECURITY: process.env.MINIO_SECURITY || false,
   MINIO_BUCKET: process.env.MINIO_BUCKET || '',
   HOST: process.env.HOST || 'http://35.187.230.102',
-  BLOCKCHAIN_HOST: process.env.BLOCKCHAIN_HOST || 'http://localhost:7545',
+  BLOCKCHAIN_HOST:
+    process.env.BLOCKCHAIN_HOST ||
+    'https://ropsten.infura.io/v3/60b00290d6e841db9c79393ddcb2f00d',
   ACCOUNT_WALLET:
-    process.env.ACCOUNT_WALLET || '0xFB42998FAc8D89105a058F9a52fEcA5aE1f155c1',
+    process.env.ACCOUNT_WALLET || '0x425649ce990288A41Ccca60B11B5651bf67d9380',
+  BLOCKCHAIN_PRIVATE: '0x425649ce990288A41Ccca60B11B5651bf67d9380' || '',
 }

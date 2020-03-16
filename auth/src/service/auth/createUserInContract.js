@@ -1,7 +1,6 @@
 import web3 from '../../service/blockchain/web3'
 import { createManner } from '../../service/blockchain/manner'
 import { getUserByUsername } from '../../crud/user'
-import { getInfomationByUsername } from '../../crud/information'
 export const createUserInContract = async (username, data) => {
   const user = await getUserByUsername(username)
   const blockData = {
