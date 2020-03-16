@@ -1,6 +1,5 @@
 const HDWalletProvider = require("truffle-hdwallet-provider");
 require("dotenv").config();
-
 module.exports = {
   networks: {
     development: {
@@ -14,15 +13,14 @@ module.exports = {
       network_id: "*"
     },
     ropsten: {
-      provider: function() {
-        return new HDWalletProvider(
+      provider: () =>
+        new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          `https://ropsten.infura.io/v3/${process.env.INFURA_KEY}`
-        );
-      },
+          "https://ropsten.infura.io/v3/" + process.env.INFURA_API_KEY
+        ),
       network_id: 3,
-      skipDryRun: true,
-      gas: 4000000 //make sure this gas allocation isn't over 4M, which is the max
+      gas: 3000000,
+      gasPrice: 10000000000
     }
   }
 };
