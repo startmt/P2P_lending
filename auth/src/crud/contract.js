@@ -1,4 +1,5 @@
 import db from '../mysql'
+import { updateRequest } from './request'
 export const savedContractAddressInDB = async (address, requestId) => {
   try {
     const request = await db.sequelize.transaction(async (t) => {
@@ -15,9 +16,12 @@ export const savedContractAddressInDB = async (address, requestId) => {
       status: 200,
       data: request.get(),
     }
+    await updateRequest(requestId, {
+      state: 'LENDING_WAIT_BORROWER_ACCEPT_MONEY',
+    })
     return returnData
   } catch (e) {
-    console.log(e)
+    console.log('error', e)
     return { message: 'error' }
   }
 }

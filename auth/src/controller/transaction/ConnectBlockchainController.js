@@ -14,11 +14,11 @@ export default async (req, res) => {
 
     const { username, requestId } = data.metadata
     const user = await getUserByUsername(username)
-    const request = await getRequestById(requestId)
-
     switch (data.object) {
       case 'charge':
         if (data.status !== 'successful') status400(res, 'unsuccessful payment')
+
+        const request = await getRequestById(requestId)
         switch (request.get().state) {
           case 'CHECKED':
             const userRequest = await getUserIdOnefromRequestId(requestId)
@@ -32,7 +32,7 @@ export default async (req, res) => {
               data._address,
               requestId,
             )
-            await updateRequest(requestId, { state: 'LENDING' })
+
             status200(res, { lendingContract: response })
           case 'LENDING':
           default:
@@ -40,7 +40,6 @@ export default async (req, res) => {
         }
       case 'recipient':
         if (data.verified !== true) status400(res, 'incomplete verify')
-        
     }
   } catch (e) {
     console.log(e)
