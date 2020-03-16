@@ -49,7 +49,10 @@ contract Lending {
         }
         return 999;
     }
-    function setEvidenceStamp(string memory _evidence) public {
+    function setEvidenceStamp(string memory _evidence, uint256 _currentTime)
+        public
+    {
+        checkOvertimeLending(_currentTime);
         uint256 current = getCurrentTenor();
         if (
             current <= tenor &&
@@ -59,14 +62,13 @@ contract Lending {
                 keccak256("BORROWER_NOT_ACCEPT") ||
                 keccak256(abi.encodePacked(state)) != keccak256("REJECTED"))
         ) {
-            state = "LENDING";
             contractList[current].evidence = _evidence;
             contractList[current].isPaid = true;
         } else {
             state = "SUCCESS_LENDING";
         }
     }
-    function startLending() public {
+    function startNormalLending() public {
         state = "LENDING";
     }
 
