@@ -5,7 +5,10 @@ contract Manner {
         int256 id;
         string firstname;
         string lastname;
+        string state;
+        uint amoutOfRequest;
     }
+
     User public user;
     constructor(int256 id, string memory firstname, string memory lastname)
         public
@@ -14,25 +17,31 @@ contract Manner {
         user.firstname = firstname;
         user.lastname = lastname;
         user.id = id;
+        user.state = "NORMAL";
     }
-    function getUser()
-        public
-        view
-        returns (string memory, string memory, int256)
-    {
-        return (user.firstname, user.lastname, user.score);
-    }
-    function setScore(int256 _score, string memory _operation) public {
-        if (keccak256(abi.encodePacked(_operation)) == keccak256("INCREASE")) {
-            user.score += _score;
-        } else {
-            user.score -= _score;
+    function setScore(string memory _state) public returns (string memory) {
+        if (keccak256(abi.encodePacked(_state)) == keccak256("LENDING")) {
+            user.score += 5;
+        } else if (
+            keccak256(abi.encodePacked(_state)) ==
+            keccak256("BORROWER_NOT_ACCEPT") ||
+            keccak256(abi.encodePacked(_state)) == keccak256("REJECTED")
+        ) {
+            user.score -= 20;
+        } else if (
+            keccak256(abi.encodePacked(_state)) == keccak256("LENDING_LATE")
+        ) {
+            user.score -= 10;
         }
-
         if (user.score > 100) {
             user.score = 100;
         } else if (user.score < 0) {
             user.score = 0;
+        }
+    }
+    function checkBan() public {
+        if (user.score == 0) {
+            user.state = "BANNED";
         }
     }
 

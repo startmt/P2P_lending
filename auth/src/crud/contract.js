@@ -25,3 +25,8 @@ export const savedContractAddressInDB = async (address, requestId) => {
     return { message: 'error' }
   }
 }
+export const getContractById = async (id) => {
+  return db.contract.findOne({
+    where: { requestId: id },
+  })
+}

@@ -1,23 +1,26 @@
 import web3 from '../../service/blockchain/web3'
 import Lending from '../../contracts/Lending.json'
 import config from '../../config'
+import { getContractById } from '../../crud/contract'
 export const lendingContract = (contractId) => {
   return new web3.eth.Contract(Lending.abi, contractId)
+}
+export const startLending = async (requestId, c) => {
+  const contract = await getContractById(requestId)
+  const state = await lendingContract(contract.get().contractDetailId).methods.checkOvertimeLending().call()
+  if (state === 'WAITING_BORROWER_ACCEPT_MONEY')
+    return await lendingContract(contract.get().contractDetailId).methods.startNormalLending().call()
+  return state
 }
 export const createLendingContract = async (contractData) => {
   const contract = new web3.eth.Contract(Lending.abi)
   const dateList = contractData.contract.map((data) => data.date)
-  const amountList = contractData.contract.map((data) => data.amount)
-  const isPaidList = contractData.contract.map((data) => data.isPaid)
-  const evidenceList = contractData.contract.map((data) => data.evidence)
   return await contract
     .deploy({
       data: Lending.bytecode,
       arguments: [
         dateList,
-        amountList,
-        isPaidList,
-        evidenceList,
+        amount,
         contractData.userContract.borrowerId,
         contractData.userContract.lenderId,
       ],
