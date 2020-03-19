@@ -1,7 +1,7 @@
 import { status400, status200 } from '../../utils/status'
 import { getRequestById, lenderAcceptRequest } from '../../crud/request'
 import CreateContract from '../../service/transaction/CreateContract'
-import { getUserByUsername } from '../../crud/user'
+import { getUserByUsername, getUserById } from '../../crud/user'
 import { getUserIdOnefromRequestId } from '../../crud/requestuser'
 import { savedContractAddressInDB } from '../../crud/contract'
 import { getInfomationByUsername } from '../../crud/information'
@@ -20,9 +20,7 @@ export default async (req, res) => {
         switch (request.get().state) {
           case 'CHECKED':
             const userRequest = await getUserIdOnefromRequestId(requestId)
-            const borrowerUser = await getUserByUsername(
-              userRequest.get().userId,
-            )
+            const borrowerUser = await getUserById(userRequest.get().userId)
             const lenderInformation = await getInfomationByUsername(username)
             const borrowerInformation = await getInfomationByUsername(
               borrowerUser.get().username,

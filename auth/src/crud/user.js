@@ -3,7 +3,10 @@ export const getUserByUsername = async (username) =>
   await db.user.findOne({
     where: { username: username },
   })
-
+export const getUserById = async (id) =>
+  await db.user.findOne({
+    where: { id },
+  })
 export const createUser = async (user) =>
   await db.sequelize.transaction((t) => {
     return db.user.create(
