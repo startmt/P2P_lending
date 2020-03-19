@@ -26,7 +26,9 @@ export const createLendingContract = async (contractData) => {
         dateList,
         contractData.amount,
         contractData.userContract.borrowerId,
+        contractData.userContract.borrowerAddress,
         contractData.userContract.lenderId,
+        contractData.userContract.lenderAddress,
       ],
     })
     .send({
