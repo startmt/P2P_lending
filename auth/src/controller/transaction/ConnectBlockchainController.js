@@ -8,6 +8,7 @@ import CreateContract from '../../service/transaction/CreateContract'
 import { getUserByUsername } from '../../crud/user'
 import { getUserIdOnefromRequestId } from '../../crud/requestuser'
 import { savedContractAddressInDB } from '../../crud/contract'
+import { verifyBank } from '../../crud/bank'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -40,6 +41,10 @@ export default async (req, res) => {
         }
       case 'recipient':
         if (data.verified !== true) status400(res, 'incomplete verify')
+        else if (data.verified === true) {
+          const response = await verifyBank(user.get().id)
+          status200(res, response)
+        }
     }
   } catch (e) {
     console.log(e)

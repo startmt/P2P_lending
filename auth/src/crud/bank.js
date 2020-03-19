@@ -52,3 +52,17 @@ export const addBank = async (username, bank_account, name) => {
     return { status: 400, message: `can't add bank` }
   }
 }
+export const verifyBank = async (userId) => {
+  try {
+    await db.sequelize.transaction((t) => {
+      return db.bank.update(
+        { state: 'VERIFIED' },
+        { where: { userId } },
+        { transaction: t },
+      )
+    })
+  } catch (e) {
+    console.log(e)
+    return { message: 'error' }
+  }
+}
