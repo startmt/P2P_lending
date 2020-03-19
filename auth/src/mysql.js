@@ -5,7 +5,6 @@ import Scb from './orm/scb'
 import Information from './orm/information'
 import Bank from './orm/bank'
 import Request from './orm/request'
-import Config from './orm/config'
 import RequestUser from './orm/request_user'
 import PaymentDate from './orm/payment_date'
 import Contract from './orm/contract'
@@ -35,7 +34,6 @@ export const connectMysql = async () => {
   const InformationModel = Information(sequelize)
   const BankModel = Bank(sequelize)
   const RequestModel = Request(sequelize)
-  const ConfigModel = Config(sequelize)
   const RequestUserModel = RequestUser(sequelize)
 
   paymentDateModel.belongsTo(contractModel)
@@ -63,7 +61,6 @@ export const connectMysql = async () => {
   db.infomation = InformationModel
   db.Sequelize = Sequelize
   db.sequelize = sequelize
-  db.config = ConfigModel
   db.paymentDate = paymentDateModel
   db.contract = contractModel
   db.file = fileModel
