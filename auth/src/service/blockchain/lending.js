@@ -7,9 +7,13 @@ export const lendingContract = (contractId) => {
 }
 export const startLending = async (requestId, c) => {
   const contract = await getContractById(requestId)
-  const state = await lendingContract(contract.get().contractDetailId).methods.checkOvertimeLending().call()
+  const state = await lendingContract(contract.get().contractDetailId)
+    .methods.checkOvertimeLending()
+    .call()
   if (state === 'WAITING_BORROWER_ACCEPT_MONEY')
-    return await lendingContract(contract.get().contractDetailId).methods.startNormalLending().call()
+    return await lendingContract(contract.get().contractDetailId)
+      .methods.startNormalLending()
+      .call()
   return state
 }
 export const createLendingContract = async (contractData) => {
@@ -20,7 +24,7 @@ export const createLendingContract = async (contractData) => {
       data: Lending.bytecode,
       arguments: [
         dateList,
-        amount,
+        contractData.amount,
         contractData.userContract.borrowerId,
         contractData.userContract.lenderId,
       ],
