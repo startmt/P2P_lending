@@ -20,11 +20,12 @@ export default async (req, res) => {
         switch (request.get().state) {
           case 'CHECKED':
             const userRequest = await getUserIdOnefromRequestId(requestId)
-            const lenderInformation = await getInfomationByUsername(
-              user.get().username,
+            const borrowerUser = await getUserByUsername(
+              userRequest.get().userId,
             )
+            const lenderInformation = await getInfomationByUsername(username)
             const borrowerInformation = await getInfomationByUsername(
-              userRequest.get().username,
+              borrowerUser.get().username,
             )
             const userContract = {
               borrowerId: userRequest.get().userId,
