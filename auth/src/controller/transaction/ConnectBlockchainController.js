@@ -1,13 +1,10 @@
 import { status400, status200 } from '../../utils/status'
-import {
-  getRequestById,
-  updateRequest,
-  lenderAcceptRequest,
-} from '../../crud/request'
+import { getRequestById, lenderAcceptRequest } from '../../crud/request'
 import CreateContract from '../../service/transaction/CreateContract'
 import { getUserByUsername } from '../../crud/user'
 import { getUserIdOnefromRequestId } from '../../crud/requestuser'
 import { savedContractAddressInDB } from '../../crud/contract'
+import { getInfomationByUsername } from '../../crud/information'
 import { verifyBank } from '../../crud/bank'
 export default async (req, res) => {
   try {
@@ -23,9 +20,17 @@ export default async (req, res) => {
         switch (request.get().state) {
           case 'CHECKED':
             const userRequest = await getUserIdOnefromRequestId(requestId)
+            const lenderInformation = await getInfomationByUsername(
+              user.get().username,
+            )
+            const borrowerInformation = await getInfomationByUsername(
+              userRequest.get().username,
+            )
             const userContract = {
               borrowerId: userRequest.get().userId,
               lenderId: user.get().id,
+              borrowerAddress: borrowerInformation.get().blockData,
+              lenderAddress: lenderInformation.get().blockData,
             }
             await lenderAcceptRequest(user.get().id, requestId)
             const data = await CreateContract(request.get(), userContract)
