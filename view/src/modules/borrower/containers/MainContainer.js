@@ -46,10 +46,16 @@ const MainContainer = (props) => {
                 title={`คะแนนความประพฤติ (${userDetail.get(
                   'firstName',
                 )} ${userDetail.get('lastName')})`}
-                value={`${userFromContract.user.score} คะแนน`}
+                value={`${userFromContract.getIn([
+                  'user',
+                  'score',
+                ])} คะแนน`}
                 icon="plus"
                 color="white"
-                loading={userFromContract.loading}
+                loading={userFromContract.getIn([
+                  'user',
+                  'loading',
+                ])}
                 bgcolor="#23B7E5"
                 footer="คะแนนความประพฤติของคุณจะส่งผลต่อดอกเบี้ยที่คุณต้องจ่าย / ได้รับ"
               />

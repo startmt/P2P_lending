@@ -57,7 +57,6 @@ function* setAuthen(action) {
         getUserFromContractApi,
         blockUser,
       )
-      console.log(res)
       const data = { state: res.state, score: res.score }
       yield put(authAction.setUserFromContractSuccess(data))
     }

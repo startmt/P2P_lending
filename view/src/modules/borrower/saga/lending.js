@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 import { getMyLendingListApi } from '../api/lending'
 import { lendingAction } from '../actions'
-import Router from 'next/router'
 
 function* getMyLendingList(action) {
   try {
