@@ -12,6 +12,9 @@ export const addBankForRecieveMoney = async (
       {
         name: username,
         type: 'individual',
+        metadata: {
+          username: username,
+        },
         bank_account: {
           brand: bank_code,
           number: number,

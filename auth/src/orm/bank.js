@@ -19,6 +19,10 @@ export default (sequelize) =>
       type: DataTypes.ENUM('CREATED', 'VERIFIED'),
       field: 'state',
     },
+    transferId: {
+      type: DataTypes.STRING,
+      field: 'tranfer_id',
+    },
     userId: {
       type: DataTypes.INTEGER,
       primaryKey: true,

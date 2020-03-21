@@ -38,6 +38,7 @@ export const addBank = async (username, bank_account, name) => {
             bankAccount: bank_account,
             name,
             state: 'CREATED',
+            transferId: null,
             userId: user.get().id,
           },
           { transaction: t },
@@ -52,11 +53,11 @@ export const addBank = async (username, bank_account, name) => {
     return { status: 400, message: `can't add bank` }
   }
 }
-export const verifyBank = async (userId) => {
+export const verifyBank = async (userId, transferId) => {
   try {
     await db.sequelize.transaction((t) => {
       return db.bank.update(
-        { state: 'VERIFIED' },
+        { state: 'VERIFIED', transferId },
         { where: { userId } },
         { transaction: t },
       )
