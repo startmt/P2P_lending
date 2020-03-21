@@ -14,6 +14,8 @@ export default function reducer(
       return state
         .set('loading', false)
         .set('data', fromJS(action.payload.data))
+    case 'INIT_MY_LENDING_LIST_FAIL':
+      return state.set('loading', false)
     default:
       return state
   }

@@ -43,7 +43,9 @@ const MainContainer = (props) => {
           {isUserVerified ? (
             <div className="col-md-6 col-sm-12 p-2">
               <DashboardCard
-                title={`คะแนนความประพฤติ (${userDetail.firstName} ${userDetail.lastName})`}
+                title={`คะแนนความประพฤติ (${userDetail.get(
+                  'firstName',
+                )} ${userDetail.get('lastName')})`}
                 value={`${userFromContract.user.score} คะแนน`}
                 icon="plus"
                 color="white"
@@ -85,12 +87,12 @@ const mapStateToProps = (state) => ({
     'auth',
     'isIdentify',
   ]),
-  userDetail: state
-    .getIn(['authentication', 'auth', 'userDetail'])
-    .toJS(),
-  userFromContract: state
-    .getIn(['authentication', 'auth', 'contract'])
-    .toJS(),
+  userDetail:
+    state.getIn(['authentication', 'auth', 'userDetail']) ||
+    undefined,
+  userFromContract:
+    state.getIn(['authentication', 'auth', 'contract']) ||
+    undefined,
 })
 export default connect(
   mapStateToProps,
