@@ -6,6 +6,7 @@ import { getUserIdOnefromRequestId } from '../../crud/requestuser'
 import { savedContractAddressInDB } from '../../crud/contract'
 import { getInfomationByUsername } from '../../crud/information'
 import { verifyBank } from '../../crud/bank'
+import { setLoadingBlockchain } from '../../service/blockchain/loading'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -32,6 +33,7 @@ export default async (req, res) => {
               lenderAddress: lenderInformation.get().blockData,
             }
             await lenderAcceptRequest(user.get().id, requestId)
+            setLoadingBlockchain(username)
             const data = await CreateContract(request.get(), userContract)
             const response = await savedContractAddressInDB(
               data._address,
@@ -46,7 +48,7 @@ export default async (req, res) => {
       case 'recipient':
         if (data.verified !== true) status400(res, 'incomplete verify')
         else if (data.verified === true) {
-          const response = await verifyBank(user.get().id)
+          const response = await verifyBank(user.get().id, data.id)
           status200(res, response)
         }
     }
