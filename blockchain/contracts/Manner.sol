@@ -6,7 +6,6 @@ contract Manner {
         string firstname;
         string lastname;
         string state;
-        uint amoutOfRequest;
     }
 
     User public user;

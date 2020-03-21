@@ -7,7 +7,6 @@ export const mannerContract = (contractId) => {
 
 export const createManner = async (data) => {
   const { id, firstname, lastname } = data
-  console.log(await web3.eth.getAccounts())
   const contract = new web3.eth.Contract(Manner.abi)
   return await contract
     .deploy({

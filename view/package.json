@@ -44,7 +44,8 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1",
     "styled-components": "^4.4.0",
-    "url-loader": "^2.2.0"
+    "url-loader": "^2.2.0",
+    "web3": "^1.2.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.5.2",

@@ -68,28 +68,14 @@ contract Lending {
     function getBorrowerDetail()
         public
         view
-        returns (
-            int256,
-            int256,
-            string memory,
-            string memory,
-            string memory,
-            uint256
-        )
+        returns (int256, int256, string memory, string memory, string memory)
     {
         return borrower.manner.user();
     }
     function getLenderDetail()
         public
         view
-        returns (
-            int256,
-            int256,
-            string memory,
-            string memory,
-            string memory,
-            uint256
-        )
+        returns (int256, int256, string memory, string memory, string memory)
     {
         return lender.manner.user();
     }
