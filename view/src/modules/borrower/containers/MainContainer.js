@@ -52,10 +52,7 @@ const MainContainer = (props) => {
                 ])} คะแนน`}
                 icon="plus"
                 color="white"
-                loading={userFromContract.getIn([
-                  'user',
-                  'loading',
-                ])}
+                loading={userFromContract.get('loading')}
                 bgcolor="#23B7E5"
                 footer="คะแนนความประพฤติของคุณจะส่งผลต่อดอกเบี้ยที่คุณต้องจ่าย / ได้รับ"
               />

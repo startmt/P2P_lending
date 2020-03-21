@@ -44,6 +44,8 @@ export default function reducer(
       return state
         .setIn(['contract', 'user'], action.payload.user)
         .setIn(['contract', 'loading'], false)
+    case 'SET_USER_FROM_CONTRACT_FAIL':
+      return state.setIn(['contract', 'loading'], false)
     default:
       return state
   }

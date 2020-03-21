@@ -62,21 +62,9 @@ function* setAuthen(action) {
     }
   } catch (e) {
     console.log(e)
+    yield put(authAction.setUserFromContractFail())
   }
 }
-// function* getUserFromContract(action) {
-//   console.log(action)
-//   try {
-//     yield put(authAction.setUserFromContractSuccess())
-//   } catch (e) {
-//     console.log(e)
-//     yield put(
-//       authAction.setUserFromContractFail(
-//         e.response.data.message,
-//       ),
-//     )
-//   }
-// }
 
 export default function*() {
   yield all([
