@@ -1,5 +1,5 @@
 import { updateRequest, getRequestById } from '../../crud/request'
-import { createTransactionAdminRequest } from '../../crud/adminrequest'
+import { getUserById } from '../../crud/user'
 
 export const changeRequestState = async ({ requestId, state, adminId }) => {
   switch (state) {
@@ -11,18 +11,15 @@ export const changeRequestState = async ({ requestId, state, adminId }) => {
 const appoveInit = async (requestId, state, adminId) => {
   if (await checkRepeatState(requestId, state)) {
     try {
+      const admin = await getUserById(adminId)
       const requestData = {
         state,
-      }
-      const requestAdminData = {
-        description: 'change INIT to CHECKED',
-        adminId,
-        requestId,
+        log: `change INIT to CHECKED by ${admin.get().username}`,
       }
       await updateRequest(requestId, requestData)
-      await createTransactionAdminRequest(requestAdminData)
       return { status: 200 }
     } catch (error) {
+      console.log(error)
       return { status: 400, message: 'Something went wrong.' }
     }
   } else {

@@ -3,6 +3,7 @@ import {
   createSession,
 } from '../../service/auth/signinService'
 import { status400, status200, status401 } from '../../utils/status'
+import { getUserByUsername } from '../../crud/user'
 export default async (req, res) => {
   const user = {
     username: req.body.username,
@@ -10,8 +11,9 @@ export default async (req, res) => {
   }
   let isUserInDatabase = await checkUserFromDb(user)
   if (isUserInDatabase) {
+    const userDetail = await getUserByUsername(req.body.username)
     status200(res, {
-      token: await createSession(user, 'user'),
+      token: await createSession(user, userDetail.get().role),
     })
   } else if (!isUserInDatabase) {
     status401(res, {

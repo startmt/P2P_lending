@@ -9,8 +9,6 @@ import RequestUser from './orm/request_user'
 import PaymentDate from './orm/payment_date'
 import Contract from './orm/contract'
 import File from './orm/file'
-import Admin from './orm/admin'
-import RequestAdmin from './orm/request_admin'
 const db = {}
 export const connectMysql = async () => {
   const sequelize = new Sequelize('test', 'root', 'example', {
@@ -27,8 +25,6 @@ export const connectMysql = async () => {
   const paymentDateModel = PaymentDate(sequelize)
   const contractModel = Contract(sequelize)
   const fileModel = File(sequelize)
-  const adminModel = Admin(sequelize)
-  const requestAdminModel = RequestAdmin(sequelize)
   const userModel = User(sequelize)
   const ScbModel = Scb(sequelize)
   const InformationModel = Information(sequelize)
@@ -42,9 +38,6 @@ export const connectMysql = async () => {
   // RequestModel.hasMany(contractModel)
   fileModel.belongsTo(RequestModel)
   RequestModel.hasMany(fileModel)
-  // requestAdminModel.hasMany(adminModel)
-  requestAdminModel.belongsTo(RequestModel)
-  // RequestModel.hasMany(requestAdminModel)
   userModel.hasOne(ScbModel)
   userModel.hasMany(BankModel)
   userModel.hasMany(RequestUserModel)
@@ -64,8 +57,6 @@ export const connectMysql = async () => {
   db.paymentDate = paymentDateModel
   db.contract = contractModel
   db.file = fileModel
-  db.admin = adminModel
-  db.requestAdmin = requestAdminModel
   db.bank = BankModel
   db.sequelize.sync()
 }

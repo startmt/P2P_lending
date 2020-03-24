@@ -17,6 +17,7 @@ const Index = (props) => {
     </DashboardLayout>
   )
 }
+
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(

@@ -10,7 +10,12 @@ import { connect } from 'react-redux'
 const { Header } = Layout
 const { Item } = Menu
 
-const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
+const Navbar = ({
+  pageName,
+  username,
+  isAuth,
+  handleLogout,
+}) => (
   <Fragment>
     <Header>
       <Menu
@@ -41,8 +46,12 @@ const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
         <div className="right-item">
           {isAuth ? (
             <Row>
-              <Link href="/borrower/main"><a className="mr-2">Console</a></Link>
-                  <Button onClick={handleLogout}>ออกจากระบบ</Button>
+              <Link href="/user/main">
+                <a className="mr-2">Console</a>
+              </Link>
+              <Button onClick={handleLogout}>
+                ออกจากระบบ
+              </Button>
             </Row>
           ) : (
             <Row>
@@ -53,7 +62,7 @@ const Navbar = ({ pageName, username, isAuth, handleLogout }) => (
               </Col>
               <Col span={12}>
                 <Link href="/register">
-                <Button>เริ่มต้นใช้งาน</Button>
+                  <Button>เริ่มต้นใช้งาน</Button>
                 </Link>
               </Col>
             </Row>

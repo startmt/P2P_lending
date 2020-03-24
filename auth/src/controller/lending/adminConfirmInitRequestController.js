@@ -1,11 +1,11 @@
 import { status400, status200 } from '../../utils/status'
 import { isAdmin } from '../../utils/checkrole'
-import { getAdminDataByUsername } from '../../crud/admin'
 import { changeRequestState } from '../../service/lending/lendingService'
+import { getUserByUsername } from '../../crud/user'
 export default async (req, res) => {
   try {
     isAdmin(req.authInfo.role, res)
-    const adminData = await getAdminDataByUsername(req.authInfo.username)
+    const adminData = await getUserByUsername(req.authInfo.username)
     const requestData = {
       requestId: req.body.requestId,
       state: req.body.state,

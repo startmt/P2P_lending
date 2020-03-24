@@ -12,6 +12,7 @@ export default async (req, res) => {
       interestRate: 8,
       loanTenor: req.body.loanTenor,
       description: req.body.description,
+      log: `create lending by ${req.authInfo.username}`,
     })
     if (query.status === 200) {
       const prefix = `${req.authInfo.username}-${query.data.id}`
