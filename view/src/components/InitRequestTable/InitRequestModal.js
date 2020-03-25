@@ -1,26 +1,42 @@
 import React, { useContext } from 'react'
 import { Modal } from 'antd'
-import { AdminRequestTableContext } from '../../context/AdminRequestTableContext'
-const { confirm } = Modal
-const InitRequestModal = () => {
-  const {
-    open,
-    id,
-    handleOk,
-    handleCancel,
-    loading,
-  } = useContext(AdminRequestTableContext)
-  console.log(open, id, loading)
+import { connect } from 'react-redux'
+import { adminAction } from '../../modules/admin/actions'
+import { bindActionCreators } from 'redux'
+const InitRequestModal = ({
+  initRequestData,
+  handleOk,
+  handleCancel,
+}) => {
   return (
     <Modal
       title="Title"
-      visible={open}
-      onOk={handleOk}
-      confirmLoading={loading}
-      onCancel={handleCancel}>
-      <p>{id}</p>
-    </Modal>
+      visible={initRequestData.get('open')}
+      onOk={() => {
+        handleOk(
+          initRequestData.getIn(['data', 'id']),
+          'APPROVE_INIT',
+        )
+      }}
+      onCancel={handleCancel}></Modal>
   )
 }
+const mapStateToProps = (state) => ({
+  initRequestData: state.getIn([
+    'admin',
+    'adminInitRequestData',
+  ]),
+})
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      handleOk: adminAction.confirmRequest,
+      handleCancel: adminAction.closeInitRequestModal,
+    },
+    dispatch,
+  )
 
-export default InitRequestModal
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InitRequestModal)

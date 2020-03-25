@@ -28,3 +28,20 @@ export const getInitRequestDataSuccess = (data) => ({
 export const getInitRequestDataFail = () => ({
   type: 'GET_INIT_REQUEST_DATA_FAIL',
 })
+
+export const confirmRequest = (id, state) => ({
+  type: 'CONFIRM_INIT_REQUEST_DATA',
+  payload: { id, state },
+})
+
+export const confirmRequestSuccess = () => ({
+  type: 'CONFIRM_INIT_REQUEST_DATA_SUCCESS',
+})
+
+export const confirmRequestFail = () => ({
+  type: 'CONFIRM_INIT_REQUEST_DATA_FAIL',
+})
+
+export const closeInitRequestModal = () => ({
+  type: 'CLOSE_INIT_REQUEST_DATA_MODAL',
+})

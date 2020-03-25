@@ -1,16 +1,15 @@
-import React, { useContext, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { Table, Skeleton, Card } from 'antd'
 import { connect } from 'react-redux'
+import { adminAction } from '../../modules/admin/actions'
 import './styles.less'
-import { AdminRequestTableContext } from '../../context/AdminRequestTableContext'
 import InitRequestModal from './InitRequestModal'
+import { bindActionCreators } from 'redux'
 
-const InitRequestTable = ({ initRequestStore }) => {
-  const { handleModal, open } = useContext(
-    AdminRequestTableContext,
-  )
-  console.log(open)
-
+const InitRequestTable = ({
+  initRequestList,
+  handleModal,
+}) => {
   const columns = [
     {
       title: 'title',
@@ -34,7 +33,19 @@ const InitRequestTable = ({ initRequestStore }) => {
       dataIndex: 'loanTenor',
     },
     {
-      title: 'Action',
+      title: 'เอกสาร',
+      key: 'docs',
+      render: (text, record) => (
+        <a
+          onClick={() => {
+            handleModal(record.id)
+          }}>
+          ดูข้อมูล
+        </a>
+      ),
+    },
+    {
+      title: 'action',
       key: 'action',
       render: (text, record) => (
         <a
@@ -51,10 +62,10 @@ const InitRequestTable = ({ initRequestStore }) => {
       <Card title="ใบคำร้อง">
         <Skeleton
           active
-          loading={initRequestStore.get('loading')}>
+          loading={initRequestList.get('loading')}>
           <Table
             columns={columns}
-            dataSource={initRequestStore.get('data').toJS()}
+            dataSource={initRequestList.get('data').toJS()}
             pagination={false}
           />
         </Skeleton>
@@ -65,12 +76,18 @@ const InitRequestTable = ({ initRequestStore }) => {
 }
 
 const mapStateToProps = (state) => ({
-  initRequestStore: state.getIn([
+  initRequestList: state.getIn([
     'admin',
     'adminInitRequest',
   ]),
 })
-const mapDispatchToProps = null
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      handleModal: adminAction.getInitRequestData,
+    },
+    dispatch,
+  )
 
 export default connect(
   mapStateToProps,

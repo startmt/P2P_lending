@@ -7,6 +7,7 @@ import {
 import {
   getInitRequestList,
   getInitRequestData,
+  confirmInitRequest,
 } from '../api/admin'
 import { adminAction } from '../actions'
 
@@ -40,6 +41,26 @@ function* getinitRequestDataSaga(actions) {
     )
   }
 }
+function* confirmRequestSaga(actions) {
+  try {
+    console.log(actions)
+    const data = yield call(
+      confirmInitRequest,
+      actions.payload.id,
+      actions.payload.state,
+    )
+    yield put(adminAction.confirmRequestSuccess(data.data))
+    yield getinitRequest()
+    yield put(adminAction.closeInitRequestModal())
+  } catch (e) {
+    yield put(
+      adminAction.confirmRequestFail(
+        e.response.data.message,
+      ),
+    )
+    yield put(adminAction.closeInitRequestModal())
+  }
+}
 
 export default function*() {
   yield all([
@@ -47,6 +68,10 @@ export default function*() {
     takeLatest(
       'GET_INIT_REQUEST_DATA',
       getinitRequestDataSaga,
+    ),
+    takeLatest(
+      'CONFIRM_INIT_REQUEST_DATA',
+      confirmRequestSaga,
     ),
   ])
 }

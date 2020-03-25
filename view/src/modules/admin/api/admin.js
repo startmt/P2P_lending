@@ -27,3 +27,17 @@ export const getInitRequestData = (id) => {
     config,
   )
 }
+
+export const confirmInitRequest = (id, state) => {
+  const config = {
+    headers: {
+      Authorization:
+        'Bearer ' + localStorage.getItem('token'),
+    },
+  }
+  return axios.post(
+    publicRuntimeConfig.LENDING_SERVICE + '/admin/confirm',
+    { requestId: id, state },
+    config,
+  )
+}
