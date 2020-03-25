@@ -15,6 +15,7 @@ const Navbar = ({
   username,
   isAuth,
   handleLogout,
+  role,
 }) => (
   <Fragment>
     <Header>
@@ -44,29 +45,39 @@ const Navbar = ({
           นักลงทุน
         </Item>
         <div className="right-item">
-          {isAuth ? (
-            <Row>
-              <Link href="/user/main">
-                <a className="mr-2">Console</a>
+          {(isAuth &&
+            (role !== 'admin' && (
+              <Row>
+                <Link href="/user/main">
+                  <a className="mr-2">Console</a>
+                </Link>
+                <Button onClick={handleLogout}>
+                  ออกจากระบบ
+                </Button>
+              </Row>
+            ))) ||
+            (role === 'admin' && (
+              <Row>
+                <Link href="/admin/main">
+                  <a className="mr-2">Console</a>
+                </Link>
+                <Button onClick={handleLogout}>
+                  ออกจากระบบ
+                </Button>
+              </Row>
+            ))}
+          {/* <Row>
+            <Col span={12}>
+              <Link href="/login">
+                <Button>เข้าสู่ระบบ</Button>
               </Link>
-              <Button onClick={handleLogout}>
-                ออกจากระบบ
-              </Button>
-            </Row>
-          ) : (
-            <Row>
-              <Col span={12}>
-                <Link href="/login">
-                  <Button>เข้าสู่ระบบ</Button>
-                </Link>
-              </Col>
-              <Col span={12}>
-                <Link href="/register">
-                  <Button>เริ่มต้นใช้งาน</Button>
-                </Link>
-              </Col>
-            </Row>
-          )}
+            </Col>
+            <Col span={12}>
+              <Link href="/register">
+                <Button>เริ่มต้นใช้งาน</Button>
+              </Link>
+            </Col>
+          </Row> */}
         </div>
       </Menu>
     </Header>
@@ -77,6 +88,7 @@ const mapStateToProps = (state, props) =>
     pageName: pageSelector.getNamePage,
     isAuth: authSelector.isAuth,
     username: authSelector.getUsername,
+    role: authSelector.getRole,
   })(state, props)
 const mapDispatchToProps = null
 

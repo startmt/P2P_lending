@@ -38,6 +38,7 @@ export default function reducer(
           'userDetail',
           fromJS(action.payload.authDesc.userDetail),
         )
+        .set('role', fromJS(action.payload.authDesc.role))
     case 'SET_USER_FROM_CONTRACT':
       return state.setIn(['contract', 'loading'], true)
     case 'SET_USER_FROM_CONTRACT_SUCCESS':
