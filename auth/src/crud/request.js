@@ -8,6 +8,13 @@ export const getCheckedRequest = async () => {
 export const getCheckedRequestById = async (id) => {
   return db.request.findOne({
     where: { state: 'CHECKED', id: id },
+    include: [
+      {
+        model: db.requestlog,
+        where: { requestId: id },
+      },
+    ],
+    order: [[db.requestlog, 'createdAt', 'DESC']],
   })
 }
 
@@ -45,6 +52,13 @@ export const getRequestByIdState = async (id, state) => {
 export const getRequestById = async (id) => {
   return db.request.findOne({
     where: { id },
+    include: [
+      {
+        model: db.requestlog,
+        where: { requestId: id },
+      },
+    ],
+    order: [[db.requestlog, 'createdAt', 'DESC']],
   })
 }
 

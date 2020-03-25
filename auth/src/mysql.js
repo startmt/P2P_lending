@@ -9,6 +9,7 @@ import RequestUser from './orm/request_user'
 import PaymentDate from './orm/payment_date'
 import Contract from './orm/contract'
 import File from './orm/file'
+import RequestLog from './orm/requestlog'
 const db = {}
 export const connectMysql = async () => {
   const sequelize = new Sequelize('test', 'root', 'example', {
@@ -31,7 +32,7 @@ export const connectMysql = async () => {
   const BankModel = Bank(sequelize)
   const RequestModel = Request(sequelize)
   const RequestUserModel = RequestUser(sequelize)
-
+  const RequestLogModel = RequestLog(sequelize)
   paymentDateModel.belongsTo(contractModel)
   // contractModel.hasMany(paymentDateModel)
   contractModel.belongsTo(RequestModel)
@@ -45,6 +46,8 @@ export const connectMysql = async () => {
   ScbModel.belongsTo(userModel)
   ScbModel.hasOne(InformationModel)
   InformationModel.belongsTo(ScbModel)
+  RequestModel.hasMany(RequestLogModel)
+  RequestLogModel.belongsTo(RequestModel)
   BankModel.belongsTo(userModel)
 
   db.user = userModel
@@ -58,6 +61,7 @@ export const connectMysql = async () => {
   db.contract = contractModel
   db.file = fileModel
   db.bank = BankModel
+  db.requestlog = RequestLogModel
   db.sequelize.sync()
 }
 export default db

@@ -2,6 +2,7 @@ import { status400, status200 } from '../../utils/status'
 import { getLendingRequestById } from '../../service/lending/lenderService'
 export default async (req, res) => {
   try {
+    console.log('dddd')
     const query = await getLendingRequestById(
       req.authInfo.username,
       req.params.id,

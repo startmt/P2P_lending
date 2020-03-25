@@ -42,9 +42,4 @@ export default (sequelize) =>
       field: 'description',
       allowNull: false,
     },
-    log: {
-      type: DataTypes.STRING,
-      field: 'log',
-      allowNull: false,
-    },
   })

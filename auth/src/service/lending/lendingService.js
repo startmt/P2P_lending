@@ -1,5 +1,6 @@
 import { updateRequest, getRequestById } from '../../crud/request'
 import { getUserById } from '../../crud/user'
+import { createLog } from '../../crud/requestlog'
 
 export const changeRequestState = async ({ requestId, state, adminId }) => {
   switch (state) {
@@ -14,8 +15,11 @@ const appoveInit = async (requestId, state, adminId) => {
       const admin = await getUserById(adminId)
       const requestData = {
         state,
-        log: `change INIT to CHECKED by ${admin.get().username}`,
       }
+      await createLog(
+        `change INIT to CHECKED by ${admin.get().username}`,
+        requestId,
+      )
       await updateRequest(requestId, requestData)
       return { status: 200 }
     } catch (error) {

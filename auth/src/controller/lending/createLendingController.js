@@ -1,6 +1,7 @@
 import { status400, status200 } from '../../utils/status'
 import { createLending } from '../../service/lending/borrowerService'
 import { uploadFile } from '../../utils/managefile'
+import { createLog } from '../../crud/requestlog'
 
 export default async (req, res) => {
   try {
@@ -12,8 +13,8 @@ export default async (req, res) => {
       interestRate: 8,
       loanTenor: req.body.loanTenor,
       description: req.body.description,
-      log: `create lending by ${req.authInfo.username}`,
     })
+    await createLog(`create lending by ${req.authInfo.username}`, query.data.id)
     if (query.status === 200) {
       const prefix = `${req.authInfo.username}-${query.data.id}`
       const data = {
