@@ -5,6 +5,7 @@ import { adminAction } from '~/modules/admin/actions'
 import withRedux from '~/hocs/with-redux'
 import { AdminLayout } from '~/layouts/admin'
 import InitRequestTable from '../../components/InitRequestTable/InitRequestTable'
+import { AdminRequestTableProvider } from '../../context/AdminRequestTableContext'
 const Index = (props) => {
   const { setPageName, getInitRequest, resetState } = props
   setPageName('adminRequest')
@@ -18,7 +19,9 @@ const Index = (props) => {
     <AdminLayout>
       <section className="section">
         <div className="container">
-          <InitRequestTable />
+          <AdminRequestTableProvider>
+            <InitRequestTable />
+          </AdminRequestTableProvider>
         </div>
       </section>
     </AdminLayout>

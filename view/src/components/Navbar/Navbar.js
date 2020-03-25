@@ -56,7 +56,7 @@ const Navbar = ({
                 </Button>
               </Row>
             ))) ||
-            (role === 'admin' && (
+            ((role === 'admin' && (
               <Row>
                 <Link href="/admin/main">
                   <a className="mr-2">Console</a>
@@ -65,19 +65,20 @@ const Navbar = ({
                   ออกจากระบบ
                 </Button>
               </Row>
+            )) || (
+              <Row>
+                <Col span={12}>
+                  <Link href="/login">
+                    <Button>เข้าสู่ระบบ</Button>
+                  </Link>
+                </Col>
+                <Col span={12}>
+                  <Link href="/register">
+                    <Button>เริ่มต้นใช้งาน</Button>
+                  </Link>
+                </Col>
+              </Row>
             ))}
-          {/* <Row>
-            <Col span={12}>
-              <Link href="/login">
-                <Button>เข้าสู่ระบบ</Button>
-              </Link>
-            </Col>
-            <Col span={12}>
-              <Link href="/register">
-                <Button>เริ่มต้นใช้งาน</Button>
-              </Link>
-            </Col>
-          </Row> */}
         </div>
       </Menu>
     </Header>

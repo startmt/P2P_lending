@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux-immutable'
-import adminReducer from './admin'
+import initRequestList from './initRequestList'
+import initRequestData from './initRequestData'
 export default combineReducers({
-  adminInitRequest: adminReducer,
+  adminInitRequest: initRequestList,
+  adminInitRequestData: initRequestData,
 })

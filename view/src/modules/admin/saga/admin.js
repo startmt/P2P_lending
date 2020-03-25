@@ -4,7 +4,10 @@ import {
   put,
   all,
 } from 'redux-saga/effects'
-import { getInitRequestList } from '../api/admin'
+import {
+  getInitRequestList,
+  getInitRequestData,
+} from '../api/admin'
 import { adminAction } from '../actions'
 
 function* getinitRequest() {
@@ -13,7 +16,27 @@ function* getinitRequest() {
     yield put(adminAction.getInitRequestSuccess(data.data))
   } catch (e) {
     yield put(
-      registerAction.registerFail(e.response.data.message),
+      adminAction.getInitRequestFail(
+        e.response.data.message,
+      ),
+    )
+  }
+}
+
+function* getinitRequestDataSaga(actions) {
+  try {
+    const data = yield call(
+      getInitRequestData,
+      actions.payload.id,
+    )
+    yield put(
+      adminAction.getInitRequestDataSuccess(data.data),
+    )
+  } catch (e) {
+    yield put(
+      adminAction.getInitRequestDataFail(
+        e.response.data.message,
+      ),
     )
   }
 }
@@ -21,5 +44,9 @@ function* getinitRequest() {
 export default function*() {
   yield all([
     takeLatest('GET_INIT_REQUEST', getinitRequest),
+    takeLatest(
+      'GET_INIT_REQUEST_DATA',
+      getinitRequestDataSaga,
+    ),
   ])
 }
