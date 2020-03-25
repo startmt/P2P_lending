@@ -6,7 +6,10 @@ import { getUserIdOnefromRequestId } from '../../crud/requestuser'
 import { savedContractAddressInDB } from '../../crud/contract'
 import { getInfomationByUsername } from '../../crud/information'
 import { verifyBank } from '../../crud/bank'
-import { setLoadingBlockchain } from '../../service/blockchain/loading'
+import {
+  setLoadingBlockchain,
+  deleteLoading,
+} from '../../service/blockchain/loading'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -39,6 +42,7 @@ export default async (req, res) => {
               requestId,
             )
             await lenderAcceptRequest(user.get().id, requestId)
+            await deleteLoading(username)
             status200(res, { lendingContract: response })
           case 'LENDING':
           default:
@@ -53,6 +57,7 @@ export default async (req, res) => {
     }
   } catch (e) {
     console.log(e)
+    deleteLoading(req.body.data.username)
     status400(res, 'Error catch')
   }
 }

@@ -9,5 +9,10 @@ export const deleteLoading = async (username) => {
 }
 
 export const getLoading = async (username) => {
-  return redisClient.getAsync('loading' + username)
+  const data = await redisClient.getAsync('loading' + username)
+  if (data) {
+    return { result: await redisClient.getAsync('loading' + username) }
+  } else {
+    return { error: 'error' }
+  }
 }
