@@ -55,7 +55,6 @@ export const getRequestById = async (id) => {
     include: [
       {
         model: db.requestlog,
-        where: { requestId: id },
       },
     ],
     order: [[db.requestlog, 'createdAt', 'DESC']],

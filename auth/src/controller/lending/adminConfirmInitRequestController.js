@@ -9,7 +9,7 @@ export default async (req, res) => {
     const requestData = {
       requestId: req.body.requestId,
       state: req.body.state,
-      adminId: adminData.get().id,
+      userId: adminData.get().id,
     }
     const adminTransaction = await changeRequestState(requestData)
     adminTransaction.status === 200
