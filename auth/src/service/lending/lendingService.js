@@ -2,10 +2,10 @@ import { updateRequest, getRequestById } from '../../crud/request'
 import { getUserById } from '../../crud/user'
 import { createLog } from '../../crud/requestlog'
 
-export const changeRequestState = async ({ requestId, state, adminId }) => {
+export const changeRequestState = async ({ requestId, state, userId }) => {
   switch (state) {
     case 'APPROVE_INIT':
-      return await appoveInit(requestId, 'CHECKED', adminId)
+      return await appoveInit(requestId, 'CHECKED', userId)
   }
 }
 

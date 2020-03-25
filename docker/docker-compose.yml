@@ -38,6 +38,16 @@ services:
       - minio1
   redis_auth:
     image: redis:5-alpine
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: example
+    depends_on:
+      - mysql
   web:
     image: startmt/p2p-frontend-service:latest
     # build:
