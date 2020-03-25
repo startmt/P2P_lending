@@ -7,7 +7,6 @@ import { savedContractAddressInDB } from '../../crud/contract'
 import { getInfomationByUsername } from '../../crud/information'
 import { verifyBank } from '../../crud/bank'
 import { setLoadingBlockchain } from '../../service/blockchain/loading'
-import { changeRequestState } from '../../service/lending/lendingService'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -39,7 +38,6 @@ export default async (req, res) => {
               data._address,
               requestId,
             )
-            await changeRequestState(requestId, 'LENDING', user.get().id)
             await lenderAcceptRequest(user.get().id, requestId)
             status200(res, { lendingContract: response })
           case 'LENDING':

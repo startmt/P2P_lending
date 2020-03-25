@@ -17,7 +17,7 @@ export const savedContractAddressInDB = async (address, requestId) => {
       data: request.get(),
     }
     await updateRequest(requestId, {
-      state: 'LENDING_WAIT_BORROWER_ACCEPT_MONEY',
+      state: 'LENDING',
     })
     return returnData
   } catch (e) {
