@@ -4,11 +4,13 @@ import { connect } from 'react-redux'
 import { adminAction } from '../../modules/admin/actions'
 import './styles.less'
 import InitRequestModal from './InitRequestModal'
+import { Button } from 'antd'
 import { bindActionCreators } from 'redux'
-
 const InitRequestTable = ({
   initRequestList,
   handleModal,
+  handleSubmit,
+  confirm,
 }) => {
   const columns = [
     {
@@ -48,12 +50,25 @@ const InitRequestTable = ({
       title: 'action',
       key: 'action',
       render: (text, record) => (
-        <a
-          onClick={() => {
-            handleModal(record.id)
-          }}>
-          ดูข้อมูล
-        </a>
+        <Fragment>
+          <Button
+            style={{ marginRight: 8 }}
+            type="primary"
+            loading={confirm.get('loading')}
+            onClick={() => {
+              handleSubmit(record.id, 'APPROVE_INIT')
+            }}>
+            ยืนยัน
+          </Button>
+          <Button
+            loading={confirm.get('loading')}
+            type="danger"
+            onClick={() => {
+              handleSubmit(record.id, 'REJECT')
+            }}>
+            ยกเลิก
+          </Button>
+        </Fragment>
       ),
     },
   ]
@@ -80,11 +95,13 @@ const mapStateToProps = (state) => ({
     'admin',
     'adminInitRequest',
   ]),
+  confirm: state.getIn(['admin', 'confirm']),
 })
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleModal: adminAction.getInitRequestData,
+      handleSubmit: adminAction.confirmRequest,
     },
     dispatch,
   )

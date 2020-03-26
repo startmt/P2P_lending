@@ -9,6 +9,7 @@ import {
   getInitRequestData,
   confirmInitRequest,
 } from '../api/admin'
+import { openNotificationWithIcon } from '../../../components/Notification/Notification'
 import { adminAction } from '../actions'
 
 function* getinitRequest() {
@@ -43,22 +44,29 @@ function* getinitRequestDataSaga(actions) {
 }
 function* confirmRequestSaga(actions) {
   try {
-    console.log(actions)
     const data = yield call(
       confirmInitRequest,
       actions.payload.id,
       actions.payload.state,
     )
+
     yield put(adminAction.confirmRequestSuccess(data.data))
     yield getinitRequest()
     yield put(adminAction.closeInitRequestModal())
-  } catch (e) {
-    yield put(
-      adminAction.confirmRequestFail(
-        e.response.data.message,
-      ),
+    yield call(
+      openNotificationWithIcon,
+      'success',
+      'สำเร็จ',
     )
-    yield put(adminAction.closeInitRequestModal())
+  } catch (e) {
+    console.log(e)
+
+    yield call(
+      openNotificationWithIcon,
+      'error',
+      'มีบางอย่างผิดพลาด',
+    )
+    yield put(adminAction.confirmRequestFail('Error'))
   }
 }
 
