@@ -14,13 +14,13 @@ const Sidebar = ({ pageName, handleLogout }) => {
       mode="inline">
       <Menu.Item key="borrowerMain">
         <Icon type="home" />
-        <Link href="/borrower/main" prefetch>
+        <Link href="/user/main" prefetch>
           <span>หน้าหลัก</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="borrowerProfile">
+      <Menu.Item key="userProfile">
         <Icon type="user" />
-        <Link href="/borrower/profile" prefetch>
+        <Link href="/user/profile" prefetch>
           <span>ข้อมูลส่วนตัว</span>
         </Link>
       </Menu.Item>

@@ -59,16 +59,19 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "1d:ac:17:b2:37:21:2d:53:6c:82:39:81:f9:30:46:bb"
+            - "b6:26:21:2f:7e:4e:d9:e4:d8:4c:91:c0:bd:55:25:76"
       - run:
           name: Deploy Over SSH
           command: |
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
             cd P2P_lending && cd docker && \
             sudo docker-compose stop && \
+            sudo git pull && \
             sudo docker-compose rm -f && \
             sudo docker-compose pull && \
+            sudo docker-compose build nginx && \
             sudo docker-compose up -d && \
+            sudo docker-compose restart api && \
             sudo docker image prune -f"
 
 workflows:
