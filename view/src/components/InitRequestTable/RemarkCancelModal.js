@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal } from 'antd'
 import PropTypes from 'prop-types'
 import { TextArea, Form, Message } from 'semantic-ui-react'
+import ErrorMessage from '~/components/ErrorMessage'
 const { Field } = Form
 const RemarkCancelModal = ({
   handleCancel,
@@ -23,11 +24,8 @@ const RemarkCancelModal = ({
         <Field>
           <label>หมายเหตุการยกเลิก</label>
           <TextArea name="remark" onChange={onFormChange} />
-          <Message
-            error={errors.remark ? false : true}
-            negative
-            header="Error"
-            content={
+          <ErrorMessage
+            text={
               (errors.remark && errors.remark.message) || ''
             }
           />

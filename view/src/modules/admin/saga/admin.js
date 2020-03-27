@@ -64,7 +64,6 @@ function* confirmRequestSaga(actions) {
       actions.payload.state,
       actions.payload.remark,
     )
-    const files = data.files
     yield put(adminAction.confirmRequestSuccess(data.data))
     yield getinitRequest()
     yield put(adminAction.closeInitRequestModal())
