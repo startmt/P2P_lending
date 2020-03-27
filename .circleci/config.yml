@@ -7,7 +7,7 @@ jobs:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - checkout:
           path: ~/P2P_lending
       - run:
@@ -25,15 +25,16 @@ jobs:
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
             docker build -t $DOCKER_USERNAME/p2p-auth-service . && \
             docker push $DOCKER_USERNAME/p2p-auth-service
+
   frontend:
-    working_directory: ~/P2P_lending/front-end
+    working_directory: ~/P2P_lending/view
     docker:
       - image: circleci/node:10
     steps:
       - setup_remote_docker:
-          docker_layer_caching: true
+          docker_layer_caching: false
       - checkout:
-          path: ~/P2P_lending/view
+          path: ~/P2P_lending
       - run:
           name: install npm
           command: npm install
@@ -41,7 +42,7 @@ jobs:
           name: push container to docker hub
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && \
-            docker build -t $DOCKER_USERNAME/p2p-frontend:$CIRCLE_SHA1 . && \
+            docker build -t $DOCKER_USERNAME/p2p-frontend-service:$CIRCLE_SHA1 . && \
             docker push $DOCKER_USERNAME/p2p-frontend-service:$CIRCLE_SHA1
       - run:
           name: push container to docker hub (latest)
@@ -50,44 +51,48 @@ jobs:
             docker build -t $DOCKER_USERNAME/p2p-frontend-service . && \
             docker push $DOCKER_USERNAME/p2p-frontend-service
       - run:
-      name: build react
-      command: npm run build
-      
-    - run:
-          name: Firebase Deploy
-          command: ./node_modules/.bin/firebase deploy --project $PROJECT_ID --token "$TOKEN_FIREBASE"
+          name: build react
+          command: npm run build
   deploy:
     machine:
       enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "b2:d6:0b:82:24:75:87:9e:8c:62:2d:27:a5:5b:92:2f"
+            - "b6:26:21:2f:7e:4e:d9:e4:d8:4c:91:c0:bd:55:25:76"
       - run:
           name: Deploy Over SSH
           command: |
             ssh -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} "\
-            docker-compose pull auth && \
-            docker-compose up -d"
+            cd P2P_lending && cd docker && \
+            sudo docker-compose stop && \
+            sudo git pull && \
+            sudo docker-compose rm -f && \
+            sudo docker-compose pull && \
+            sudo docker-compose build nginx && \
+            sudo docker-compose up -d && \
+            sudo docker-compose restart api && \
+            sudo docker image prune -f"
 
 workflows:
   version: 2
   deploy:
     jobs:
-          - auth:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-          - frontend:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-          - deploy:
-              filters:
-                branches:
-                  only:
-                    - pre-master
-              requires:
-                - auth
+      - auth:
+          filters:
+            branches:
+              only:
+                - pre-master
+      - frontend:
+          filters:
+            branches:
+              only:
+                - pre-master
+      - deploy:
+          filters:
+            branches:
+              only:
+                - pre-master
+          requires:
+            - auth
+            - frontend

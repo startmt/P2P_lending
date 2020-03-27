@@ -1,12 +1,31 @@
 {
-    "sourceMaps": "both",
-    "presets": [ "next/babel", "@babel/preset-env" ],
-    "plugins": [
-      "transform-export-extensions",
-      "inline-react-svg",
-      [ "babel-plugin-root-import", {
+  "sourceMaps": "both",
+  "presets": ["next/babel", "@babel/preset-env"],
+  "plugins": [
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/transform-runtime",
+    "@babel/plugin-proposal-export-namespace-from",
+    [
+      "styled-components",
+      { "ssr": true, "displayName": true }
+    ],
+    "transform-export-extensions",
+    "inline-react-svg",
+    [
+      "babel-plugin-root-import",
+      {
         "rootPathSuffix": "src"
-      }],
-      ["react-intl"]
+      }
     ]
+  ],
+  "env": {
+    "prod": {
+      "plugins": [
+        [
+          "styled-components",
+          { "ssr": true, "displayName": false }
+        ]
+      ]
+    }
+  }
 }

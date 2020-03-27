@@ -1,10 +1,30 @@
-import React from 'react'
-import { compose } from 'redux'
+import React, { Fragment } from 'react'
+import { compose, bindActionCreators } from 'redux'
+import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '../hocs/with-redux'
-const Index = () => <div>Hello World</div>
+import { LandingLayout } from '../layouts/landing'
+import HomeContainer from '../modules/home/containers/HomeContainer'
+import withIntl from '../hocs/with-intl'
+const Index = (props) => {
+  const { setPageName } = props
+  setPageName('Landing')
+  return (
+    <Fragment>
+      <LandingLayout>
+        <HomeContainer />
+      </LandingLayout>
+    </Fragment>
+  )
+}
 const mapStateToProps = null
-const mapDispatchToProps = null
-
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setPageName: pageNameAction.setPageName,
+    },
+    dispatch,
+  )
 export default compose(
   withRedux(mapStateToProps, mapDispatchToProps),
+  withIntl,
 )(Index)
