@@ -3,18 +3,18 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import { lendingAction } from '~/modules/borrower/actions'
 import withRedux from '~/hocs/with-redux'
-import { DashboardLayout } from '~/layouts/dashboard'
+import { AdminLayout } from '~/layouts/admin'
 import MainContainer from '~/modules/borrower/containers/MainContainer'
 const Index = (props) => {
   const { setPageName, getSelfLending } = props
-  setPageName('borrowerMain')
+  setPageName('adminMain')
   useEffect(() => {
     getSelfLending()
   }, [])
   return (
-    <DashboardLayout>
-      <MainContainer />
-    </DashboardLayout>
+    <AdminLayout>
+      <div>ddd</div>
+    </AdminLayout>
   )
 }
 

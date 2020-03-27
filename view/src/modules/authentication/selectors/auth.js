@@ -21,3 +21,8 @@ export const isConnectScb = createSelector(
   getAuth,
   (auth) => auth.get('isConnectScb', false),
 )
+
+export const getRole = createSelector(
+  getAuth,
+  (auth) => auth.get('role', false),
+)
