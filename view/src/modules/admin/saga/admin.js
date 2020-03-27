@@ -8,9 +8,11 @@ import {
   getInitRequestList,
   getInitRequestData,
   confirmInitRequest,
+  getMannerFromWeb3,
 } from '../api/admin'
 import { openNotificationWithIcon } from '../../../components/Notification/Notification'
 import { adminAction } from '../actions'
+import { mapMannerToObject } from '../../../contract/manner'
 
 function* getinitRequest() {
   try {
@@ -27,19 +29,24 @@ function* getinitRequest() {
 
 function* getinitRequestDataSaga(actions) {
   try {
-    const data = yield call(
+    const { data } = yield call(
       getInitRequestData,
       actions.payload.id,
     )
+    const manner = yield call(
+      getMannerFromWeb3,
+      data.user.blockData,
+    )
+    const mannerObj = mapMannerToObject(manner)
     yield put(
-      adminAction.getInitRequestDataSuccess(data.data),
+      adminAction.getInitRequestDataSuccess({
+        ...data,
+        manner: mannerObj,
+      }),
     )
   } catch (e) {
-    yield put(
-      adminAction.getInitRequestDataFail(
-        e.response.data.message,
-      ),
-    )
+    console.log(e)
+    yield put(adminAction.getInitRequestDataFail('error'))
   }
 }
 function* confirmRequestSaga(actions) {

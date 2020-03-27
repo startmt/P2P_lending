@@ -35,7 +35,7 @@ const InitRequestTable = ({
       dataIndex: 'loanTenor',
     },
     {
-      title: 'เอกสาร',
+      title: 'ข้อมูล',
       key: 'docs',
       render: (text, record) => (
         <a
@@ -52,7 +52,7 @@ const InitRequestTable = ({
       render: (text, record) => (
         <Fragment>
           <Button
-            style={{ marginRight: 8 }}
+            className="ant-button"
             type="primary"
             loading={confirm.get('loading')}
             onClick={() => {
@@ -61,6 +61,7 @@ const InitRequestTable = ({
             ยืนยัน
           </Button>
           <Button
+            className="ant-button"
             loading={confirm.get('loading')}
             type="danger"
             onClick={() => {
