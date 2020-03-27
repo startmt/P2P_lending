@@ -1,17 +1,52 @@
-import React, { Fragment } from 'react'
-import { Table, Skeleton, Card } from 'antd'
+import React, { Fragment, useState, useEffect } from 'react'
+import { Table, Skeleton, Card, Modal } from 'antd'
 import { connect } from 'react-redux'
 import { adminAction } from '../../modules/admin/actions'
 import './styles.less'
 import InitRequestModal from './InitRequestModal'
 import { Button } from 'antd'
 import { bindActionCreators } from 'redux'
+import useForm from 'react-hook-form'
+import RemarkCancelModal from './RemarkCancelModal'
 const InitRequestTable = ({
   initRequestList,
   handleModal,
-  handleSubmit,
+  handleConfirm,
   confirm,
 }) => {
+  const [open, setOpen] = useState(false)
+  const [id, setId] = useState('')
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    errors,
+    triggerValidation,
+  } = useForm()
+  useEffect(() => {
+    register(
+      {
+        name: 'remark',
+      },
+      { required: 'กรุณากรอกหมายเหตุ' },
+    )
+  }, [])
+  const handleClose = () => {
+    setOpen(false)
+    setId('')
+  }
+  const handleOpen = (id) => {
+    setOpen(true)
+    setId(id)
+  }
+  const onFormChange = async (e, { name, value }) => {
+    setValue(name, value)
+    await triggerValidation({ name })
+  }
+  const onSubmit = handleSubmit(async (value) => {
+    await handleConfirm(id, 'REJECT', value.remark)
+    handleClose()
+  })
   const columns = [
     {
       title: 'title',
@@ -56,7 +91,7 @@ const InitRequestTable = ({
             type="primary"
             loading={confirm.get('loading')}
             onClick={() => {
-              handleSubmit(record.id, 'APPROVE_INIT')
+              handleConfirm(record.id, 'APPROVE_INIT')
             }}>
             ยืนยัน
           </Button>
@@ -64,11 +99,16 @@ const InitRequestTable = ({
             className="ant-button"
             loading={confirm.get('loading')}
             type="danger"
-            onClick={() => {
-              handleSubmit(record.id, 'REJECT')
-            }}>
+            onClick={() => handleOpen(record.id)}>
             ยกเลิก
           </Button>
+          <RemarkCancelModal
+            handleCancel={handleClose}
+            handleSubmit={onSubmit}
+            open={open}
+            onFormChange={onFormChange}
+            errors={errors}
+          />
         </Fragment>
       ),
     },
@@ -102,7 +142,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       handleModal: adminAction.getInitRequestData,
-      handleSubmit: adminAction.confirmRequest,
+      handleConfirm: adminAction.confirmRequest,
     },
     dispatch,
   )

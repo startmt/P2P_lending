@@ -10,6 +10,7 @@ export default async (req, res) => {
       requestId: req.body.requestId,
       state: req.body.state,
       userId: adminData.get().id,
+      remark: req.body.remark || ''
     }
     const adminTransaction = await changeRequestState(requestData)
     adminTransaction.status === 200
