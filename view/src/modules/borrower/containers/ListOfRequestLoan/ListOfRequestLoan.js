@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'semantic-ui-react'
 import { Row, Col, Button } from 'antd'
-import Link from 'next/link'
 import './style.less'
 import LoanCondition from '~/modules/borrower/containers/LoanCondition/LoanCondition'
 import UploadFromBorrower from '~/modules/borrower/containers/UploadFromBorrower/UploadFromBorrower'
 import moment from 'moment'
+import axios from 'axios'
+import config from '../../../../../config'
 
 const ListOfRequestLoan = (props) => {
   const [loanName, setLoanName] = useState('')
@@ -14,23 +14,44 @@ const ListOfRequestLoan = (props) => {
   const [purposeDetail, setPurposeDetail] = useState('')
   const [modalLoan, setModalLoan] = useState(false)
   const [loanList, setLoanList]= useState([])
+  const [idCard, setIdCard] = useState(null)
+  const [salary, setSalary] = useState(null)
+  const [modalUpload, setModalUpload] = useState(false)
   // const [createAt, setCreateAt] = useState('')
-
+ 
+  const fetch = async () => {
+    const result = await axios.get(`${config.LENDING_HOST}/lending/my`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+    console.log(result)
+    setLoanList(result.data)
+  }
+ 
   useEffect(() => {
-    localStorage.setItem('loanList', loanList);
-  }, [loanList]);
+    fetch()
+  },[]);
+ 
+  const submitForm = async () => {
+    console.log(idCard)
+    let data = new FormData();
 
-
-  const submitForm = () => {
-    setLoanList([...loanList, { loanName, approvalLimit, loanPurpose, purposeDetail, loanerName:  'boss', state: 'Initial', createAt: moment().calendar() }])
-    window.localStorage.setItem('loanList', [...loanList, { loanName, approvalLimit, loanPurpose, purposeDetail, loanerName:  'boss', state: 'Initial', createAt: moment().calendar() }])
+    data.append('category', 1);
+    data.append('title', loanName);
+    data.append('amount', approvalLimit);
+    data.append('loanTenor', 8);
+    data.append('description', purposeDetail);
+    data.append('credit', idCard.originFileObj);
+    data.append('salary', salary.originFileObj);
+    console.log(idCard)
+    console.log(salary)
+    const result = await axios.post(`${config.LENDING_HOST}/lending/create`, data,  { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+    console.log(result)
     setLoanName('')
     setApprovalLimit(20000)
     setLoanPurpose('เงินทุนหมุนเวียน')
     setPurposeDetail('')
     setModalLoan(false)
+    setModalUpload(false)
   }
-  //setLoanList(localStorage.getItem('loanList'))
+ 
   return (
     <div className="fromRequestLoan">
       <div class="stateTable">
@@ -39,16 +60,18 @@ const ListOfRequestLoan = (props) => {
           <div className="createLoan">
             <LoanCondition
               open={modalLoan}
-              submit={submitForm}
               loanName={loanName}
               approvalLimit={approvalLimit}
               loanPurpose={loanPurpose}
               purposeDetail={purposeDetail}
+              idCard={idCard}
               setModalLoan={setModalLoan}
               setLoanName={setLoanName}
               setApprovalLimit={setApprovalLimit}
               setLoanPurpose={setLoanPurpose}
               setPurposeDetail={setPurposeDetail}
+              setIdCard={setIdCard}
+              setModalUpload={setModalUpload}
             />
           </div>
           <br />
@@ -64,62 +87,31 @@ const ListOfRequestLoan = (props) => {
             </tr>
           </thead>
           <tbody>
+            {loanList.map(data => (
             <tr>
-              <td>Kritsakorn Yongpenny</td>
-              <td>200,000</td>
-              <td>24/03/19</td>
-              <td>Initial</td>
+              <td>Kritsakorn Tongchaikun</td>
+              <td>{data.amount}</td>
+              <td>{data.createdAt}</td>
               <td>
-                <UploadFromBorrower />
+                {data.state === 'LENDING_WAIT_BORROWER_ACCEPT_MONEY' && 'Review'}
+                {/* {data.state === 'INIT' && 'Initial'}
+                {data.state === 'upload' && 'Upload'}
+                {data.state === 'INQU' && 'Inquire'}
+                {data.state === 'Review' && 'Review'}
+                {data.state === 'Submit' && 'Submit'}
+                {data.state === 'Cancel' && 'Cancel'} */}
               </td>
-            </tr>
-            <tr>
-              <td>Thongsabad Kadsonnguen</td>
-              <td>550,000</td>
-              <td>09/12/18</td>
-              <td>Initial</td>
               <td>
-                <Button
-                  type="primary"
-                  href="/borrower/detailloanerdoc">
-                  Detail
-                </Button>
+                {data.state === 'upload' && <UploadFromBorrower />}
               </td>
             </tr>
-            <tr>
-              <td>Zhuwang Kingkol</td>
-              <td>850,000</td>
-              <td>21/03/17</td>
-              <td>Process</td>
-              <td>
-                <Button type="primary" href="/borrower/paymentforloan">Pay</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Leo Whereami</td>
-              <td>1,000,000</td>
-              <td>31/07/16</td>
-              <td>Pay in 05/08/16</td>
-              <td>
-                <Button type="primary" href="/borrower/paymentsuccess">Pay</Button>
-              </td>
-            </tr>
-            {loanList.map(loan => 
-            <tr>
-<td>{loan.loanerName}</td>
-            <td>{loan.approvalLimit}</td>
-            <td>{loan.createAt}</td>
-            <td>{loan.state}</td>
-            <td>
-            <UploadFromBorrower />
-              </td>
-            </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
       <br />
       <br />
+      <UploadFromBorrower open={modalUpload} submit={submitForm} setIdCard={setIdCard} setSalary={setSalary}/>
     </div>
   )
 }

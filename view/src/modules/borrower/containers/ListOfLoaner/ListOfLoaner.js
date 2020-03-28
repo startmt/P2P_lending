@@ -2,6 +2,7 @@ import React from 'react'
 import { Table } from 'semantic-ui-react'
 import { Row, Col, Select } from 'antd'
 import Link from 'next/link'
+import UploadFromBorrower from '~/modules/borrower/containers/UploadFromBorrower/UploadFromBorrower'
 import './style.less'
 
 const { Option } = Select;
@@ -9,6 +10,13 @@ const { Option } = Select;
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
+
+const moc = [{
+  Name:'Kitti',
+  Amount:200000,
+  CreateAt:'24/24/2400',
+  Type:'ขยายกิจการ'
+}]
 
 const StateLoaner = (props) => {
   return (
@@ -40,33 +48,17 @@ const StateLoaner = (props) => {
             </tr>
           </thead>
           <tbody>
+            {moc.map(loaner => (
             <tr>
-              <td>Kritsakorn Yungpenny</td>
-              <td>850,000</td>
-              <td>24/03/19</td>
-              <td>ขยายกิจการ</td>
+              <td>{loaner.Name}</td>
+              <td>{loaner.Amount}</td>
+              <td>{loaner.CreateAt}</td>
+              <td>{loaner.Type}</td>
               <td>
-                <a href="../UploadFromBorrower">Click</a>
+                <a href="../borrower/detailloanerdoc">Click</a>
               </td>
             </tr>
-            <tr>
-              <td>Thongsabad Kadsonnguen</td>
-              <td>200,000</td>
-              <td>09/12/18</td>
-              <td>เงินทุนหมุนเวียน</td>
-              <td>
-                <a href="../UploadFromBorrower">Click</a>
-              </td>
-            </tr>
-            <tr>
-              <td>Leo Whereami</td>
-              <td>1,000,000</td>
-              <td>31/07/16</td>
-              <td>เงินทุนหมุนเวียน</td>
-              <td>
-                <a href="../UploadFromBorrower">Click</a>
-              </td>
-            </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -11,6 +11,7 @@ import {
 } from 'antd'
 import Link from 'next/link'
 import './style.less'
+import UploadFile from '../UploadFile'
 
 function onChange(e) {
   console.log(`checked = ${e.target.checked}`)
@@ -24,8 +25,12 @@ function handleChange(value) {
 
 const LoanCondition = (props) => {
   console.log(props)
-  const { loanName, approvalLimit, loanPurpose, purposeDetail, setLoanName, open, submit, setModalLoan } = props
+  const { loanName, approvalLimit, loanPurpose, purposeDetail, idCard , setLoanName, open, submit, setModalLoan, setIdCard } = props
   //console.log(approvalLimit)
+
+  const uploadIdCard = (file) => {
+    props.setIdCard(file)
+  }
   return (
     <Modal open={open}
     onClose={() => setModalLoan(false)}
@@ -100,7 +105,7 @@ const LoanCondition = (props) => {
                 <Row>
                   <Col span={5}>
                     <label className="subTopic_2">
-                      จุดประสงต์ในการกู้ :
+                      จุดประสงค์ในการกู้ :
                     </label>
                     <br />
                   </Col>
@@ -141,6 +146,7 @@ const LoanCondition = (props) => {
                   </Col>
                 </Row>
                 <br />
+                <br />
                 <Row>
                   <h4>
                     <div className="supTopic_2">
@@ -172,7 +178,7 @@ const LoanCondition = (props) => {
                 <Row>
                   <div className="buttonMargin">
                     <Link href="/borrower/listofrequestloan">
-                      <Button onClick={submit} type="primary">
+                      <Button onClick={()=> props.setModalUpload(true)} type="primary">
                         Create loan
                       </Button>
                     </Link>

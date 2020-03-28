@@ -11,7 +11,7 @@ const AdminListOfLoanTransaction = (props) => {
         <table class="ui selectable table">
           <thead>
             <tr>
-              <th><div className="ThTopic">Loaner Name</div></th>
+              <th><div className="ThTopic">Borrower Name</div></th>
               <th><div className="ThTopic">Amount</div></th>
               <th><div className="ThTopic">Create at</div></th>
               <th><div className="ThTopic">Document</div></th>
@@ -20,9 +20,9 @@ const AdminListOfLoanTransaction = (props) => {
           </thead>
           <tbody>
             <tr>
-              <td><div className="ThTopic">Kritsakorn Yongpenny</div></td>
-              <td><div className="ThTopic">850,000</div></td>
-              <td><div className="ThTopic">24/03/19</div></td>
+              <td><div className="ThTopic">Rapis Sirikun</div></td>
+              <td><div className="ThTopic">20,000</div></td>
+              <td><div className="ThTopic">Today at 11:54 PM</div></td>
               <td>
                   <div className="ThTopic">
                 <a href="/admin/adminrequestuploaddoc">Detail</a>

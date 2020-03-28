@@ -15,12 +15,18 @@ const DetailLoanerDoc = () => {
       </div>
       <br />
       <div>
-        <div className="titleName">Title : Lorem</div>
+        <div className="titleName">Title : สินเชื่อเพื่อกู้สร้างธุรกิจ</div>
       </div>
       <br />
+      <div className="amount">
+        วงเงินอนุมัติ : 2,000,000
+      </div>
+      <div>
+        จุดประสงค์ในการกู้ : ลงทุนโครงการใหม่
+      </div>
       <div className="description">
         Description :
-        ยังไม่มีอะไรเพราะยังไม่ได้ใส่อย่าถามนะอิอิ
+        สร้างธุรกิจเกี่ยวกับร้านขายทอง
       </div>
       <br />
       <div className="showTypeDoc">

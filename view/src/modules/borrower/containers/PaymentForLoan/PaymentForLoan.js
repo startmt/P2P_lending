@@ -26,10 +26,10 @@ const PaymentForLoan = () => {
       </div>
       <br />
       <div className="information">
-        Transaction id : {md5('4218 1589 1564 1883')}
+        Transaction id : {md5('2510097')}
       </div>
       <br />
-      <div className="information">Amount : 10,000</div>
+      <div className="information">Amount : 20,000</div>
       <br />
       <div className="information">
         Type Card : Visa (SCB)
@@ -62,7 +62,7 @@ const PaymentForLoan = () => {
         <Col span="8">
           <div className="buttonSpace">
             <div className="AcceptButtonMargin">
-            <Link href="/borrower/paymentsuccess/[transactionId]" as={`/borrower/paymentsuccess/${md5('4218 1589 1564 1883')}`}>
+            <Link href="/borrower/paymentsuccess/[transactionId]" as={`/borrower/paymentsuccess/${md5('2510097')}`}>
               <Button type="primary">Accept</Button>
             </Link>           
             </div>

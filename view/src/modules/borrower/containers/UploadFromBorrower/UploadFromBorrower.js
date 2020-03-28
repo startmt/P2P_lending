@@ -1,3 +1,5 @@
+import React, {useCallback} from 'react'
+import {useDropzone} from 'react-dropzone'
 import { Upload, Icon, message, Button } from 'antd'
 import { Modal } from 'semantic-ui-react'
 import Link from 'next/link'
@@ -5,12 +7,16 @@ import './style.less'
 
 const { Dragger } = Upload
 
-const props = {
-  name: 'file',
-  multiple: true,
-  action:
-    'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange(info) {
+const UploadFromBorrow = props => {
+  const onDrop = useCallback(acceptedFiles => {
+    console.log(acceptedFiles[0])
+    // Do something with the files
+    props.upload(acceptedFiles[0])
+  }, [])
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
+  const onChangeIdCard = (info) => {
+    console.log(info)
     const { status } = info.file
     if (status !== 'uploading') {
       console.log(info.file, info.fileList)
@@ -22,12 +28,26 @@ const props = {
     } else if (status === 'error') {
       message.error(`${info.file.name} file upload failed.`)
     }
-  },
-}
+    props.setIdCard(info.file)
+  }
+  const onChangeSalary = (info) => {
+    console.log(info)
+    const { status } = info.file
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList)
+    }
+    if (status === 'done') {
+      message.success(
+        `${info.file.name} file uploaded successfully.`,
+      )
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`)
+    }
+    props.setSalary(info.file)
+  }
 
-const UploadFromBorrow = () => {
   return (
-    <Modal trigger={<Button type="primary">Upload</Button>}>
+    <Modal open = {props.open}>
       <Modal.Content>
         <Modal.Description>
           <div className="fromContainer">
@@ -62,12 +82,11 @@ const UploadFromBorrow = () => {
             <div className="uploadFileContainer">
               <div className="uploadForm">
                 <div className="uploadTopic">
-                  1.
-                  หนังสือรับรองการจดทะเบียนบริษัทอายุไม่เกิน
-                  3 เดือน
+                  1. บัตรประชาชน
                 </div>
                 <br />
-                <Dragger {...props}>
+                <Dragger onChange = {onChangeIdCard} {...getRootProps()}>
+                  <div {...getInputProps()} />
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -80,11 +99,11 @@ const UploadFromBorrow = () => {
               <br />
               <div className="uploadForm">
                 <div className="uploadTopic">
-                  2. บัญชีธนาคารหลักแสดงรายการ 6
-                  เดือนย้อนหลังของบริษัท
+                  2. สลิปเงินเดือน
                 </div>
                 <br />
-                <Dragger {...props}>
+                <Dragger onChange = {onChangeSalary} {...getRootProps()}>
+                  <div {...getInputProps()} />
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -97,11 +116,11 @@ const UploadFromBorrow = () => {
               <br />
               <div className="uploadForm">
                 <div className="uploadTopic">
-                  3. รานงานเครดิตบูโรของบริษัท
-                  [ข้อมูลล่าสุดไม่เกิน 30 วัน]
+                  3. รายงานเครดิตบรูโร(ข้อมูลล่าสุดไม่เกิน 30 วัน)
                 </div>
                 <br />
-                <Dragger {...props}>
+                <Dragger {...getRootProps()}>
+                  <div {...getInputProps()} />
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -114,42 +133,11 @@ const UploadFromBorrow = () => {
               <br />
               <div className="uploadForm">
                 <div className="uploadTopic">
-                  4. งบการเงินที่สอบทานล่าสุด
+                  4. รายการบัญชีธนาคาร
                 </div>
                 <br />
-                <Dragger {...props}>
-                  <p className="ant-upload-drag-icon">
-                    <Icon type="inbox" />
-                  </p>
-                  <p className="ant-upload-text">
-                    Click or drag file to this area to
-                    upload
-                  </p>
-                </Dragger>
-              </div>
-              <br />
-              <div className="uploadForm">
-                <div className="uploadTopic">
-                  5. ใบทะเบียนพาณิชย์
-                </div>
-                <br />
-                <Dragger {...props}>
-                  <p className="ant-upload-drag-icon">
-                    <Icon type="inbox" />
-                  </p>
-                  <p className="ant-upload-text">
-                    Click or drag file to this area to
-                    upload
-                  </p>
-                </Dragger>
-              </div>
-              <br />
-              <div className="uploadForm">
-                <div className="uploadTopic">
-                  6. บัญชีรายชื่อผู้ถือหุ้น บอจ. 5
-                </div>
-                <br />
-                <Dragger {...props}>
+                <Dragger {...getRootProps()}>
+                  <div {...getInputProps()} />
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -162,9 +150,7 @@ const UploadFromBorrow = () => {
               <br />
             </div>
             <div className="buttonMargin">
-              <Link href="/borrower/listofrequestloan">
-                <Button type="primary">Submit</Button>
-              </Link>
+              <Button type="primary" onClick={props.submit}>Submit</Button>
             </div>
           </div>
         </Modal.Description>
