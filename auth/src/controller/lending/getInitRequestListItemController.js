@@ -16,10 +16,10 @@ export default async (req, res) => {
     }
     Object.assign(data, query.data.get())
 
-    if (query.status === 200) status200(res, data || {})
-    status400(res, query.message)
+    if (query.status === 200) return status200(res, data || {})
+    return status400(res, query.message)
   } catch (e) {
     console.log(e)
-    status400(res)
+    return status400(res)
   }
 }

@@ -29,9 +29,9 @@ export const getInitRequestDataFail = () => ({
   type: 'GET_INIT_REQUEST_DATA_FAIL',
 })
 
-export const confirmRequest = (id, state) => ({
+export const confirmRequest = (id, state, remark) => ({
   type: 'CONFIRM_INIT_REQUEST_DATA',
-  payload: { id, state },
+  payload: { id, state, remark },
 })
 
 export const confirmRequestSuccess = () => ({
