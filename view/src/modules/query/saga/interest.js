@@ -30,7 +30,6 @@ function* setInterestDataSaga(actions) {
       setInterestToWeb3,
       actions.payload,
     )
-    console.log(data)
     yield put(
       interestAction.setInterestDataSuccess(
         actions.payload.interest,

@@ -10,8 +10,8 @@ export const getInterestFromWeb3 = () => {
 export const setInterestToWeb3 = (interestData) => {
   return Interest(publicRuntimeConfig.INTEREST_CONTRACT)
     .methods.setAllInterest(
-      interestData.interest,
-      interestData.fee,
+      Number(interestData.interest),
+      Number(interestData.fee),
     )
     .send({
       from: publicRuntimeConfig.ACCOUNT_WALLET,
