@@ -177,11 +177,9 @@ const LoanCondition = (props) => {
                 <br />
                 <Row>
                   <div className="buttonMargin">
-                    <Link href="/borrower/listofrequestloan">
                       <Button onClick={()=> props.setModalUpload(true)} type="primary">
                         Create loan
                       </Button>
-                    </Link>
                   </div>
                 </Row>
               </div>

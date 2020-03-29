@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table } from 'semantic-ui-react'
 import { Row, Col, Select } from 'antd'
+import axios from 'axios'
+import config from '../../../../../config'
 import Link from 'next/link'
 import UploadFromBorrower from '~/modules/borrower/containers/UploadFromBorrower/UploadFromBorrower'
 import './style.less'
@@ -11,14 +13,19 @@ function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
-const moc = [{
-  Name:'Kitti',
-  Amount:200000,
-  CreateAt:'24/24/2400',
-  Type:'ขยายกิจการ'
-}]
-
 const StateLoaner = (props) => {
+  const [data, setData] = useState([])
+
+  const fetch = async () => {
+    const result = await axios.get(`${config.LENDING_HOST}/lending/my`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+    console.log(result)
+    setData(result.data)
+  }
+
+  useEffect(() => {
+    fetch()
+  },[]);
+
   return (
     <div className="fromStateLoan">
       <div class="stateTable">
@@ -48,13 +55,14 @@ const StateLoaner = (props) => {
             </tr>
           </thead>
           <tbody>
-            {moc.map(loaner => (
+            {data.map(loaner => (
             <tr>
-              <td>{loaner.Name}</td>
-              <td>{loaner.Amount}</td>
-              <td>{loaner.CreateAt}</td>
-              <td>{loaner.Type}</td>
+              <td>Kritsakorn Tongchaikun</td>
+              <td>{loaner.amount}</td>
+              <td>{loaner.createdAt}</td>
+              <td>เงินทุนหมุนเวียน</td>
               <td>
+                {/* File */}
                 <a href="../borrower/detailloanerdoc">Click</a>
               </td>
             </tr>
