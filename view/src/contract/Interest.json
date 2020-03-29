@@ -71,9 +71,7 @@
   "ast": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
     "exportedSymbols": {
-      "Interest": [
-        58
-      ]
+      "Interest": [58]
     },
     "id": 59,
     "nodeType": "SourceUnit",
@@ -99,9 +97,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 58,
-        "linearizedBaseContracts": [
-          58
-        ],
+        "linearizedBaseContracts": [58],
         "name": "Interest",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -743,9 +739,7 @@
   "legacyAST": {
     "absolutePath": "/D/work/P2P_lending/blockchain/contracts/Interest.sol",
     "exportedSymbols": {
-      "Interest": [
-        58
-      ]
+      "Interest": [58]
     },
     "id": 59,
     "nodeType": "SourceUnit",
@@ -771,9 +765,7 @@
         "documentation": null,
         "fullyImplemented": true,
         "id": 58,
-        "linearizedBaseContracts": [
-          58
-        ],
+        "linearizedBaseContracts": [58],
         "name": "Interest",
         "nodeType": "ContractDefinition",
         "nodes": [

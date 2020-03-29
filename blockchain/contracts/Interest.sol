@@ -15,10 +15,8 @@ contract Interest {
     function getNetInterest() public view returns (int256) {
         return (interest.allInterest - interest.fee);
     }
-    function setAllInterest(int256 _interest) public {
+    function setAllInterest(int256 _interest, int256 _fee) public {
         interest.allInterest = _interest;
-    }
-    function setFee(int256 _fee) public {
         interest.fee = _fee;
     }
 
