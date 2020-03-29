@@ -8,7 +8,6 @@ import {
   Descriptions,
 } from 'antd'
 import ProfileCard from '~/components/ProfileCard'
-import Route from 'next/router'
 import { connect } from 'react-redux'
 import { authSelector } from '~/modules/authentication/selectors'
 import { getQrcode } from '~/helpers/scbEasy'
@@ -18,10 +17,11 @@ import {
   getHeaderFromOtp,
   checkConfirmData,
 } from '~/helpers/scbEasy'
-const ProfileContainer = ({ username, isIdentify }) => {
+const ProfileContainer = ({ username, isIdentify, isConnectScb }) => {
   const [qrCode, setQrcode] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
   useEffect(() => {
+    if (isConnectScb === true) setCurrentStep(2)
     if (isIdentify === false)
       getQrcode(username).then((res) =>
         setQrcode(res.data.data.callbackUrl),
@@ -36,7 +36,7 @@ const ProfileContainer = ({ username, isIdentify }) => {
   const handleConfirm = async (data) => {
     const status = await checkConfirmData(data)
     if (status) {
-      Route.push('/verify/confirm')
+      window.location.replace('/verify/confirm')
     }
   }
   const handleOtp = async (data) => {
@@ -54,15 +54,15 @@ const ProfileContainer = ({ username, isIdentify }) => {
             {isIdentify == true ? (
               <ProfileCard />
             ) : (
-              <VerifySCBCard
-                step={currentStep}
-                next={next}
-                qrCode={qrCode}
-                prev={prev}
-                handleOtp={handleOtp}
-                handleConfirm={handleConfirm}
-              />
-            )}
+                <VerifySCBCard
+                  step={currentStep}
+                  next={next}
+                  qrCode={qrCode}
+                  prev={prev}
+                  handleOtp={handleOtp}
+                  handleConfirm={handleConfirm}
+                />
+              )}
           </Col>
         </Row>
         <Row gutter={[7, 7]}>
@@ -100,6 +100,8 @@ const mapStateToProps = (state, props) =>
   createStructuredSelector({
     username: authSelector.getUsername,
     isIdentify: authSelector.isIdentify,
+    isConnectScb: authSelector.isConnectScb
+
   })(state, props)
 export default connect(
   mapStateToProps,

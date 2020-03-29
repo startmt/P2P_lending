@@ -40,7 +40,7 @@ const VerifySCBData = () => {
         </Descriptions>
       }
       extra={[
-        <Link href="/borrower/profile">
+        <Link href="/user/profile">
           <Button type="success" key="console">
             ยืนยัน
           </Button>
