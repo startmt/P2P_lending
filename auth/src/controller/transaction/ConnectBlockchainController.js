@@ -13,11 +13,12 @@ import {
 export default async (req, res) => {
   try {
     const data = req.body.data
-
+    const key = req.body.key
     const { username, requestId } = data.metadata
     const user = await getUserByUsername(username)
-    switch (data.object) {
-      case 'charge':
+    console.log(key)
+    switch (key) {
+      case 'charge.complete':
         if (data.status !== 'successful') status400(res, 'unsuccessful payment')
 
         const request = await getRequestById(requestId)
@@ -43,21 +44,21 @@ export default async (req, res) => {
             )
             await lenderAcceptRequest(user.get().id, requestId)
             await deleteLoading(username)
-            status200(res, { lendingContract: response })
+            return status200(res, { lendingContract: response })
           case 'LENDING':
           default:
-            status400(res, 'Error')
+            return status400(res, 'Error')
         }
-      case 'recipient':
+      case 'recipient.verify':
         if (data.verified !== true) status400(res, 'incomplete verify')
         else if (data.verified === true) {
-          const response = await verifyBank(user.get().id, data.id)
-          status200(res, response)
+          const response = await verifyBank(data.id)
+          return status200(res, response)
         }
     }
   } catch (e) {
     console.log(e)
     deleteLoading(req.body.data.username)
-    status400(res, 'Error catch')
+    return status400(res, 'Error catch')
   }
 }

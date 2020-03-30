@@ -9,7 +9,7 @@ export default async (req, res) => {
     const token = await redisClient.getAsync(req.authInfo.username + 'refresh')
     if (query.user.identify == true) {
       const userDetail = await getUserDatail(req.authInfo.username)
-      status200(res, {
+      return status200(res, {
         username: query.user.username,
         isIdentify: query.user.identify,
         role: query.user.role,
@@ -17,7 +17,8 @@ export default async (req, res) => {
         isConnectScb: token ? true : false,
       })
     } else {
-      status200(res, {
+      w
+      return status200(res, {
         username: query.user.username,
         isIdentify: query.user.identify,
         role: query.user.role,
@@ -27,6 +28,6 @@ export default async (req, res) => {
     }
   } catch (e) {
     console.log(e)
-    status400(res)
+    return status400(res)
   }
 }
