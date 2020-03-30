@@ -1,14 +1,18 @@
 import db from '../mysql'
 import { getUserByUsername } from './user'
-export const getBankByUsername = async (username) => {
+export const getBankByUsername = async (username, state) => {
   try {
     const user = await getUserByUsername(username)
-
+    const query = {
+      userId: user.get().id,
+    }
+    if (state) query.state = state
     return await db.bank.findAll({
-      where: { userId: user.get().id },
+      where: query,
       raw: true,
     })
   } catch (error) {
+    console.log(error)
     return { status: 400, message: `can't get bank account` }
   }
 }
