@@ -14,3 +14,17 @@ export const getBank = () => {
     },
   )
 }
+
+export const addBank = (data) => {
+  return axios.post(
+    publicRuntimeConfig.AUTH_SERVICE + '/bank',
+    data,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          'token',
+        )}`,
+      },
+    },
+  )
+}
