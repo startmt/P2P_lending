@@ -12,14 +12,14 @@ export default async (req, res) => {
   let isUserInDatabase = await checkUserFromDb(user)
   if (isUserInDatabase) {
     const userDetail = await getUserByUsername(req.body.username)
-    status200(res, {
+    return status200(res, {
       token: await createSession(user, userDetail.get().role),
     })
   } else if (!isUserInDatabase) {
-    status401(res, {
+    return status401(res, {
       message: 'Your username or password is wrong.',
     })
   } else {
-    status400(res)
+    return status400(res)
   }
 }
