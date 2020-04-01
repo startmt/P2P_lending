@@ -2,7 +2,6 @@ import { Input, Button, Row, Col } from 'antd'
 import md5 from 'md5'
 import Link from 'next/link'
 import './style.less'
-import paymentforloan from '../../../../pages/borrower/paymentforloan'
 
 const MicrodataLink = ({ href, children, ...rest }) => (
   <Link href={href}>
