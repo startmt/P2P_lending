@@ -14,16 +14,16 @@ export default async (req, res) => {
       Object.assign(data, tokenScb.data.data)
       const otpPassword = await generateOtp(data, username)
       if (otpPassword > 0) {
-        status200(res, {
+        return status200(res, {
           otp: otpPassword,
         })
       } else {
-        status400(res)
+        return status400(res)
       }
     } else {
-      status400(res)
+      return status400(res)
     }
   } else {
-    status400(res)
+    return status400(res)
   }
 }

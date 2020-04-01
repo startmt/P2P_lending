@@ -1,9 +1,14 @@
 import React from 'react'
-import { Button, Form, Message } from 'semantic-ui-react'
+import {
+  Button,
+  Form,
+  Message,
+  Select,
+} from 'semantic-ui-react'
 import './styles.less'
 import Link from 'next/link'
 import Input from '~/components/Input'
-import { Select } from 'semantic-ui-react'
+
 import { Typography } from 'antd'
 import ErrorMessage from '~/components/ErrorMessage'
 const { Title, Paragraph } = Typography
@@ -98,9 +103,7 @@ const RegisterForm = ({
             onChange={setValues}
           />
           <ErrorMessage
-            text={
-              errors.role && errors.role.message
-            }
+            text={errors.role && errors.role.message}
           />
         </Form.Field>
         <Message error header="Error" content={error} />

@@ -2,13 +2,18 @@ import { updateRequest, getRequestById } from '../../crud/request'
 import { getUserById } from '../../crud/user'
 import { createLog } from '../../crud/requestlog'
 
-export const changeRequestState = async ({ requestId, state, userId }) => {
+export const changeRequestState = async ({
+  requestId,
+  state,
+  userId,
+  remark,
+}) => {
   try {
     switch (state) {
       case 'APPROVE_INIT':
         return await appoveInit(requestId, 'CHECKED', userId)
       case 'REJECT':
-        return await rejectInit(requestId, userId)
+        return await rejectInit(requestId, userId, remark)
     }
   } catch (error) {
     console.log(error)
@@ -41,13 +46,13 @@ const appoveInit = async (requestId, state, adminId) => {
   }
 }
 
-const rejectInit = async (requestId, adminId) => {
+const rejectInit = async (requestId, adminId, remark) => {
   try {
     if (await checkRepeatState(requestId, 'REJECT')) {
       const admin = await getUserById(adminId)
       await updateRequest(requestId, { state: 'REJECT' })
       await createLog(
-        `change INIT to REJECED by ${admin.get().username}`,
+        `change INIT to REJECED by ${admin.get().username} because ${remark}`,
         requestId,
       )
       return { status: 200 }

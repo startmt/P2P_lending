@@ -13,11 +13,20 @@ import { authSelector } from '~/modules/authentication/selectors'
 import { getQrcode } from '~/helpers/scbEasy'
 import VerifySCBCard from '~/components/VerifySCBCard'
 import { createStructuredSelector } from 'reselect'
+import { bankAction } from '../actions'
 import {
   getHeaderFromOtp,
   checkConfirmData,
 } from '~/helpers/scbEasy'
-const ProfileContainer = ({ username, isIdentify, isConnectScb }) => {
+import UserBankList from '../../../components/UserBankList/UserBankList'
+import { bindActionCreators } from 'redux'
+import AddBankModal from '../../../components/AddBankModal/AddBankModal'
+const ProfileContainer = ({
+  username,
+  isIdentify,
+  isConnectScb,
+  handleOpenAddBankModal,
+}) => {
   const [qrCode, setQrcode] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
   useEffect(() => {
@@ -50,47 +59,41 @@ const ProfileContainer = ({ username, isIdentify, isConnectScb }) => {
     <section className="section">
       <div className="container">
         <Row gutter={[0, 7]}>
-          <Col span={18}>
+          <Col span={24}>
             {isIdentify == true ? (
               <ProfileCard />
             ) : (
-                <VerifySCBCard
-                  step={currentStep}
-                  next={next}
-                  qrCode={qrCode}
-                  prev={prev}
-                  handleOtp={handleOtp}
-                  handleConfirm={handleConfirm}
-                />
-              )}
+              <VerifySCBCard
+                step={currentStep}
+                next={next}
+                qrCode={qrCode}
+                prev={prev}
+                handleOtp={handleOtp}
+                handleConfirm={handleConfirm}
+              />
+            )}
           </Col>
         </Row>
         <Row gutter={[7, 7]}>
-          <Col span={9}>
-            <Card style={{ height: 200 }}>
-              <Descriptions title="บัญชี">
-                <Descriptions.Item label="ชื่อบัญชี">
-                  ชาญศิลป์ ทองคำ
-                </Descriptions.Item>
-                <Descriptions.Item label="หมายเลขบัญชี">
-                  0910110111
-                </Descriptions.Item>
-              </Descriptions>
-            </Card>
-          </Col>
-          <Col span={9}>
-            <Card style={{ height: 200 }}>
-              <Empty
-                image="https://cdn4.iconfinder.com/data/icons/credit-card-payments/48/79-512.png"
-                imageStyle={{
-                  height: 60,
-                }}
-                description={<span>เพิ่มบัตรเดบิต</span>}>
-                <Button type="primary">Create Now</Button>
-              </Empty>
-            </Card>
+          <Col span={24}>
+            <UserBankList />
           </Col>
         </Row>
+        <Card style={{ height: 200 }}>
+          <Empty
+            image="https://cdn4.iconfinder.com/data/icons/credit-card-payments/48/79-512.png"
+            imageStyle={{
+              height: 60,
+            }}
+            description={<span>เพิ่มบัญชีรับเงิน</span>}>
+            <Button
+              type="primary"
+              onClick={handleOpenAddBankModal}>
+              Create Now
+            </Button>
+          </Empty>
+          <AddBankModal />
+        </Card>
       </div>
     </section>
   )
@@ -100,10 +103,17 @@ const mapStateToProps = (state, props) =>
   createStructuredSelector({
     username: authSelector.getUsername,
     isIdentify: authSelector.isIdentify,
-    isConnectScb: authSelector.isConnectScb
-
+    isConnectScb: authSelector.isConnectScb,
   })(state, props)
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      handleOpenAddBankModal: bankAction.openAddBankModal,
+    },
+    dispatch,
+  )
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(ProfileContainer)

@@ -24,6 +24,12 @@ const Sidebar = ({ pageName, handleLogout }) => {
           <span>ตรวจสอบใบคำร้อง</span>
         </Link>
       </Menu.Item>
+      <Menu.Item key="adminInterest">
+        <Icon type="dollar" />
+        <Link href="/admin/interest" prefetch>
+          <span>อัตราดอกเบี้ย</span>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="3">
         <Icon type="logout" />
         <span onClick={handleLogout}>Logout</span>

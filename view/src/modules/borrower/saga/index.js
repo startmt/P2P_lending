@@ -1,3 +1,4 @@
 import { call } from 'redux-saga/effects'
 import lendingSaga from './lending'
-export default [call(lendingSaga)]
+import bankSaga from './bank'
+export default [call(lendingSaga), call(bankSaga)]

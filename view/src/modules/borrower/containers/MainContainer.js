@@ -2,6 +2,7 @@ import React from 'react'
 import DashboardCard from '../components/CardDashboard'
 import Link from 'next/link'
 import { connect } from 'react-redux'
+import { Map } from 'immutable'
 const MainContainer = (props) => {
   const {
     selfLendingListSize,
@@ -9,6 +10,7 @@ const MainContainer = (props) => {
     isUserVerified,
     userFromContract,
     userDetail,
+    interest,
   } = props
   return (
     <section className="section">
@@ -33,7 +35,10 @@ const MainContainer = (props) => {
           <div className="col-md-6 col-sm-12 p-2">
             <DashboardCard
               title="อัตราดอกเบี้ยการขอสินเชื่อ"
-              value="8%"
+              value={`เริ่มต้น ${interest.get(
+                'interest',
+              )}%`}
+              loading={interest.get('loading')}
               icon="dollar"
               color="white"
               bgcolor="#EFB44E"
@@ -85,6 +90,7 @@ const mapStateToProps = (state) => ({
     'mylending',
     'loading',
   ]),
+  interest: state.getIn(['page', 'interest']),
   isUserVerified: state.getIn([
     'authentication',
     'auth',

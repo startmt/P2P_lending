@@ -10,6 +10,7 @@ import {
   confirmInitRequest,
   getMannerFromWeb3,
 } from '../api/admin'
+import { groupBy } from 'lodash'
 import { openNotificationWithIcon } from '../../../components/Notification/Notification'
 import { adminAction } from '../actions'
 import { mapMannerToObject } from '../../../contract/manner'
@@ -38,6 +39,12 @@ function* getinitRequestDataSaga(actions) {
       data.user.blockData,
     )
     const mannerObj = mapMannerToObject(manner)
+    const files = yield groupBy(
+      data.files,
+      'fileDescription',
+    )
+    yield (data.files = {})
+    yield Object.assign(data.files, files)
     yield put(
       adminAction.getInitRequestDataSuccess({
         ...data,
@@ -55,8 +62,8 @@ function* confirmRequestSaga(actions) {
       confirmInitRequest,
       actions.payload.id,
       actions.payload.state,
+      actions.payload.remark,
     )
-
     yield put(adminAction.confirmRequestSuccess(data.data))
     yield getinitRequest()
     yield put(adminAction.closeInitRequestModal())
