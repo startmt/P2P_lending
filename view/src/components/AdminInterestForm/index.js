@@ -1,0 +1,1 @@
+export AdminInterestForm from './AdminInterestForm'

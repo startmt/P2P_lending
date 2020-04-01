@@ -29,8 +29,10 @@ module.exports = withCSS(
           'https://ropsten.infura.io/v3/60b00290d6e841db9c79393ddcb2f00d',
         ACCOUNT_WALLET:
           process.env.ACCOUNT_WALLET ||
-          '0x6431F4CA5A8BBEFCA56F89A52748A8616E7DD145FF74E281E7567ED702A84F26',
+          '0x425649ce990288A41Ccca60B11B5651bf67d9380',
         SCB_SECRET: 'e48a5b88876f48708e4ac495fb4705d9',
+        INTEREST_CONTRACT:
+          '0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938',
       },
     }),
   ),
