@@ -1,10 +1,9 @@
 import { Input, Button, Row, Col } from 'antd'
 import Link from 'next/link'
 import './style.less'
-import paymentforloan from '../../../../pages/borrower/paymentforloan'
 import { useRouter } from 'next/router'
 
-const PaymentSuccess = props => {
+const PaymentSuccess = (props) => {
   console.log(props)
   const router = useRouter()
   return (
@@ -35,7 +34,9 @@ const PaymentSuccess = props => {
         />
       </div>
       <br />
-      <div className="information">Success, please wait a second for redirect</div>
+      <div className="information">
+        Success, please wait a second for redirect
+      </div>
       <br />
     </div>
   )
