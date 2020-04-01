@@ -9,7 +9,7 @@ const Index = (props) => {
   const { setPageName, getLendingList } = props
 
   useEffect(() => {
-    setPageName('stateLoan')
+    setPageName('lending')
     getLendingList()
   }, [])
   return (

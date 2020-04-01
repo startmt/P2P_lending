@@ -10,7 +10,6 @@ import {
   Header,
   Grid,
 } from 'semantic-ui-react'
-import ClueCard from './ClueCard'
 import { Map } from 'immutable'
 
 const { Field } = Form
