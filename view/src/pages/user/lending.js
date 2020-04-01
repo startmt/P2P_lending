@@ -1,15 +1,22 @@
-import React, { Fragment } from 'react'
+import React, { useEffect } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
-import StateLoaner from '~/modules/borrower/containers/ListOfLoaner/ListOfLoaner'
+import { lendingAction } from '../../modules/borrower/actions'
+import { LendingTable } from '../../components/LendingTable'
 const Index = (props) => {
-  const { setPageName } = props
-  setPageName('stateLoan')
+  const { setPageName, getLendingList } = props
+
+  useEffect(() => {
+    setPageName('stateLoan')
+    getLendingList()
+  }, [])
   return (
     <DashboardLayout>
-      <StateLoaner />
+      <div className="container section">
+        <LendingTable />
+      </div>
     </DashboardLayout>
   )
 }
@@ -18,6 +25,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       setPageName: pageNameAction.setPageName,
+      getLendingList: lendingAction.getLendingList,
     },
     dispatch,
   )

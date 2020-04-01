@@ -14,3 +14,29 @@ export const getMyLendingListApi = () => {
     },
   )
 }
+
+export const getLendingList = () => {
+  return axios.get(
+    publicRuntimeConfig.LENDING_SERVICE + '/',
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          'token',
+        )}`,
+      },
+    },
+  )
+}
+
+export const getLendingDataApi = (id) => {
+  return axios.get(
+    publicRuntimeConfig.LENDING_SERVICE + '/borrower/' + id,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          'token',
+        )}`,
+      },
+    },
+  )
+}
