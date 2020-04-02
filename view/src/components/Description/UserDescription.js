@@ -7,10 +7,8 @@ const UserDescription = ({
   loading,
   userData,
 }) => {
-  console.log('loading', loading)
   const { data } = userData
   const addressJson = JSON.parse(data.user.address) || {}
-  console.log(data)
   return (
     <Descriptions
       column={{
@@ -33,13 +31,10 @@ const UserDescription = ({
       <Descriptions.Item label="เบอร์โทรศัพท์">
         {data.user.phoneNumber}
       </Descriptions.Item>
-      <Descriptions.Item label="วันเกิด">
-        {data.user.birthDate}
-      </Descriptions.Item>
       <Descriptions.Item label="เลขบัตรประจำตัวประชาชน">
-        {data.user.citizenId}
+        {'xxxxxxx' + data.user.citizenId.slice(7)}
       </Descriptions.Item>
-      <Descriptions.Item label="ที่อยู่">
+      <Descriptions.Item span={2} label="ที่อยู่">
         {`บ้านเลขที่. ${addressJson.thaiAddressMoo ||
           ''}, ${addressJson.thaiAddressThanon ||
           ''}, ต. ${addressJson.thaiAddressDistrict ||
