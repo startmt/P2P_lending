@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux'
 import useForm from 'react-hook-form'
 import { lendingAction } from '../../modules/borrower/actions'
 import LendingDataModal from './LendingDataModal'
+import Router from 'next/router'
 const LendingTable = ({
   lending,
   handleConfirm,
@@ -47,18 +48,6 @@ const LendingTable = ({
       dataIndex: 'loanTenor',
     },
     {
-      title: 'ข้อมูล',
-      key: 'docs',
-      render: (text, record) => (
-        <a
-          onClick={() => {
-            handleModal(record.id)
-          }}>
-          ดูข้อมูล
-        </a>
-      ),
-    },
-    {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
@@ -68,9 +57,11 @@ const LendingTable = ({
             type="primary"
             // loading={confirm.get('loading')}
             onClick={() => {
-              handleConfirm(record.id, 'APPROVE_INIT')
+              Router.push({
+                pathname: `/user/lending/${record.id}`,
+              })
             }}>
-            ยืนยัน
+            ดูรายละเอียด
           </Button>
         </Fragment>
       ),

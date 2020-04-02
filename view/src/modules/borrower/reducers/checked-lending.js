@@ -3,7 +3,7 @@ const initialState = fromJS({
   loading: false,
   data: [],
   loadingObj: false,
-  dataById: Map({}),
+  dataById: Map(),
 })
 export default function reducer(
   state = initialState,

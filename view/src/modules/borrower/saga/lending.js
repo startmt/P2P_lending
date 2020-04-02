@@ -12,6 +12,8 @@ import {
   getLendingDataApi,
 } from '../api/lending'
 import { lendingAction } from '../actions'
+import { getMannerFromWeb3 } from '../../admin/api/admin'
+import { mapMannerToObject } from '../../../contract/manner'
 
 function* getMyLendingList() {
   try {
@@ -43,8 +45,19 @@ function* getLendingDataSaga(action) {
       getLendingDataApi,
       action.payload.id,
     )
-    console.log(data)
-    yield put(lendingAction.getLendingDataSuccess({ data }))
+    const manner = yield call(
+      getMannerFromWeb3,
+      data.user.blockData,
+    )
+    const mannerObj = mapMannerToObject(manner)
+    yield put(
+      lendingAction.getLendingDataSuccess({
+        data: {
+          ...data,
+          manner: mannerObj,
+        },
+      }),
+    )
   } catch (e) {
     console.log(e)
     yield put(lendingAction.getLendingDataFail())
