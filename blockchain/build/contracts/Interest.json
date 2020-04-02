@@ -17,15 +17,13 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0xc392f766"
+      "type": "function"
     },
     {
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
+      "type": "constructor"
     },
     {
       "constant": true,
@@ -39,8 +37,7 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0xdca6895a"
+      "type": "function"
     },
     {
       "constant": false,
@@ -58,8 +55,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x7cc3e915"
+      "type": "function"
     }
   ],
   "bytecode": "0x608060405234801561001057600080fd5b50600a60008001819055506002600060010181905550610165806100356000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680637cc3e9151461005c578063c392f766146100a1578063dca6895a146100d3575b600080fd5b34801561006857600080fd5b5061009f6004803603604081101561007f57600080fd5b8101908080359060200190929190803590602001909291905050506100fe565b005b3480156100ad57600080fd5b506100b6610115565b604051808381526020018281526020019250505060405180910390f35b3480156100df57600080fd5b506100e8610127565b6040518082815260200191505060405180910390f35b816000800181905550806000600101819055505050565b60008060000154908060010154905082565b6000806001015460008001540390509056fea165627a7a723058209a358da0ca2fd5606ebdd08a444bf74ee9d2be0fa2b7ebb6c1f1aa792e0a2a350029",
@@ -1416,22 +1412,9 @@
     "name": "solc",
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
-  "networks": {
-    "3": {
-      "events": {},
-      "links": {},
-      "address": "0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938",
-      "transactionHash": "0xb49803fb50ea4f057715802dd450c9185aeeb65855f8d6a0a2ad27204f31f158"
-    },
-    "5777": {
-      "events": {},
-      "links": {},
-      "address": "0x3261527d2272fd3188d08f2c70D4482268e36fe2",
-      "transactionHash": "0xde4a968970a0e2f88229f5b85bb00a27684e856d02c3e4e718344771eb509d19"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2020-03-29T16:58:44.372Z",
+  "updatedAt": "2020-04-02T05:54:41.510Z",
   "devdoc": {
     "methods": {}
   },

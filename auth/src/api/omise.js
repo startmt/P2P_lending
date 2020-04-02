@@ -25,3 +25,16 @@ export const addBankForRecieveMoney = async (
     )
     .catch((err) => err.response)
 }
+
+export const withdrawnCash = async (amount, recipient) => {
+  return await axios
+    .post(
+      env.OMISE_HOST + '/transfers',
+      {
+        amount,
+        recipient,
+      },
+      { auth: { username: 'skey_test_5hu9iykyg1qw218pezq' } },
+    )
+    .catch((err) => err.response)
+}

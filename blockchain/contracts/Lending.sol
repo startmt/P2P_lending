@@ -1,6 +1,9 @@
 pragma solidity >=0.4.25 <0.7.0;
 pragma experimental ABIEncoderV2;
 import "./Manner.sol";
+import "./Interest.sol";
+
+
 contract Lending {
     struct ContractStruct {
         uint256 date;
@@ -12,14 +15,23 @@ contract Lending {
     struct UserContractStruct {
         int256 id;
         Manner manner;
+        bool withdrawn;
+        string evidence;
+    }
+    struct LenderContract {
+        int256 fee;
+        int256 amount;
     }
     // Contractdata
     UserContractStruct public borrower;
+    LenderContract public lenderContract;
     UserContractStruct public lender;
     uint256 startTime;
     uint256 tenor;
     string state;
+    Interest interest = Interest(0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938);
     mapping(uint256 => ContractStruct) public contractList;
+
     //
     constructor(
         uint256[] memory dateList,
@@ -40,15 +52,25 @@ contract Lending {
         }
         borrower = UserContractStruct({
             id: _borrowerId,
-            manner: Manner(borrowerAddress)
+            manner: Manner(borrowerAddress),
+            withdrawn: false,
+            evidence: ""
         });
         lender = UserContractStruct({
             id: _lenderId,
-            manner: Manner(lenderAddress)
+            manner: Manner(lenderAddress),
+            withdrawn: false,
+            evidence: ""
+        });
+        (, int256 fee) = interest.interest();
+        lenderContract = LenderContract({
+            fee: (fee),
+            amount: int256(amount * dateList.length)
         });
         tenor = dateList.length;
-        state = "WAITING_BORROWER_ACCEPT_MONEY";
+        state = "LENDING";
     }
+
     function getCurrentTenor() public view returns (uint256) {
         for (uint256 i = 0; i < tenor; i++) {
             if (contractList[i].isPaid == false) {
@@ -65,6 +87,7 @@ contract Lending {
     function setBorrowerScore(uint256 _currentTime) public {
         borrower.manner.setScore(checkOvertimeLending(_currentTime));
     }
+
     function getBorrowerDetail()
         public
         view
@@ -72,6 +95,7 @@ contract Lending {
     {
         return borrower.manner.user();
     }
+
     function getLenderDetail()
         public
         view
@@ -99,21 +123,34 @@ contract Lending {
             contractList[current].paidDate = _currentTime;
             if (getCurrentTenor() > tenor) {
                 state = "SUCCESS_LENDING";
-                return "SUCCESS_LENDING";
+                return state;
             } else {
                 return "PAY_SUCCESS";
             }
         }
         return state;
     }
+
     function startNormalLending() public {
         if (
             keccak256(abi.encodePacked(state)) == keccak256("LENDING") ||
-            keccak256(abi.encodePacked(state)) == keccak256("LENDING_LATE") ||
-            keccak256(abi.encodePacked(state)) ==
-            keccak256("WAITING_BORROWER_ACCEPT_MONEY")
+            keccak256(abi.encodePacked(state)) == keccak256("LENDING_LATE")
         ) {
             state = "LENDING";
+        }
+    }
+
+    function startLending(string memory evidence) public {
+        borrower.withdrawn = true;
+        borrower.evidence = evidence;
+    }
+
+    function finishLending(string memory evidence) public {
+        if (
+            keccak256(abi.encodePacked(state)) == keccak256("SUCCESS_LENDING")
+        ) {
+            lender.withdrawn = true;
+            lender.evidence = evidence;
         }
     }
 
@@ -131,10 +168,7 @@ contract Lending {
             } else if ((_currentTime >= contractList[current].date + 86400)) {
                 state = "LENDING_LATE";
             }
-        } else if (
-            keccak256(abi.encodePacked(state)) ==
-            keccak256("WAITING_BORROWER_ACCEPT_MONEY")
-        ) {
+        } else if (borrower.withdrawn == false) {
             if (_currentTime >= startTime + 259200) {
                 state = "BORROWER_NOT_ACCEPT";
             }
