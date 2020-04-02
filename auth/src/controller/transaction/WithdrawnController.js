@@ -7,8 +7,8 @@ export default async (req, res) => {
     const requestId = req.body.requestId
     const recipient = req.body.transferId
     data = await withDrawnService(username, requestId, recipient)
-    if (data.status === 200) return status200(res, data.message)
-    return status400(res, data.message  )
+    if (data.status === 200) return status200(res, data)
+    return status400(res, data)
   } catch (e) {
     console.log(e)
     status400(res)

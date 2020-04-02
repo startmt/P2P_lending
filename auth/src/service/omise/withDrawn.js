@@ -31,8 +31,8 @@ export const withDrawnService = async (username, requestId, recipient) => {
         const amount =
           lenderContract['amount'] -
           (lenderContract['amount'] * lenderContract['fee']) / 100
-        console.log(amount)
-        await contract.methods.startLending(amount).send({
+        const transfer = await withdrawnCash(amount, recipient)
+        await contract.methods.finishLending(transfer.data.id).send({
           from: config.ACCOUNT_WALLET,
           gasPrice: '1000',
           gas: 6721975,

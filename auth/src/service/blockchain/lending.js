@@ -2,19 +2,34 @@ import web3 from '../../service/blockchain/web3'
 import Lending from '../../contracts/Lending.json'
 import config from '../../config'
 import { getContractById } from '../../crud/contract'
+import moment from 'moment'
+import { updateRequest } from '../../crud/request'
 export const lendingContract = (contractId) => {
   return new web3.eth.Contract(Lending.abi, contractId)
 }
-export const startLending = async (requestId, c) => {
-  const contract = await getContractById(requestId)
-  const state = await lendingContract(contract.get().contractDetailId)
-    .methods.checkOvertimeLending()
-    .call()
-  if (state === 'WAITING_BORROWER_ACCEPT_MONEY')
-    return await lendingContract(contract.get().contractDetailId)
-      .methods.startNormalLending()
+export const borrowerLending = async (evidence, requestId) => {
+  try {
+    const contract = await getContractById(requestId)
+
+    await lendingContract(contract.get().contractDetailId)
+      .methods.setEvidenceStamp(evidence, moment().unix())
+      .send({
+        from: config.ACCOUNT_WALLET,
+        gasPrice: '1000',
+        gas: 6721975,
+      })
+
+    const state = await lendingContract(contract.get().contractDetailId)
+      .methods.getState()
       .call()
-  return state
+    if (state === 'SUCCESS_LENDING') {
+      await updateRequest(requestId, { state: 'SUCCESS' })
+    }
+    return { status: 200, message: 'Pay success' }
+  } catch (error) {
+    console.log(error)
+    return { status: 400, message: 'service error' }
+  }
 }
 export const createLendingContract = async (contractData) => {
   const contract = new web3.eth.Contract(Lending.abi)

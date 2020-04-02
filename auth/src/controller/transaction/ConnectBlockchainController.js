@@ -10,6 +10,7 @@ import {
   setLoadingBlockchain,
   deleteLoading,
 } from '../../service/blockchain/loading'
+import { borrowerLending } from '../../service/blockchain/lending'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -46,6 +47,14 @@ export default async (req, res) => {
             await deleteLoading(username)
             return status200(res, { lendingContract: response })
           case 'LENDING':
+            const responseData = await borrowerLending(
+              req.body.data.id,
+              requestId,
+            )
+            if (responseData.status === 200) {
+              return status200(res, responseData)
+            }
+            return status400(res, responseData)
           default:
             return status400(res, 'Error')
         }
