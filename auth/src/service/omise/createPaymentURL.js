@@ -16,8 +16,12 @@ export default async (amount, type, userData) => {
     {
       metadata: userData,
       amount,
+      fee: 0,
+      fee_vat: 0,
+      platform_fee: 0.0,
+      platform_fee: 0.0,
       currency: 'thb',
-      return_uri: `${env.HOST}/user/my`,
+      return_uri: `${env.HOST}/user/payment-success`,
       source: source.data.id,
     },
     { auth: { username: 'skey_test_5hu9iykyg1qw218pezq' } },

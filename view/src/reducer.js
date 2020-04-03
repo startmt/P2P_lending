@@ -4,10 +4,12 @@ import queryReducer from '~/modules/query/reducers'
 import lendingReducer from '~/modules/borrower/reducers'
 import admin from '~/modules/admin/reducers'
 import { paymentReducer } from './modules/payment'
+import { transactionReducer } from './modules/transaction'
 export default combineReducers({
   authentication: authReducer,
   page: queryReducer,
   lending: lendingReducer,
   admin,
+  transaction: transactionReducer,
   paymentReducer,
 })
