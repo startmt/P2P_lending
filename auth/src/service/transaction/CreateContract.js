@@ -3,8 +3,7 @@ import { createLendingContract } from '../blockchain/lending'
 export default async (request, userContract) => {
   const currentDate = moment()
   const contract = []
-  console.log(request)
-  const { loanTenor, amount, interestRate } = request
+  const { loanTenor, amount, interestRate, id } = request
   const net = Math.ceil((amount + (amount * interestRate) / 100) / loanTenor)
   contract.push({
     date: currentDate.unix(),
@@ -19,7 +18,6 @@ export default async (request, userContract) => {
     amount: net,
     userContract,
   }
-  const response = await createLendingContract(data)
-
+  const response = await createLendingContract(id, data)
   return response
 }

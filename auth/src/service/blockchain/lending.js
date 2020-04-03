@@ -1,7 +1,7 @@
 import web3 from '../../service/blockchain/web3'
 import Lending from '../../contracts/Lending.json'
 import config from '../../config'
-import { getContractById } from '../../crud/contract'
+import { getContractById, savedContractAddressInDB } from '../../crud/contract'
 import moment from 'moment'
 import { updateRequest } from '../../crud/request'
 export const lendingContract = (contractId) => {
@@ -31,10 +31,10 @@ export const borrowerLending = async (evidence, requestId) => {
     return { status: 400, message: 'service error' }
   }
 }
-export const createLendingContract = async (contractData) => {
+export const createLendingContract = async (id, contractData) => {
   const contract = new web3.eth.Contract(Lending.abi)
   const dateList = contractData.contract.map((data) => data.date)
-  return await contract
+  return contract
     .deploy({
       data: Lending.bytecode,
       arguments: [
@@ -46,9 +46,14 @@ export const createLendingContract = async (contractData) => {
         contractData.userContract.lenderAddress,
       ],
     })
-    .send({
-      from: config.ACCOUNT_WALLET,
-      gasPrice: '1000',
-      gas: 6721975,
-    })
+    .send(
+      {
+        from: config.ACCOUNT_WALLET,
+        gasPrice: '1000',
+        gas: 6721975,
+      },
+      async function(error, transactionHash) {
+        await savedContractAddressInDB(transactionHash, id)
+      },
+    )
 }
