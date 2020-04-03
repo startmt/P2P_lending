@@ -24,7 +24,7 @@ const PaymentSucces = ({ loading, loadingAction }) => {
             subTitle="กรุณารอ 1 - 2 นาทีเพื่อให้บล๊อกเชนเขียนข้อมูลธุรกรรม"
             extra={
               <Button
-                onClick={() => Router.push('user/my')}
+                onClick={() => Router.push('/user/my')}
                 loading={loading}
                 type="primary"
                 key="console">
