@@ -23,6 +23,9 @@ module.exports = withCSS(
         LENDING_SERVICE:
           process.env.LENDING_SERVICE ||
           'http://35.187.230.102/api/lending',
+        TRANSACTION_SERVICE:
+          process.env.TRANSACTION_SERVICE ||
+          'http://35.187.230.102/api/transaction',
         SCB_API: 'l7b5616b7185e143c9a380033362b5f324',
         BLOCKCHAIN_HOST:
           process.env.BLOCKCHAIN_HOST ||

@@ -3,38 +3,33 @@ import { Select } from 'semantic-ui-react'
 
 const bankCodeList = [
   {
-    key: 'bbl',
-    value: 'bbl',
+    key: 'internet_banking_bbl',
+    value: 'internet_banking_bbl',
     text: 'ธนาคารกรุงเทพ',
   },
   {
-    key: 'kbank',
-    value: 'kbank',
+    key: 'internet_banking_ktb',
+    value: 'internet_banking_ktb',
     text: 'ธนาคารกรุงไทย',
   },
   {
-    key: 'tmb',
-    value: 'tmb',
-    text: 'ธนาคารทหารไทย',
-  },
-  {
-    key: 'scb',
-    value: 'scb',
+    key: 'internet_banking_scb',
+    value: 'internet_banking_scb',
     text: 'ธนาคารไทยพาณิชย์',
   },
   {
-    key: 'bay',
-    value: 'bay',
+    key: 'internet_banking_bay',
+    value: 'internet_banking_bay',
     text: 'ธนาคารกรุงศรีอยุธยา',
   },
 ]
 
-const BankMenu = ({ data, setData }, props) => {
+const PaymentMenu = ({ data, setData }, props) => {
   return (
     <Fragment>
       <Select
         {...props}
-        name="bank_code"
+        name="bank_name"
         value={data?.key}
         onChange={(e) => {
           setData(
@@ -50,4 +45,4 @@ const BankMenu = ({ data, setData }, props) => {
   )
 }
 
-export default BankMenu
+export default PaymentMenu

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'next/router'
 import { compose } from 'redux'
 import withRedux from '~/hocs/with-redux'
@@ -11,8 +11,9 @@ import {
   ContractDescription,
   PaymentSummaryDescription,
 } from '../../../components/Description'
-import { Card, Skeleton } from 'antd'
-import { isEmpty } from 'lodash'
+import { Card } from 'antd'
+import LendingPaymentStep from '../../../components/Step/LendingPaymentStep'
+import { Header } from 'semantic-ui-react'
 const LendingById = (props) => {
   const {
     router,
@@ -21,6 +22,7 @@ const LendingById = (props) => {
     data,
     loadingObj,
   } = props
+
   useEffect(() => {
     getDataById(router.query.lendingId)
     getInterest()
@@ -29,25 +31,7 @@ const LendingById = (props) => {
     <LandingLayout>
       <div className="container section">
         <Card loading={loadingObj}>
-          <Skeleton loading={loadingObj}>
-            {!isEmpty(data) && (
-              <UserDescription
-                title="ผู้กู้"
-                userData={data}
-                loading={loadingObj}
-              />
-            )}
-          </Skeleton>
-          <Skeleton loading={loadingObj}>
-            {!isEmpty(data) && (
-              <ContractDescription
-                title="สัญญาการกู้"
-                contractData={data}
-                loading={loadingObj}
-              />
-            )}
-          </Skeleton>
-          <PaymentSummaryDescription title="สรุปการชำระเงิน" />
+          <LendingPaymentStep />
         </Card>
       </div>
     </LandingLayout>
