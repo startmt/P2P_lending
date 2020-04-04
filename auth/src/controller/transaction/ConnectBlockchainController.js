@@ -47,10 +47,12 @@ export default async (req, res) => {
             await deleteLoading(username)
             return status200(res, { lendingContract: response })
           case 'LENDING':
+            setLoadingBlockchain(username)
             const responseData = await borrowerLending(
               req.body.data.id,
               requestId,
             )
+            await deleteLoading(username)
             if (responseData.status === 200) {
               return status200(res, responseData)
             }
