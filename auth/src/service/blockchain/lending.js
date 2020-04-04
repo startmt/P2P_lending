@@ -46,14 +46,13 @@ export const createLendingContract = async (id, contractData) => {
         contractData.userContract.lenderAddress,
       ],
     })
-    .send(
-      {
-        from: config.ACCOUNT_WALLET,
-        gasPrice: '1000',
-        gas: 6721975,
-      },
-      async function(error, transactionHash) {
-        await savedContractAddressInDB(transactionHash, id)
-      },
-    )
+    .send({
+      from: config.ACCOUNT_WALLET,
+      gasPrice: '100000',
+      gas: 6721975,
+    })
+    .on('receipt', async function(receipt) {
+      await savedContractAddressInDB(receipt.contractAddress, id)
+      console.log(receipt.contractAddress) // contains the new contract address
+    })
 }
