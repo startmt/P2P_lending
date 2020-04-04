@@ -25,11 +25,10 @@ export const getBorrower = async (address) => {
   return mapUserToObject(borrower)
 }
 
-export const getState = async (address) => {
-  const borrower = await Lending(address)
+export const getState = (address) => {
+  return Lending(address)
     .methods.state()
     .call()
-  return mapUserToObject(borrower)
 }
 
 export const getLender = (address) => {

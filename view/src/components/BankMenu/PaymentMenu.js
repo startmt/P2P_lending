@@ -24,10 +24,14 @@ const bankCodeList = [
   },
 ]
 
-const PaymentMenu = ({ data, setData }, props) => {
+const PaymentMenu = (
+  { data, setData, disabled },
+  props,
+) => {
   return (
     <Fragment>
       <Select
+        disabled={disabled}
         {...props}
         name="bank_name"
         value={data?.key}
