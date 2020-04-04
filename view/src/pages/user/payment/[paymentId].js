@@ -87,7 +87,7 @@ const Index = (props) => {
                   <p>ไม่สามารถจ่ายเงินได้</p>
                 </Message>
               )}
-              {contractData?.state === 'LENDING' && (
+              {contractData?.state !== 'LENDING' && (
                 <Message negative>
                   <Message.Header>
                     ไม่สามารถทำรายการได้
