@@ -25,6 +25,9 @@ export const getRequestByUserList = async (userId) => {
         model: db.requestuser,
         where: { userId },
       },
+      {
+        model: db.contract,
+      },
     ],
     raw: true,
   })

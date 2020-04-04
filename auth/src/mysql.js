@@ -36,7 +36,7 @@ export const connectMysql = async () => {
   paymentDateModel.belongsTo(contractModel)
   // contractModel.hasMany(paymentDateModel)
   contractModel.belongsTo(RequestModel)
-  // RequestModel.hasMany(contractModel)
+  RequestModel.hasOne(contractModel)
   fileModel.belongsTo(RequestModel)
   RequestModel.hasMany(fileModel)
   userModel.hasOne(ScbModel)
