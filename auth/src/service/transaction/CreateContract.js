@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { createLendingContract } from '../blockchain/lending'
 export default async (request, userContract) => {
-  const currentDate = moment()
+  const currentDate = moment().add(30, 'days')
   const contract = []
   const { loanTenor, amount, interestRate, id } = request
   const net = Math.ceil((amount + (amount * interestRate) / 100) / loanTenor)

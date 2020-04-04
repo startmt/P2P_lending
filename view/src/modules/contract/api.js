@@ -1,5 +1,9 @@
 import { Lending } from '../../helpers/web3'
-import { mapUserToObject } from '../../contract/Lending'
+import {
+  mapUserToObject,
+  mapUserDetailToObject,
+  mapLendingContractToObject,
+} from '../../contract/Lending'
 export const getCurrentTenorFromWeb3 = async (address) => {
   const current = await Lending(address)
     .methods.getCurrentTenor()
@@ -19,4 +23,31 @@ export const getBorrower = async (address) => {
     .methods.borrower()
     .call()
   return mapUserToObject(borrower)
+}
+
+export const getLender = async (address) => {
+  const lender = await Lending(address)
+    .methods.lender()
+    .call()
+  return mapUserToObject(lender)
+}
+
+export const getBorrowerDetail = async (address) => {
+  const borrower = await Lending(address)
+    .methods.getBorrowerDetail()
+    .call()
+  return mapUserDetailToObject(borrower)
+}
+
+export const getLenderDetail = async (address) => {
+  const lender = await Lending(address)
+    .methods.getLenderDetail()
+    .call()
+  return mapUserDetailToObject(lender)
+}
+export const getLenderContract = async (address) => {
+  const lender = await Lending(address)
+    .methods.lenderContract()
+    .call()
+  return mapLendingContractToObject(lender)
 }

@@ -8,6 +8,10 @@ import {
   getCurrentTenorFromWeb3,
   getBorrower,
   getId,
+  getLender,
+  getBorrowerDetail,
+  getLenderContract,
+  getLenderDetail,
 } from './api'
 import { mapContractListToObject } from '../../contract/Lending'
 import { contractAction } from './index'
@@ -23,12 +27,34 @@ function* contractTenorSaga(actions) {
       getBorrower,
       actions.payload.address,
     )
+    const lender = yield call(
+      getLender,
+      actions.payload.address,
+    )
+
+    const borrowerDetail = yield call(
+      getBorrowerDetail,
+      actions.payload.address,
+    )
+
+    const lenderDetail = yield call(
+      getLenderDetail,
+      actions.payload.address,
+    )
+    const lenderContract = yield call(
+      getLenderContract,
+      actions.payload.address,
+    )
 
     const lendingObj = mapContractListToObject(data)
     const mutated = {
       id,
       ...lendingObj,
       borrower,
+      lender,
+      borrowerDetail,
+      lenderDetail,
+      lenderContract,
     }
     yield put(
       contractAction.getCurrentContractSuccess(mutated),
