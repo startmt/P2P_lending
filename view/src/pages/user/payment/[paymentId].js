@@ -72,7 +72,8 @@ const Index = (props) => {
 
               <Button
                 disabled={
-                  !contractData?.borrower?.withdrawn
+                  !contractData?.borrower?.withdrawn ||
+                  contractData?.state !== 'LENDING'
                 }
                 onClick={onSubmit}
                 type="submit">
@@ -84,6 +85,17 @@ const Index = (props) => {
                     ไม่สามารถทำรายการได้
                   </Message.Header>
                   <p>ไม่สามารถจ่ายเงินได้</p>
+                </Message>
+              )}
+              {contractData?.state === 'LENDING' && (
+                <Message negative>
+                  <Message.Header>
+                    ไม่สามารถทำรายการได้
+                  </Message.Header>
+                  <p>
+                    ใบคำร้องไม่อยู่ในสถานะการกู้เงิน
+                    หรือทำรายการเสร็จสิ้น
+                  </p>
                 </Message>
               )}
             </Form>

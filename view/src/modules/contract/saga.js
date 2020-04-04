@@ -12,6 +12,7 @@ import {
   getBorrowerDetail,
   getLenderContract,
   getLenderDetail,
+  getState,
 } from './api'
 import { mapContractListToObject } from '../../contract/Lending'
 import { contractAction } from './index'
@@ -45,6 +46,10 @@ function* contractTenorSaga(actions) {
       getLenderContract,
       actions.payload.address,
     )
+    const state = yield call(
+      getState,
+      actions.payload.address,
+    )
 
     const lendingObj = mapContractListToObject(data)
     const mutated = {
@@ -55,6 +60,7 @@ function* contractTenorSaga(actions) {
       borrowerDetail,
       lenderDetail,
       lenderContract,
+      state,
     }
     yield put(
       contractAction.getCurrentContractSuccess(mutated),
