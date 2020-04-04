@@ -39,10 +39,10 @@ export default async (req, res) => {
             }
             setLoadingBlockchain(username)
             const data = await CreateContract(request.get(), userContract)
-            // const response = await savedContractAddressInDB(
-            //   data._address,
-            //   requestId,
-            // )
+            const response = await savedContractAddressInDB(
+              data._address,
+              requestId,
+            )
             await lenderAcceptRequest(user.get().id, requestId)
             await deleteLoading(username)
             return status200(res, { lendingContract: response })

@@ -20,7 +20,7 @@ export const borrowerLending = async (evidence, requestId) => {
       })
 
     const state = await lendingContract(contract.get().contractDetailId)
-      .methods.getState()
+      .methods.state()
       .call()
     if (state === 'SUCCESS_LENDING') {
       await updateRequest(requestId, { state: 'SUCCESS' })
@@ -38,6 +38,7 @@ export const createLendingContract = async (id, contractData) => {
     .deploy({
       data: Lending.bytecode,
       arguments: [
+        id,
         dateList,
         contractData.amount,
         contractData.userContract.borrowerId,
@@ -50,9 +51,5 @@ export const createLendingContract = async (id, contractData) => {
       from: config.ACCOUNT_WALLET,
       gasPrice: '10000000000',
       gas: 6721975,
-    })
-    .on('receipt', async function(receipt) {
-      await savedContractAddressInDB(receipt.contractAddress, id)
-      console.log(receipt.contractAddress) // contains the new contract address
     })
 }

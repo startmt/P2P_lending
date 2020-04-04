@@ -11,7 +11,6 @@ function* paymentSaga(actions) {
       createPaymentUrl,
       actions.payload,
     )
-    console.log(response)
     window.location.replace(response.data.url)
     yield call(getBankSaga)
   } catch (e) {

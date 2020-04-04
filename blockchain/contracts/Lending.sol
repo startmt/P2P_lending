@@ -28,12 +28,14 @@ contract Lending {
     UserContractStruct public lender;
     uint256 startTime;
     uint256 tenor;
-    string state;
+    string public state;
+    uint256 public id;
     Interest interest = Interest(0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938);
     mapping(uint256 => ContractStruct) public contractList;
 
     //
     constructor(
+        uint256 _id,
         uint256[] memory dateList,
         uint256 amount,
         int256 _borrowerId,
@@ -67,6 +69,7 @@ contract Lending {
             fee: (fee),
             amount: int256(amount * dateList.length)
         });
+        id = _id;
         tenor = dateList.length;
         state = "LENDING";
     }
@@ -78,10 +81,6 @@ contract Lending {
             }
         }
         return 999;
-    }
-
-    function getState() public view returns (string memory) {
-        return state;
     }
 
     function setBorrowerScore(uint256 _currentTime) public {
@@ -117,7 +116,7 @@ contract Lending {
             keccak256(abi.encodePacked(state)) == keccak256("REJECTED")
         ) {
             return state;
-        } else if (current <= tenor) {
+        } else if (current <= tenor && borrower.withdrawn == true) {
             contractList[current].evidence = _evidence;
             contractList[current].isPaid = true;
             contractList[current].paidDate = _currentTime;

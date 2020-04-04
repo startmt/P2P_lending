@@ -7,7 +7,7 @@ import { LandingLayout } from '~/layouts/landing'
 import { PaymentMenu } from '../../../components/BankMenu'
 import moment from 'moment'
 import { Result, Button, Icon, Skeleton } from 'antd'
-import { Form, Input } from 'semantic-ui-react'
+import { Form, Input, Message } from 'semantic-ui-react'
 import { contractAction } from '../../../modules/contract'
 const Index = (props) => {
   const {
@@ -25,7 +25,7 @@ const Index = (props) => {
   }, [])
   const onSubmit = () => {
     handlePayment(
-      url.query.paymentId,
+      contractData.id,
       bank.key,
       contractData.amount,
     )
@@ -69,9 +69,23 @@ const Index = (props) => {
                   setData={setBank}
                 />
               </Form.Field>
-              <Button onClick={onSubmit} type="submit">
+
+              <Button
+                disabled={
+                  !contractData?.borrower?.withdrawn
+                }
+                onClick={onSubmit}
+                type="submit">
                 ยืนยัน
               </Button>
+              {!contractData?.borrower?.withdrawn && (
+                <Message negative>
+                  <Message.Header>
+                    ไม่สามารถทำรายการได้
+                  </Message.Header>
+                  <p>ไม่สามารถจ่ายเงินได้</p>
+                </Message>
+              )}
             </Form>
           </Skeleton>
         </Result>

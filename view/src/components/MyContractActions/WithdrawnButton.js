@@ -24,7 +24,7 @@ const WithdrawnButton = ({ contractAddress, role }) => {
           .methods.lender()
           .call()
         const state = await Lending(contractAddress)
-          .methods.getState()
+          .methods.state()
           .call()
         const lenderObj = mapUserToObject(lender)
         if (
