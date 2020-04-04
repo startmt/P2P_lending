@@ -12,10 +12,10 @@ export const borrowerLending = async (evidence, requestId) => {
     const contract = await getContractById(requestId)
 
     await lendingContract(contract.get().contractDetailId)
-      .methods.setEvidenceStamp(evidence, moment().unix())
+      .methods.setEvidenceStamp(evidence, moment().unix() * 1000)
       .send({
         from: config.ACCOUNT_WALLET,
-        gasPrice: '1000',
+        gasPrice: '10000000000',
         gas: 6721975,
       })
 
@@ -48,7 +48,7 @@ export const createLendingContract = async (id, contractData) => {
     })
     .send({
       from: config.ACCOUNT_WALLET,
-      gasPrice: '100000',
+      gasPrice: '10000000000',
       gas: 6721975,
     })
     .on('receipt', async function(receipt) {

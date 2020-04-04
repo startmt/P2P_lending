@@ -8,9 +8,13 @@ export default function reducer(
   action,
 ) {
   switch (action.type) {
-    case 'PAYMENT':
+    case 'GET_CURRENT_CONTRACT_TENOR':
       return state.set('loading', true)
-    case 'PAYMENT_SUCCESS':
+    case 'GET_CURRENT_CONTRACT_TENOR_SUCCESS':
+      return state
+        .set('loading', false)
+        .set('data', action.payload.data)
+    case 'GET_CURRENT_CONTRACT_TENOR_FAIL':
       return state.set('loading', false)
     default:
       return state

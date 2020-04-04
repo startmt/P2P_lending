@@ -12,7 +12,7 @@ export default {
   MINIO_PORT: process.env.MINIO_PORT || 9001,
   MINIO_SECURITY: process.env.MINIO_SECURITY || false,
   MINIO_BUCKET: process.env.MINIO_BUCKET || '',
-  HOST: process.env.HOST || 'http://35.187.230.102',
+  HOST: process.env.HOST || 'http://localhost:3001',
   BLOCKCHAIN_HOST:
     process.env.BLOCKCHAIN_HOST ||
     'https://ropsten.infura.io/v3/60b00290d6e841db9c79393ddcb2f00d',

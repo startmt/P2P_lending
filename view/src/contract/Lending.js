@@ -17,6 +17,16 @@ export const mapUserDetailToObject = (result) => {
   }
 }
 
+export const mapContractListToObject = (result) => {
+  return {
+    date: result['date'],
+    amount: result['amount'],
+    isPaid: result['isPaid'],
+    evidence: result['evidence'],
+    paidDate: result['paidDate'],
+  }
+}
+
 export const mapLendingContractToObject = (result) => {
   return {
     fee: result['fee'],

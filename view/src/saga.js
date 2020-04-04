@@ -5,6 +5,7 @@ import adminSaga from '~/modules/admin/saga'
 import { paymentSaga } from './modules/payment'
 import querySaga from '~/modules/query/saga'
 import { transactionSaga } from './modules/transaction'
+import { contractSaga } from './modules/contract'
 const sagas = [
   all(authenticationSaga),
   all(lendingSaga),
@@ -12,6 +13,7 @@ const sagas = [
   all(querySaga),
   all(paymentSaga),
   all(transactionSaga),
+  all(contractSaga),
 ]
 
 export default function* mainSaga() {

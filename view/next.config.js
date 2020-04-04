@@ -19,13 +19,13 @@ module.exports = withCSS(
       publicRuntimeConfig: {
         AUTH_SERVICE:
           process.env.AUTH_SERVICE ||
-          'http://35.187.230.102/api/auth',
+          'http://localhost:3000/api/auth',
         LENDING_SERVICE:
           process.env.LENDING_SERVICE ||
-          'http://35.187.230.102/api/lending',
+          'http://localhost:3000/api/lending',
         TRANSACTION_SERVICE:
           process.env.TRANSACTION_SERVICE ||
-          'http://35.187.230.102/api/transaction',
+          'http://localhost:3000/api/transaction',
         SCB_API: 'l7b5616b7185e143c9a380033362b5f324',
         BLOCKCHAIN_HOST:
           process.env.BLOCKCHAIN_HOST ||

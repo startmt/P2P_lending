@@ -19,7 +19,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
         )
         await contract.methods.startLending(transfer.data.id).send({
           from: config.ACCOUNT_WALLET,
-          gasPrice: '1000',
+          gasPrice: '10000000000',
           gas: 6721975,
         })
         return { status: 200, message: 'transfer successful' }
@@ -34,7 +34,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
         const transfer = await withdrawnCash(amount, recipient)
         await contract.methods.finishLending(transfer.data.id).send({
           from: config.ACCOUNT_WALLET,
-          gasPrice: '1000',
+          gasPrice: '10000000000',
           gas: 6721975,
         })
         return { status: 200, message: 'transfer successful' }
