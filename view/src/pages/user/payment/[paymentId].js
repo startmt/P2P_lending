@@ -65,6 +65,10 @@ const Index = (props) => {
               <Form.Field>
                 <label>กรุณาเลือกธนาคาร</label>
                 <PaymentMenu
+                  disabled={
+                    !contractData?.borrower?.withdrawn ||
+                    contractData?.state !== 'LENDING'
+                  }
                   data={bank}
                   setData={setBank}
                 />
