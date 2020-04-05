@@ -43,7 +43,7 @@ const WithdrawnButton = ({ contractAddress, role }) => {
     }
   }, [role])
   const RouteToPaymentPage = () => {
-    Router.push(`/withdrawn/${contractAddress}`)
+    Router.push(`/user/withdrawn/${contractAddress}`)
   }
   if (visible)
     return (

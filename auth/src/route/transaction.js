@@ -11,5 +11,5 @@ export const transaction = (router) => {
     requireJWTAuth,
     CheckLoadingBlockchainController,
   )
-  router.get('/api/transaction/withdrawn', requireJWTAuth, WithdrawnController)
+  router.post('/api/transaction/withdrawn', requireJWTAuth, WithdrawnController)
 }

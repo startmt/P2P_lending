@@ -4,7 +4,8 @@ import {
   all,
   takeLatest,
 } from 'redux-saga/effects'
-import { createPaymentUrl } from './api'
+import { createPaymentUrl, withdrawnApi } from './api'
+import { paymentAction } from '.'
 function* paymentSaga(actions) {
   try {
     const response = yield call(
@@ -17,7 +18,20 @@ function* paymentSaga(actions) {
     console.log(e)
   }
 }
+function* withdrawnSaga(actions) {
+  try {
+    yield call(withdrawnApi, actions.payload)
+    window.location.replace('/user/payment-success')
+    yield put(paymentAction.withdrawnSuccess())
+  } catch (e) {
+    console.log(e)
+    yield put(paymentAction.withdrawnSuccess())
+  }
+}
 
 export default function*() {
-  yield all([takeLatest('PAYMENT', paymentSaga)])
+  yield all([
+    takeLatest('PAYMENT', paymentSaga),
+    takeLatest('WITHDRAWN', withdrawnSaga),
+  ])
 }

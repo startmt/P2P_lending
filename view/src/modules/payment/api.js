@@ -14,3 +14,17 @@ export const createPaymentUrl = (data) => {
     },
   )
 }
+
+export const withdrawnApi = (data) => {
+  return axios.post(
+    publicRuntimeConfig.TRANSACTION_SERVICE + '/withdrawn',
+    data,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem(
+          'token',
+        )}`,
+      },
+    },
+  )
+}
