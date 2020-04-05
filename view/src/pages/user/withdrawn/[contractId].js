@@ -1,16 +1,15 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import { paymentAction } from '../../../modules/payment'
 import withRedux from '~/hocs/with-redux'
 import { LandingLayout } from '~/layouts/landing'
-import { PaymentMenu } from '../../../components/BankMenu'
-import moment from 'moment'
-import { Result, Button, Icon, Skeleton } from 'antd'
-import { Form, Input, Message } from 'semantic-ui-react'
+import { Result, Icon, Skeleton } from 'antd'
+import { Form } from 'semantic-ui-react'
 import { contractAction } from '../../../modules/contract'
 import { WithdrawnFormField } from '../../../components/CashFormField'
 import { transactionAction } from '../../../modules/transaction'
+import { Map } from 'immutable'
 const Index = (props) => {
   const {
     setPageName,
@@ -21,6 +20,7 @@ const Index = (props) => {
     contractData,
     loadingContract,
     getTransactionLoading,
+    lendingRequest,
   } = props
   const [bank, setBank] = useState(null)
   useEffect(() => {
@@ -29,10 +29,8 @@ const Index = (props) => {
     getTransactionLoading()
   }, [])
   const onSubmit = () => {
-    handleWithdrawn(
-      contractData.id,
-      'recp_test_5hv7fdsfkar9q9qgvgj',
-    )
+    console.log(contractData.id, bank.key)
+    handleWithdrawn(contractData.id, bank.key)
   }
   return (
     <LandingLayout>
@@ -46,13 +44,17 @@ const Index = (props) => {
               {role === 'borrower' && (
                 <Fragment>
                   <WithdrawnFormField
-                    amount={contractData?.amount}
-                    bank={bank}
+                    amount={lendingRequest?.amount}
                     setBank={setBank}
                     contractId={url.query.contractId}
-                    disabled={
+                    error={
                       contractData?.borrower?.withdrawn ||
                       contractData?.state !== 'LENDING'
+                    }
+                    disabled={
+                      contractData?.borrower?.withdrawn ||
+                      contractData?.state !== 'LENDING' ||
+                      !bank
                     }
                     handleWithdrawn={onSubmit}
                   />
@@ -64,14 +66,19 @@ const Index = (props) => {
                     amount={
                       contractData?.lenderContract?.amount
                     }
-                    bank={bank}
                     fee={contractData?.lenderContract?.fee}
                     setBank={setBank}
                     contractId={url.query.contractId}
-                    disabled={
+                    error={
                       contractData?.lender?.withdrawn ||
                       contractData?.state !==
                         'SUCCESS_LENDING'
+                    }
+                    disabled={
+                      contractData?.lender?.withdrawn ||
+                      contractData?.state !==
+                        'SUCCESS_LENDING' ||
+                      !bank
                     }
                     handleWithdrawn={onSubmit}
                   />
@@ -91,6 +98,14 @@ const mapStateToProps = (state) => ({
     'contract',
     'data',
   ]),
+  lendingRequest: (
+    state.getIn([
+      'lending',
+      'lending',
+      'dataById',
+      'data',
+    ]) || Map({})
+  ).toJS(),
   loadingContract: state.getIn([
     'contract',
     'contract',

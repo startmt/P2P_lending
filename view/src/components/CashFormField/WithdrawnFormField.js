@@ -1,21 +1,20 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Form, Input } from 'semantic-ui-react'
-import { PaymentMenu } from '../BankMenu'
+import { UserBankMenu } from '../BankMenu'
 import { Button, Result } from 'antd'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 const WithdrawnFormField = ({
   contractId,
   amount,
   disabled,
-  bank,
   fee,
-  setBank,
   handleWithdrawn,
+  setBank,
   loading,
+  error,
   transactionLoading,
 }) => {
-  if (disabled) {
+  if (error) {
     return (
       <Result
         status="error"
@@ -30,32 +29,28 @@ const WithdrawnFormField = ({
         <label>หมายเลขสัญญาการกู้</label>
         <Input value={contractId} disabled />
       </Form.Field>
-      <Form.Field>
-        <label>จำนวนเงินรวมดอกเบี้ย</label>
-        <Input value={amount} disabled />
-      </Form.Field>
+
       {fee && (
-        <Form.Field>
-          <label>ค่าธรรมเนียม</label>
-          <Input value={amount} disabled />
-        </Form.Field>
+        <Fragment>
+          <Form.Field>
+            <label>จำนวนเงินรวมดอกเบี้ย</label>
+            <Input value={amount} disabled />
+          </Form.Field>
+          <Form.Field>
+            <label>ค่าธรรมเนียม</label>
+            <Input value={amount} disabled />
+          </Form.Field>
+        </Fragment>
       )}
 
       <Form.Field>
         <label>จำนวนเงินที่ได้รับ</label>
         <Input
-          value={amount - (amount * fee) / 100}
+          value={amount - (amount * fee) / 100 || amount}
           disabled
         />
       </Form.Field>
-      <Form.Field>
-        <label>กรุณาเลือกธนาคาร</label>
-        <PaymentMenu
-          disabled={disabled}
-          data={bank}
-          setData={setBank}
-        />
-      </Form.Field>
+      <UserBankMenu setData={setBank} />
       <Button
         disabled={disabled || transactionLoading}
         onClick={handleWithdrawn}

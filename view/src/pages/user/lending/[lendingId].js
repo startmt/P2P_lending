@@ -29,14 +29,8 @@ const LendingById = (props) => {
         <Card loading={loadingObj}>
           {data?.data?.state === 'CHECKED' &&
             role === 'lender' && <LendingPaymentStep />}
-          {data?.data?.state === 'CHECKED' &&
-            role === 'borrower' && <LendingBorrower />}
           {data?.data?.state !== 'CHECKED' && (
-            <Result
-              status="error"
-              title="เกิดข้อผิดพลาด"
-              subTitle="กรุณากลับสู่หน้าหลัก"
-            />
+            <LendingBorrower />
           )}
         </Card>
       </div>

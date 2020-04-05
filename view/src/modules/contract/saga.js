@@ -16,6 +16,7 @@ import {
 } from './api'
 import { mapContractListToObject } from '../../contract/Lending'
 import { contractAction } from './index'
+import { lendingAction } from '../borrower/actions'
 // import Router from 'next/router'
 function* contractTenorSaga(actions) {
   try {
@@ -50,6 +51,7 @@ function* contractTenorSaga(actions) {
       getState,
       actions.payload.address,
     )
+    yield put(lendingAction.getLendingData(id))
 
     const lendingObj = mapContractListToObject(data)
     const mutated = {

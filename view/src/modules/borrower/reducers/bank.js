@@ -2,6 +2,7 @@ import { fromJS } from 'immutable'
 const initialState = fromJS({
   loading: false,
   data: [],
+  emptyList: true,
   loadingAdd: false,
   openModalAdd: false,
 })
@@ -16,6 +17,10 @@ export default function reducer(
       return state
         .set('loading', false)
         .set('data', fromJS(action.payload.data))
+        .set(
+          'emptyList',
+          fromJS(action.payload.emptyBankList),
+        )
     case 'LOADING_BANK_FAIL':
       return state.set('loading', false)
     case 'OPEN_ADD_BANK_MODAL':
