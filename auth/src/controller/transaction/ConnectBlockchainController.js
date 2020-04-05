@@ -15,11 +15,11 @@ export default async (req, res) => {
   try {
     const data = req.body.data
     const key = req.body.key
-    const { username, requestId } = data.metadata
-    const user = await getUserByUsername(username)
     console.log(key)
     switch (key) {
       case 'charge.complete':
+        const { username, requestId } = data.metadata
+        const user = await getUserByUsername(username)
         if (data.status !== 'successful') status400(res, 'unsuccessful payment')
 
         const request = await getRequestById(requestId)
