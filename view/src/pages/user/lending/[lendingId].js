@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'next/router'
 import { compose } from 'redux'
 import withRedux from '~/hocs/with-redux'
@@ -6,14 +6,9 @@ import { LandingLayout } from '~/layouts/landing'
 import { bindActionCreators } from 'redux'
 import { lendingAction } from '../../../modules/borrower/actions'
 import { interestAction } from '~/modules/query/actions'
-import {
-  UserDescription,
-  ContractDescription,
-  PaymentSummaryDescription,
-} from '../../../components/Description'
-import { Card } from 'antd'
+import { Card, Result } from 'antd'
 import LendingPaymentStep from '../../../components/Step/LendingPaymentStep'
-import { Header } from 'semantic-ui-react'
+import { LendingBorrower } from '../../../components/Step'
 const LendingById = (props) => {
   const {
     router,
@@ -21,6 +16,7 @@ const LendingById = (props) => {
     getDataById,
     data,
     loadingObj,
+    role,
   } = props
 
   useEffect(() => {
@@ -31,13 +27,24 @@ const LendingById = (props) => {
     <LandingLayout>
       <div className="container section">
         <Card loading={loadingObj}>
-          <LendingPaymentStep />
+          {data?.data?.state === 'CHECKED' &&
+            role === 'lender' && <LendingPaymentStep />}
+          {data?.data?.state === 'CHECKED' &&
+            role === 'borrower' && <LendingBorrower />}
+          {data?.data?.state !== 'CHECKED' && (
+            <Result
+              status="error"
+              title="เกิดข้อผิดพลาด"
+              subTitle="กรุณากลับสู่หน้าหลัก"
+            />
+          )}
         </Card>
       </div>
     </LandingLayout>
   )
 }
 const mapStateToProps = (state) => ({
+  role: state.getIn(['authentication', 'auth', 'role']),
   loadingObj: state.getIn([
     'lending',
     'lending',
