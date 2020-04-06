@@ -11,7 +11,7 @@ function* getBankSaga(actions) {
   try {
     const { data } = yield call(
       getBank,
-      actions.payload.state,
+      actions?.payload?.state || '',
     )
     if (data.length === 0)
       yield put(bankAction.getBankSuccess(data, true))

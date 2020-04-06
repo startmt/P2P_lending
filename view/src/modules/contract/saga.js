@@ -13,6 +13,7 @@ import {
   getLenderContract,
   getLenderDetail,
   getState,
+  getPayDateList,
 } from './api'
 import { mapContractListToObject } from '../../contract/Lending'
 import { contractAction } from './index'
@@ -71,6 +72,18 @@ function* contractTenorSaga(actions) {
     console.log(e)
   }
 }
+function* getContractListSaga(actions) {
+  try {
+    const data = yield call(
+      getPayDateList,
+      actions.payload.address,
+      actions.payload.tenor,
+    )
+    yield put(contractAction.getContractListSuccess(data))
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 export default function*() {
   yield all([
@@ -78,5 +91,6 @@ export default function*() {
       'GET_CURRENT_CONTRACT_TENOR',
       contractTenorSaga,
     ),
+    takeLatest('GET_CONTRACT_LIST', getContractListSaga),
   ])
 }

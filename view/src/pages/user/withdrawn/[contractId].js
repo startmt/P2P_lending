@@ -29,7 +29,6 @@ const Index = (props) => {
     getTransactionLoading()
   }, [])
   const onSubmit = () => {
-    console.log(contractData.id, bank.key)
     handleWithdrawn(contractData.id, bank.key)
   }
   return (

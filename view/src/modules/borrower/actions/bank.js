@@ -1,7 +1,7 @@
 export const getBank = (state = '') => ({
   type: 'LOADING_BANK',
   payload: {
-    state,
+    state: state || '',
   },
 })
 export const getBankSuccess = (data, emptyBankList) => ({

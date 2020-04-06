@@ -29,9 +29,11 @@ const LendingById = (props) => {
         <Card loading={loadingObj}>
           {data?.data?.state === 'CHECKED' &&
             role === 'lender' && <LendingPaymentStep />}
-          {data?.data?.state !== 'CHECKED' && (
-            <LendingBorrower />
-          )}
+          {role === 'borrower' &&
+            (data?.data?.state === 'CHECKED' ||
+              data?.data?.state === 'INIT') && (
+              <LendingBorrower />
+            )}
         </Card>
       </div>
     </LandingLayout>

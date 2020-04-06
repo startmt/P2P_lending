@@ -3,6 +3,7 @@ import {
   mapUserToObject,
   mapUserDetailToObject,
   mapLendingContractToObject,
+  mapContractListToObject,
 } from '../../contract/Lending'
 export const getCurrentTenorFromWeb3 = async (address) => {
   const current = await Lending(address)
@@ -11,6 +12,17 @@ export const getCurrentTenorFromWeb3 = async (address) => {
   return Lending(address)
     .methods.contractList(Number(current))
     .call()
+}
+
+export const getPayDateList = async (address, tenor) => {
+  let data = []
+  for (let i = 0; i < tenor; i++) {
+    let currentContract = await Lending(address)
+      .methods.contractList(Number(i))
+      .call()
+    data.push(mapContractListToObject(currentContract))
+  }
+  return data
 }
 export const getId = async (address) => {
   return Lending(address)
@@ -31,10 +43,11 @@ export const getState = (address) => {
     .call()
 }
 
-export const getLender = (address) => {
-  return Lending(address)
+export const getLender = async (address) => {
+  const lender = await Lending(address)
     .methods.lender()
     .call()
+  return mapUserToObject(lender)
 }
 
 export const getBorrowerDetail = async (address) => {
