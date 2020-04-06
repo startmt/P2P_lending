@@ -18,7 +18,6 @@ const UserBankMenu = ({
     getBank('VERIFIED')
   }, [])
   if (!loading) {
-    console.log(bankList)
     bank = bankList.map((data) => ({
       key: data.transferId,
       value: data.transferId,
