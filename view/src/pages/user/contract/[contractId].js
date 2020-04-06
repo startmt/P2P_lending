@@ -12,13 +12,25 @@ import {
 } from '../../../components/ContractDescription'
 import moment from 'moment'
 
-const renderState = (state) => {
-  if (state === 'LENDING') {
+const renderState = (state, borrower, lender) => {
+  if (state === 'LENDING' && !borrower) {
     return (
-      <Tag color="blue">กำลังอยู่ในระหว่างการกู้เงิน</Tag>
+      <Tag color="blue">
+        กำลังดำเนินการ (รอผู้กู้รับเงิน)
+      </Tag>
     )
   }
-  if (state === 'SUCCESS_LENDING') {
+  if (state === 'LENDING' && borrower) {
+    return <Tag color="blue">กำลังดำเนินการ</Tag>
+  }
+  if (state === 'SUCCESS_LENDING' && !lender) {
+    return (
+      <Tag color="blue">
+        กำลังดำเนินการ (รอผู้ให้กู้รับเงิน)
+      </Tag>
+    )
+  }
+  if (state === 'SUCCESS_LENDING' && lender) {
     return <Tag color="green">เสร็จสิ้น</Tag>
   }
   if (state === 'REJECTED') {
@@ -45,7 +57,12 @@ const ContractByAddress = (props) => {
   return (
     <LandingLayout>
       <div className="container section">
-        <Card extra={renderState(contractData.state)}>
+        <Card
+          extra={renderState(
+            contractData.state,
+            contractData?.borrower?.withdrawn,
+            contractData?.lender?.withdrawn,
+          )}>
           <Result
             icon={<Icon type="profile" />}
             title="สัญญาการกู้เงิน"

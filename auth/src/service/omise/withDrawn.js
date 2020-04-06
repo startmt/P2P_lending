@@ -34,6 +34,11 @@ export const withDrawnService = async (username, requestId, recipient) => {
       const lender = await contract.methods.lender().call()
       const lenderContract = await contract.methods.lenderContract().call()
       const state = await contract.methods.state().call()
+      console.log(
+        user.get().id == lender['id'],
+        lender['withdrawn'] == false,
+        state === 'SUCCESS_LENDING',
+      )
       if (
         user.get().id == lender['id'] &&
         lender['withdrawn'] == false &&
