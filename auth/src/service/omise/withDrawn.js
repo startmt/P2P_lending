@@ -4,6 +4,7 @@ import { getUserByUsername } from '../../crud/user'
 import { getRequestById } from '../../crud/request'
 import { withdrawnCash } from '../../api/omise'
 import config from '../../config'
+import { createLog } from '../../crud/requestlog'
 export const withDrawnService = async (username, requestId, recipient) => {
   try {
     const user = await getUserByUsername(username)
@@ -22,6 +23,11 @@ export const withDrawnService = async (username, requestId, recipient) => {
           gasPrice: '10000000000',
           gas: 6721975,
         })
+
+        createLog(
+          `${username} has been withdraw amount ${request.get().amount}.`,
+          requestId,
+        )
         return { status: 200, message: 'transfer successful' }
       }
     } else if (user.get().role === 'lender') {
@@ -37,6 +43,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
           gasPrice: '10000000000',
           gas: 6721975,
         })
+        createLog(`${username} has been withdraw amount ${amount}.`, requestId)
         return { status: 200, message: 'transfer successful' }
       }
     }
