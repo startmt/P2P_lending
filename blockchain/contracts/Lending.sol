@@ -27,7 +27,7 @@ contract Lending {
     LenderContract public lenderContract;
     UserContractStruct public lender;
     uint256 startTime;
-    uint256 tenor;
+    uint256 public tenor;
     string public state;
     uint256 public id;
     Interest interest = Interest(0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938);
