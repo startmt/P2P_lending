@@ -24,7 +24,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
           gas: 6721975,
         })
 
-        createLog(
+        await createLog(
           `${username} has been withdraw amount ${request.get().amount}.`,
           requestId,
         )
@@ -43,7 +43,10 @@ export const withDrawnService = async (username, requestId, recipient) => {
           gasPrice: '10000000000',
           gas: 6721975,
         })
-        createLog(`${username} has been withdraw amount ${amount}.`, requestId)
+        await createLog(
+          `${username} has been withdraw amount ${amount}.`,
+          requestId,
+        )
         return { status: 200, message: 'transfer successful' }
       }
     }
