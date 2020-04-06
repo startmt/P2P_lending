@@ -25,7 +25,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
         })
 
         await createLog(
-          `${username} has been withdraw amount ${request.get().amount}.`,
+          `${username} has been withdraw amount ${request.get().amount} baht.`,
           requestId,
         )
         return { status: 200, message: 'transfer successful' }
@@ -33,7 +33,12 @@ export const withDrawnService = async (username, requestId, recipient) => {
     } else if (user.get().role === 'lender') {
       const lender = await contract.methods.lender().call()
       const lenderContract = await contract.methods.lenderContract().call()
-      if (user.get().id == lender['id'] && lender['withdrawn'] == false) {
+      const state = await contract.methods.state().call()
+      if (
+        user.get().id == lender['id'] &&
+        lender['withdrawn'] == false &&
+        state === 'SUCCESS_LENDING'
+      ) {
         const amount =
           lenderContract['amount'] -
           (lenderContract['amount'] * lenderContract['fee']) / 100
@@ -44,7 +49,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
           gas: 6721975,
         })
         await createLog(
-          `${username} has been withdraw amount ${amount}.`,
+          `${username} has been withdraw amount ${amount} baht.`,
           requestId,
         )
         return { status: 200, message: 'transfer successful' }
