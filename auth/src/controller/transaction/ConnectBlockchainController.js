@@ -11,6 +11,7 @@ import {
   deleteLoading,
 } from '../../service/blockchain/loading'
 import { borrowerLending } from '../../service/blockchain/lending'
+import { createLog } from '../../crud/requestlog'
 export default async (req, res) => {
   try {
     const data = req.body.data
@@ -44,6 +45,10 @@ export default async (req, res) => {
               requestId,
             )
             await lenderAcceptRequest(user.get().id, requestId)
+            await createLog(
+              `${username}(lender) has been paid cash. `,
+              request.get().id,
+            )
             await deleteLoading(username)
             return status200(res, { lendingContract: response })
           case 'LENDING':
@@ -53,6 +58,10 @@ export default async (req, res) => {
               requestId,
             )
             await deleteLoading(username)
+            await createLog(
+              `${username}(borrwer) has been paid cash. `,
+              request.get().id,
+            )
             if (responseData.status === 200) {
               return status200(res, responseData)
             }

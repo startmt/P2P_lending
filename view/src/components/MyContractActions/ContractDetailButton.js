@@ -6,7 +6,7 @@ const ContractDetailButton = ({
   contractAddress,
 }) => {
   const RouteToContractPage = () => {
-    Router.push(`/contract/${contractAddress}`)
+    Router.push(`/user/contract/${contractAddress}`)
   }
   if (state !== 'CHECKED' || state !== 'INIT')
     return (

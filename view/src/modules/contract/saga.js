@@ -14,6 +14,7 @@ import {
   getLenderDetail,
   getState,
   getPayDateList,
+  getLogApi,
 } from './api'
 import { mapContractListToObject } from '../../contract/Lending'
 import { contractAction } from './index'
@@ -53,7 +54,11 @@ function* contractTenorSaga(actions) {
       actions.payload.address,
     )
     yield put(lendingAction.getLendingData(id))
-
+    yield put(
+      contractAction.getContractList(
+        actions.payload.address,
+      ),
+    )
     const lendingObj = mapContractListToObject(data)
     const mutated = {
       id,
@@ -68,6 +73,7 @@ function* contractTenorSaga(actions) {
     yield put(
       contractAction.getCurrentContractSuccess(mutated),
     )
+    yield put(contractAction.getLog(id))
   } catch (e) {
     console.log(e)
   }
@@ -77,9 +83,20 @@ function* getContractListSaga(actions) {
     const data = yield call(
       getPayDateList,
       actions.payload.address,
-      actions.payload.tenor,
     )
     yield put(contractAction.getContractListSuccess(data))
+  } catch (e) {
+    console.log(e)
+  }
+}
+function* getLogSaga(actions) {
+  try {
+    const { data } = yield call(
+      getLogApi,
+      actions.payload.requestId,
+    )
+    const { log } = data
+    yield put(contractAction.getLogSuccess(log))
   } catch (e) {
     console.log(e)
   }
@@ -92,5 +109,6 @@ export default function*() {
       contractTenorSaga,
     ),
     takeLatest('GET_CONTRACT_LIST', getContractListSaga),
+    takeLatest('GET_LOGS', getLogSaga),
   ])
 }

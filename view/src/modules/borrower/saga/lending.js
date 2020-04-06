@@ -55,19 +55,6 @@ function* getLendingDataSaga(action) {
       ...data,
       manner: mannerObj,
     }
-    console.log(data.state)
-    if (
-      data.state === 'CHECKED' ||
-      data.state === 'SUCCESS' ||
-      data.state === 'REJECT'
-    ) {
-      yield put(
-        contractAction.getContractList(
-          data.contract.contractDetailId,
-          data.loanTenor,
-        ),
-      )
-    }
     yield put(
       lendingAction.getLendingDataSuccess({
         data: returnData,

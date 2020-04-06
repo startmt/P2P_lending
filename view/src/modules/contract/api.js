@@ -5,6 +5,9 @@ import {
   mapLendingContractToObject,
   mapContractListToObject,
 } from '../../contract/Lending'
+import Axios from 'axios'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 export const getCurrentTenorFromWeb3 = async (address) => {
   const current = await Lending(address)
     .methods.getCurrentTenor()
@@ -14,8 +17,11 @@ export const getCurrentTenorFromWeb3 = async (address) => {
     .call()
 }
 
-export const getPayDateList = async (address, tenor) => {
+export const getPayDateList = async (address) => {
   let data = []
+  const tenor = await Lending(address)
+    .methods.tenor()
+    .call()
   for (let i = 0; i < tenor; i++) {
     let currentContract = await Lending(address)
       .methods.contractList(Number(i))
@@ -68,4 +74,10 @@ export const getLenderContract = async (address) => {
     .methods.lenderContract()
     .call()
   return mapLendingContractToObject(lender)
+}
+
+export const getLogApi = async (requestId) => {
+  return Axios.get(
+    `${publicRuntimeConfig.TRANSACTION_SERVICE}/log/${requestId}`,
+  )
 }

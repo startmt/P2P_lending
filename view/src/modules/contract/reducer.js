@@ -4,6 +4,8 @@ const initialState = fromJS({
   data: Map({}),
   loadingList: false,
   contractList: [],
+  logLoading: false,
+  logs: [],
 })
 export default function reducer(
   state = initialState,
@@ -26,6 +28,14 @@ export default function reducer(
         .set('contractList', action.payload.data)
     case 'GET_CONTRACT_LIST_FAIL':
       return state.set('loadingList', false)
+    case 'GET_LOGS':
+      return state.set('logLoading', true)
+    case 'GET_LOGS_SUCCESS':
+      return state
+        .set('logLoading', false)
+        .set('logs', action.payload.data)
+    case 'GET_LOGS_FAIL':
+      return state.set('logLoading', false)
     default:
       return state
   }
