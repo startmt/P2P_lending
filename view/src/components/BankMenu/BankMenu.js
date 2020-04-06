@@ -29,15 +29,20 @@ const bankCodeList = [
   },
 ]
 
-const BankMenu = ({ data, setData }, props) => {
+const BankMenu = ({ setData }, props) => {
+  const [bank, setBank] = useState(null)
+  const handleChange = (value) => {
+    setBank(value)
+    setData(value)
+  }
   return (
     <Fragment>
       <Select
         {...props}
         name="bank_code"
-        value={data?.key}
+        value={bank?.key}
         onChange={(e) => {
-          setData(
+          handleChange(
             bankCodeList.find(
               (data) => data.text === e.target.textContent,
             ),
