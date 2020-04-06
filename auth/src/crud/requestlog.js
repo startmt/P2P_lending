@@ -17,3 +17,18 @@ export const createLog = async (log, requestId) => {
     return { message: 'error' }
   }
 }
+
+export const getLog = async (requestId) => {
+  try {
+    return await db.requestlog.findAll({
+      where: {
+        requestId,
+      },
+      order: [['createdAt', 'DESC']],
+      raw: true,
+    })
+  } catch (e) {
+    console.log('error', e)
+    return { message: 'error' }
+  }
+}
