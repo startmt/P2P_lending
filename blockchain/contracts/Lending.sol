@@ -146,7 +146,10 @@ contract Lending {
 
     function finishLending(string memory evidence) public {
         if (
-            keccak256(abi.encodePacked(state)) == keccak256("SUCCESS_LENDING")
+            keccak256(abi.encodePacked(state)) ==
+            keccak256("SUCCESS_LENDING") ||
+            keccak256(abi.encodePacked(state)) ==
+            keccak256("BORROWER_NOT_ACCEPT")
         ) {
             lender.withdrawn = true;
             lender.evidence = evidence;

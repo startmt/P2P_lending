@@ -34,20 +34,35 @@ export const withDrawnService = async (username, requestId, recipient) => {
       const lender = await contract.methods.lender().call()
       const lenderContract = await contract.methods.lenderContract().call()
       const state = await contract.methods.state().call()
-      console.log(
-        user.get().id == lender['id'],
-        lender['withdrawn'] == false,
-        state === 'SUCCESS_LENDING',
-      )
       if (
         user.get().id == lender['id'] &&
         lender['withdrawn'] == false &&
-        (state === 'SUCCESS_LENDING' || state === 'BORROWER_NOT_ACCEPT')
+        state === 'SUCCESS_LENDING'
       ) {
         const amount =
           lenderContract['amount'] -
           (lenderContract['amount'] * lenderContract['fee']) / 100
         const transfer = await withdrawnCash(amount, recipient)
+        await contract.methods.finishLending(transfer.data.id).send({
+          from: config.ACCOUNT_WALLET,
+          gasPrice: '10000000000',
+          gas: 6721975,
+        })
+        await createLog(
+          `${username} has been withdraw amount ${amount} baht.`,
+          requestId,
+        )
+        return { status: 200, message: 'transfer successful' }
+      }
+      if (
+        user.get().id == lender['id'] &&
+        lender['withdrawn'] == false &&
+        state === 'BORROWER_NOT_ACCEPT'
+      ) {
+        const transfer = await withdrawnCash(
+          request.get().amount + '00',
+          recipient,
+        )
         await contract.methods.finishLending(transfer.data.id).send({
           from: config.ACCOUNT_WALLET,
           gasPrice: '10000000000',

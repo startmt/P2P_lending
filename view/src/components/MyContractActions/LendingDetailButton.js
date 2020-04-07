@@ -1,21 +1,23 @@
 import React from 'react'
 import { Button } from 'antd'
 import Router from 'next/router'
-const LendingDetailButton = ({
-  state,
-  contractAddress,
-}) => {
-  const RouteToContractPage = () => {
-    Router.push(`/my/${contractAddress}`)
+const LendingDetailButton = ({ state, lendingId }) => {
+  const RouteToLendingPage = () => {
+    Router.push(`/user/lending/${lendingId}`)
   }
-  if (state === 'INIT' || state === 'CHECKED')
+  if (
+    state === 'INIT' ||
+    state === 'CHECKED' ||
+    state === 'REJECTED'
+  ) {
     return (
       <Button
         className="ant-button"
-        onClick={RouteToContractPage}>
+        onClick={RouteToLendingPage}>
         ดูข้อมูล
       </Button>
     )
+  }
   return null
 }
 

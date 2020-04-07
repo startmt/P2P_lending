@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
-import { paymentAction } from '../../../modules/payment'
 import withRedux from '~/hocs/with-redux'
 import { LandingLayout } from '~/layouts/landing'
 import { Result, Icon, Skeleton, Card, Tag } from 'antd'
@@ -33,6 +32,20 @@ const renderState = (state, borrower, lender) => {
   if (state === 'SUCCESS_LENDING' && lender) {
     return <Tag color="green">เสร็จสิ้น</Tag>
   }
+  if (state === 'BORROWER_NOT_ACCEPT' && !lender) {
+    return (
+      <Tag color="red">
+        ผู้กู้ไม่รับเงิน (รอให้ผู้ใก้กู้รับเงินคืน)
+      </Tag>
+    )
+  }
+  if (state === 'BORROWER_NOT_ACCEPT' && lender) {
+    return (
+      <Tag color="red">
+        ผู้กู้ไม่รับเงิน (ผู้ให้กู้รับเงินคืนแล้ว)
+      </Tag>
+    )
+  }
   if (state === 'REJECTED') {
     return <Tag color="red">ล้มเหลว</Tag>
   }
@@ -43,7 +56,6 @@ const ContractByAddress = (props) => {
     setPageName,
     url,
     logs,
-    handlePayment,
     getContract,
     contractData,
     loadingContract,
@@ -127,7 +139,6 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       setPageName: pageNameAction.setPageName,
-      handlePayment: paymentAction.payment,
       getContract: contractAction.getCurrentContract,
     },
     dispatch,

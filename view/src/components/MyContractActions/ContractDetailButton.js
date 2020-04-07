@@ -8,7 +8,7 @@ const ContractDetailButton = ({
   const RouteToContractPage = () => {
     Router.push(`/user/contract/${contractAddress}`)
   }
-  if (state !== 'CHECKED' || state !== 'INIT')
+  if (state === 'LENDING' || state === 'SUCCESS')
     return (
       <Button
         className="ant-button"
