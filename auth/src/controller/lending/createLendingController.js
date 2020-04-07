@@ -2,15 +2,21 @@ import { status400, status200 } from '../../utils/status'
 import { createLending } from '../../service/lending/borrowerService'
 import { uploadFile } from '../../utils/managefile'
 import { createLog } from '../../crud/requestlog'
+import interestContract from '../../service/blockchain/interest'
 
 export default async (req, res) => {
   try {
+    const interest = await interestContract(
+      '0xd0ee9F1B0580897FdB42e3fD14361D89441Cf938',
+    )
+      .methods.interest()
+      .call()
     const query = await createLending(req.authInfo.username, {
       category: req.body.category,
       title: req.body.title,
       state: 'INIT',
       amount: req.body.amount,
-      interestRate: 8,
+      interestRate: Number(interest['allInterest']),
       loanTenor: req.body.loanTenor,
       description: req.body.description,
     })
