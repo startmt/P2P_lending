@@ -38,7 +38,7 @@ const WithdrawnFormField = ({
           </Form.Field>
           <Form.Field>
             <label>ค่าธรรมเนียม</label>
-            <Input value={amount} disabled />
+            <Input value={(amount * fee) / 100} disabled />
           </Form.Field>
         </Fragment>
       )}

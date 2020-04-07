@@ -10,7 +10,9 @@ const UserDescription = ({ loading, payList }) => {
       render: (text, record) => {
         return (
           <Fragment>
-            {moment(Number(record.date)).format('L')}
+            {moment(Number(record.date)).format(
+              'DD/MM/YYYY',
+            )}
           </Fragment>
         )
       },
