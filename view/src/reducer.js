@@ -6,6 +6,7 @@ import admin from '~/modules/admin/reducers'
 import { paymentReducer } from './modules/payment'
 import { transactionReducer } from './modules/transaction'
 import { contractReducer } from './modules/contract'
+import { eventReducer } from './modules/event'
 export default combineReducers({
   authentication: authReducer,
   page: queryReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   contract: contractReducer,
   transaction: transactionReducer,
   paymentReducer,
+  event: eventReducer,
 })

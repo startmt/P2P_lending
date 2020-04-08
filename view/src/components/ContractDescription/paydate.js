@@ -21,6 +21,9 @@ const UserDescription = ({ loading, payList }) => {
       title: 'จำนวนเงิน',
       dataIndex: 'amount',
       key: 'amount',
+      render: (text, record) => {
+        return <Fragment>{record.amount} บาท</Fragment>
+      },
     },
     {
       title: 'สถานะ',
