@@ -12,6 +12,7 @@ import {
 import { lendingAction } from '../../modules/borrower/actions'
 import { Table, Card } from 'antd'
 import CreateLendingModal from '../../components/CreateLendingModal/CreateLendingModal'
+import StateTags from '../../components/StateTags/StateTags'
 const MyLendingPage = ({
   setPageName,
   getSelfLending,
@@ -36,6 +37,9 @@ const MyLendingPage = ({
       title: 'state',
       dataIndex: 'state',
       key: 'state',
+      render: (index, record) => {
+        return <StateTags state={record.state} />
+      },
     },
     {
       title: 'actions',

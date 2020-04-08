@@ -28,9 +28,8 @@ const PaymentButton = ({
     }
     borrower()
   })
-  console.log(visible, state)
   const RouteToPaymentPage = () => {
-    Router.push(`/payment/${contractAddress}`)
+    Router.push(`/user/payment/${contractAddress}`)
   }
   if (visible && state === 'LENDING' && role === 'borrower')
     return (
