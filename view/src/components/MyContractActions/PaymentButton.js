@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'antd'
 import Router from 'next/router'
 import { connect } from 'react-redux'
+import { Lending } from '../../helpers/web3'
+import { mapUserToObject } from '../../contract/Lending'
 const PaymentButton = ({
   state,
   contractAddress,
@@ -11,17 +13,22 @@ const PaymentButton = ({
   useEffect(() => {
     const borrower = async () => {
       try {
-        const borrower = await Lending(contractAddress)
-          .methods.borrower()
-          .call()
-        const borrowerObj = mapUserToObject(borrower)
-        if (borrowerObj.withdrawn === true) {
-          setVisible(true)
+        if (contractAddress) {
+          const borrower = await Lending(contractAddress)
+            .methods.borrower()
+            .call()
+          const borrowerObj = mapUserToObject(borrower)
+          if (borrowerObj.withdrawn === true) {
+            setVisible(true)
+          }
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error)
+      }
     }
     borrower()
   })
+  console.log(visible, state)
   const RouteToPaymentPage = () => {
     Router.push(`/payment/${contractAddress}`)
   }
