@@ -23,7 +23,7 @@ export default async (time) => {
         await updateRequest(id, {
           state: 'SUCCESS',
         })
-        await createLog('contract has been rejected at state' + state, id)
+        await createLog('contract has been rejected at state ' + state, id)
       }
     }
     return { status: 200, message: 'complete' }
