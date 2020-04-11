@@ -61,9 +61,13 @@ const CreateLendingModal = ({
       { required: 'กรุณากรอกรหัสบัญชี' },
     )
   }, [])
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-    createLending(data)
+  const onClose = () => {
+    handleClose()
+    document.getElementById('create-form').reset()
+  }
+  const onSubmit = handleSubmit(async (data) => {
+    await createLending(data)
+    document.getElementById('create-form').reset()
   })
   const setValues = async (e, { name, value }) => {
     setValue(name, value)
@@ -87,11 +91,13 @@ const CreateLendingModal = ({
     <Fragment>
       <Modal
         title="สร้างใบคำร้อง"
-        onCancel={handleClose}
+        onCancel={onClose}
         width={800}
+        confirmLoading={loading}
         onOk={onSubmit}
         visible={open}>
-        <Form>
+        <Form id="create-form" onSubmit={onSubmit}>
+          <input type="reset" hidden />
           <Form.Field>
             <label>หัวข้อ</label>
             <Input name="title" onChange={setValues} />
