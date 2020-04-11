@@ -37,7 +37,7 @@ export const withDrawnService = async (username, requestId, recipient) => {
       if (
         user.get().id == lender['id'] &&
         lender['withdrawn'] == false &&
-        state === 'SUCCESS_LENDING'
+        (state === 'SUCCESS_LENDING' || state === 'REJECTED')
       ) {
         const amount =
           lenderContract['amount'] -
