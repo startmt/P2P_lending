@@ -22,6 +22,13 @@ const renderState = (state, borrower, lender) => {
   if (state === 'LENDING' && borrower) {
     return <Tag color="blue">กำลังดำเนินการ</Tag>
   }
+  if (state === 'LENDING_LATE' && borrower) {
+    return (
+      <Tag color="blue">
+        กำลังดำเนินการ (ผู้กู้เกินกำหนดชำระเงิน)
+      </Tag>
+    )
+  }
   if (state === 'SUCCESS_LENDING' && !lender) {
     return (
       <Tag color="blue">
