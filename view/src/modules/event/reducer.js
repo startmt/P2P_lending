@@ -11,7 +11,7 @@ export default function reducer(
     case 'CREATE_LENDING':
       return state.set('loading', true)
     case 'CREATE_LENDING_SUCCESS':
-      return state.set('loading', false)
+      return state.set('loading', false).set('modal', false)
     case 'CREATE_LENDING_FAIL':
       return state.set('loading', false)
     case 'CREATE_LENDING_OPEN_MODAL':
