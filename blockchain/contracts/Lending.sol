@@ -26,7 +26,6 @@ contract Lending {
     UserContractStruct public borrower;
     LenderContract public lenderContract;
     UserContractStruct public lender;
-    uint256 startTime;
     uint256 public tenor;
     string public state;
     uint256 public id;
@@ -154,18 +153,20 @@ contract Lending {
         returns (string memory)
     {
         uint256 current = getCurrentTenor();
-        if (
+        if (borrower.withdrawn == false) {
+            if (_currentTime >= contractList[current].date + 259200000) {
+                state = "BORROWER_NOT_ACCEPT";
+            }
+        } else if (
             keccak256(abi.encodePacked(state)) == keccak256("LENDING") ||
             keccak256(abi.encodePacked(state)) == keccak256("LENDING_LATE")
         ) {
-            if (_currentTime >= contractList[current].date + 604800) {
+            if (_currentTime >= contractList[current].date + 604800000) {
                 state = "REJECTED";
-            } else if ((_currentTime >= contractList[current].date + 86400)) {
+            } else if (
+                (_currentTime >= contractList[current].date + 86400000)
+            ) {
                 state = "LENDING_LATE";
-            }
-        } else if (borrower.withdrawn == false) {
-            if (_currentTime >= startTime + 259200) {
-                state = "BORROWER_NOT_ACCEPT";
             }
         }
         return state;

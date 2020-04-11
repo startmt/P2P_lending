@@ -12,8 +12,14 @@ const WithdrawnButton = ({ contractAddress, role }) => {
         const borrower = await Lending(contractAddress)
           .methods.borrower()
           .call()
+        const state = await Lending(contractAddress)
+          .methods.state()
+          .call()
         const borrowerObj = mapUserToObject(borrower)
-        if (borrowerObj.withdrawn === false) {
+        if (
+          borrowerObj.withdrawn === false &&
+          state === 'LENDING'
+        ) {
           setVisible(true)
         }
       } catch (error) {}
