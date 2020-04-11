@@ -110,3 +110,15 @@ export const updateRequest = async (id, data) => {
     return { message: 'error' }
   }
 }
+
+export const getLendingRequest = async () => {
+  return db.request.findAll({
+    where: { state: 'LENDING' },
+    include: [
+      {
+        model: db.contract,
+      },
+    ],
+    raw: true,
+  })
+}

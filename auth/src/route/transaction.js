@@ -4,6 +4,7 @@ import ConnectBlockchainController from '../controller/transaction/ConnectBlockc
 import CheckLoadingBlockchainController from '../controller/transaction/CheckLoadingBlockchainController'
 import WithdrawnController from '../controller/transaction/WithdrawnController'
 import GetLogsController from '../controller/transaction/GetLogsController'
+import UpdateStateController from '../controller/transaction/UpdateStateController'
 export const transaction = (router) => {
   router.post('/api/transaction/payment', requireJWTAuth, PaymentController)
   router.post('/api/transaction/check', ConnectBlockchainController)
@@ -14,4 +15,5 @@ export const transaction = (router) => {
   )
   router.post('/api/transaction/withdrawn', requireJWTAuth, WithdrawnController)
   router.get('/api/transaction/log/:id', GetLogsController)
+  router.post('/api/transaction/update-state', UpdateStateController)
 }
