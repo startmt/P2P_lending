@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Steps, Button } from 'antd'
+import { Steps, Button, Result, Descriptions } from 'antd'
 import { connect } from 'react-redux'
 import { Form } from 'semantic-ui-react'
 import {
@@ -57,8 +57,16 @@ const LendingPaymentStep = ({
   const SummarryStep = () => {
     return (
       <Fragment>
-        จำนวนเงินที่ต้องจ่าย : 20000
-        {bank.key}
+        <Result>
+          <Descriptions title="สรุปการให้สินเชื่อ">
+            <Descriptions.Item label="จำนวนเงินที่ต้องจ่าย">
+              {data.data.amount} บาท
+            </Descriptions.Item>
+            <Descriptions.Item label="ธนาคารที่ชำระเงิน">
+              {bank.text}
+            </Descriptions.Item>
+          </Descriptions>
+        </Result>
       </Fragment>
     )
   }

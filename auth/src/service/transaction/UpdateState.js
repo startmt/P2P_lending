@@ -21,7 +21,7 @@ export default async (time) => {
       if (state === 'BORROWER_NOT_ACCEPT' || state === 'REJECTED') {
         const id = await contract.methods.id().call()
         await updateRequest(id, {
-          state: 'REJECT',
+          state: 'SUCCESS',
         })
         await createLog('contract has been rejected at state' + state, id)
       }

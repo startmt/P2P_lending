@@ -28,7 +28,9 @@ const WithdrawnButton = ({ contractAddress, role }) => {
           .call()
         const lenderObj = mapUserToObject(lender)
         if (
-          state === 'SUCCESS_LENDING' &&
+          (state === 'SUCCESS_LENDING' ||
+            state === 'BORROWER_NOT_ACCEPT' ||
+            state === 'REJECTED') &&
           lenderObj.withdrawn === false
         ) {
           setVisible(true)

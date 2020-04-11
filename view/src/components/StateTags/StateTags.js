@@ -13,7 +13,7 @@ const StateTags = ({ state }) => {
   if (state === 'SUCCESS') {
     return <Tag color="green">สิ้นสุดสัญญา</Tag>
   }
-  if (state === 'REJECTED') {
+  if (state === 'REJECT') {
     return <Tag color="red">ถูกยกเลิก</Tag>
   }
   return null

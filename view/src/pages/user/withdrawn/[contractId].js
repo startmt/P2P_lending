@@ -59,30 +59,62 @@ const Index = (props) => {
                   />
                 </Fragment>
               )}
-              {role === 'lender' && (
-                <Fragment>
-                  <WithdrawnFormField
-                    amount={
-                      contractData?.lenderContract?.amount
-                    }
-                    fee={contractData?.lenderContract?.fee}
-                    setBank={setBank}
-                    contractId={url.query.contractId}
-                    error={
-                      contractData?.lender?.withdrawn ||
-                      contractData?.state !==
-                        'SUCCESS_LENDING'
-                    }
-                    disabled={
-                      contractData?.lender?.withdrawn ||
-                      contractData?.state !==
-                        'SUCCESS_LENDING' ||
-                      !bank
-                    }
-                    handleWithdrawn={onSubmit}
-                  />
-                </Fragment>
-              )}
+              {role === 'lender' &&
+                (contractData?.state ===
+                  'SUCCESS_LENDING' ||
+                  contractData?.state === 'REJECTED') && (
+                  <Fragment>
+                    <WithdrawnFormField
+                      amount={
+                        contractData?.lenderContract?.amount
+                      }
+                      fee={
+                        contractData?.lenderContract?.fee
+                      }
+                      setBank={setBank}
+                      contractId={url.query.contractId}
+                      error={
+                        contractData?.lender?.withdrawn ||
+                        (contractData?.state !==
+                          'SUCCESS_LENDING' &&
+                          contractData?.state !==
+                            'REJECTED')
+                      }
+                      disabled={
+                        contractData?.lender?.withdrawn ||
+                        (contractData?.state !==
+                          'SUCCESS_LENDING' &&
+                          contractData?.state !==
+                            'REJECTED') ||
+                        !bank
+                      }
+                      handleWithdrawn={onSubmit}
+                    />
+                  </Fragment>
+                )}
+              {role === 'lender' &&
+                contractData?.state ===
+                  'BORROWER_NOT_ACCEPT' && (
+                  <Fragment>
+                    <WithdrawnFormField
+                      amount={lendingRequest?.amount}
+                      setBank={setBank}
+                      contractId={url.query.contractId}
+                      error={
+                        contractData?.lender?.withdrawn ||
+                        contractData?.state !==
+                          'BORROWER_NOT_ACCEPT'
+                      }
+                      disabled={
+                        contractData?.lender?.withdrawn ||
+                        contractData?.state !==
+                          'BORROWER_NOT_ACCEPT' ||
+                        !bank
+                      }
+                      handleWithdrawn={onSubmit}
+                    />
+                  </Fragment>
+                )}
             </Form>
           </Skeleton>
         </Result>

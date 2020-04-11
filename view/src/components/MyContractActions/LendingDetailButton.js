@@ -8,7 +8,7 @@ const LendingDetailButton = ({ state, lendingId }) => {
   if (
     state === 'INIT' ||
     state === 'CHECKED' ||
-    state === 'REJECTED'
+    state === 'REJECT'
   ) {
     return (
       <Button
