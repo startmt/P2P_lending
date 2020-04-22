@@ -78,6 +78,10 @@ const CreateLendingModal = ({
   const onClose = () => {
     handleClose()
     document.getElementById('create-form').reset()
+    setIdentifyImg(null)
+    setCreditImg(null)
+    setSalaryImg(null)
+    setBankstatementImg(null)
   }
   const onSubmit = handleSubmit(async (data) => {
     await createLending(data)
