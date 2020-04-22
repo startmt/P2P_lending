@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect, Fragment, useState } from 'react'
 import { Modal, Button } from 'antd'
 import { connect } from 'react-redux'
 import { createLendingAction } from '../../modules/event'
@@ -61,6 +61,20 @@ const CreateLendingModal = ({
       { required: 'กรุณากรอกรหัสบัญชี' },
     )
   }, [])
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = (error) => reject(error)
+    })
+  }
+  const [identifyImg, setIdentifyImg] = useState(null)
+  const [creditImg, setCreditImg] = useState(null)
+  const [salaryImg, setSalaryImg] = useState(null)
+  const [bankstatementImg, setBankstatementImg] = useState(
+    null,
+  )
   const onClose = () => {
     handleClose()
     document.getElementById('create-form').reset()
@@ -74,7 +88,20 @@ const CreateLendingModal = ({
     await triggerValidation({ name })
   }
   const setFile = async (name, value) => {
-    console.log(value)
+    switch (name) {
+      case 'identify':
+        setIdentifyImg(await getBase64(value))
+        break
+      case 'credit':
+        setCreditImg(await getBase64(value))
+        break
+      case 'salary':
+        setSalaryImg(await getBase64(value))
+        break
+      case 'bankstatement':
+        setBankstatementImg(await getBase64(value))
+        break
+    }
     setValue(name, value)
     await triggerValidation({ name })
   }
@@ -132,7 +159,10 @@ const CreateLendingModal = ({
               computer={8}>
               <ClueCard
                 description="บัตรประชาชน"
-                icon="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-id-512.png"
+                icon={
+                  identifyImg ||
+                  'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-id-512.png'
+                }
                 handleFile={setFile}
                 name="identify"
               />
@@ -143,7 +173,10 @@ const CreateLendingModal = ({
               computer={8}>
               <ClueCard
                 description="เครดิตบรูโร"
-                icon="https://cdn1.iconfinder.com/data/icons/hawcons/32/699603-icon-94-document-file-doc-512.png"
+                icon={
+                  creditImg ||
+                  'https://cdn1.iconfinder.com/data/icons/hawcons/32/699603-icon-94-document-file-doc-512.png'
+                }
                 handleFile={setFile}
                 name="credit"
               />
@@ -154,7 +187,10 @@ const CreateLendingModal = ({
               computer={8}>
               <ClueCard
                 description="สลิปเงินเดือน (ถ้ามี)"
-                icon="https://cdn0.iconfinder.com/data/icons/finance-4-6/512/finance-money-dollar-40-512.png"
+                icon={
+                  salaryImg ||
+                  'https://cdn0.iconfinder.com/data/icons/finance-4-6/512/finance-money-dollar-40-512.png'
+                }
                 handleFile={setFile}
                 name="salary"
               />
@@ -165,7 +201,10 @@ const CreateLendingModal = ({
               computer={8}>
               <ClueCard
                 description="รายการดำเนินธุรกรรมทางบัญชี (ถ้ามี)"
-                icon="https://cdn4.iconfinder.com/data/icons/finance-and-banking-free/64/Finance_bank_check-512.png"
+                icon={
+                  bankstatementImg ||
+                  'https://cdn4.iconfinder.com/data/icons/finance-and-banking-free/64/Finance_bank_check-512.png'
+                }
                 handleFile={setFile}
                 name="bankstatement"
               />

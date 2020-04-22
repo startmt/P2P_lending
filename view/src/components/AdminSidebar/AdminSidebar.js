@@ -12,12 +12,6 @@ const Sidebar = ({ pageName, handleLogout }) => {
       defaultSelectedKeys={pageName}
       selectedKeys={pageName}
       mode="inline">
-      <Menu.Item key="adminMain">
-        <Icon type="home" />
-        <Link href="/admin/main" prefetch>
-          <span>หน้าหลัก</span>
-        </Link>
-      </Menu.Item>
       <Menu.Item key="adminRequest">
         <Icon type="user" />
         <Link href="/admin/request" prefetch>

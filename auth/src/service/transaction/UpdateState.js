@@ -26,6 +26,7 @@ export default async (time) => {
         await createLog('contract has been rejected at state ' + state, id)
       }
     }
+
     return { status: 200, message: 'complete' }
   } catch (error) {
     console.log(error)

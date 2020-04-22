@@ -58,7 +58,7 @@ const Navbar = ({
             ))) ||
             ((role === 'admin' && (
               <Row>
-                <Link href="/admin/main">
+                <Link href="/admin/request">
                   <a className="mr-2">Console</a>
                 </Link>
                 <Button onClick={handleLogout}>

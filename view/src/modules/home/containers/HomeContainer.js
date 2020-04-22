@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react'
-import { Typography } from 'antd'
 import Banner from '~/components/Banner/Banner'
-const { Title, Paragraph } = Typography
 const HomeContainer = (props) => {
   return (
     <Fragment>
@@ -12,18 +10,6 @@ const HomeContainer = (props) => {
               คือผู้ดำเนินการเพื่อเชื่อมโยงผู้ประกอบการและนักลงทุนเข้าด้วยกัน
               ในลักษณะที่ไม่ใช่ธนาคาร"
       />
-      <section className="section">
-        <div className="container">
-          <Title className="text-center">
-            Peer To Peer Lending System
-          </Title>
-          <Paragraph className="text-center">
-            Peer To Peer Lending System
-            คือผู้ดำเนินการเพื่อเชื่อมโยงผู้ประกอบการและนักลงทุนเข้าด้วยกัน
-            ในลักษณะที่ไม่ใช่ธนาคาร
-          </Paragraph>
-        </div>
-      </section>
     </Fragment>
   )
 }
