@@ -8,9 +8,9 @@ export default async (req, res) => {
     data = await to(getLoading(username))
     console.log(data)
     if (data.error) {
-      status400(res, data.error)
+      return status200(res, { loading: false })
     }
-    status200(res, data)
+    return status200(res, { loading: true })
   } catch (error) {
     console.log(error)
   }

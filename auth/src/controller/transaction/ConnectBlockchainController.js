@@ -10,15 +10,17 @@ import {
   setLoadingBlockchain,
   deleteLoading,
 } from '../../service/blockchain/loading'
+import { borrowerLending } from '../../service/blockchain/lending'
+import { createLog } from '../../crud/requestlog'
 export default async (req, res) => {
   try {
     const data = req.body.data
     const key = req.body.key
-    const { username, requestId } = data.metadata
-    const user = await getUserByUsername(username)
     console.log(key)
     switch (key) {
       case 'charge.complete':
+        const { username, requestId } = data.metadata
+        const user = await getUserByUsername(username)
         if (data.status !== 'successful') status400(res, 'unsuccessful payment')
 
         const request = await getRequestById(requestId)
@@ -43,9 +45,27 @@ export default async (req, res) => {
               requestId,
             )
             await lenderAcceptRequest(user.get().id, requestId)
+            await createLog(
+              `${username}(lender) has been paid cash. `,
+              request.get().id,
+            )
             await deleteLoading(username)
             return status200(res, { lendingContract: response })
           case 'LENDING':
+            setLoadingBlockchain(username)
+            const responseData = await borrowerLending(
+              req.body.data.id,
+              requestId,
+            )
+            await deleteLoading(username)
+            await createLog(
+              `${username}(borrwer) has been paid cash. `,
+              request.get().id,
+            )
+            if (responseData.status === 200) {
+              return status200(res, responseData)
+            }
+            return status400(res, responseData)
           default:
             return status400(res, 'Error')
         }

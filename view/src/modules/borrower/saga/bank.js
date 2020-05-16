@@ -7,10 +7,15 @@ import {
 import { bankAction } from '../actions'
 import { getBank, addBank } from '../api/bank'
 
-function* getBankSaga() {
+function* getBankSaga(actions) {
   try {
-    const { data } = yield call(getBank)
-    yield put(bankAction.getBankSuccess({ data }))
+    const { data } = yield call(
+      getBank,
+      actions?.payload?.state || '',
+    )
+    if (data.length === 0)
+      yield put(bankAction.getBankSuccess(data, true))
+    else yield put(bankAction.getBankSuccess(data, false))
   } catch (e) {
     console.log(e)
     yield put(bankAction.getBankFail())

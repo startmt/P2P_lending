@@ -3,13 +3,13 @@ import { compose, bindActionCreators } from 'redux'
 import { pageNameAction } from '~/modules/query/actions'
 import withRedux from '~/hocs/with-redux'
 import { DashboardLayout } from '~/layouts/dashboard'
-import { lendingAction } from '../../modules/borrower/actions'
-import { LendingTable } from '../../components/LendingTable'
+import { lendingAction } from '~/modules/borrower/actions'
+import { LendingTable } from '~/components/LendingTable'
 const Index = (props) => {
   const { setPageName, getLendingList } = props
 
   useEffect(() => {
-    setPageName('stateLoan')
+    setPageName('lending')
     getLendingList()
   }, [])
   return (

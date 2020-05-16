@@ -43,5 +43,4 @@ export const lending = (router) => {
     requireJWTAuth,
     getBorrowerRequestByIdController,
   )
-  router.post('/api/lending/:id', requireJWTAuth, (req, res) => res.end()) //not done
 }

@@ -17,7 +17,6 @@ export default async (req, res) => {
         isConnectScb: token ? true : false,
       })
     } else {
-      w
       return status200(res, {
         username: query.user.username,
         isIdentify: query.user.identify,

@@ -2,9 +2,9 @@ import axios from 'axios'
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
-export const getBank = () => {
+export const getBank = (state = '') => {
   return axios.get(
-    publicRuntimeConfig.AUTH_SERVICE + '/bank',
+    `${publicRuntimeConfig.AUTH_SERVICE}/bank?state=${state}`,
     {
       headers: {
         authorization: `Bearer ${localStorage.getItem(

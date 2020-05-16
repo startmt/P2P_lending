@@ -3,7 +3,8 @@ import { Modal } from 'antd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { bankAction } from '../../modules/borrower/actions'
-import { Form, Input } from 'semantic-ui-react'
+import Input from '../Input'
+import { Form } from 'semantic-ui-react'
 import BankMenu from '../BankMenu/BankMenu'
 import useForm from 'react-hook-form'
 const AddBankModal = ({
@@ -20,15 +21,28 @@ const AddBankModal = ({
     handleSubmit,
   } = useForm()
   useEffect(() => {
-    register({ name: 'bank_code' })
-    register({ name: 'name' })
-    register({ name: 'number' })
+    register(
+      { name: 'bank_code' },
+      { required: 'กรุณาเลือกธนาคาร' },
+    )
+    register(
+      { name: 'name' },
+      { required: 'กรุณากรอกชื่อบัญชี' },
+    )
+    register(
+      { name: 'number' },
+      { required: 'กรุณากรอกรหัสบัญชี' },
+    )
   }, [])
   const onSubmit = handleSubmit((data) => {
     handleAddBank(data)
   })
   const setValues = async (e, { name, value }) => {
     setValue(name, value)
+    await triggerValidation({ name })
+  }
+  const setbank = async (value) => {
+    setValue('bank_code', value.key)
     await triggerValidation({ name })
   }
   return (
@@ -65,7 +79,7 @@ const AddBankModal = ({
           <label>ธนาคาร</label>
           <BankMenu
             error={errors.bank_code ? true : false}
-            onChange={setValues}
+            setData={setbank}
             disable={loading}
           />
         </Form.Field>

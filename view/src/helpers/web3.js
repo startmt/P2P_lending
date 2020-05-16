@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import getConfig from 'next/config'
 import MannerJson from '../contract/Manner.json'
 import InterestJson from '../contract/Interest.json'
+import LendingJson from '../contract/Lending.json'
 const { publicRuntimeConfig } = getConfig()
 let web3
 const provider = new Web3.providers.HttpProvider(
@@ -18,5 +19,8 @@ export const Manner = (address) => {
 }
 export const Interest = (address) => {
   return new web3.eth.Contract(InterestJson.abi, address)
+}
+export const Lending = (address) => {
+  return new web3.eth.Contract(LendingJson.abi, address)
 }
 export default web3

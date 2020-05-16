@@ -25,6 +25,9 @@ export const getRequestByUserList = async (userId) => {
         model: db.requestuser,
         where: { userId },
       },
+      {
+        model: db.contract,
+      },
     ],
     raw: true,
   })
@@ -106,4 +109,16 @@ export const updateRequest = async (id, data) => {
     console.log(e)
     return { message: 'error' }
   }
+}
+
+export const getLendingRequest = async () => {
+  return db.request.findAll({
+    where: { state: 'LENDING' },
+    include: [
+      {
+        model: db.contract,
+      },
+    ],
+    raw: true,
+  })
 }

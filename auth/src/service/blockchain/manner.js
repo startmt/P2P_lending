@@ -19,5 +19,16 @@ export const createManner = async (data) => {
       gas: 3000000,
     })
 }
+export const getUser = async (address) => {
+  const contract = await new web3.eth.Contract(Manner.abi, address).methods
+    .user()
+    .call()
+  return {
+    id: contract['id'],
+    firstname: contract['firstname'],
+    lastname: contract['lastname'],
+    score: contract['score'],
+  }
+}
 
 export default mannerContract

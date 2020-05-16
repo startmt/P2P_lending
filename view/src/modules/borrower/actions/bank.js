@@ -1,9 +1,15 @@
-export const getBank = () => ({
+export const getBank = (state = '') => ({
   type: 'LOADING_BANK',
+  payload: {
+    state: state || '',
+  },
 })
-export const getBankSuccess = (data) => ({
+export const getBankSuccess = (data, emptyBankList) => ({
   type: 'LOADING_BANK_SUCCESS',
-  payload: data,
+  payload: {
+    data,
+    emptyBankList,
+  },
 })
 export const getBankFail = (error) => ({
   type: 'LOADING_BANK_FAIL',

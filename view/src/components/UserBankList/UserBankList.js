@@ -25,7 +25,7 @@ const UserBankList = ({ bankList, loading }) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  bankList: state.getIn(['lending', 'bank', 'data']),
+  bankList: state.getIn(['lending', 'bank', 'data']) || [],
   loading: state.getIn(['lending', 'bank', 'loading']),
 })
 const mapDispatchToProps = null

@@ -31,6 +31,7 @@ services:
       - REDIS_HOST=redis_auth
       - MINIO_ENDPOINT=minio1
       - MINIO_PORT=9000
+      - HOST=http://35.187.230.102/
 
     depends_on:
       - redis_auth

@@ -10,7 +10,6 @@ import {
   Header,
   Grid,
 } from 'semantic-ui-react'
-import ClueCard from './ClueCard'
 import { Map } from 'immutable'
 
 const { Field } = Form
@@ -37,21 +36,16 @@ const LendingDataModal = ({
       onCancel={handleCancel}>
       <Skeleton loading={loading}>
         <Form>
-          <Header as="h2">ผู้ใช้งาน</Header>
+          <Header as="h2">ผู้กู้</Header>
           <Field>
             <label>ชื่อ - นามสกุล</label>
             <Input
               disabled
               type="text"
               value={`${data.getIn([
-                'data',
                 'manner',
                 'firstname',
-              ])} ${data.getIn([
-                'data',
-                'manner',
-                'lastname',
-              ])}`}
+              ])} ${data.getIn(['manner', 'lastname'])}`}
             />
           </Field>
           <Field>
@@ -59,14 +53,10 @@ const LendingDataModal = ({
             <Input
               disabled
               type="text"
-              value={data.getIn([
-                'data',
-                'manner',
-                'score',
-              ])}
+              value={data.getIn(['manner', 'score'])}
             />
           </Field>
-          <Header as="h2">สัญญาการกู้</Header>
+          <Header as="h2">รายละเอียดการกู้</Header>
           <Field>
             <label>หัวข้อ</label>
             <Input

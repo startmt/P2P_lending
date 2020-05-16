@@ -7,7 +7,7 @@ import cors from 'cors'
 import fileUpload from 'express-fileupload'
 import { connectMysql } from './mysql'
 const app = express()
-const PORT = '3000'
+const PORT = process.env.PORT || '3000'
 app.use(fileUpload())
 http.createServer(app).listen(PORT, async () => {
   await connectMysql()
