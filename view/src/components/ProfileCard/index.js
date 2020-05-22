@@ -33,6 +33,9 @@ const ProfileCard = () => {
             ''} จ. ${addressJson.thaiAddressProvince ||
             ''} ${addressJson.zipCode || ''} `}
         </Descriptions.Item>
+        <Descriptions.Item label="Address ผู้ใช้งาน">
+          {authDetailSelector.get('blockData')}
+        </Descriptions.Item>
       </Descriptions>
     </Card>
   )
